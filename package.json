@@ -30,6 +30,7 @@
     "vue-i18n": "^8.14.1",
     "vue-router": "^3.0.3",
     "vue-social-sharing": "^2.4.6",
+    "vue-uuid": "^1.1.1",
     "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {

@@ -127,7 +127,7 @@ export default{
         horizontalAlign: horizontalAlign,
         verticalAlign: verticalAlign,
         type: this.type[color],
-        timeout: 0
+        timeout: 1000
       });
     }
   }

@@ -1,34 +1,48 @@
 <template>
   <card type="user">
+    <h5 class='text-left mb-5'> <strong>Preview</strong> </h5>
     <div class="author">
+
+      <!-- 
       <div class="block block-one"></div>
       <div class="block block-two"></div>
       <div class="block block-three"></div>
       <div class="block block-four"></div>
-      <a href="#">
-        <img class="avatar" src="../../assets/img/anime6.png" alt="...">
-        <h5 class="title">{{ user.fullName }}</h5>
+      -->
+
+      <a href="#" @click='saveLogo'>
+        <input type="file" accept="image/*" @change="onFileChange" id="file-input" ref='uploadImage' style='display:none;'>
+        <img style='height:124px;width:124px;' class="avatar" :src="company.logo" alt="Logo"> 
+        <!-- @error="imageUrlAlt" -->
+        <h5 class="title">{{ company.company }}</h5>
       </a>
       <p class="description">
-        {{user.title}}
+        {{company.firstName}} {{company.lastName}} 
       </p>
     </div>
-    <p class="card-description">
-      {{user.description}}
+
+    <p class="card-description my-3 pb-3">
+      {{company.address}}<br />
+      {{company.city}} - {{company.country}} - {{company.zip}}<br />
+      {{company.email}}<br /><br />
     </p>
-    <div slot="footer" class="button-container">
-      <base-button icon round class="btn-facebook">
-        <i class="fab fa-facebook"></i>
-      </base-button>
-      <base-button icon round class="btn-twitter">
-        <i class="fab fa-twitter"></i>
-      </base-button>
-      <base-button icon round class="btn-google">
-        <i class="fab fa-google-plus"></i>
-      </base-button>
+
+    <div class='col-12 text-left' v-if='company.tax'>
+      <h6>Tax Nº</h6> 
+      <div class='ml-2'>{{company.tax}}</div>
     </div>
+
+    <div class='col-12 text-left mb-2 mt-3' v-if='company.comments'>
+        <h6>Comments</h6>
+        <div style="white-space: pre-line;" class='ml-2'>{{company.comments}}</div>
+    </div>
+    <div class='col-12 text-left mt-3 mb-5' v-if='company.payment'>
+        <h6>Payment Method</h6>
+        <div style="white-space: pre-line;" class='ml-2'>{{company.payment}}</div>
+    </div>    
   </card>
 </template>
+
 <script>
 import {
   Card
@@ -42,14 +56,27 @@ export default {
     BaseButton
   },
   props: {
-    user: {
+    company: {
       type: Object,
       default: () => {
         return {};
       }
     }
+  },
+
+  methods: {
+    saveLogo(event){
+      const elem = this.$refs.uploadImage
+      elem.click();
+    },
+    onFileChange(e) {
+      const file = e.target.files[0];
+      var url = URL.createObjectURL(file);
+      this.$emit('newLogo', url);
+    },
+    imageUrlAlt(event) {
+      event.target.src = '@/assets/img/company.png'
+    }
   }
 }
 </script>
-<style>
-</style>

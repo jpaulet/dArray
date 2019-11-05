@@ -37,3 +37,14 @@ html,body{
 .content-main-card .card {
 	min-height: 760px;
 }
+
+.addMoreItems{
+	padding-left: 260px !important;
+}
+
+@media screen and (max-width: 991px) {
+	.addMoreItems{
+		padding-left: 0px !important;
+		margin: 10px auto 10px !important;
+	}
+}

@@ -24,6 +24,35 @@
       </button>
 
       <div class="collapse navbar-collapse show text-left" v-show="showMenu">
+        <ul class="navbar-nav addMoreItems">
+          <drop-down>
+            <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle nav-link">
+              <div class="d-none d-lg-block d-xl-block"></div>
+              <i class="tim-icons icon-simple-add"></i>
+              <p class="d-lg-none text-left">
+                Add New
+              </p>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right dropdown-navbar py-3">
+              <li class="nav-link mb-2">
+                  <a href="#" class="nav-item dropdown-item">
+                    <i class="tim-icons icon-paper text-info"></i> New Invoice
+                  </a>
+              </li>
+              <li class="nav-link mb-2">
+                  <a href="#" class="nav-item dropdown-item">
+                    <i class="tim-icons icon-pin text-info"></i> New Expense
+                  </a>
+              </li>
+              <li class="nav-link mb-2">
+                  <a href="#" class="nav-item dropdown-item">
+                    <i class="tim-icons icon-single-02 text-info"></i> New Customer
+                  </a>
+              </li>
+            </ul>
+          </drop-down>
+        </ul>
+
         <ul class="navbar-nav ml-auto">
           
           <!-- SEARCH -->
@@ -132,7 +161,8 @@ import {
         this.showMenu  = !this.showMenu;
       },
       signOut () {
-        userSession.signUserOut(window.location.href)
+        userSession.signUserOut();
+        location.reload();
       }
     },      
     mounted () {

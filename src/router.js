@@ -4,10 +4,10 @@ import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
 
 import Dashboard from '@/pages/Dashboard.vue'
 import Invoices from '@/pages/Invoices.vue'
-import Notifications from '@/pages/Notifications.vue'
+import Customers from '@/pages/Customers.vue'
 import UserProfile from '@/pages/UserProfile.vue'
 import TableList from '@/pages/TableList.vue'
-import Typography from '@/pages/Typography.vue'
+import Settings from '@/pages/Settings.vue'
 
 const routes = [{
   path: '/',
@@ -25,9 +25,9 @@ const routes = [{
       component: Invoices
     },
     {
-      path: 'notifications',
-      name: 'Notifications',
-      component: Notifications
+      path: 'customers',
+      name: 'Customers',
+      component: Customers
     },
     {
       path: 'user',
@@ -40,9 +40,9 @@ const routes = [{
       component: TableList
     },
     {
-      path: 'typography',
-      name: 'Typography',
-      component: Typography
+      path: 'settings',
+      name: 'Settings',
+      component: Settings
     }
   ]
 }]

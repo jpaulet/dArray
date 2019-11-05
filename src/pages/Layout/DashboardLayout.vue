@@ -22,7 +22,7 @@
           <p>Expenses</p>
         </template>
       </sidebar-link>
-      <sidebar-link to="/notifications">
+      <sidebar-link to="/customers">
         <i class="tim-icons icon-single-02"></i>
         <template>
           <p>Customers</p>
@@ -40,7 +40,7 @@
           <p>Resources</p>
         </template>
       </sidebar-link>
-      <sidebar-link to="/typography">
+      <sidebar-link to="/settings">
         <i class="tim-icons icon-settings"></i>
         <p>Settings</p>
       </sidebar-link>      
