@@ -9,18 +9,18 @@
   </button>
 </template>
 <script>
-  export default{
-    name:"close-button",
-    props: {
-      target: [String, Number],
-      expanded: Boolean
-    },
-    methods: {
-      handleClick(evt) {
-        this.$emit("click", evt);
-      }
+export default {
+  name: 'close-button',
+  props: {
+    target: [String, Number],
+    expanded: Boolean
+  },
+  methods: {
+    handleClick (evt) {
+      this.$emit('click', evt)
     }
   }
+}
 </script>
 <style>
 </style>

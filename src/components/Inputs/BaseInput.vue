@@ -35,50 +35,50 @@
   </div>
 </template>
 <script>
-  export default{
-    inheritAttrs: false,
-    name: "base-input",
-    props:{
-      label: String,
-      value: [String, Number],
-      addonRightIcon: String,
-      addonLeftIcon: String
+export default {
+  inheritAttrs: false,
+  name: 'base-input',
+  props: {
+    label: String,
+    value: [String, Number],
+    addonRightIcon: String,
+    addonLeftIcon: String
+  },
+  model: {
+    prop: 'value',
+    event: 'input'
+  },
+  data () {
+    return {
+      focused: false
+    }
+  },
+  computed: {
+    hasIcon () {
+      const { addonRight, addonLeft } = this.$slots
+      return addonRight !== undefined || addonLeft !== undefined || this.addonRightIcon !== undefined || this.addonLeftIcon !== undefined
     },
-    model: {
-      prop: 'value',
-      event: 'input'
-    },
-    data(){
-      return{
-        focused: false
-      }
-    },
-    computed:{
-      hasIcon(){
-        const{addonRight, addonLeft} = this.$slots;
-        return addonRight !== undefined || addonLeft !== undefined || this.addonRightIcon !== undefined || this.addonLeftIcon !== undefined;
-      },
-      listeners(){
-        return {
-          ...this.$listeners,
-          input: this.onInput,
-          blur: this.onBlur,
-          focus: this.onFocus
-        }
-      }
-    },
-    methods:{
-      onInput(evt){
-        this.$emit('input', evt.target.value)
-      },
-      onFocus(){
-        this.focused = true;
-      },
-      onBlur(){
-        this.focused = false;
+    listeners () {
+      return {
+        ...this.$listeners,
+        input: this.onInput,
+        blur: this.onBlur,
+        focus: this.onFocus
       }
     }
+  },
+  methods: {
+    onInput (evt) {
+      this.$emit('input', evt.target.value)
+    },
+    onFocus () {
+      this.focused = true
+    },
+    onBlur () {
+      this.focused = false
+    }
   }
+}
 </script>
 <style>
 </style>

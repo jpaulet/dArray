@@ -97,38 +97,37 @@
 <script>
 import {
   Card
-} from "@/components/index";
+} from '@/components/index'
 
-import BaseAlert from '@/components/BaseAlert';
-import BaseButton from '@/components/BaseButton';
-import NotificationTemplate from './Notifications/NotificationTemplate';
+import BaseAlert from '@/components/BaseAlert'
+import BaseButton from '@/components/BaseButton'
+import NotificationTemplate from './Notifications/NotificationTemplate'
 
-
-export default{
-  components:{
+export default {
+  components: {
     BaseAlert,
     BaseButton,
     Card
   },
-  data(){
+  data () {
     return {
-      type:["","info","success","warning","danger"],
-      notifications:{
+      type: ['', 'info', 'success', 'warning', 'danger'],
+      notifications: {
         topCenter: false
       }
-    };
+    }
   },
-  methods:{
-    notifyVue(verticalAlign, horizontalAlign){
-      const color = Math.floor(Math.random() * 4 + 1);
+  methods: {
+    notifyVue (verticalAlign, horizontalAlign) {
+      const color = Math.floor(Math.random() * 4 + 1)
       this.$notify({
         component: NotificationTemplate,
-        icon: "tim-icons icon-bell-55",
+        icon: 'tim-icons icon-bell-55',
         horizontalAlign: horizontalAlign,
         verticalAlign: verticalAlign,
         type: this.type[color],
         timeout: 1000
-      });
+      })
     }
   }
 }

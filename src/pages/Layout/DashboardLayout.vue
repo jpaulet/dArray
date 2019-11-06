@@ -28,7 +28,13 @@
           <p>Customers</p>
         </template>
       </sidebar-link>
-      <sidebar-link to="/user">
+      <sidebar-link to="/tasks">
+        <i class="tim-icons icon-pin"></i>
+        <template>
+          <p>Tasks</p>
+        </template>
+      </sidebar-link>
+      <sidebar-link to="/calendar">
         <i class="tim-icons icon-calendar-60"></i>
         <template>
           <p>Calendar</p>
@@ -43,7 +49,7 @@
       <sidebar-link to="/settings">
         <i class="tim-icons icon-settings"></i>
         <p>Settings</p>
-      </sidebar-link>      
+      </sidebar-link>
     </side-bar>
 
     <!-- <sidebar-share :background-color.sync="backgroundColor"></sidebar-share> -->
@@ -60,58 +66,58 @@
 </template>
 
 <script>
-  import TopNavbar from "./TopNavbar.vue";
-  import ContentFooter from "./ContentFooter.vue";
-  import DashboardContent from "./DashboardContent.vue";
-  import SidebarShare from "./SidebarSharePlugin.vue";
-  import MobileMenu from "./MobileMenu.vue";
-  import SideBar from "@/components/SidebarPlugin/SideBar.vue";
-  import SidebarLink from "@/components/SidebarPlugin/SidebarLink.vue";
+import TopNavbar from './TopNavbar.vue'
+import ContentFooter from './ContentFooter.vue'
+import DashboardContent from './DashboardContent.vue'
+import SidebarShare from './SidebarSharePlugin.vue'
+import MobileMenu from './MobileMenu.vue'
+import SideBar from '@/components/SidebarPlugin/SideBar.vue'
+import SidebarLink from '@/components/SidebarPlugin/SidebarLink.vue'
 
-  import Landing from '@/components/Landing.vue'
+import Landing from '@/components/Landing.vue'
 
-  import { Person } from 'blockstack'
-  import { userSession } from '@/userSession'
+import { Person } from 'blockstack'
+import { userSession } from '@/userSession'
 
-  export default{
-    components: {
-      TopNavbar,
-      DashboardContent,
-      ContentFooter,
-      MobileMenu,
-      SideBar,
-      SidebarLink,
-      SidebarShare,
-      Landing
-    },
-    data() {
-      return {
-        backgroundColor: "green",
-        userSession: null,
-        user: null
-      };
-    },
-    methods: {
-      toggleSidebar() {
-        if (this.$sidebar.showSidebar) {
-          this.$sidebar.displaySidebar(false);
-        }
-      }
-    },
-    created () {
-      this.userSession = userSession
-    },
-    mounted () {
-      if (userSession.isUserSignedIn()) {
-        this.userData = userSession.loadUserData()
-        this.user = new Person(this.userData.profile)
-        this.user.username = this.userData.username
-      } else if (userSession.isSignInPending()) {
-        userSession.handlePendingSignIn()
-          .then((userData) => {
-            window.location = window.location.origin
-          })
+export default {
+  components: {
+    TopNavbar,
+    DashboardContent,
+    ContentFooter,
+    MobileMenu,
+    SideBar,
+    SidebarLink,
+    SidebarShare,
+    Landing
+  },
+  data () {
+    return {
+      backgroundColor: 'green',
+      userSession: null,
+      user: null
+    }
+  },
+  methods: {
+    toggleSidebar () {
+      if (this.$sidebar.showSidebar) {
+        this.$sidebar.displaySidebar(false)
       }
     }
-};
+  },
+  created () {
+    this.userSession = userSession
+  },
+  mounted () {
+    if (userSession.isUserSignedIn()) {
+      this.userData = userSession.loadUserData()
+      this.user = new Person(this.userData.profile)
+      this.user.username = this.userData.username
+    } else if (userSession.isSignInPending()) {
+      userSession.handlePendingSignIn()
+        .then((userData) => {
+          window.location = window.location.origin
+        })
+    }
+  }
+}
 </script>

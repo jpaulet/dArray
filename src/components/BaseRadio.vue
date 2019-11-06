@@ -13,41 +13,41 @@
   </div>
 </template>
 <script>
-export default{
-  name:"base-radio",
+export default {
+  name: 'base-radio',
   props: {
     name: [String, Number],
     disabled: Boolean,
     value: [String, Boolean],
     inline: Boolean
   },
-  data() {
+  data () {
     return {
-      cbId: ""
+      cbId: ''
     }
   },
-  computed:{
+  computed: {
     model: {
-      get(){
-        return this.value;
+      get () {
+        return this.value
       },
-      set(value) {
-        this.$emit("input", value);
+      set (value) {
+        this.$emit('input', value)
       }
     },
-    inlineClass() {
+    inlineClass () {
       if (this.inline) {
-        return `form-check-inline`;
+        return `form-check-inline`
       }
-      return "";
+      return ''
     }
   },
-  created(){
+  created () {
     this.cbId = Math.random()
-        .toString(16)
-        .slice(2);
+      .toString(16)
+      .slice(2)
   }
-};
+}
 </script>
 <style>
 </style>

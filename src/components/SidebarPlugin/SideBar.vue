@@ -10,7 +10,7 @@
           <a href="javascript:void(0)" class="simple-text logo-normal text-left">
             {{ title }}
             <b class="caret d-none d-lg-block d-xl-block" style='float: right;right:20px;top:25px;color:#999;'></b>
-          </a>          
+          </a>
 
           <ul class="dropdown-menu dropdown-navbar" style='float: right;right:0px;left:0px;box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2);'>
             <li class="nav-link">
@@ -18,11 +18,11 @@
             </li>
             <li class="nav-link">
               <a href="javascript:void(0)" class="nav-item dropdown-item">Startup 3</a>
-            </li>            
-          </ul>              
+            </li>
+          </ul>
         </drop-down>
       </div>
-      
+
       <ul class="nav">
         <slot>
           <sidebar-link></sidebar-link>
@@ -33,43 +33,43 @@
 </template>
 
 <script>
-import SidebarLink from "./SidebarLink.vue";
+import SidebarLink from './SidebarLink.vue'
 
-export default{
-  name: "side-bar",
+export default {
+  name: 'side-bar',
   components: {
     SidebarLink
   },
   props: {
     abv: {
       type: String,
-      default: "JPA"
+      default: 'JPA'
     },
     title: {
       type: String,
-      default: " Aulet"
+      default: ' Aulet'
     },
     backgroundColor: {
       type: String,
-      default: "green"
+      default: 'green'
     },
-    sidebarLinks:{
+    sidebarLinks: {
       type: Array,
       default: () => []
     }
   },
-  data(){
-    return{
+  data () {
+    return {
       activeLinkIndex: 0
     }
   },
-  methods:{
-    findActiveLink(){
+  methods: {
+    findActiveLink () {
       this.links.forEach((link, index) => {
-        if(link.isActive()){
-          this.activeLinkIndex = index;
+        if (link.isActive()) {
+          this.activeLinkIndex = index
         }
-      });
+      })
     }
   }
 }

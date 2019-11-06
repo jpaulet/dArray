@@ -36,46 +36,46 @@
 
 import {
   Card
-} from "@/components/index";
+} from '@/components/index'
 
-import BaseTable from "@/components/BaseTable";
+import BaseTable from '@/components/BaseTable'
 
-const tableColumns = ["Name", "Country", "City", "Salary"];
+const tableColumns = ['Name', 'Country', 'City', 'Salary']
 const tableData = [
   {
     id: 1,
-    name: "Dakota Rice",
-    salary: "$36.738",
-    country: "Niger",
-    city: "Oud-Turnhout",
+    name: 'Dakota Rice',
+    salary: '$36.738',
+    country: 'Niger',
+    city: 'Oud-Turnhout'
   },
   {
     id: 2,
-    name: "Minerva Hooper",
-    salary: "$23,789",
-    country: "Curaçao",
-    city: "Sinaai-Waas"
+    name: 'Minerva Hooper',
+    salary: '$23,789',
+    country: 'Curaçao',
+    city: 'Sinaai-Waas'
   },
   {
     id: 3,
-    name: "Sage Rodriguez",
-    salary: "$56,142",
-    country: "Netherlands",
-    city: "Baileux"
+    name: 'Sage Rodriguez',
+    salary: '$56,142',
+    country: 'Netherlands',
+    city: 'Baileux'
   },
   {
     id: 4,
-    name: "Philip Chaney",
-    salary: "$38,735",
-    country: "Korea, South",
-    city: "Overland Park"
+    name: 'Philip Chaney',
+    salary: '$38,735',
+    country: 'Korea, South',
+    city: 'Overland Park'
   },
   {
     id: 5,
-    name: "Doris Greene",
-    salary: "$63,542",
-    country: "Malawi",
-    city: "Feldkirchen in Kärnten"
+    name: 'Doris Greene',
+    salary: '$63,542',
+    country: 'Malawi',
+    city: 'Feldkirchen in Kärnten'
   },
   {
     id: 6,
@@ -91,27 +91,26 @@ const tableData = [
     country: 'Portugal',
     city: 'Gloucester'
   }
-];
+]
 
-
-export default{
-  components:{
+export default {
+  components: {
     Card,
     BaseTable
   },
-  data() {
+  data () {
     return {
       table1: {
-        title: "Simple Table",
+        title: 'Simple Table',
         columns: [...tableColumns],
         data: [...tableData]
       },
       table2: {
-        title: "Table on Plain Background",
+        title: 'Table on Plain Background',
         columns: [...tableColumns],
         data: [...tableData]
       }
-    };
+    }
   }
 }
 </script>

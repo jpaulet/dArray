@@ -39,57 +39,56 @@
 </template>
 
 <script>
-import { SlideYUpTransition } from "vue2-transitions";
+import { SlideYUpTransition } from 'vue2-transitions'
 
-
-  export default {
-    name: "modal",
-    components: {
-      SlideYUpTransition
+export default {
+  name: 'modal',
+  components: {
+    SlideYUpTransition
+  },
+  props: {
+    show: Boolean,
+    showClose: {
+      type: Boolean,
+      default: true
     },
-    props:{
-      show: Boolean,
-      showClose: {
-        type: Boolean,
-        default: true
-      },
-      centered:{
-        type: Boolean,
-        default: true
-      },
-      type: {
-        type: String,
-        default: "",
-        validator(value){
-          let acceptedValues = ["", "notice", "mini"];
-          return acceptedValues.indexOf(value) !== -1;
-        }
-      },
-      modalClasses: [Object, String],
-      modalContentClasses: [Object, String],
-      gradient: String,
-      headerClasses: [Object, String],
-      bodyClasses: [Object, String],
-      footerClasses: [Object, String],
-      watch: {
-        show(val) {
-          let documentClasses = document.body.classList;
-          if (val) {
-            documentClasses.add("modal-open");
-          } else {
-            documentClasses.remove("modal-open");
-          }
-        }
+    centered: {
+      type: Boolean,
+      default: true
+    },
+    type: {
+      type: String,
+      default: '',
+      validator (value) {
+        let acceptedValues = ['', 'notice', 'mini']
+        return acceptedValues.indexOf(value) !== -1
       }
-
     },
-    methods:{
-      closeModal(){
-        this.$emit("update:show", false);
-        this.$emit("close");
+    modalClasses: [Object, String],
+    modalContentClasses: [Object, String],
+    gradient: String,
+    headerClasses: [Object, String],
+    bodyClasses: [Object, String],
+    footerClasses: [Object, String],
+    watch: {
+      show (val) {
+        let documentClasses = document.body.classList
+        if (val) {
+          documentClasses.add('modal-open')
+        } else {
+          documentClasses.remove('modal-open')
+        }
       }
     }
+
+  },
+  methods: {
+    closeModal () {
+      this.$emit('update:show', false)
+      this.$emit('close')
+    }
   }
+}
 </script>
 
 <style>

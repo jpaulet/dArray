@@ -7,7 +7,7 @@
             <div class="row">
               <div class="col-sm-6 text-left">
                   <h5 class="card-category">Total Shipments</h5>
-                  <h2 class="card-title">Performance</h2>              
+                  <h2 class="card-title">Performance</h2>
               </div>
               <div class="col-sm-6 text-right">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
@@ -21,7 +21,7 @@
                             name="options" autocomplete="off"
                             :checked="bigLineChart.activeIndex === index">
                       {{ option }}
-                   </label>                   
+                   </label>
                 </div>
               </div>
             </div>
@@ -120,7 +120,7 @@
       <div class="col-lg-6 col-md-12">
         <card class="card">
           <h4 slot="header" class="card-title">
-            Simple Table            
+            Simple Table
           </h4>
           <div class="table-responsive">
             <user-table></user-table>
@@ -134,14 +134,14 @@
 
 import {
   Card
-} from "@/components/index";
+} from '@/components/index'
 
-import LineChart from '@/components/Charts/LineChart';
-import BarChart from '@/components/Charts/BarChart';
-import * as chartConfigs from '@/components/Charts/config';
+import LineChart from '@/components/Charts/LineChart'
+import BarChart from '@/components/Charts/BarChart'
+import * as chartConfigs from '@/components/Charts/config'
 import TaskList from './Dashboard/TaskList'
 import UserTable from './Dashboard/UserTable'
-import config from '@/config';
+import config from '@/config'
 
 export default {
   components: {
@@ -151,12 +151,12 @@ export default {
     TaskList,
     UserTable
   },
-  data(){
-    return{
-      bigLineChartCategories:[
-        "Accounts",
-        "Purchases",
-        "Sessions"
+  data () {
+    return {
+      bigLineChartCategories: [
+        'Accounts',
+        'Purchases',
+        'Sessions'
       ],
       bigLineChart: {
         allData: [
@@ -165,7 +165,7 @@ export default {
           [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
         ],
         activeIndex: 0,
-        chartData: { datasets: [{ }]},
+        chartData: { datasets: [{ }] },
         extraOptions: chartConfigs.purpleChartOptions,
         gradientColors: config.colors.primaryGradient,
         gradientStops: [1, 0.4, 0],
@@ -176,7 +176,7 @@ export default {
         chartData: {
           labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
           datasets: [{
-            label: "Data",
+            label: 'Data',
             fill: true,
             borderColor: config.colors.primary,
             borderWidth: 2,
@@ -189,35 +189,35 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: [80, 100, 70, 80, 120, 80],
+            data: [80, 100, 70, 80, 120, 80]
           }]
         },
         gradientColors: config.colors.primaryGradient,
-        gradientStops: [1, 0.2, 0],
+        gradientStops: [1, 0.2, 0]
       },
       blueBarChart: {
         extraOptions: chartConfigs.barChartOptions,
         chartData: {
           labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
           datasets: [{
-            label: "Countries",
+            label: 'Countries',
             fill: true,
             borderColor: config.colors.primary,
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: [53, 20, 10, 80, 100, 45],
+            data: [53, 20, 10, 80, 100, 45]
           }]
         },
         gradientColors: config.colors.primaryGradient,
-        gradientStops: [1, 0.4, 0],
+        gradientStops: [1, 0.4, 0]
       },
       purpleLineChart: {
         extraOptions: chartConfigs.purpleChartOptions,
         chartData: {
           labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
           datasets: [{
-            label: "My First dataset",
+            label: 'My First dataset',
             fill: true,
             borderColor: config.colors.primary,
             borderWidth: 2,
@@ -230,16 +230,16 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: [90, 27, 60, 12, 80],
+            data: [90, 27, 60, 12, 80]
           }]
         },
         gradientColors: config.colors.primaryGradient,
-        gradientStops: [1, 0.4, 0],
+        gradientStops: [1, 0.4, 0]
       }
     }
   },
-  methods:{
-    initBigChart(index) {
+  methods: {
+    initBigChart (index) {
       let chartData = {
         datasets: [{
           fill: true,
@@ -256,16 +256,16 @@ export default {
           pointRadius: 4,
           data: this.bigLineChart.allData[index]
         }],
-        labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+        labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
       }
-      this.$refs.bigChart.updateGradients(chartData);
-      this.bigLineChart.chartData = chartData;
-      this.bigLineChart.activeIndex = index;
+      this.$refs.bigChart.updateGradients(chartData)
+      this.bigLineChart.chartData = chartData
+      this.bigLineChart.activeIndex = index
     }
   },
-  mounted(){
-    this.i18n = this.$i18n;
-    this.initBigChart(0);
+  mounted () {
+    this.i18n = this.$i18n
+    this.initBigChart(0)
   }
 }
 </script>

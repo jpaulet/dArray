@@ -19,23 +19,23 @@
 </template>
 
 <script>
-  import BaseButton from '@/components/BaseButton';
-  import BaseTable from '@/components/BaseTable';
-  import BaseCheckbox from '@/components/BaseCheckbox';
+import BaseButton from '@/components/BaseButton'
+import BaseTable from '@/components/BaseTable'
+import BaseCheckbox from '@/components/BaseCheckbox'
 
-  export default {
-    components: {
-      BaseButton,
-      BaseTable,
-      BaseCheckbox
-    },
+export default {
+  components: {
+    BaseButton,
+    BaseTable,
+    BaseCheckbox
+  },
 
-    computed: {
-      tableData() {
-        return this.$t('dashboard.taskList');
-      }
+  computed: {
+    tableData () {
+      return this.$t('dashboard.taskList')
     }
   }
+}
 </script>
 
 <style>

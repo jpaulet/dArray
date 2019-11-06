@@ -22,8 +22,8 @@
   </div>
 </template>
 <script>
-export default{
-  name:"card",
+export default {
+  name: 'card',
   props: {
     title: String,
     subTitle: String,

@@ -21,39 +21,39 @@
   </table>
 </template>
 <script>
- export default {
-   name: 'base-table',
-   props:{
-     tableClass: {
-       type: String,
-       default: ''
-     },
-     theadClasses:{
-       type: String,
-       default: ''
-     },
-     tbodyClasses:{
-       type: String,
-       default: ''
-     },
-     data:{
-       type: Array,
-       default: () => []
-     },
-     columns:{
-       type: Array,
-       default: ()=>[]
-     }
-   },
-   methods: {
-     hasValue(item, column) {
-       return item[column.toLowerCase()] !== "undefined";
-     },
-     itemValue(item, column) {
-       return item[column.toLowerCase()];
-     }
-   }
- }
+export default {
+  name: 'base-table',
+  props: {
+    tableClass: {
+      type: String,
+      default: ''
+    },
+    theadClasses: {
+      type: String,
+      default: ''
+    },
+    tbodyClasses: {
+      type: String,
+      default: ''
+    },
+    data: {
+      type: Array,
+      default: () => []
+    },
+    columns: {
+      type: Array,
+      default: () => []
+    }
+  },
+  methods: {
+    hasValue (item, column) {
+      return item[column.toLowerCase()] !== 'undefined'
+    },
+    itemValue (item, column) {
+      return item[column.toLowerCase()]
+    }
+  }
+}
 </script>
 <style>
 </style>

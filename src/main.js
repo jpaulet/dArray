@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import UUID from 'vue-uuid';
+import UUID from 'vue-uuid'
 
 import GlobalComponents from './globalComponents'
 import GlobalDirectives from './globalDirectives'
@@ -28,7 +28,7 @@ Vue.use(GlobalComponents)
 Vue.use(GlobalDirectives)
 Vue.use(SideBar)
 Vue.use(Notify)
-Vue.use(UUID);
+Vue.use(UUID)
 
 new Vue({
   router,

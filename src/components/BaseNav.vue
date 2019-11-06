@@ -31,37 +31,37 @@
   </nav>
 </template>
 <script>
-import NavbarToggleButton from "./NavbarToggleButton";
+import NavbarToggleButton from './NavbarToggleButton'
 
 export default {
-  name: "base-nav",
+  name: 'base-nav',
   components: {
     NavbarToggleButton
   },
   props: {
-    expand:{
+    expand: {
       type: Boolean,
       default: false
     },
     effect: {
       type: String,
-      default: "dark"
+      default: 'dark'
     },
-    transparent:{
+    transparent: {
       type: Boolean,
       default: false
     },
     type: {
       type: String,
-      default: "primary"
+      default: 'primary'
     },
-    round:{
+    round: {
       type: Boolean,
       default: false
     },
     title: {
       type: String,
-      default: ""
+      default: ''
     },
     contentId: {
       type: [String, Number],
@@ -69,17 +69,17 @@ export default {
     }
   },
   methods: {
-    onTitleClick(evt){
-      this.$emit("title-click", evt);
+    onTitleClick (evt) {
+      this.$emit('title-click', evt)
     },
-    closeMenu() {
-      this.toggled = false;
+    closeMenu () {
+      this.toggled = false
     }
   },
-  data() {
+  data () {
     return {
       toggled: false
-    };
+    }
   }
 }
 </script>

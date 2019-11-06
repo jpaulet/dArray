@@ -8,18 +8,18 @@
 </template>
 
 <script>
- import BaseTable from '@/components/BaseTable';
+import BaseTable from '@/components/BaseTable'
 
- export default{
-   components: {
-     BaseTable
-   },
-   computed: {
-     table() {
-       return this.$t('dashboard.usersTable');
-     }
-   }
- }
+export default {
+  components: {
+    BaseTable
+  },
+  computed: {
+    table () {
+      return this.$t('dashboard.usersTable')
+    }
+  }
+}
 </script>
 
 <style>

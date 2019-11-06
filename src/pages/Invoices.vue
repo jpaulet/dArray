@@ -18,13 +18,13 @@
                                 name="options" autocomplete="off"
                                 :checked="activeIndex === index">
                           {{ option }}
-                       </label>                   
+                       </label>
                     </div>
                 </div>
-            </div>            
+            </div>
         </template>
 
-        <div v-if='table1.data.length'>                
+        <div v-if='table1.data.length'>
             <h6 class="title d-inline text-left float-left">Invoices ({{table1.data.length}})</h6>
             <drop-down tag="div" class='float-right text-right'>
               <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon">
@@ -103,7 +103,7 @@
         <div v-if='!table1.data.length' class='py-4 text-center my-4'>
             <p>No invoices yet. </p>
             <img src='@/assets/img/invoice.png' class='mt-3 mb-5' height='400' />
-        </div>        
+        </div>
     </card>
 
     <card v-if='newInvoice && !showPreview' style='background:-moz-linear-gradient(left, rgba(10, 87, 249, 0.06) 0%, rgba(10, 87, 249, 0.06) 32.5%, rgba(13, 65, 176, 0.13) 32.5%, rgb(255, 255, 255) 32.6%, rgb(255, 255, 255) 41%, rgb(255, 255, 255) 100%);min-width: 850px;'>
@@ -119,7 +119,7 @@
         <!-- INVOICE CONFIGURATOR -->
             <div class='col-4 ml-0 pl-0 pr-4' style='min-width: 250px;'>
                 <h4 class="card-title text-left"><i class="tim-icons icon-bell-55 text-primary "></i> Configure Invoice </h4>
-                
+
                 <div class='row text-left mt-4'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'> Invoice Nº </label><input class='form-control ml-3' type='text' v-model='invoice.name' name='invoice' style='min-width: 120px;max-width:200px;' placeholder="Invoice #" />
                 </div>
@@ -177,7 +177,7 @@
                         </td>
 
                         <td>
-                          <strong>Invoice #: {{invoice.name}}</strong><br> 
+                          <strong>Invoice #: {{invoice.name}}</strong><br>
                           <label style='line-height:40px;vertical-align:middle;'>Created</label>
                           <input type="date" class="form-control" style="border: 0px none; width: 120px; text-align: right; float: right; cursor: pointer;padding-right:0px;margin-right:-20px;" v-model='invoice.date'><br>
                           <label style='line-height:20px;vertical-align:middle;'>Due</label>
@@ -193,10 +193,10 @@
                     <table class='mb-3'>
                       <tr>
                         <td style='padding-bottom:10px;'>
-                            <h6>Customer Details:</h6>                        
-                            <span class='ml-2'>{{invoice.client.name}}</span><br> 
-                            <span class='ml-2'>{{invoice.client.address}}</span><br> 
-                            <span class='ml-2'>{{invoice.client.country}}</span><br> 
+                            <h6>Customer Details:</h6>
+                            <span class='ml-2'>{{invoice.client.name}}</span><br>
+                            <span class='ml-2'>{{invoice.client.address}}</span><br>
+                            <span class='ml-2'>{{invoice.client.country}}</span><br>
                             <span v-if='invoice.client.tax_number' class='ml-2'>{{invoice.client.tax_number}}<br> </span>
                             <span v-if='invoice.client.email' class='ml-2'>{{invoice.client.email}}<br></span>
                             <span v-if='invoice.client.phone' class='ml-2'>{{invoice.client.phone}}</span>
@@ -213,7 +213,7 @@
                     </table>
                   </td>
                 </tr>
-                
+
                 <tr class="heading" style='font-size:12px;'>
                   <td style='background-color: #fff;'>Item</td>
                   <td style='background-color: #fff;text-align:right;padding-right:20px;'>Unit Cost</td>
@@ -296,7 +296,7 @@
         </div>
     </card>
 
-    <card v-if='showPreview'>      
+    <card v-if='showPreview'>
         <!-- INVOICE PREVIEW -->
         <template slot="header">
           <div class='row'>
@@ -319,7 +319,7 @@
                     </td>
 
                     <td>
-                      <strong>Invoice #: {{invoice.name}}</strong><br> 
+                      <strong>Invoice #: {{invoice.name}}</strong><br>
                       <label style='line-height:40px;vertical-align:middle;'>Created</label>
                       <div style="border: 0px none; width: 120px; text-align: right; float: right; cursor: pointer;padding-right:0px;margin-right:-20px;">{{invoice.date}}</div><br>
                       <label style='line-height:20px;vertical-align:middle;'>Due</label>
@@ -335,10 +335,10 @@
                 <table class='mb-3'>
                   <tr>
                     <td style='padding-bottom:10px;'>
-                        <h6>Customer Details:</h6>                        
-                        <span class='ml-2'>{{invoice.client.name}}</span><br> 
-                        <span class='ml-2'>{{invoice.client.address}}</span><br> 
-                        <span class='ml-2'>{{invoice.client.country}}</span><br> 
+                        <h6>Customer Details:</h6>
+                        <span class='ml-2'>{{invoice.client.name}}</span><br>
+                        <span class='ml-2'>{{invoice.client.address}}</span><br>
+                        <span class='ml-2'>{{invoice.client.country}}</span><br>
                         <span v-if='invoice.client.tax_number' class='ml-2'>{{invoice.client.tax_number}}<br> </span>
                         <span v-if='invoice.client.email' class='ml-2'>{{invoice.client.email}}<br></span>
                         <span v-if='invoice.client.phone' class='ml-2'>{{invoice.client.phone}}</span>
@@ -355,7 +355,7 @@
                 </table>
               </td>
             </tr>
-            
+
             <tr class="heading" style='font-size:12px;'>
               <td style='background-color: #fff;'>Item</td>
               <td style='background-color: #fff;text-align:right;padding-right:20px;'>Unit Cost</td>
@@ -419,46 +419,46 @@
 import { userSession } from '@/userSession'
 import {
   Card
-} from "@/components/index";
-import BaseButton from '@/components/BaseButton';
-import BaseTable from '@/components/BaseTable';
-import BaseCheckbox from '@/components/BaseCheckbox';
-import BaseAlert from '@/components/BaseAlert';
-import NotificationTemplate from './Notifications/NotificationTemplate';
-import { uuid } from 'vue-uuid';
+} from '@/components/index'
+import BaseButton from '@/components/BaseButton'
+import BaseTable from '@/components/BaseTable'
+import BaseCheckbox from '@/components/BaseCheckbox'
+import BaseAlert from '@/components/BaseAlert'
+import NotificationTemplate from './Notifications/NotificationTemplate'
+import { uuid } from 'vue-uuid'
 
-const tableColumns = ["", "Name", "Client", "Date", "Total", "Status", "View", "Edit"];
+const tableColumns = ['', 'Name', 'Client', 'Date', 'Total', 'Status', 'View', 'Edit']
 
-var STORAGE_FILE = 'invoices.json';
-var COMPANY_FILE = 'company.json';
-var CUSTOMERS_FILE ='customers.json';
+var STORAGE_FILE = 'invoices.json'
+var COMPANY_FILE = 'company.json'
+var CUSTOMERS_FILE = 'customers.json'
 
-export default{
-  components:{
+export default {
+  components: {
     Card,
     BaseButton,
     BaseTable,
     BaseCheckbox,
     BaseAlert
   },
-  data(){
-    return{
+  data () {
+    return {
       showPreview: false,
       tableData: [{}],
       newInvoice: false,
-      invoiceOptions:[
-        "This Month",
-        "Today",
-        "All"
+      invoiceOptions: [
+        'This Month',
+        'Today',
+        'All'
       ],
-      activeIndex:0,
+      activeIndex: 0,
       table1: {
-        title: "Invoices",
+        title: 'Invoices',
         columns: [...tableColumns],
         data: []
       },
-      invoice:{
-        id: null,        
+      invoice: {
+        id: null,
         number: '',
         date: new Date().toISOString().split('T')[0],
         year: 2019,
@@ -474,7 +474,7 @@ export default{
         currency: '$',
         discount: 0,
         items: [
-          { description: "", quantity: 1, price: 0 }
+          { description: '', quantity: 1, price: 0 }
         ],
         subtotal: 0,
         total: 0,
@@ -487,184 +487,184 @@ export default{
     }
   },
   methods: {
-    openNewInvoice(){
-      this.clearInvoice();
-      this.newInvoice = true;
+    openNewInvoice () {
+      this.clearInvoice()
+      this.newInvoice = true
     },
-    closeNewInvoice(){
-      this.newInvoice = false;
-    },    
-    addRow() {
-      this.invoice.items.push({ description: "", quantity: 1, price: 0 });
+    closeNewInvoice () {
+      this.newInvoice = false
     },
-    clearInvoice(){
-        this.invoice = {
-            id: null,
-            name: '',
-            date: new Date().toISOString().split('T')[0],
-            year: 2019,
-            due_date: new Date().toISOString().split('T')[0],
-            payment: null,
-            logo: null,
-            client: {},
-            product: null,
-            comments: '',
-            status: 'Pending',
-            tax: 0,
-            currency: '$',
-            discount: 0,
-            items: [
-              { description: "", quantity: 1, price: 0 }
-            ],
-            subtotal: 0,
-            total: 0,
-            vat: 0
-        };
+    addRow () {
+      this.invoice.items.push({ description: '', quantity: 1, price: 0 })
     },
-    initBigChart(index) {
-      this.activeIndex = index;
+    clearInvoice () {
+      this.invoice = {
+        id: null,
+        name: '',
+        date: new Date().toISOString().split('T')[0],
+        year: 2019,
+        due_date: new Date().toISOString().split('T')[0],
+        payment: null,
+        logo: null,
+        client: {},
+        product: null,
+        comments: '',
+        status: 'Pending',
+        tax: 0,
+        currency: '$',
+        discount: 0,
+        items: [
+          { description: '', quantity: 1, price: 0 }
+        ],
+        subtotal: 0,
+        total: 0,
+        vat: 0
+      }
     },
-    selectCustomer(index){
-        this.invoice.client = {
-            id: 1,
-            name: 'Customer 1',
-            address: 'The new address',
-            country: 'Girona (Spain)',
-            email: 'theEmail@gmail.com',
-            phone: '+34 3525525252',
-            tax_number: 'AS3254525'
-        }
+    initBigChart (index) {
+      this.activeIndex = index
     },
-    fetchData() {
-      //Load Company data
+    selectCustomer (index) {
+      this.invoice.client = {
+        id: 1,
+        name: 'Customer 1',
+        address: 'The new address',
+        country: 'Girona (Spain)',
+        email: 'theEmail@gmail.com',
+        phone: '+34 3525525252',
+        tax_number: 'AS3254525'
+      }
+    },
+    fetchData () {
+      // Load Company data
       userSession.getFile(COMPANY_FILE).then((company) => {
-          this.company = JSON.parse(company || "{}");
+        this.company = JSON.parse(company || '{}')
 
-          this.invoice.payment = this.company.payment;
-          this.invoice.comments = this.company.comments;
-          this.invoice.tax = this.company.vat;
-          this.invoice.logo = this.company.logo;
-      });
+        this.invoice.payment = this.company.payment
+        this.invoice.comments = this.company.comments
+        this.invoice.tax = this.company.vat
+        this.invoice.logo = this.company.logo
+      })
 
-      //Load Invoices data
+      // Load Invoices data
       userSession.getFile(STORAGE_FILE).then((invoices) => {
-        this.invoices_list = JSON.parse(invoices || "[]");
-        let i = 0;
+        this.invoices_list = JSON.parse(invoices || '[]')
+        let i = 0
 
-        for(i in this.invoices_list){
-          userSession.getFile(this.invoices_list[i]+'.json').then((invoice) => {
-            if(invoice === null){
-              return false;
+        for (i in this.invoices_list) {
+          userSession.getFile(this.invoices_list[i] + '.json').then((invoice) => {
+            if (invoice === null) {
+              return false
             }
-            this.invoices.push(JSON.parse(invoice));
-            this.table1.data = this.invoices;
-          });
+            this.invoices.push(JSON.parse(invoice))
+            this.table1.data = this.invoices
+          })
         }
-      });
-      
-      //Load Customers
+      })
+
+      // Load Customers
       userSession.getFile(CUSTOMERS_FILE).then((customers) => {
-        this.customers = JSON.parse(customers || "[]");
-        let i = 0;
+        this.customers = JSON.parse(customers || '[]')
+        let i = 0
 
-        for(i in this.customers){
-          userSession.getFile(this.customers[i]+'.json').then((customer) => {
-            this.customers[i] = customer;
-          });
+        for (i in this.customers) {
+          userSession.getFile(this.customers[i] + '.json').then((customer) => {
+            this.customers[i] = customer
+          })
         }
-      });
+      })
     },
-    saveInvoice(){
-      let isNew = false;
-      if(this.invoice.id === null){
-        this.invoice.id = uuid.v4();
-        this.invoices_list.unshift(this.invoice.id);
-        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoices_list));
-        isNew = true;
+    saveInvoice () {
+      let isNew = false
+      if (this.invoice.id === null) {
+        this.invoice.id = uuid.v4()
+        this.invoices_list.unshift(this.invoice.id)
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoices_list))
+        isNew = true
       }
 
-      let invoiceFile = this.invoice.id+".json";
-      this.invoice.total = this.total;
-      this.invoice.vat = this.vat;
-      this.invoice.subtotal = this.subtotal;
-      userSession.putFile(invoiceFile, JSON.stringify(this.invoice));
+      let invoiceFile = this.invoice.id + '.json'
+      this.invoice.total = this.total
+      this.invoice.vat = this.vat
+      this.invoice.subtotal = this.subtotal
+      userSession.putFile(invoiceFile, JSON.stringify(this.invoice))
 
-      if(isNew){
-        this.invoices.push(this.invoice);
-        this.table1.data = this.invoices;
+      if (isNew) {
+        this.invoices.push(this.invoice)
+        this.table1.data = this.invoices
       }
-      this.clearInvoice();
-      this.newInvoice = false;
+      this.clearInvoice()
+      this.newInvoice = false
 
       this.$notify({
         message: 'Invoice created successfully',
-        icon: "tim-icons icon-bell-55",
+        icon: 'tim-icons icon-bell-55',
         horizontalAlign: 'center',
         verticalAlign: 'bottom',
         type: 'success',
         timeout: 1500
-      });
+      })
     },
-    editInvoice(id){
-      let search_invoice = this.invoices_list.indexOf(id);
-      if(search_invoice === -1){
+    editInvoice (id) {
+      let search_invoice = this.invoices_list.indexOf(id)
+      if (search_invoice === -1) {
         this.$notify({
           message: 'Something wrong happened',
-          icon: "tim-icons icon-bell-55",
+          icon: 'tim-icons icon-bell-55',
           horizontalAlign: 'center',
           verticalAlign: 'bottom',
           type: 'danger',
           timeout: 1500
-        });
-        return false;
+        })
+        return false
       }
 
-      this.invoice = this.invoices[search_invoice];
-      this.newInvoice = true;
+      this.invoice = this.invoices[search_invoice]
+      this.newInvoice = true
     },
-    showInvoice(id){
-      let search_invoice = this.invoices_list.indexOf(id);
-      if(search_invoice === -1){
+    showInvoice (id) {
+      let search_invoice = this.invoices_list.indexOf(id)
+      if (search_invoice === -1) {
         this.$notify({
           message: 'Something wrong happened',
-          icon: "tim-icons icon-bell-55",
+          icon: 'tim-icons icon-bell-55',
           horizontalAlign: 'center',
           verticalAlign: 'bottom',
           type: 'danger',
           timeout: 1500
-        });
-        return false;
+        })
+        return false
       }
 
-      this.invoice = this.invoices[search_invoice];
-      this.showPreview = true;
+      this.invoice = this.invoices[search_invoice]
+      this.showPreview = true
     }
   },
   filters: {
-    currency(value) {
-      return value.toFixed(2);
+    currency (value) {
+      return value.toFixed(2)
     }
   },
   computed: {
-    total() {
-      return this.subtotal + this.vat - this.invoice.discount;
+    total () {
+      return this.subtotal + this.vat - this.invoice.discount
     },
-    vat() {
-      return this.subtotal * this.invoice.tax / 100;
+    vat () {
+      return this.subtotal * this.invoice.tax / 100
     },
-    subtotal() {
+    subtotal () {
       return this.invoice.items.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
-      );
+      )
     }
   },
-  async mounted(){
-    this.i18n = this.$i18n;
-    this.initBigChart(2);
-    this.fetchData();
+  async mounted () {
+    this.i18n = this.$i18n
+    this.initBigChart(2)
+    this.fetchData()
   }
-};
+}
 </script>
 
 <style scoped>

@@ -5,7 +5,8 @@ import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
 import Dashboard from '@/pages/Dashboard.vue'
 import Invoices from '@/pages/Invoices.vue'
 import Customers from '@/pages/Customers.vue'
-import UserProfile from '@/pages/UserProfile.vue'
+import Tasks from '@/pages/Tasks.vue'
+import Calendar from '@/pages/Calendar.vue'
 import TableList from '@/pages/TableList.vue'
 import Settings from '@/pages/Settings.vue'
 
@@ -20,7 +21,7 @@ const routes = [{
       component: Dashboard
     },
     {
-      path: 'Invoices',
+      path: 'invoices',
       name: 'Invoices',
       component: Invoices
     },
@@ -30,9 +31,14 @@ const routes = [{
       component: Customers
     },
     {
-      path: 'user',
-      name: 'User Profile',
-      component: UserProfile
+      path: 'tasks',
+      name: 'Tasks',
+      component: Tasks
+    },
+    {
+      path: 'calendar',
+      name: 'Calendar',
+      component: Calendar
     },
     {
       path: 'table',

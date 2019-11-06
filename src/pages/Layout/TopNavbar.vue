@@ -36,17 +36,17 @@
             <ul class="dropdown-menu dropdown-menu-right dropdown-navbar py-3">
               <li class="nav-link mb-2">
                   <a href="#" class="nav-item dropdown-item">
-                    <i class="tim-icons icon-paper text-info"></i> New Invoice
+                    <i class="tim-icons icon-paper text-info" style='color:#222 !important;'></i> New Invoice
                   </a>
               </li>
               <li class="nav-link mb-2">
                   <a href="#" class="nav-item dropdown-item">
-                    <i class="tim-icons icon-pin text-info"></i> New Expense
+                    <i class="tim-icons icon-pin text-info" style='color:#222 !important;'></i> New Expense
                   </a>
               </li>
               <li class="nav-link mb-2">
                   <a href="#" class="nav-item dropdown-item">
-                    <i class="tim-icons icon-single-02 text-info"></i> New Customer
+                    <i class="tim-icons icon-single-02 text-info" style='color:#222 !important;'></i> New Customer
                   </a>
               </li>
             </ul>
@@ -54,7 +54,7 @@
         </ul>
 
         <ul class="navbar-nav ml-auto">
-          
+
           <!-- SEARCH -->
           <li class="search-bar input-group"  @click="searchModalVisible = true">
             <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
@@ -129,57 +129,57 @@
 </template>
 
 <script>
-import DropDown from "@/components/Dropdown.vue";
-import Modal from "@/components/Modal.vue";
+import DropDown from '@/components/Dropdown.vue'
+import Modal from '@/components/Modal.vue'
 import { userSession } from '@/userSession'
 
 import {
   SidebarPlugin
-} from "@/components/index";
+} from '@/components/index'
 
-  export default{
-    components:{
-      DropDown,
-      Modal,
-      SidebarPlugin
+export default {
+  components: {
+    DropDown,
+    Modal,
+    SidebarPlugin
+  },
+  data () {
+    return {
+      searchModalVisible: false,
+      searchQuery: '',
+      showMenu: false,
+      blockstack: window.blockstack,
+      avatar: 'https://s3.amazonaws.com/onename/avatar-placeholder.png',
+      givenName: 'Anonymous'
+    }
+  },
+  methods: {
+    toggleSidebar () {
+      this.$sidebar.displaySidebar(!this.$sidebar.showSidebar)
     },
-    data() {
-      return {
-        searchModalVisible: false,
-        searchQuery: '',
-        showMenu: false,
-        blockstack: window.blockstack,
-        avatar: 'https://s3.amazonaws.com/onename/avatar-placeholder.png',
-        givenName: 'Anonymous'
-      };
+    toggleMenu () {
+      this.showMenu = !this.showMenu
     },
-    methods:{
-      toggleSidebar(){
-        this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
-      },
-      toggleMenu(){
-        this.showMenu  = !this.showMenu;
-      },
-      signOut () {
-        userSession.signUserOut();
-        location.reload();
-      }
-    },      
-    mounted () {
-      const blockstack = this.blockstack
-      if (blockstack.isUserSignedIn()) {
-        const profile = blockstack.loadUserData().profile
-        const user = new blockstack.Person(profile)
-        this.givenName = user.name() ? user.name() : 'Nameless Person'
-        if (user.avatarUrl()) this.avatar = user.avatarUrl()
-      } else if (blockstack.isSignInPending()) {
-        blockstack.handlePendingSignIn()
-          .then((userData) => {
-            window.location = window.location.origin
-          })
-      }
+    signOut () {
+      userSession.signUserOut()
+      location.reload()
+    }
+  },
+  mounted () {
+    const blockstack = this.blockstack
+    if (blockstack.isUserSignedIn()) {
+      const profile = blockstack.loadUserData().profile
+      const user = new blockstack.Person(profile)
+      this.givenName = user.name() ? user.name() : 'Nameless Person'
+      if (user.avatarUrl()) this.avatar = user.avatarUrl()
+    } else if (blockstack.isSignInPending()) {
+      blockstack.handlePendingSignIn()
+        .then((userData) => {
+          window.location = window.location.origin
+        })
     }
   }
+}
 </script>
 <style>
 </style>

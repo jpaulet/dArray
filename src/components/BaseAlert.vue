@@ -14,37 +14,37 @@
   </div>
 </template>
 <script>
-  export default {
-    name:'base-alert',
-    props:{
-      type:{
-        type: String,
-        default: 'default',
-        description: "Alert type"
+export default {
+  name: 'base-alert',
+  props: {
+    type: {
+      type: String,
+      default: 'default',
+      description: 'Alert type'
 
-      },
-      withIcon:{
-        type: Boolean,
-        default: false,
-        description: "Whether alert contains icon"
-      },
-      dismissible: {
-        type: Boolean,
-        default: false,
-        description: "Whether alert is dismissible (closeable)"
-      }
     },
-    data(){
-      return{
-        visible: true
-      }
+    withIcon: {
+      type: Boolean,
+      default: false,
+      description: 'Whether alert contains icon'
     },
-    methods: {
-      dismissAlert(){
-        this.visible = false;
-      }
+    dismissible: {
+      type: Boolean,
+      default: false,
+      description: 'Whether alert is dismissible (closeable)'
+    }
+  },
+  data () {
+    return {
+      visible: true
+    }
+  },
+  methods: {
+    dismissAlert () {
+      this.visible = false
     }
   }
+}
 </script>
 <style>
 </style>
