@@ -2,7 +2,7 @@
   <div class="content content-main-card">
     <card v-if='!newCustomer'>
       <template slot="header">
-            <div class='row mb-5'>
+            <div class='row mb-4'>
                 <div class="col-sm-6 text-left">
                   <button type="button" class="btn btn-light btn-sm px-5 text-white" fill="" @click="openNewCustomer">+ New Customer</button>
                 </div>
@@ -11,7 +11,7 @@
 
         <div v-if='table1.data.length'>
             <h6 class="title d-inline text-left float-left">Customers ({{table1.data.length}})</h6>
-            <drop-down tag="div" class='float-right text-right'>
+            <drop-down tag="div" class='float-right text-right' style='display:none;'>
               <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon">
                 <i class="tim-icons icon-settings-gear-63"></i>
               </button>
@@ -28,27 +28,20 @@
                             <base-checkbox v-model="row.done"></base-checkbox>
                         </td>
                         <td class="text-left">
-                            <p class="title">{{row.name}}</p>
+                            <p class="title">{{row.legal}}</p>
                         </td>
                         <td class="text-left">
                             <p class="text-muted">{{row.address}}</p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">{{row.country}}</p>
+                            <p class="text-muted">{{row.city}} / {{row.country}}</p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">{{row.email}}</p>
+                            <p class="text-muted">{{row.name}}: {{row.email}}</p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">0</p>
+                            <p class="text-muted"><span class='badge badge-light'>{{row.type}}</span></p>
                         </td>
-                        <!--
-                        <td class="td-actions text-center" style='width:50px;'>
-                            <base-button type="link" artia-label="view button" @click='showCustomer(row.id)'>
-                              <i class="tim-icons icon-zoom-split"></i>
-                            </base-button>
-                        </td>
-                        -->
                         <td class="td-actions text-center" style='width:50px;'>
                             <base-button type="link" artia-label="edit button" @click='editCustomer(row.id)'>
                               <i class="tim-icons icon-pencil"></i>
@@ -194,7 +187,7 @@ import BaseAlert from '@/components/BaseAlert'
 import NotificationTemplate from './Notifications/NotificationTemplate'
 import { uuid } from 'vue-uuid'
 
-const tableColumns = ['', 'Name', 'Address', 'Country', 'Email', 'Total', 'Edit']
+const tableColumns = ['','Legal', 'Address', 'City / Country', 'Contact', 'Type', 'Edit']
 
 var COMPANY_FILE = 'company.json'
 var CUSTOMERS_FILE = 'customers.json'
@@ -344,6 +337,9 @@ export default {
 }
 </script>
 <style>
+  .content-main-card .card{
+    min-height: 560px;
+  }
   .btn-dropdown:hover{
     background-color: #fff !important;
     font-weight: 600;

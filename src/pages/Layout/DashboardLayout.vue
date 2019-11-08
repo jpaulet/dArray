@@ -16,7 +16,7 @@
           <p>Invoices</p>
         </template>
       </sidebar-link>
-      <sidebar-link to="/maps">
+      <sidebar-link to="/expenses">
         <i class="tim-icons icon-pin"></i>
         <template>
           <p>Expenses</p>
@@ -38,6 +38,12 @@
         <i class="tim-icons icon-calendar-60"></i>
         <template>
           <p>Calendar</p>
+        </template>
+      </sidebar-link>
+      <sidebar-link to="/files">
+        <i class="tim-icons icon-upload"></i>
+        <template>
+          <p>Documents</p>
         </template>
       </sidebar-link>
       <sidebar-link to="/table">

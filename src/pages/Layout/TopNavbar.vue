@@ -49,6 +49,16 @@
                     <i class="tim-icons icon-single-02 text-info" style='color:#222 !important;'></i> New Customer
                   </a>
               </li>
+              <li class="nav-link mb-2">
+                  <a href="#" class="nav-item dropdown-item">
+                    <i class="tim-icons icon-pin text-info" style='color:#222 !important;'></i> New Task
+                  </a>
+              </li>
+              <li class="nav-link mb-2">
+                  <a href="#" class="nav-item dropdown-item">
+                    <i class="tim-icons icon-calendar-60 text-info" style='color:#222 !important;'></i> New Event
+                  </a>
+              </li>
             </ul>
           </drop-down>
         </ul>

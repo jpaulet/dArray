@@ -56,6 +56,7 @@
           </div>
 
           <h6 class='text-left mb-2 mt-3'>Invoice</h6>
+          
           <div class="row">
             <div class="col-md-8 text-left">
               <base-input label="Tax Nº" v-model="model.tax" placeholder="Tax Nº">

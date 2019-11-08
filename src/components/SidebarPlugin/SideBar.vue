@@ -6,8 +6,8 @@
           {{ abv }}
         </a>
 
-        <drop-down>
-          <a href="javascript:void(0)" class="simple-text logo-normal text-left">
+        <drop-down style='list-style-type: none;'>
+          <a href="javascript:void(0)" class="simple-text logo-normal text-left float-left col-7">
             {{ title }}
             <b class="caret d-none d-lg-block d-xl-block" style='float: right;right:20px;top:25px;color:#999;'></b>
           </a>
@@ -23,7 +23,7 @@
         </drop-down>
       </div>
 
-      <ul class="nav">
+      <ul class="nav mt-5" style='clear:both;'>
         <slot>
           <sidebar-link></sidebar-link>
         </slot>

@@ -48,3 +48,12 @@ html,body{
 		margin: 10px auto 10px !important;
 	}
 }
+
+.router-link-active{
+	background-color: #cccccc21 !important;
+	border-radius:8px !important;
+}
+
+.router-link-active a p{
+	color: #000 !important;
+}

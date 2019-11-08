@@ -171,7 +171,7 @@
             }
 
             > a{
-                margin: 10px 15px 0;
+                margin: 0px 15px 0;
                 border-radius: $btn-round-radius;
                 color: $black;
                 display: block;
@@ -307,17 +307,6 @@
             display: block;
             opacity: 1;
             @include transform-translate-x(0px);
-        }
-
-        &:after{
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 15px;
-            height: 1px;
-            width: calc(100% - 30px);
-            background: $opacity-5;
-
         }
 
         p{

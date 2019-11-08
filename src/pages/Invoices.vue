@@ -6,7 +6,7 @@
                 <div class="col-sm-6 text-left">
                   <button type="button" class="btn btn-light btn-sm px-5 text-white" fill="" @click="openNewInvoice">+ New Invoice</button>
                 </div>
-                <div class="col-sm-6 text-right">
+                <div class="col-sm-6 text-right" v-if='false'>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
                        <label v-for="(option, index) in invoiceOptions"
                               :key="option"
@@ -102,11 +102,11 @@
 
         <div v-if='!table1.data.length' class='py-4 text-center my-4'>
             <p>No invoices yet. </p>
-            <img src='@/assets/img/invoice.png' class='mt-3 mb-5' height='400' />
+            <img src='@/assets/img/invoice.png' class='mt-3 mb-5' height='200' />
         </div>
     </card>
 
-    <card v-if='newInvoice && !showPreview' style='background:-moz-linear-gradient(left, rgba(10, 87, 249, 0.06) 0%, rgba(10, 87, 249, 0.06) 32.5%, rgba(13, 65, 176, 0.13) 32.5%, rgb(255, 255, 255) 32.6%, rgb(255, 255, 255) 41%, rgb(255, 255, 255) 100%);min-width: 850px;'>
+    <card v-if='newInvoice && !showPreview' style='background: linear-gradient(90deg, rgba(231,236,250,1) 0%, rgba(231,236,250,1) 33.5%, rgba(202,215,251,1) 33.6%, rgba(255,255,255,1) 33.5%, rgba(255,255,255,1) 100%);min-width: 850px;'>
         <template slot="header">
             <div class='row'>
                 <h6 class='col-8'><a href='' @click.prevent='closeNewInvoice'><i class="tim-icons icon-minimal-left text-light mr-3"></i></a> New Invoice</h6>
@@ -121,7 +121,8 @@
                 <h4 class="card-title text-left"><i class="tim-icons icon-bell-55 text-primary "></i> Configure Invoice </h4>
 
                 <div class='row text-left mt-4'>
-                    <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'> Invoice Nº </label><input class='form-control ml-3' type='text' v-model='invoice.name' name='invoice' style='min-width: 120px;max-width:200px;' placeholder="Invoice #" />
+                    <label class='ml-3' style='vertical-align:middle;line-height:40px;width:60px;'> Title </label>
+                    <input class='form-control ml-0' type='text' v-model='invoice.name' name='invoice' style='min-width: 90px;max-width:180px;' placeholder="Invoice #" />
                 </div>
                 <div class='text-left mt-4'>
                     <h6 class='float-left' style='line-height:22px;vertical-align:middle;height:22px;'>
@@ -133,14 +134,14 @@
                         <i class="tim-icons icon-single-02"></i>
                       </button>
                       <ul class="dropdown-menu dropdown-menu-right">
-                        <a href="" class="dropdown-item" @click.prevent='selectCustomer(1)'>1 Customer</a>
-                        <a href="" class="dropdown-item" @click.prevent='selectCustomer(1)'>2 Pleasepoint</a>
+                        <a v-for='customer in customers' href="" class="dropdown-item" @click.prevent='selectCustomer(customer.id)'>{{customer.legal}}</a>
                       </ul>
                     </drop-down>
-                    <input type='text' class='form-control col-10 ml-1' v-model='invoice.client.name' placeholder="Name" />
+                    <input type='text' class='form-control col-10 ml-1' v-model='invoice.client.legal' placeholder="Title" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.address' placeholder="Address" />
-                    <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.country' placeholder="City / Country" />
-                    <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.tax_number' placeholder="Tax Nº" />
+                    <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.city' placeholder="City" />
+                    <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.country' placeholder="Country" />
+                    <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.nif' placeholder="Tax Nº" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.email' placeholder="E-mail" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.phone' placeholder="Phone" />
                 </div>
@@ -194,10 +195,10 @@
                       <tr>
                         <td style='padding-bottom:10px;'>
                             <h6>Customer Details:</h6>
-                            <span class='ml-2'>{{invoice.client.name}}</span><br>
+                            <span class='ml-2'>{{invoice.client.legal}}</span><br>
                             <span class='ml-2'>{{invoice.client.address}}</span><br>
-                            <span class='ml-2'>{{invoice.client.country}}</span><br>
-                            <span v-if='invoice.client.tax_number' class='ml-2'>{{invoice.client.tax_number}}<br> </span>
+                            <span class='ml-2'>{{invoice.client.city}}</span> / <span class='ml-2'>{{invoice.client.country}}</span><br>
+                            <span v-if='invoice.client.nif' class='ml-2'>{{invoice.client.nif}}<br> </span>
                             <span v-if='invoice.client.email' class='ml-2'>{{invoice.client.email}}<br></span>
                             <span v-if='invoice.client.phone' class='ml-2'>{{invoice.client.phone}}</span>
                         </td>
@@ -482,6 +483,7 @@ export default {
       },
       company: {},
       customers: [],
+      customers_list: [],
       invoices_list: [],
       invoices: []
     }
@@ -490,6 +492,9 @@ export default {
     openNewInvoice () {
       this.clearInvoice()
       this.newInvoice = true
+      this.invoice.payment = this.company.payment
+      this.invoice.comments = this.company.comments
+      this.invoice.tax = this.company.vat
     },
     closeNewInvoice () {
       this.newInvoice = false
@@ -525,14 +530,25 @@ export default {
       this.activeIndex = index
     },
     selectCustomer (index) {
-      this.invoice.client = {
-        id: 1,
-        name: 'Customer 1',
-        address: 'The new address',
-        country: 'Girona (Spain)',
-        email: 'theEmail@gmail.com',
-        phone: '+34 3525525252',
-        tax_number: 'AS3254525'
+      let search_invoice = this.customers_list.indexOf(index)
+      if (search_invoice === -1) {
+        this.$notify({
+          message: 'Something wrong happened',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'danger',
+          timeout: 1500
+        })
+        return false
+      }
+
+      this.invoice.client = this.customers[search_invoice]
+      if(!this.invoice.payment){
+        this.invoice.payment = this.company.payment
+      }
+      if(!this.invoice.comments){
+        this.invoice.comments = this.company.comments
       }
     },
     fetchData () {
@@ -564,12 +580,12 @@ export default {
 
       // Load Customers
       userSession.getFile(CUSTOMERS_FILE).then((customers) => {
-        this.customers = JSON.parse(customers || '[]')
+        this.customers_list = JSON.parse(customers || '[]')
         let i = 0
-
-        for (i in this.customers) {
-          userSession.getFile(this.customers[i] + '.json').then((customer) => {
-            this.customers[i] = customer
+        
+        for (i in this.customers_list) {
+          userSession.getFile(this.customers_list[i] + '.json').then((customer) => {
+            this.customers.push(JSON.parse(customer))
           })
         }
       })
@@ -668,6 +684,9 @@ export default {
 </script>
 
 <style scoped>
+  .content-main-card .card{
+    min-height: 560px;
+  }
   .table > thead > tr > th{
       text-align: center !important;
   }
