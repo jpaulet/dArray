@@ -43,3 +43,7 @@ export default {
 </style>
 
 <style src="./assets/styles.css" lang="css"></style>
+<!--
+<script src="print.js"></script>
+<link rel="stylesheet" type="text/css" href="print.css">
+-->

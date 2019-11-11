@@ -8,7 +8,7 @@
             <input type="file" ref="filepicker" @change="uploadFile" />
           </div>
           <div class='text-left row mb-3'>
-            <h6 class='col-1'> Path: </h6>
+            <h6 class='col-2'> Path: </h6>
             <a href='#' @click.prevent='changeFolder()' class='text-left text-muted badge badge-light' style='font-size:11px;line-height:14px;color:#fff !important;'> /Home </a>
           </div>
           <h4 class='text-left'> Folders </h4>

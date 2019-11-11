@@ -88,19 +88,6 @@
         <user-card :company="model" v-on:newLogo='saveLogo' style='height:96%;'></user-card>
       </div>
     </div>
-
-    <!--
-    <div class="row">
-      <div class="col-md-12">
-        <card>
-          <template slot="header">
-            <h5 class="card-category">White Table Heading</h5>
-            <h3 class="card-title">Created using Poppins Font Family</h3>
-          </template>
-        </card>
-      </div>
-    </div>
-    -->
   </div>
 </template>
 
@@ -134,7 +121,8 @@ export default {
         city: '',
         country: '',
         zip: '',
-        logo: '@/assets/img/company.png',
+        //logo: '@/assets/img/company.png',
+        logo: '',
         tax: '',
         vat: 0,
         payment: '',
@@ -156,6 +144,29 @@ export default {
       })
     },
     saveLogo (logo) {
+      if(this.model.logo !== '@/assets/img/company.png'){        
+        userSession.deleteFile(this.model.logo).then(() => {
+            // file was deleted
+            this.$notify({
+              message: 'File uploaded',
+              icon: 'tim-icons icon-bell-55',
+              horizontalAlign: 'center',
+              verticalAlign: 'bottom',
+              type: 'success',
+              timeout: 1500
+            })
+        }).catch((error) => {
+            // file does not exist or is inaccessable
+            this.$notify({
+              message: 'Failed to delete the file',
+              icon: 'tim-icons icon-bell-55',
+              horizontalAlign: 'center',
+              verticalAlign: 'bottom',
+              type: 'danger',
+              timeout: 1500
+            })
+        });        
+      }
       this.model.logo = logo
       this.saveCompany()
     },

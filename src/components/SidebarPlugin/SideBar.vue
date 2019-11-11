@@ -9,10 +9,11 @@
         <drop-down style='list-style-type: none;'>
           <a href="javascript:void(0)" class="simple-text logo-normal text-left float-left col-7">
             {{ title }}
-            <b class="caret d-none d-lg-block d-xl-block" style='float: right;right:20px;top:25px;color:#999;'></b>
+            <b class="caret d-none d-lg-block d-xl-block" style='float:right;right:0px;top:25px;color:#999;display:none;'></b>
           </a>
 
-          <ul class="dropdown-menu dropdown-navbar" style='float: right;right:0px;left:0px;box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2);'>
+          <!-- TODO -->
+          <ul class="dropdown-menu dropdown-navbar" style='float:right;right:0px;left:0px;margin-top:45px;box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2);display:none !important;'>
             <li class="nav-link">
               <a href="javascript:void(0)" class="nav-item dropdown-item">Startup 2</a>
             </li>
@@ -43,7 +44,7 @@ export default {
   props: {
     abv: {
       type: String,
-      default: 'JPA'
+      default: 'CRM'
     },
     title: {
       type: String,
@@ -75,4 +76,7 @@ export default {
 }
 </script>
 <style>
+.sidebar-wrapper .dropdown-menu:before{
+  margin-right:12px;
+}
 </style>

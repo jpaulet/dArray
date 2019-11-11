@@ -9,7 +9,7 @@
                   <h5 class="card-category">Total Shipments</h5>
                   <h2 class="card-title">Performance</h2>
               </div>
-              <div class="col-sm-6 text-right">
+              <div class="col-sm-6 text-right" style='display:none;'>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
                    <label v-for="(option, index) in bigLineChartCategories"
                           :key="option"

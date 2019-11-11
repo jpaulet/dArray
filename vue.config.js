@@ -8,7 +8,13 @@ module.exports = {
         'window.jQuery': 'jquery',
         jQuery: 'jquery'
       })
-    ]
+    ],
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.esm.js'
+      }
+    },
+    mode: 'production'
   },
   devServer: {
     headers: {

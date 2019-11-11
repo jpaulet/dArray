@@ -263,7 +263,7 @@ export default {
       this.customer = this.model
       if (this.customer.id === null) {
         this.customer.id = uuid.v4()
-        this.customers_list.unshift(this.customer.id)
+        this.customers_list.push(this.customer.id)
         userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customers_list))
         isNew = true
       }

@@ -26,7 +26,7 @@
 
         <div v-if='table1.data.length'>
             <h6 class="title d-inline text-left float-left">Expenses ({{table1.data.length}})</h6>
-            <drop-down tag="div" class='float-right text-right'>
+            <drop-down tag="div" class='float-right text-right' style='display:none;'>
               <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon">
                 <i class="tim-icons icon-settings-gear-63"></i>
               </button>
@@ -52,25 +52,25 @@
                             <p class="text-muted">{{row.date}}</p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">{{row.total}} €</p>
+                            <p class="text-muted">{{row.total | currency}} €</p>
                         </td>
                         <td class="text-left">
                             <p class="text-muted">
                               <drop-down tag="div">
-                                <span aria-label="Expense Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge badge-warning" style='font-size:12px;margin-bottom:3px;'>
-                                  Pending
+                                <span aria-label="Expense Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge" :class="{ 'badge-success' : (row.status == 'Paid'), 'badge-warning' : (row.status == 'Pending'), 'badge-danger' : (row.status == 'Not paid') }" style='font-size:12px;margin-bottom:3px;width:100px;'>
+                                  {{row.status}}
                                   <!-- Do not remove, the icon has a ::after property with a dropdown arrow -->
                                   <i class="tim-icons icon-settings-gear-63" style='display:none;'></i>
                                 </span>
                                 <ul class="dropdown-menu dropdown-menu-left">
-                                  <a href="#duplicate" class="dropdown-item">
-                                    <span class='badge badge-success' style='font-size:13px;width:100%;'>Paid</span>
+                                  <a href="#" class="dropdown-item" @click='changeStatus("Paid",row.id)'>
+                                    <span class='badge badge-success text-center' style='font-size:13px;width:120px;'>Paid</span>
                                   </a>
-                                  <a href="#delete" class="dropdown-item">
-                                    <span class='badge badge-warning' style='font-size:13px;width:100%;'>Pending</span>
+                                  <a href="#" class="dropdown-item" @click='changeStatus("Pending",row.id)'>
+                                    <span class='badge badge-warning text-center' style='font-size:13px;width:120px;'>Pending</span>
                                   </a>
-                                  <a href="#delete" class="dropdown-item">
-                                    <span class='badge badge-danger' style='font-size:13px;width:100%;'>Not paid</span>
+                                  <a href="#" class="dropdown-item" @click='changeStatus("Not paid",row.id)'>
+                                    <span class='badge badge-danger text-center' style='font-size:13px;width:120px;'>Not paid</span>
                                   </a>
                                 </ul>
                               </drop-down>
@@ -100,7 +100,7 @@
     <card v-if='newExpense && !showPreview' style='background: linear-gradient(90deg, rgba(231,236,250,1) 0%, rgba(231,236,250,1) 33.5%, rgba(202,215,251,1) 33.6%, rgba(255,255,255,1) 33.5%, rgba(255,255,255,1) 100%);min-width: 850px;'>
         <template slot="header">
             <div class='row'>
-                <h6 class='col-8'><a href='' @click.prevent='closeNewExpense'><i class="tim-icons icon-minimal-left text-light mr-3"></i></a> New Expense</h6>
+                <h6 class='col-8'><a href='' @click.prevent='closeNewExpense'><i class="tim-icons icon-minimal-left text-light mr-5 pr-4"></i></a> New Expense</h6>
                 <a class='col-4 float-right text-right' href='' @click.prevent='closeNewExpense'><i class="tim-icons icon-simple-remove text-dark mr-3"></i></a>
             </div>
         </template>
@@ -109,9 +109,9 @@
 
         <!-- INVOICE CONFIGURATOR -->
             <div class='col-4 ml-0 pl-0 pr-4' style='min-width: 250px;'>
-                <h4 class="card-title text-left"><i class="tim-icons icon-bell-55 text-primary "></i> Configure Expense </h4>
+                <h4 style='display:none;' class="card-title text-left"><i class="tim-icons icon-bell-55 text-primary "></i> Configure Expense </h4>
 
-                <div class='row text-left mt-4'>
+                <div class='row text-left'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'> Title </label>
                     <input class='form-control ml-3 col-7' type='text' v-model='expense.title' name='expense' placeholder="Expense name" />
                 </div>
@@ -550,7 +550,7 @@ export default {
       let isNew = false
       if (this.expense.id === null) {
         this.expense.id = uuid.v4()
-        this.expenses_list.unshift(this.expense.id)
+        this.expenses_list.push(this.expense.id)
         userSession.putFile(STORAGE_FILE, JSON.stringify(this.expenses_list))
         isNew = true
       }
@@ -610,6 +610,25 @@ export default {
 
       this.expense = this.expenses[search_expense]
       this.showPreview = true
+    },
+    changeStatus (status, id) {
+      let search_expense = this.expenses_list.indexOf(id)
+      if (search_expense === -1) {
+        this.$notify({
+          message: 'Something wrong happened',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'danger',
+          timeout: 1500
+        })
+        return false
+      }
+
+      this.expense = this.expenses[search_expense]
+      this.expense.status = status
+      let expenseFile = this.expense.id + '.json'
+      userSession.putFile(expenseFile, JSON.stringify(this.expense))
     }
   },
   filters: {
@@ -751,5 +770,17 @@ export default {
   .form-control{
       background-color: #fff;
       border-color: rgba(29, 37, 59, 0.25);
+  }
+
+  .badge-success {
+    background-color: #c2e8ce !important;
+  }
+
+  .badge-warning {
+    background-color: #f6cd90 !important;
+  }
+
+  .badge-danger{
+    background-color: #f0b7a4 !important;
   }
 </style>

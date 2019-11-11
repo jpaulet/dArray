@@ -2,7 +2,7 @@
   <div class="content content-main-card">
     <card v-if='!newInvoice && !showPreview'>
         <template slot="header">
-            <div class='row mb-5'>
+            <div class='row mb-4'>
                 <div class="col-sm-6 text-left">
                   <button type="button" class="btn btn-light btn-sm px-5 text-white" fill="" @click="openNewInvoice">+ New Invoice</button>
                 </div>
@@ -26,7 +26,7 @@
 
         <div v-if='table1.data.length'>
             <h6 class="title d-inline text-left float-left">Invoices ({{table1.data.length}})</h6>
-            <drop-down tag="div" class='float-right text-right'>
+            <drop-down tag="div" class='float-right text-right' style='display:none;'>
               <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon">
                 <i class="tim-icons icon-settings-gear-63"></i>
               </button>
@@ -46,39 +46,39 @@
                             <p class="title">{{row.name}}</p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">{{row.client.name}}</p>
+                            <p class="text-muted">{{row.client.legal}}</p>
                         </td>
                         <td class="text-left">
                             <p class="text-muted">{{row.date}}</p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">{{row.total}} €</p>
+                            <p class="text-muted">{{row.total | currency}} €</p>
                         </td>
                         <td class="text-left">
                             <p class="text-muted">
                               <drop-down tag="div">
-                                <span aria-label="Invoice Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge badge-warning" style='font-size:12px;margin-bottom:3px;'>
-                                  Pending
+                                <span aria-label="Invoice Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge" :class="{ 'badge-success' : (row.status == 'Paid'), 'badge-warning' : (row.status == 'Pending'), 'badge-danger' : (row.status == 'Not paid'), 'badge-light' : (row.status == 'Overdue'), 'badge-ingo' : (row.status == 'Void'), 'badge-secondary' : (row.status == 'Draft') }" style='font-size:12px;margin-bottom:3px;width:100px;'>
+                                  {{row.status}}
                                   <!-- Do not remove, the icon has a ::after property with a dropdown arrow -->
                                   <i class="tim-icons icon-settings-gear-63" style='display:none;'></i>
                                 </span>
                                 <ul class="dropdown-menu dropdown-menu-left">
-                                  <a href="#duplicate" class="dropdown-item">
+                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Paid",row.id)'>
                                     <span class='badge badge-success' style='font-size:13px;width:100%;'>Paid</span>
                                   </a>
-                                  <a href="#delete" class="dropdown-item">
+                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Pending",row.id)'>
                                     <span class='badge badge-warning' style='font-size:13px;width:100%;'>Pending</span>
                                   </a>
-                                  <a href="#delete" class="dropdown-item">
+                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Not paid",row.id)'>
                                     <span class='badge badge-danger' style='font-size:13px;width:100%;'>Not paid</span>
                                   </a>
-                                  <a href="#delete" class="dropdown-item">
+                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Overdue",row.id)'>
                                     <span class='badge badge-light' style='font-size:13px;width:100%;'>Overdue</span>
                                   </a>
-                                  <a href="#delete" class="dropdown-item">
+                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Void",row.id)'>
                                     <span class='badge badge-info' style='font-size:13px;width:100%;'>Void</span>
                                   </a>
-                                  <a href="#delete" class="dropdown-item">
+                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Draft",row.id)'>
                                     <span class='badge badge-secondary' style='font-size:13px;width:100%;'>Draft</span>
                                   </a>
                                 </ul>
@@ -109,7 +109,7 @@
     <card v-if='newInvoice && !showPreview' style='background: linear-gradient(90deg, rgba(231,236,250,1) 0%, rgba(231,236,250,1) 33.5%, rgba(202,215,251,1) 33.6%, rgba(255,255,255,1) 33.5%, rgba(255,255,255,1) 100%);min-width: 850px;'>
         <template slot="header">
             <div class='row'>
-                <h6 class='col-8'><a href='' @click.prevent='closeNewInvoice'><i class="tim-icons icon-minimal-left text-light mr-3"></i></a> New Invoice</h6>
+                <h6 class='col-8'><a href='' @click.prevent='closeNewInvoice'><i class="tim-icons icon-minimal-left text-light mr-5 pr-5"></i></a> New Invoice</h6>
                 <a class='col-4 float-right text-right' href='' @click.prevent='closeNewInvoice'><i class="tim-icons icon-simple-remove text-dark mr-3"></i></a>
             </div>
         </template>
@@ -118,11 +118,11 @@
 
         <!-- INVOICE CONFIGURATOR -->
             <div class='col-4 ml-0 pl-0 pr-4' style='min-width: 250px;'>
-                <h4 class="card-title text-left"><i class="tim-icons icon-bell-55 text-primary "></i> Configure Invoice </h4>
+                <h4 style='display:none;' class="card-title text-left"><i class="tim-icons icon-bell-55 text-primary "></i> Configure Invoice </h4>
 
-                <div class='row text-left mt-4'>
-                    <label class='ml-3' style='vertical-align:middle;line-height:40px;width:60px;'> Title </label>
-                    <input class='form-control ml-0' type='text' v-model='invoice.name' name='invoice' style='min-width: 90px;max-width:180px;' placeholder="Invoice #" />
+                <div class='row text-left mt-0'>
+                    <label class='ml-3' style='vertical-align:middle;line-height:40px;width:50px;'> Title </label>
+                    <input class='form-control ml-0' type='text' v-model='invoice.name' name='invoice' style='min-width: 90px;max-width:60%;' placeholder="Invoice #" />
                 </div>
                 <div class='text-left mt-4'>
                     <h6 class='float-left' style='line-height:22px;vertical-align:middle;height:22px;'>
@@ -173,16 +173,16 @@
                   <td colspan="4">
                     <table class='mb-3'>
                       <tr>
-                        <td class="title">
-                          <img :src="company.logo" style="width:80%; max-width:300px;">
+                        <td class="title mb-0 pb-0">
+                          <img :src="imageSrc" style="max-height:120px;margin-top:-20px;">
                         </td>
 
                         <td>
                           <strong>Invoice #: {{invoice.name}}</strong><br>
                           <label style='line-height:40px;vertical-align:middle;'>Created</label>
-                          <input type="date" class="form-control" style="border: 0px none; width: 120px; text-align: right; float: right; cursor: pointer;padding-right:0px;margin-right:-20px;" v-model='invoice.date'><br>
+                          <input type="date" class="form-control" style="border: 0px none; width: 120px; text-align: right; float: right; cursor: pointer;padding-right:0px;margin-right:-40px;" v-model='invoice.date'><br>
                           <label style='line-height:20px;vertical-align:middle;'>Due</label>
-                          <input type="date" class="form-control" style="border: 0px none; width: 120px; text-align: right; float: right; cursor: pointer;padding-right:0px;margin-right:-20px;margin-top:-6px;" v-model='invoice.due_date'>
+                          <input type="date" class="form-control" style="border: 0px none; width: 120px; text-align: right; float: right; cursor: pointer;padding-right:0px;margin-right:-40px;margin-top:-10px;" v-model='invoice.due_date'>
                         </td>
                       </tr>
                     </table>
@@ -217,8 +217,8 @@
 
                 <tr class="heading" style='font-size:12px;'>
                   <td style='background-color: #fff;'>Item</td>
-                  <td style='background-color: #fff;text-align:right;padding-right:20px;'>Unit Cost</td>
-                  <td style='background-color: #fff;text-align:right;padding-right:12px;'>Quantity</td>
+                  <td style='background-color: #fff;text-align:right;'>Unit Cost</td>
+                  <td style='background-color: #fff;text-align:right;'>Quantity</td>
                   <td style='background-color: #fff;'>Price</td>
                 </tr>
 
@@ -291,13 +291,9 @@
                 <button class='btn btn-secondary btn-sm px-5' @click='saveInvoice'>Save</button>
             </div>
         </div>
-
-        <div style="width:100%;height:100%;position:absolute;background-color:#fff;z-index:9999;min-height:100%;left: 0;top: -10px;display:none;">
-            z-index:99999;top:5%;position:absolute;
-        </div>
     </card>
 
-    <card v-if='showPreview'>
+    <card id='previewInvoice' v-if='showPreview'>
         <!-- INVOICE PREVIEW -->
         <template slot="header">
           <div class='row'>
@@ -315,16 +311,19 @@
               <td colspan="4">
                 <table class='mb-3'>
                   <tr>
-                    <td class="title">
-                      <img :src="company.logo" style="width:80%; max-width:300px;">
+                    <td class="title mb-0 pb-0">
+                      <img id='imgLogo' :src="imageSrc" style="max-height:120px;margin-top:-20px;" />
+                      <div id='imgLogoExample'>
+                        
+                      </div>
                     </td>
 
                     <td>
-                      <strong>Invoice #: {{invoice.name}}</strong><br>
-                      <label style='line-height:40px;vertical-align:middle;'>Created</label>
-                      <div style="border: 0px none; width: 120px; text-align: right; float: right; cursor: pointer;padding-right:0px;margin-right:-20px;">{{invoice.date}}</div><br>
+                      <strong style='font-size:14px;width:100%;text-align: right;'>Invoice #: {{invoice.name}}</strong><br>
+                      <label>Created</label>
+                      <div style="border: 0px none; width: 90px; text-align: right; float: right; cursor: pointer;padding-right:0px;">{{invoice.date}}</div><br>
                       <label style='line-height:20px;vertical-align:middle;'>Due</label>
-                      <div style="border: 0px none; width: 120px; text-align: right; float: right; cursor: pointer;padding-right:0px;margin-right:-20px;margin-top:-6px;"> {{invoice.due_date}}</div>
+                      <div style="border: 0px none; width: 90px; text-align: right; float: right; cursor: pointer;padding-right:0px;"> {{invoice.due_date}}</div>
                     </td>
                   </tr>
                 </table>
@@ -337,7 +336,7 @@
                   <tr>
                     <td style='padding-bottom:10px;'>
                         <h6>Customer Details:</h6>
-                        <span class='ml-2'>{{invoice.client.name}}</span><br>
+                        <span class='ml-2'>{{invoice.client.legal}}</span><br>
                         <span class='ml-2'>{{invoice.client.address}}</span><br>
                         <span class='ml-2'>{{invoice.client.country}}</span><br>
                         <span v-if='invoice.client.tax_number' class='ml-2'>{{invoice.client.tax_number}}<br> </span>
@@ -485,16 +484,24 @@ export default {
       customers: [],
       customers_list: [],
       invoices_list: [],
-      invoices: []
+      invoices: [],
+      imageSrc: null
     }
   },
   methods: {
+    loadCompanyLogo(){
+      userSession.getFile(this.company.logo).then((logoImage) => {
+        this.imageSrc = logoImage;
+      })
+    },
     openNewInvoice () {
       this.clearInvoice()
       this.newInvoice = true
       this.invoice.payment = this.company.payment
       this.invoice.comments = this.company.comments
       this.invoice.tax = this.company.vat
+
+      this.loadCompanyLogo()
     },
     closeNewInvoice () {
       this.newInvoice = false
@@ -572,7 +579,7 @@ export default {
             if (invoice === null) {
               return false
             }
-            this.invoices.push(JSON.parse(invoice))
+            this.invoices.unshift(JSON.parse(invoice))
             this.table1.data = this.invoices
           })
         }
@@ -589,12 +596,36 @@ export default {
           })
         }
       })
+
+    },
+    isFilled(){
+      if(!this.invoice.name || !this.invoice.client.legal || this.total == 0){
+        this.$notify({
+          message: 'You should fill the invoice first',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'danger',
+          timeout: 1500
+        })
+        return false;
+      }
+      return true
     },
     saveInvoice () {
+      let canSave = this.isFilled()
+      if(!canSave){
+        return false;
+      }
       let isNew = false
       if (this.invoice.id === null) {
         this.invoice.id = uuid.v4()
-        this.invoices_list.unshift(this.invoice.id)
+        if(this.invoices_list === null){
+          this.invoices_list = []
+          this.invoices_list.push(this.invoice.id)
+        }else{
+          this.invoices_list.push(this.invoice.id)
+        }
         userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoices_list))
         isNew = true
       }
@@ -639,6 +670,29 @@ export default {
       this.newInvoice = true
     },
     showInvoice (id) {
+      if(!this.newInvoice){
+        let search_invoice = this.invoices_list.indexOf(id)
+        if (search_invoice === -1) {
+          this.$notify({
+            message: 'Something wrong happened',
+            icon: 'tim-icons icon-bell-55',
+            horizontalAlign: 'center',
+            verticalAlign: 'bottom',
+            type: 'danger',
+            timeout: 1500
+          })
+          return false
+        }
+
+        this.invoice = this.invoices[search_invoice]
+      }
+      let canSave = this.isFilled()
+      if(!canSave){
+        return false;
+      }
+      this.showPreview = true
+    },
+    changeStatus (status, id) {
       let search_invoice = this.invoices_list.indexOf(id)
       if (search_invoice === -1) {
         this.$notify({
@@ -653,8 +707,10 @@ export default {
       }
 
       this.invoice = this.invoices[search_invoice]
-      this.showPreview = true
-    }
+      this.invoice.status = status
+      let invoiceFile = this.invoice.id + '.json'
+      userSession.putFile(invoiceFile, JSON.stringify(this.invoice))
+    },
   },
   filters: {
     currency (value) {
@@ -811,5 +867,21 @@ export default {
   .form-control{
       background-color: #fff;
       border-color: rgba(29, 37, 59, 0.25);
+  }
+
+  .badge-success {
+    background-color: #c2e8ce !important;
+  }
+
+  .badge-warning {
+    background-color: #f6cd90 !important;
+  }
+
+  .badge-danger{
+    background-color: #f0b7a4 !important;
+  }
+
+  .badge-info{
+    background-color: #deecff !important;
   }
 </style>

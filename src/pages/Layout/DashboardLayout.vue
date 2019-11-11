@@ -2,7 +2,7 @@
   <div class="wrapper">
     <!-- <div class="wrapper" :class="{'nav-open': $sidebar.showSidebar}"> -->
 
-    <side-bar :background-color="backgroundColor" v-if="user" :user="user">
+    <side-bar :background-color="backgroundColor" v-if="user" :user="user" :title="user.name">
       <!-- <mobile-menu slot="content"></mobile-menu> -->
       <sidebar-link to="/dashboard">
         <i class="tim-icons icon-chart-pie-36"></i>
@@ -118,6 +118,7 @@ export default {
       this.userData = userSession.loadUserData()
       this.user = new Person(this.userData.profile)
       this.user.username = this.userData.username
+      this.user.name = this.userData.name
     } else if (userSession.isSignInPending()) {
       userSession.handlePendingSignIn()
         .then((userData) => {

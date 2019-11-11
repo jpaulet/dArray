@@ -1,19 +1,10 @@
 <template>
   <card type="user">
-    <h5 class='text-left mb-5'> <strong>Preview</strong> </h5>
+    <h5 class='text-left mb-4'> <strong>Preview</strong> </h5>
     <div class="author">
-
-      <!--
-      <div class="block block-one"></div>
-      <div class="block block-two"></div>
-      <div class="block block-three"></div>
-      <div class="block block-four"></div>
-      -->
-
       <a href="#" @click='saveLogo'>
         <input type="file" accept="image/*" @change="onFileChange" id="file-input" ref='uploadImage' style='display:none;'>
-        <img style='height:124px;width:124px;' class="avatar" :src="company.logo" alt="Logo">
-        <!-- @error="imageUrlAlt" -->
+        <img style='height:124px;width:124px;border-radius:0px;' class="avatar" :src="imageSrc" alt="Logo" id='imageLogo'>
         <h5 class="title">{{ company.company }}</h5>
       </a>
       <p class="description">
@@ -49,6 +40,7 @@ import {
 } from '@/components/index'
 
 import BaseButton from '@/components/BaseButton'
+const LOGO_FILE = 'logo.json'
 
 export default {
   components: {
@@ -63,20 +55,49 @@ export default {
       }
     }
   },
-
+  data(){
+    return {
+      imageSrc: null
+    }
+  },
   methods: {
     saveLogo (event) {
       const elem = this.$refs.uploadImage
       elem.click()
     },
     onFileChange (e) {
+      let reader = new FileReader();
       const file = e.target.files[0]
       var url = URL.createObjectURL(file)
-      this.$emit('newLogo', url)
+
+      reader.onload = (event) => {
+        const content = reader.result;
+        document.getElementById('imageLogo').src = content
+        userSession.putFile( file.name, content )
+      };
+
+      reader.onerror = (e) => {
+        console.error(e)
+      }
+      reader.readAsDataURL(file);
+      
+      this.$emit('newLogo', file.name)
     },
-    imageUrlAlt (event) {
-      event.target.src = '@/assets/img/company.png'
+    fetchFile(path) {
+      if(path === null){
+        this.imageSrc = null;
+        return;
+      }
+      userSession.getFile(path).then((logoImage) => {
+        console.log("The path: "+path)
+        console.log("The image: "+logoImage)
+        this.imageSrc = logoImage;
+      })
     }
+  },
+
+  mounted () {
+    this.fetchFile(this.company.logo)
   }
 }
 </script>
