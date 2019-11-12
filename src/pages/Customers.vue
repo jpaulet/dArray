@@ -78,7 +78,7 @@
             <div class="col-md-6 pl-md-1 text-left">
               <label> Customer Type </label>
               <drop-down tag="div">
-                <button v-model='model.type' aria-label="Customer Type" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-white btn-dropdown" style='background:#fff;color:#333;border:1px solid rgba(29, 37, 59, 0.5);text-align:left;height:38px;font-weight:200;color:#222a42;border-color:rgba(29, 37, 59, 0.5);border-radius: 0.4285rem;font-size: 0.75rem;box-shadow:none;'>
+                <button aria-label="Customer Type" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-white btn-dropdown" style='background:#fff;color:#333;border:1px solid rgba(29, 37, 59, 0.5);text-align:left;height:38px;font-weight:200;color:#222a42;border-color:rgba(29, 37, 59, 0.5);border-radius: 0.4285rem;font-size: 0.75rem;box-shadow:none;'>
                   <i></i>
                   {{ model.type }}
                 </button>
@@ -182,14 +182,11 @@ import {
 } from '@/components/index'
 import BaseButton from '@/components/BaseButton'
 import BaseTable from '@/components/BaseTable'
-import BaseCheckbox from '@/components/BaseCheckbox'
-import BaseAlert from '@/components/BaseAlert'
-import NotificationTemplate from './Notifications/NotificationTemplate'
 import { uuid } from 'vue-uuid'
 
 const tableColumns = ['Legal', 'Address', 'City / Country', 'Contact', 'Type', 'Edit']
 
-var COMPANY_FILE = 'company.json'
+// var COMPANY_FILE = 'company.json'
 var CUSTOMERS_FILE = 'customers.json'
 
 export default {
@@ -210,7 +207,7 @@ export default {
         data: []
       },
       customers: [],
-      invoices_list: [],
+      invoicesList: [],
       invoices: [],
       model: {
         id: null,
@@ -244,11 +241,11 @@ export default {
     fetchData () {
       // Load Customers
       userSession.getFile(CUSTOMERS_FILE).then((customers) => {
-        this.customers_list = JSON.parse(customers || '[]')
+        this.customersList = JSON.parse(customers || '[]')
         let i = 0
 
-        for (i in this.customers_list) {
-          userSession.getFile(this.customers_list[i] + '.json').then((customer) => {
+        for (i in this.customersList) {
+          userSession.getFile(this.customersList[i] + '.json').then((customer) => {
             if (customer === null) {
               return false
             }
@@ -263,8 +260,8 @@ export default {
       this.customer = this.model
       if (this.customer.id === null) {
         this.customer.id = uuid.v4()
-        this.customers_list.push(this.customer.id)
-        userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customers_list))
+        this.customersList.push(this.customer.id)
+        userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList))
         isNew = true
       }
 
@@ -291,8 +288,8 @@ export default {
 
     },
     editCustomer (id) {
-      let search_customer = this.customers_list.indexOf(id)
-      if (search_customer === -1) {
+      let searchCustomer = this.customersList.indexOf(id)
+      if (searchCustomer === -1) {
         this.$notify({
           message: 'Something wrong happened',
           icon: 'tim-icons icon-bell-55',
@@ -304,7 +301,7 @@ export default {
         return false
       }
 
-      this.customer = this.customers[search_customer]
+      this.customer = this.customers[searchCustomer]
       this.model = this.customer
       this.newCustomer = true
     },

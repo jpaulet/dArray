@@ -33,19 +33,15 @@
     </div>
   </card>
 </template>
-
 <script>
+import { userSession } from '@/userSession'
 import {
   Card
 } from '@/components/index'
 
-import BaseButton from '@/components/BaseButton'
-const LOGO_FILE = 'logo.json'
-
 export default {
   components: {
-    Card,
-    BaseButton
+    Card
   },
   props: {
     company: {
@@ -68,7 +64,6 @@ export default {
     onFileChange (e) {
       let reader = new FileReader()
       const file = e.target.files[0]
-      var url = URL.createObjectURL(file)
 
       reader.onload = (event) => {
         const content = reader.result
@@ -92,9 +87,12 @@ export default {
       })
     }
   },
-
-  mounted () {
-    this.fetchFile(this.company.logo)
+  mounted() {
+    this.$nextTick(()=>{
+      console.log('company: ')
+      console.log(this.company)
+      this.fetchFile(this.company.logo)
+    })
   }
 }
 </script>

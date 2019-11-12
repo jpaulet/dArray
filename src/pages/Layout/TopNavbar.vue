@@ -143,16 +143,11 @@ import DropDown from '@/components/Dropdown.vue'
 import Modal from '@/components/Modal.vue'
 import { userSession } from '@/userSession'
 
-import {
-  SidebarPlugin
-} from '@/components/index'
-
 var STORAGE_FILE = 'company.json'
 export default {
   components: {
     DropDown,
-    Modal,
-    SidebarPlugin
+    Modal
   },
   data () {
     return {
@@ -184,25 +179,12 @@ export default {
       const user = new blockstack.Person(profile)
       this.givenName = user.name() ? user.name() : 'Nameless Person'
       if (user.avatarUrl()) this.avatar = user.avatarUrl()
-
-      userSession.getFile(STORAGE_FILE).then((company) => {
-        this.model = JSON.parse(company || '{}')
-        let path = this.model.logo
-
-        if (path === null) {
-          this.imageSrc = null
-          return
-        }
-        userSession.getFile(path).then((logoImage) => {
-          // @/assets/img/anime3.png
-          this.imageSrc = logoImage
-        })
-      })
+      this.imageSrc = user.avatarUrl()
     } else if (blockstack.isSignInPending()) {
       blockstack.handlePendingSignIn()
-        .then((userData) => {
-          window.location = window.location.origin
-        })
+      .then((userData) => {
+        window.location = window.location.origin
+      })
     }
   }
 }

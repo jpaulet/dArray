@@ -1,9 +1,6 @@
 <template>
   <div class="wrapper">
-    <!-- <div class="wrapper" :class="{'nav-open': $sidebar.showSidebar}"> -->
-
     <side-bar :background-color="backgroundColor" v-if="user" :user="user" :title="user.name">
-      <!-- <mobile-menu slot="content"></mobile-menu> -->
       <sidebar-link to="/dashboard">
         <i class="tim-icons icon-chart-pie-36"></i>
         <template>
@@ -58,8 +55,6 @@
       </sidebar-link>
     </side-bar>
 
-    <!-- <sidebar-share :background-color.sync="backgroundColor"></sidebar-share> -->
-
     <div class="main-panel" :data="backgroundColor" v-if="user" :user="user">
       <top-navbar></top-navbar>
       <dashboard-content @click.native="toggleSidebar"></dashboard-content>
@@ -67,21 +62,15 @@
     </div>
 
     <landing v-if="!userSession.isUserSignedIn()"></landing>
-
   </div>
 </template>
-
 <script>
 import TopNavbar from './TopNavbar.vue'
 import ContentFooter from './ContentFooter.vue'
 import DashboardContent from './DashboardContent.vue'
-import SidebarShare from './SidebarSharePlugin.vue'
-import MobileMenu from './MobileMenu.vue'
 import SideBar from '@/components/SidebarPlugin/SideBar.vue'
 import SidebarLink from '@/components/SidebarPlugin/SidebarLink.vue'
-
 import Landing from '@/components/Landing.vue'
-
 import { Person } from 'blockstack'
 import { userSession } from '@/userSession'
 
@@ -90,10 +79,8 @@ export default {
     TopNavbar,
     DashboardContent,
     ContentFooter,
-    MobileMenu,
     SideBar,
     SidebarLink,
-    SidebarShare,
     Landing
   },
   data () {

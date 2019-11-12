@@ -9,7 +9,7 @@
         <drop-down style='list-style-type: none;'>
           <a href="javascript:void(0)" class="simple-text logo-normal text-left float-left col-7">
             {{ title }}
-            <b class="caret d-none d-lg-block d-xl-block" style='float:right;right:0px;top:25px;color:#999;display:none;'></b>
+            <b class="caret d-none d-lg-block d-xl-block" style='float:right;right:0px;top:25px;color:#999;display:none !important;'></b>
           </a>
 
           <!-- TODO -->

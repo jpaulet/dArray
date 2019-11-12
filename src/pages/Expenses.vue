@@ -123,13 +123,11 @@
                       <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon float-right">
                         <i class="tim-icons icon-single-02"></i>
                       </button>
-                      <ul class="dropdown-menu dropdown-menu-right">
-                        <template v-if="categories!=null" v-for="category in categories">
-                            <a href="" class="dropdown-item" @click.prevent='expense.category = category.name'><strong>{{category.name}}</strong></a>
-                            <template v-if='category.subItems' v-for="subcategory in category.subItems">
-                                  <a href="" class="dropdown-item" @click.prevent='expense.category = subcategory.name' style='font-size:10px;'>{{subcategory.name}}</a>
-                            </template>
-                        </template>
+                      <ul class="dropdown-menu dropdown-menu-right" v-if="categories">
+                        <a href="" class="dropdown-item" v-for="(category,index) in categories" @click.prevent='expense.category = category.name' :key='index'><strong>{{category.name}}</strong></a>
+                        <div v-if='category.subItems'>
+                          <a href="" class="dropdown-item" v-for="(subcategory,subindex) in category.subItems" @click.prevent='expense.category = subcategory.name' style='font-size:10px;' :key='subindex'>{{subcategory.name}}</a>
+                        </div>
                       </ul>
                     </drop-down>
                 </div>
@@ -137,7 +135,7 @@
                 <div class='row text-left mt-2'>
                   <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>Created</label>
                   <input type="date" class="form-control ml-3 col-7 text-right" v-model='expense.date'><br>
-                </div>         
+                </div>
 
                 <div class='row text-left mt-2'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>VAT</label>
@@ -159,26 +157,26 @@
         <!-- INVOICE PREVIEW -->
             <div class="expense-box col-8 card pt-0" style='font-size:13px;'>
               <table cellpadding="0" cellspacing="0" class='col-10' style='margin:0px auto;'>
-                <tr> 
-                  <td colspan='8'> 
-                    <h6 class='text-center'>- Ticket -</h6> 
-                  </td> 
+                <tr>
+                  <td colspan='8'>
+                    <h6 class='text-center'>- Ticket -</h6>
+                  </td>
                 </tr>
 
-                <tr> 
-                  <td colspan="8" class='text-center'> 
+                <tr>
+                  <td colspan="8" class='text-center'>
                     <strong>Expense #: {{expense.title}}</strong>
                   </td>
                 </tr>
 
                 <tr>
                   <td colspan="8" class='text-center'>
-                      <label><strong style='margin-right:10px;'>Date:</strong> {{expense.date}}</label>                      
+                      <label><strong style='margin-right:10px;'>Date:</strong> {{expense.date}}</label>
                   </td>
                 </tr>
 
                 <tr><td><br /></td></tr>
-            
+
                 <tr class="heading" style='font-size:12px;'>
                   <td style='background-color: #fff;'>Item</td>
                   <td style='background-color: #fff;text-align:right;padding-right:20px;'>Unit Cost</td>
@@ -186,7 +184,7 @@
                   <td style='background-color: #fff;'>Price</td>
                 </tr>
 
-                <tr class="item" v-for="item in expense.items">
+                <tr class="item" v-for="(item,index) in expense.items" :key='index'>
                   <td style='line-height: 40px;'>
                     <input class='form-control' v-model="item.description" />
                   </td>
@@ -284,7 +282,7 @@
               <td style='background-color: #fff;'>Price</td>
             </tr>
 
-            <tr class="item" v-for="item in expense.items">
+            <tr class="item" v-for="(item,index) in expense.items" :key='index'>
               <td style='line-height: 40px;'>
                 {{ item.description }}
               </td>
@@ -339,8 +337,6 @@ import {
 import BaseButton from '@/components/BaseButton'
 import BaseTable from '@/components/BaseTable'
 import BaseCheckbox from '@/components/BaseCheckbox'
-import BaseAlert from '@/components/BaseAlert'
-import NotificationTemplate from './Notifications/NotificationTemplate'
 import { uuid } from 'vue-uuid'
 
 const tableColumns = ['', 'Title', 'Category', 'Date', 'Total', 'Status', 'View', 'Edit']
@@ -353,8 +349,7 @@ export default {
     Card,
     BaseButton,
     BaseTable,
-    BaseCheckbox,
-    BaseAlert
+    BaseCheckbox
   },
   data () {
     return {
@@ -389,109 +384,109 @@ export default {
         vat: 0
       },
       company: {},
-      expenses_list: [],
+      expensesList: [],
       expenses: [],
       categories: [{
-          name: 'Advertising'
-        },
-        {
-          name: 'Car & Truck Expenses',
-          subItems: [
-              { name: 'Gas' },
-              { name: 'Mileage' },
-              { name: 'Repairs' },
-              { name: 'Vehicle Insurance' },
-              { name: 'Vehicle Licensing' }
-          ]
-        },
-        {
-          name: 'Contractors'
-        },
-        {
-          name: 'Education and Training'
-        },
-        {
-          name: 'Employee Benefits',
-          subItems: [
-              { name: 'Accident Insurance' },
-              { name: 'Health Insurance' },
-              { name: 'Life Insurance' }
-          ]
-        },
-        {
-          name: 'Meals & Entertainment',
-          subItems: [
-              { name: 'Entertainment' },
-              { name: 'Restaurants/Dining' }
-          ]
-        },
-        {
-          name: 'Office Expenses & Postage',
-          subItems: [
-              { name: 'Hardware' },
-              { name: 'Office Supplies' },
-              { name: 'Packaging' },
-              { name: 'Postage' },
-              { name: 'Printing' },
-              { name: 'Shipping & Couriers' },
-              { name: 'Software' },
-              { name: 'Stationery' }
-          ]
-        },
-        {
-          name: 'Other Expenses',
-          subItems: [
-              { name: 'Bank Fees' },
-              { name: 'Business Insurance' },
-              { name: 'Commissions' },
-              { name: 'Depreciation' },
-              { name: 'Interest - Mortgage' },
-              { name: 'Interest - Other' },
-              { name: 'Online Services' },
-              { name: 'Reference Materials' },
-              { name: 'Repairs & Maintenance' },
-              { name: 'Subscriptions/Dues/Memberships' },
-              { name: 'Taxes & Licenses' },
-              { name: 'Wages' }
-          ]
-        },
-        {
-          name: 'Personal'
-        },
-        {
-          name: 'Professional Services',
-          subItems: [
-              { name: 'Accounting' },
-              { name: 'Legal Fees' }
-          ]
-        },
-        {
-          name: 'Rent or Lease',
-          subItems: [
-              { name: 'Equipment' },
-              { name: 'Machinery' },
-              { name: 'Office Space' },
-              { name: 'Vehicles' }
-          ]
-        },
-        {
-          name: 'Supplies'
-        },
-        {
-          name: 'Travel',
-          subItems: [
-              { name: 'Airfare' },
-              { name: 'Hotel/Lodging/Accommodation' },
-              { name: 'Taxi & Parking' }
-          ]
-        },
-        {
-          name: 'Utilities',
-          subItems: [
-              { name: 'Gas & Electrical' },
-              { name: 'Phone' }
-          ]
-        }
+        name: 'Advertising'
+      },
+      {
+        name: 'Car & Truck Expenses',
+        subItems: [
+          { name: 'Gas' },
+          { name: 'Mileage' },
+          { name: 'Repairs' },
+          { name: 'Vehicle Insurance' },
+          { name: 'Vehicle Licensing' }
+        ]
+      },
+      {
+        name: 'Contractors'
+      },
+      {
+        name: 'Education and Training'
+      },
+      {
+        name: 'Employee Benefits',
+        subItems: [
+          { name: 'Accident Insurance' },
+          { name: 'Health Insurance' },
+          { name: 'Life Insurance' }
+        ]
+      },
+      {
+        name: 'Meals & Entertainment',
+        subItems: [
+          { name: 'Entertainment' },
+          { name: 'Restaurants/Dining' }
+        ]
+      },
+      {
+        name: 'Office Expenses & Postage',
+        subItems: [
+          { name: 'Hardware' },
+          { name: 'Office Supplies' },
+          { name: 'Packaging' },
+          { name: 'Postage' },
+          { name: 'Printing' },
+          { name: 'Shipping & Couriers' },
+          { name: 'Software' },
+          { name: 'Stationery' }
+        ]
+      },
+      {
+        name: 'Other Expenses',
+        subItems: [
+          { name: 'Bank Fees' },
+          { name: 'Business Insurance' },
+          { name: 'Commissions' },
+          { name: 'Depreciation' },
+          { name: 'Interest - Mortgage' },
+          { name: 'Interest - Other' },
+          { name: 'Online Services' },
+          { name: 'Reference Materials' },
+          { name: 'Repairs & Maintenance' },
+          { name: 'Subscriptions/Dues/Memberships' },
+          { name: 'Taxes & Licenses' },
+          { name: 'Wages' }
+        ]
+      },
+      {
+        name: 'Personal'
+      },
+      {
+        name: 'Professional Services',
+        subItems: [
+          { name: 'Accounting' },
+          { name: 'Legal Fees' }
+        ]
+      },
+      {
+        name: 'Rent or Lease',
+        subItems: [
+          { name: 'Equipment' },
+          { name: 'Machinery' },
+          { name: 'Office Space' },
+          { name: 'Vehicles' }
+        ]
+      },
+      {
+        name: 'Supplies'
+      },
+      {
+        name: 'Travel',
+        subItems: [
+          { name: 'Airfare' },
+          { name: 'Hotel/Lodging/Accommodation' },
+          { name: 'Taxi & Parking' }
+        ]
+      },
+      {
+        name: 'Utilities',
+        subItems: [
+          { name: 'Gas & Electrical' },
+          { name: 'Phone' }
+        ]
+      }
       ]
     }
   },
@@ -533,11 +528,11 @@ export default {
 
       // Load Expenses data
       userSession.getFile(STORAGE_FILE).then((expenses) => {
-        this.expenses_list = JSON.parse(expenses || '[]')
+        this.expensesList = JSON.parse(expenses || '[]')
         let i = 0
 
-        for (i in this.expenses_list) {
-          userSession.getFile(this.expenses_list[i] + '.json').then((expense) => {
+        for (i in this.expensesList) {
+          userSession.getFile(this.expensesList[i] + '.json').then((expense) => {
             if (expense === null) {
               return false
             }
@@ -551,8 +546,8 @@ export default {
       let isNew = false
       if (this.expense.id === null) {
         this.expense.id = uuid.v4()
-        this.expenses_list.push(this.expense.id)
-        userSession.putFile(STORAGE_FILE, JSON.stringify(this.expenses_list))
+        this.expensesList.push(this.expense.id)
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.expensesList))
         isNew = true
       }
 
@@ -579,8 +574,8 @@ export default {
       })
     },
     editExpense (id) {
-      let search_expense = this.expenses_list.indexOf(id)
-      if (search_expense === -1) {
+      let searchExpense = this.expensesList.indexOf(id)
+      if (searchExpense === -1) {
         this.$notify({
           message: 'Something wrong happened',
           icon: 'tim-icons icon-bell-55',
@@ -592,12 +587,12 @@ export default {
         return false
       }
 
-      this.expense = this.expenses[search_expense]
+      this.expense = this.expenses[searchExpense]
       this.newExpense = true
     },
     showExpense (id) {
-      let search_expense = this.expenses_list.indexOf(id)
-      if (search_expense === -1) {
+      let searchExpense = this.expensesList.indexOf(id)
+      if (searchExpense === -1) {
         this.$notify({
           message: 'Something wrong happened',
           icon: 'tim-icons icon-bell-55',
@@ -609,12 +604,12 @@ export default {
         return false
       }
 
-      this.expense = this.expenses[search_expense]
+      this.expense = this.expenses[searchExpense]
       this.showPreview = true
     },
     changeStatus (status, id) {
-      let search_expense = this.expenses_list.indexOf(id)
-      if (search_expense === -1) {
+      let searchExpense = this.expensesList.indexOf(id)
+      if (searchExpense === -1) {
         this.$notify({
           message: 'Something wrong happened',
           icon: 'tim-icons icon-bell-55',
@@ -626,7 +621,7 @@ export default {
         return false
       }
 
-      this.expense = this.expenses[search_expense]
+      this.expense = this.expenses[searchExpense]
       this.expense.status = status
       let expenseFile = this.expense.id + '.json'
       userSession.putFile(expenseFile, JSON.stringify(this.expense))

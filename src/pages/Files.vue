@@ -13,7 +13,7 @@
           </div>
           <h4 class='text-left'> Folders </h4>
           <div class='text-left row' style='clear:both;'>
-            <div v-for='folder in folders' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:90px;margin-right:30px;float:left;' @click='changeFolder(folder)'>
+            <div v-for='(folder,index) in folders' :key='index' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:90px;margin-right:30px;float:left;' @click='changeFolder(folder)'>
               <img src='@/assets/img/folder.png' height='42' />
               <p style='font-size:11px;margin-top:5px;'>{{folder}}</p>
             </div>
@@ -55,7 +55,7 @@ import {
   Card
 } from '@/components/index'
 var FILESYSTEM = 'filesystem.json'
-var FOLDERS = 'folders.json'
+// var FOLDERS = 'folders.json'
 
 export default {
   components: {
@@ -144,7 +144,7 @@ export default {
         dataURL = reader.result
         userSession.putFile(upload.id + '_' + upload.name, dataURL)
       }
-      let content = reader.readAsArrayBuffer(input.files[0])
+      reader.readAsArrayBuffer(input.files[0])
 
       // userSession.putFile( upload.id+"_"+upload.name, dataURL )
       userSession.putFile(FILESYSTEM, JSON.stringify(this.uploads))

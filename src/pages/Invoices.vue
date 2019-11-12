@@ -57,7 +57,7 @@
                         <td class="text-left">
                             <p class="text-muted">
                               <drop-down tag="div">
-                                <span aria-label="Invoice Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge" :class="{ 'badge-success' : (row.status == 'Paid'), 'badge-warning' : (row.status == 'Pending'), 'badge-danger' : (row.status == 'Not paid'), 'badge-light' : (row.status == 'Overdue'), 'badge-ingo' : (row.status == 'Void'), 'badge-secondary' : (row.status == 'Draft') }" style='font-size:12px;margin-bottom:3px;width:100px;'>
+                                <span aria-label="Invoice Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge" :class="{ 'badge-success' : (row.status === 'Paid'), 'badge-warning' : (row.status === 'Pending'), 'badge-danger' : (row.status === 'Not paid'), 'badge-light' : (row.status === 'Overdue'), 'badge-ingo' : (row.status === 'Void'), 'badge-secondary' : (row.status === 'Draft') }" style='font-size:12px;margin-bottom:3px;width:100px;'>
                                   {{row.status}}
                                   <!-- Do not remove, the icon has a ::after property with a dropdown arrow -->
                                   <i class="tim-icons icon-settings-gear-63" style='display:none;'></i>
@@ -134,7 +134,7 @@
                         <i class="tim-icons icon-single-02"></i>
                       </button>
                       <ul class="dropdown-menu dropdown-menu-right">
-                        <a v-for='customer in customers' href="" class="dropdown-item" @click.prevent='selectCustomer(customer.id)'>{{customer.legal}}</a>
+                        <a v-for='customer in customers' v-bind:key='customer.id' href="" class="dropdown-item" @click.prevent='selectCustomer(customer.id)'>{{customer.legal}}</a>
                       </ul>
                     </drop-down>
                     <input type='text' class='form-control col-10 ml-1' v-model='invoice.client.legal' placeholder="Title" />
@@ -222,7 +222,7 @@
                   <td style='background-color: #fff;'>Price</td>
                 </tr>
 
-                <tr class="item" v-for="item in invoice.items">
+                <tr class="item" v-for="(item,index) in invoice.items" v-bind:key='index'>
                   <td style='line-height: 40px;'>
                     <input class='form-control' v-model="item.description" />
                   </td>
@@ -363,7 +363,7 @@
               <td style='background-color: #fff;'>Price</td>
             </tr>
 
-            <tr class="item" v-for="item in invoice.items">
+            <tr class="item" v-for="(item,index) in invoice.items" v-bind:key='index'>
               <td style='line-height: 40px;'>
                 {{ item.description }}
               </td>
@@ -423,8 +423,6 @@ import {
 import BaseButton from '@/components/BaseButton'
 import BaseTable from '@/components/BaseTable'
 import BaseCheckbox from '@/components/BaseCheckbox'
-import BaseAlert from '@/components/BaseAlert'
-import NotificationTemplate from './Notifications/NotificationTemplate'
 import { uuid } from 'vue-uuid'
 
 const tableColumns = ['Name', 'Client', 'Date', 'Total', 'Status', 'View', 'Edit']
@@ -438,8 +436,7 @@ export default {
     Card,
     BaseButton,
     BaseTable,
-    BaseCheckbox,
-    BaseAlert
+    BaseCheckbox
   },
   data () {
     return {
@@ -482,8 +479,8 @@ export default {
       },
       company: {},
       customers: [],
-      customers_list: [],
-      invoices_list: [],
+      customersList: [],
+      invoicesList: [],
       invoices: [],
       imageSrc: null
     }
@@ -537,8 +534,8 @@ export default {
       this.activeIndex = index
     },
     selectCustomer (index) {
-      let search_invoice = this.customers_list.indexOf(index)
-      if (search_invoice === -1) {
+      let searchInvoice = this.customersList.indexOf(index)
+      if (searchInvoice === -1) {
         this.$notify({
           message: 'Something wrong happened',
           icon: 'tim-icons icon-bell-55',
@@ -550,7 +547,7 @@ export default {
         return false
       }
 
-      this.invoice.client = this.customers[search_invoice]
+      this.invoice.client = this.customers[searchInvoice]
       if (!this.invoice.payment) {
         this.invoice.payment = this.company.payment
       }
@@ -571,11 +568,11 @@ export default {
 
       // Load Invoices data
       userSession.getFile(STORAGE_FILE).then((invoices) => {
-        this.invoices_list = JSON.parse(invoices || '[]')
+        this.invoicesList = JSON.parse(invoices || '[]')
         let i = 0
 
-        for (i in this.invoices_list) {
-          userSession.getFile(this.invoices_list[i] + '.json').then((invoice) => {
+        for (i in this.invoicesList) {
+          userSession.getFile(this.invoicesList[i] + '.json').then((invoice) => {
             if (invoice === null) {
               return false
             }
@@ -587,18 +584,18 @@ export default {
 
       // Load Customers
       userSession.getFile(CUSTOMERS_FILE).then((customers) => {
-        this.customers_list = JSON.parse(customers || '[]')
+        this.customersList = JSON.parse(customers || '[]')
         let i = 0
 
-        for (i in this.customers_list) {
-          userSession.getFile(this.customers_list[i] + '.json').then((customer) => {
+        for (i in this.customersList) {
+          userSession.getFile(this.customersList[i] + '.json').then((customer) => {
             this.customers.push(JSON.parse(customer))
           })
         }
       })
     },
     isFilled () {
-      if (!this.invoice.name || !this.invoice.client.legal || this.total == 0) {
+      if (!this.invoice.name || !this.invoice.client.legal || this.total === 0) {
         this.$notify({
           message: 'You should fill the invoice first',
           icon: 'tim-icons icon-bell-55',
@@ -619,13 +616,13 @@ export default {
       let isNew = false
       if (this.invoice.id === null) {
         this.invoice.id = uuid.v4()
-        if (this.invoices_list === null) {
-          this.invoices_list = []
-          this.invoices_list.push(this.invoice.id)
+        if (this.invoicesList === null) {
+          this.invoicesList = []
+          this.invoicesList.push(this.invoice.id)
         } else {
-          this.invoices_list.push(this.invoice.id)
+          this.invoicesList.push(this.invoice.id)
         }
-        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoices_list))
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoicesList))
         isNew = true
       }
 
@@ -652,8 +649,8 @@ export default {
       })
     },
     editInvoice (id) {
-      let search_invoice = this.invoices_list.indexOf(id)
-      if (search_invoice === -1) {
+      let searchInvoice = this.invoicesList.indexOf(id)
+      if (searchInvoice === -1) {
         this.$notify({
           message: 'Something wrong happened',
           icon: 'tim-icons icon-bell-55',
@@ -665,13 +662,13 @@ export default {
         return false
       }
 
-      this.invoice = this.invoices[search_invoice]
+      this.invoice = this.invoices[searchInvoice]
       this.newInvoice = true
     },
     showInvoice (id) {
       if (!this.newInvoice) {
-        let search_invoice = this.invoices_list.indexOf(id)
-        if (search_invoice === -1) {
+        let searchInvoice = this.invoicesList.indexOf(id)
+        if (searchInvoice === -1) {
           this.$notify({
             message: 'Something wrong happened',
             icon: 'tim-icons icon-bell-55',
@@ -683,7 +680,7 @@ export default {
           return false
         }
 
-        this.invoice = this.invoices[search_invoice]
+        this.invoice = this.invoices[searchInvoice]
       }
       let canSave = this.isFilled()
       if (!canSave) {
@@ -692,8 +689,8 @@ export default {
       this.showPreview = true
     },
     changeStatus (status, id) {
-      let search_invoice = this.invoices_list.indexOf(id)
-      if (search_invoice === -1) {
+      let searchInvoice = this.invoicesList.indexOf(id)
+      if (searchInvoice === -1) {
         this.$notify({
           message: 'Something wrong happened',
           icon: 'tim-icons icon-bell-55',
@@ -705,7 +702,7 @@ export default {
         return false
       }
 
-      this.invoice = this.invoices[search_invoice]
+      this.invoice = this.invoices[searchInvoice]
       this.invoice.status = status
       let invoiceFile = this.invoice.id + '.json'
       userSession.putFile(invoiceFile, JSON.stringify(this.invoice))

@@ -54,7 +54,7 @@
                 <h6><i class="tim-icons icon-triangle-right-17 text-light mr-3"></i>In Progress Tasks ({{todoTasks.length}})</h6>
               </div>
 
-              <task v-bind:task="task" v-for="task in todoTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone'></task>
+              <task v-bind:task="task" v-for="task in todoTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
               <p v-if='!todoTasks.length' class='text-center my-1' style='font-size:12px;'>No pending tasks</p>
             </div>
 
@@ -63,7 +63,7 @@
                   <h6><i class="tim-icons icon-check-2 text-light mr-3"></i>Completed Tasks ({{completedTasks.length}})</h6>
               </div>
 
-              <task v-bind:task="task" v-for="task in completedTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone'></task>
+              <task v-bind:task="task" v-for="task in completedTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
               <p v-if='!completedTasks.length' class='text-center my-1' style='font-size:12px;'>No completed tasks yet</p>
             </div>
           </div>
@@ -125,10 +125,10 @@ export default {
   },
   computed: {
     completedTasks: function () {
-      return this.tasks.filter(item => item.completed == true)
+      return this.tasks.filter(item => item.completed === true)
     },
     todoTasks: function () {
-      return this.tasks.filter(item => item.completed == false)
+      return this.tasks.filter(item => item.completed === false)
     },
     nextID: function () {
       if (this.tasks.length === 0) { return 1 }
@@ -136,14 +136,13 @@ export default {
     }
   },
   methods: {
-
     clear: function () {
       this.task = {}
       this.action = 'create'
       this.completed = false
     },
     toggleDone: function (id) {
-      let task = this.tasks.find(item => item.id == id)
+      let task = this.tasks.find(item => item.id === id)
       if (task) {
         task.completed = !task.completed
 
@@ -151,7 +150,7 @@ export default {
       }
     },
     deleteTask: function (id) {
-      let taskIndex = this.tasks.findIndex(item => item.id == id)
+      let taskIndex = this.tasks.findIndex(item => item.id === id)
 
       if (taskIndex > -1) {
         this.$delete(this.tasks, taskIndex)
@@ -161,7 +160,7 @@ export default {
     },
     editTask: function (id) {
       this.action = 'edit'
-      let task = this.tasks.find(item => item.id == id)
+      let task = this.tasks.find(item => item.id === id)
 
       if (task) {
         this.task = { id: task.id,
@@ -174,7 +173,7 @@ export default {
     updateTask: function (event, id) {
       event.stopImmediatePropagation()
 
-      let task = this.tasks.find(item => item.id == id)
+      let task = this.tasks.find(item => item.id === id)
       if (task) {
         task.name = this.task.name
         task.description = this.task.description

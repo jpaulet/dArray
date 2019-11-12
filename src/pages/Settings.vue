@@ -90,8 +90,8 @@
     </div>
   </div>
 </template>
-
 <script>
+import { userSession } from '@/userSession'
 import BaseButton from '@/components/BaseButton'
 import UserCard from './Profile/UserCard.vue'
 import {
@@ -116,7 +116,6 @@ export default {
         username: '',
         firstName: '',
         lastName: '',
-        'email': '',
         address: '',
         city: '',
         country: '',
@@ -155,7 +154,7 @@ export default {
             type: 'success',
             timeout: 1500
           })
-        }).catch((error) => {
+        }).catch(() => {
           // file does not exist or is inaccessable
           this.$notify({
             message: 'Failed to delete the file',
