@@ -31,7 +31,7 @@
                 <i class="tim-icons icon-settings-gear-63"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
-                <a href="#" class="dropdown-item">Archive <i class="tim-icons icon-settings-gear-63" tooltip='Save to a folder & remove from the list'></i></a>
+                <a href="#" class="dropdown-item">Archive <i class="tim-icons icon-alert-circle-exc ml-2" data-toggle="tooltip" data-html="true" title="Save to folder & delete from list" style='font-size:12px;color:#777;margin-top:-10px;'></i></a>
                 <a href="#" class="dropdown-item">Duplicate</a>
                 <a href="#" class="dropdown-item">Delete</a>
               </ul>

@@ -120,7 +120,6 @@ export default {
         city: '',
         country: '',
         zip: '',
-        // logo: '@/assets/img/company.png',
         logo: '',
         tax: '',
         vat: 0,

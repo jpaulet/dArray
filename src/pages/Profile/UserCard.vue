@@ -4,7 +4,8 @@
     <div class="author">
       <a href="#" @click='saveLogo'>
         <input type="file" accept="image/*" @change="onFileChange" id="file-input" ref='uploadImage' style='display:none;'>
-        <img style='height:124px;width:124px;border-radius:0px;' class="avatar" :src="imageSrc" alt="Logo" id='imageLogo'>
+        <img v-if='!imageLogo' style='height:124px;width:124px;border-radius:0px;' class="avatar" src="@/assets/img/company.png" alt="Logo Default" id='imageLogoDefault' v-on:load='fetchFile'>
+        <img v-if='imageLogo' style='height:124px;width:124px;border-radius:0px;' class="avatar" :src="imageSrc" alt="Logo" id='imageLogo'>
         <h5 class="title">{{ company.company }}</h5>
       </a>
       <p class="description">
@@ -77,22 +78,27 @@ export default {
 
       this.$emit('newLogo', file.name)
     },
-    fetchFile (path) {
-      if (path === null) {
-        this.imageSrc = null
-        return
-      }
-      userSession.getFile(path).then((logoImage) => {
-        this.imageSrc = logoImage
+    fetchFile () {
+      this.$nextTick(() => {
+        let path = this.company.logo
+        if (path === null) {
+          return null
+        }
+        userSession.getFile(path).then((logoImage) => {
+          if(logoImage){
+            this.imageSrc = logoImage
+          }
+        })
       })
     }
   },
-  mounted() {
-    this.$nextTick(()=>{
-      console.log('company: ')
-      console.log(this.company)
-      this.fetchFile(this.company.logo)
-    })
+  computed: {
+    imageLogo (){
+      if(this.company.logo !== null){
+        this.fetchFile()
+      }
+      return this.company.logo
+    }
   }
 }
 </script>
