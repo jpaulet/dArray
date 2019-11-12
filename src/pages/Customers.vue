@@ -23,24 +23,24 @@
 
             <div class="table-responsive text-left mb-3" style='overflow-x:inherit;'>
                 <base-table :data="table1.data" :columns="table1.columns" thead-classes="text-primary">
-                    <template slot-scope="{row}">
-                        <td>
+                    <template slot-scope="{row}" style='font-size:12px;'>
+                        <td style='display:none;'>
                             <base-checkbox v-model="row.done"></base-checkbox>
                         </td>
                         <td class="text-left">
-                            <p class="title">{{row.legal}}</p>
+                            <p class="title" style='font-size:12px;'>{{row.legal}}</p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">{{row.address}}</p>
+                            <p class="text-muted" style='font-size:12px;'>{{row.address}}</p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">{{row.city}} / {{row.country}}</p>
+                            <p class="text-muted" style='font-size:12px;'>{{row.city}} <span style='font-size:11px;'>({{row.country}})</span></p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">{{row.name}}: {{row.email}}</p>
+                            <p class="text-muted" style='font-size:12px;'>{{row.name}}: <a style='font-size:11px;text-decoration:underline;'>{{row.email}}</a></p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted"><span class='badge badge-light'>{{row.type}}</span></p>
+                            <p class="text-muted"><span class='badge badge-light' style='font-size:11px;'>{{row.type}}</span></p>
                         </td>
                         <td class="td-actions text-center" style='width:50px;'>
                             <base-button type="link" artia-label="edit button" @click='editCustomer(row.id)'>
@@ -187,7 +187,7 @@ import BaseAlert from '@/components/BaseAlert'
 import NotificationTemplate from './Notifications/NotificationTemplate'
 import { uuid } from 'vue-uuid'
 
-const tableColumns = ['','Legal', 'Address', 'City / Country', 'Contact', 'Type', 'Edit']
+const tableColumns = ['Legal', 'Address', 'City / Country', 'Contact', 'Type', 'Edit']
 
 var COMPANY_FILE = 'company.json'
 var CUSTOMERS_FILE = 'customers.json'

@@ -115,7 +115,7 @@
           <drop-down>
             <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
               <div class="photo">
-                <img src="@/assets/img/anime3.png" alt="Profile Photo"> {{ givenName }}
+                <img :src="imageSrc" alt="Profile Photo"> {{ givenName }}
               </div>
               <b class="caret d-none d-lg-block d-xl-block"></b>
               <p class="d-lg-none">
@@ -147,6 +147,7 @@ import {
   SidebarPlugin
 } from '@/components/index'
 
+var STORAGE_FILE = 'company.json'
 export default {
   components: {
     DropDown,
@@ -160,7 +161,8 @@ export default {
       showMenu: false,
       blockstack: window.blockstack,
       avatar: 'https://s3.amazonaws.com/onename/avatar-placeholder.png',
-      givenName: 'Anonymous'
+      givenName: 'Anonymous',
+      imageSrc: null
     }
   },
   methods: {
@@ -182,6 +184,20 @@ export default {
       const user = new blockstack.Person(profile)
       this.givenName = user.name() ? user.name() : 'Nameless Person'
       if (user.avatarUrl()) this.avatar = user.avatarUrl()
+
+      userSession.getFile(STORAGE_FILE).then((company) => {
+        this.model = JSON.parse(company || '{}')
+        let path = this.model.logo
+
+        if(path === null){
+          this.imageSrc = null;
+          return;
+        }
+        userSession.getFile(path).then((logoImage) => {
+          //@/assets/img/anime3.png
+          this.imageSrc = logoImage;
+        })
+      })
     } else if (blockstack.isSignInPending()) {
       blockstack.handlePendingSignIn()
         .then((userData) => {

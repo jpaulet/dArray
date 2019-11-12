@@ -75,7 +75,6 @@ export default {
         document.getElementById('imageLogo').src = content
         userSession.putFile( file.name, content )
       };
-
       reader.onerror = (e) => {
         console.error(e)
       }
@@ -89,8 +88,6 @@ export default {
         return;
       }
       userSession.getFile(path).then((logoImage) => {
-        console.log("The path: "+path)
-        console.log("The image: "+logoImage)
         this.imageSrc = logoImage;
       })
     }

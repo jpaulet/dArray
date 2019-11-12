@@ -6,7 +6,7 @@
                 <div class="col-sm-6 text-left">
                   <button type="button" class="btn btn-light btn-sm px-5 text-white" fill="" @click="openNewExpense">+ New Expense</button>
                 </div>
-                <div class="col-sm-6 text-right" v-if='table1.data.length' style='display:none;'>
+                <div class="col-sm-6 text-right" v-if='table1.data.length'>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
                        <label v-for="(option, index) in expenseOptions"
                               :key="option"

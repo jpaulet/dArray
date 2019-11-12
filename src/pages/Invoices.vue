@@ -39,7 +39,7 @@
             <div class="table-responsive text-left mb-3" style='overflow-x:inherit;'>
                 <base-table :data="table1.data" :columns="table1.columns" thead-classes="text-primary">
                     <template slot-scope="{row}">
-                        <td>
+                        <td style='display:none;'>
                             <base-checkbox v-model="row.done"></base-checkbox>
                         </td>
                         <td class="text-left">
@@ -427,7 +427,7 @@ import BaseAlert from '@/components/BaseAlert'
 import NotificationTemplate from './Notifications/NotificationTemplate'
 import { uuid } from 'vue-uuid'
 
-const tableColumns = ['', 'Name', 'Client', 'Date', 'Total', 'Status', 'View', 'Edit']
+const tableColumns = ['Name', 'Client', 'Date', 'Total', 'Status', 'View', 'Edit']
 
 var STORAGE_FILE = 'invoices.json'
 var COMPANY_FILE = 'company.json'
