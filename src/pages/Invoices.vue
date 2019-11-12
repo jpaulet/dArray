@@ -314,7 +314,7 @@
                     <td class="title mb-0 pb-0">
                       <img id='imgLogo' :src="imageSrc" style="max-height:120px;margin-top:-20px;" />
                       <div id='imgLogoExample'>
-                        
+
                       </div>
                     </td>
 
@@ -489,9 +489,9 @@ export default {
     }
   },
   methods: {
-    loadCompanyLogo(){
+    loadCompanyLogo () {
       userSession.getFile(this.company.logo).then((logoImage) => {
-        this.imageSrc = logoImage;
+        this.imageSrc = logoImage
       })
     },
     openNewInvoice () {
@@ -551,10 +551,10 @@ export default {
       }
 
       this.invoice.client = this.customers[search_invoice]
-      if(!this.invoice.payment){
+      if (!this.invoice.payment) {
         this.invoice.payment = this.company.payment
       }
-      if(!this.invoice.comments){
+      if (!this.invoice.comments) {
         this.invoice.comments = this.company.comments
       }
     },
@@ -589,17 +589,16 @@ export default {
       userSession.getFile(CUSTOMERS_FILE).then((customers) => {
         this.customers_list = JSON.parse(customers || '[]')
         let i = 0
-        
+
         for (i in this.customers_list) {
           userSession.getFile(this.customers_list[i] + '.json').then((customer) => {
             this.customers.push(JSON.parse(customer))
           })
         }
       })
-
     },
-    isFilled(){
-      if(!this.invoice.name || !this.invoice.client.legal || this.total == 0){
+    isFilled () {
+      if (!this.invoice.name || !this.invoice.client.legal || this.total == 0) {
         this.$notify({
           message: 'You should fill the invoice first',
           icon: 'tim-icons icon-bell-55',
@@ -608,22 +607,22 @@ export default {
           type: 'danger',
           timeout: 1500
         })
-        return false;
+        return false
       }
       return true
     },
     saveInvoice () {
       let canSave = this.isFilled()
-      if(!canSave){
-        return false;
+      if (!canSave) {
+        return false
       }
       let isNew = false
       if (this.invoice.id === null) {
         this.invoice.id = uuid.v4()
-        if(this.invoices_list === null){
+        if (this.invoices_list === null) {
           this.invoices_list = []
           this.invoices_list.push(this.invoice.id)
-        }else{
+        } else {
           this.invoices_list.push(this.invoice.id)
         }
         userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoices_list))
@@ -670,7 +669,7 @@ export default {
       this.newInvoice = true
     },
     showInvoice (id) {
-      if(!this.newInvoice){
+      if (!this.newInvoice) {
         let search_invoice = this.invoices_list.indexOf(id)
         if (search_invoice === -1) {
           this.$notify({
@@ -687,8 +686,8 @@ export default {
         this.invoice = this.invoices[search_invoice]
       }
       let canSave = this.isFilled()
-      if(!canSave){
-        return false;
+      if (!canSave) {
+        return false
       }
       this.showPreview = true
     },
@@ -710,7 +709,7 @@ export default {
       this.invoice.status = status
       let invoiceFile = this.invoice.id + '.json'
       userSession.putFile(invoiceFile, JSON.stringify(this.invoice))
-    },
+    }
   },
   filters: {
     currency (value) {

@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
     </card>
   </div>
@@ -52,7 +52,7 @@
 <script>
 import { userSession } from '@/userSession'
 import {
-  Card,
+  Card
 } from '@/components/index'
 var FILESYSTEM = 'filesystem.json'
 var FOLDERS = 'folders.json'
@@ -66,108 +66,108 @@ export default {
       path: '/',
       uploads: [],
       folders: [],
-      colors: ["#24bddf", "#5fcc9c", "#6a65d8"],
+      colors: ['#24bddf', '#5fcc9c', '#6a65d8'],
       newFolder: false,
       folderName: ''
     }
   },
   methods: {
-    fetchData() {
+    fetchData () {
       // Load Customers
       userSession.getFile(FILESYSTEM).then((filesystem) => {
         this.uploads = JSON.parse(filesystem || [])
-        let i = 0;
+        let i = 0
 
-        for(i in this.uploads){
-          this.uploads[i].progress = '100%';
+        for (i in this.uploads) {
+          this.uploads[i].progress = '100%'
         }
       })
     },
 
-    changeFolder(folder){
+    changeFolder (folder) {
 
     },
 
-    saveFolder(){
-      this.folderName = this.folderName.toLowerCase();
-      this.folders.push(this.folderName);
-      
-      this.folderName = '';
-      this.newFolder = false;
+    saveFolder () {
+      this.folderName = this.folderName.toLowerCase()
+      this.folders.push(this.folderName)
+
+      this.folderName = ''
+      this.newFolder = false
     },
 
-    openNewFolder(){
-      this.newFolder = true;
+    openNewFolder () {
+      this.newFolder = true
       this.$nextTick(() => this.$refs.newFolder.focus())
     },
 
-    closeNewFolder(){
-      this.newFolder = false;
-      console.log('close new folder'+this.newFolder);
+    closeNewFolder () {
+      this.newFolder = false
+      console.log('close new folder' + this.newFolder)
     },
 
-    getRandomColor() {
-      const randomIndex = Math.floor(Math.random() * 2);
-      return this.colors[randomIndex];
+    getRandomColor () {
+      const randomIndex = Math.floor(Math.random() * 2)
+      return this.colors[randomIndex]
     },
 
-    removeUpload(index) {
-      clearInterval(this.uploads[index].progressTimer);
-      this.uploads.splice(index, 1);
+    removeUpload (index) {
+      clearInterval(this.uploads[index].progressTimer)
+      this.uploads.splice(index, 1)
     },
 
-    openFilePicker() {
-      this.$refs.filepicker.click();
+    openFilePicker () {
+      this.$refs.filepicker.click()
     },
 
-    uploadFile() {
-      let reader = new FileReader();
-      const input = this.$refs.filepicker;
-      const file = input.files[0];
-      var dataURL = null;
+    uploadFile () {
+      let reader = new FileReader()
+      const input = this.$refs.filepicker
+      const file = input.files[0]
+      var dataURL = null
 
       const upload = {
         id: this.uploads.length + 1,
         name: file.name,
         size: this.getFileSize(file.size),
-        progress: "0%",
-        ext: file.name.substring(file.name.lastIndexOf(".") + 1, file.name.length),
+        progress: '0%',
+        ext: file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length),
         progressTimer: null,
         color: this.getRandomColor()
-      };
+      }
 
-      this.uploads.push(upload);
-      const timer = setInterval(this.updateProgress, 300, upload.id);
-      upload.progressTimer = timer;
-      
-      reader.onload = function(){
-        dataURL = reader.result;
-        userSession.putFile( upload.id+"_"+upload.name, dataURL )
-      };
-      let content = reader.readAsArrayBuffer(input.files[0]);
+      this.uploads.push(upload)
+      const timer = setInterval(this.updateProgress, 300, upload.id)
+      upload.progressTimer = timer
 
-      //userSession.putFile( upload.id+"_"+upload.name, dataURL )
-      userSession.putFile( FILESYSTEM, JSON.stringify(this.uploads))
+      reader.onload = function () {
+        dataURL = reader.result
+        userSession.putFile(upload.id + '_' + upload.name, dataURL)
+      }
+      let content = reader.readAsArrayBuffer(input.files[0])
+
+      // userSession.putFile( upload.id+"_"+upload.name, dataURL )
+      userSession.putFile(FILESYSTEM, JSON.stringify(this.uploads))
     },
 
-    getFileSize(size) {
-      if (size < 1000000) return `${Math.ceil(size / 1024)} kb`;
-      else if (size >= 1000000) return `${Math.ceil(size / 1024000)} mb`;
+    getFileSize (size) {
+      if (size < 1000000) return `${Math.ceil(size / 1024)} kb`
+      else if (size >= 1000000) return `${Math.ceil(size / 1024000)} mb`
     },
 
-    updateProgress(id) {
-      const index = id - 1;
+    updateProgress (id) {
+      const index = id - 1
       const progress = Number.parseInt(
-        this.uploads[index].progress.replace("%", "")
-      );
+        this.uploads[index].progress.replace('%', '')
+      )
 
-      this.$set(this.uploads[index], "progress", `${progress + 10}%`);
-      if (progress + 10 === 100) clearInterval(this.uploads[index].progressTimer);
+      this.$set(this.uploads[index], 'progress', `${progress + 10}%`)
+      if (progress + 10 === 100) clearInterval(this.uploads[index].progressTimer)
     },
 
-    downloadFile(id,filename,extension){
-      userSession.getFile(id+'_'+filename).then((theFile) => {
-        if(theFile === null){
+    downloadFile (id, filename, extension) {
+      userSession.getFile(id + '_' + filename).then((theFile) => {
+        if (theFile === null) {
           this.$notify({
             message: 'Something wrong happened',
             icon: 'tim-icons icon-bell-55',
@@ -179,14 +179,14 @@ export default {
           return false
         }
 
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(theFile));
-        element.setAttribute('download',filename);
+        var element = document.createElement('a')
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(theFile))
+        element.setAttribute('download', filename)
 
-        element.style.display = 'none';
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
+        element.style.display = 'none'
+        document.body.appendChild(element)
+        element.click()
+        document.body.removeChild(element)
       })
     }
   },
@@ -197,7 +197,7 @@ export default {
 }
 </script>
 
-<style lang='scss'>  
+<style lang='scss'>
 #container {
   background-color: white;
   margin: auto;

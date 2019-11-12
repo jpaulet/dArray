@@ -55,7 +55,7 @@ export default {
       }
     }
   },
-  data(){
+  data () {
     return {
       imageSrc: null
     }
@@ -66,29 +66,29 @@ export default {
       elem.click()
     },
     onFileChange (e) {
-      let reader = new FileReader();
+      let reader = new FileReader()
       const file = e.target.files[0]
       var url = URL.createObjectURL(file)
 
       reader.onload = (event) => {
-        const content = reader.result;
+        const content = reader.result
         document.getElementById('imageLogo').src = content
-        userSession.putFile( file.name, content )
-      };
+        userSession.putFile(file.name, content)
+      }
       reader.onerror = (e) => {
         console.error(e)
       }
-      reader.readAsDataURL(file);
-      
+      reader.readAsDataURL(file)
+
       this.$emit('newLogo', file.name)
     },
-    fetchFile(path) {
-      if(path === null){
-        this.imageSrc = null;
-        return;
+    fetchFile (path) {
+      if (path === null) {
+        this.imageSrc = null
+        return
       }
       userSession.getFile(path).then((logoImage) => {
-        this.imageSrc = logoImage;
+        this.imageSrc = logoImage
       })
     }
   },

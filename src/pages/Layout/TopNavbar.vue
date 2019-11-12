@@ -189,13 +189,13 @@ export default {
         this.model = JSON.parse(company || '{}')
         let path = this.model.logo
 
-        if(path === null){
-          this.imageSrc = null;
-          return;
+        if (path === null) {
+          this.imageSrc = null
+          return
         }
         userSession.getFile(path).then((logoImage) => {
-          //@/assets/img/anime3.png
-          this.imageSrc = logoImage;
+          // @/assets/img/anime3.png
+          this.imageSrc = logoImage
         })
       })
     } else if (blockstack.isSignInPending()) {

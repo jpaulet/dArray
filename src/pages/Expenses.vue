@@ -6,7 +6,7 @@
                 <div class="col-sm-6 text-left">
                   <button type="button" class="btn btn-light btn-sm px-5 text-white" fill="" @click="openNewExpense">+ New Expense</button>
                 </div>
-                <div class="col-sm-6 text-right" v-if='table1.data.length'>
+                <div class="col-sm-6 text-right" v-if='table1.data.length' style='display:none;'>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
                        <label v-for="(option, index) in expenseOptions"
                               :key="option"
@@ -26,13 +26,14 @@
 
         <div v-if='table1.data.length'>
             <h6 class="title d-inline text-left float-left">Expenses ({{table1.data.length}})</h6>
-            <drop-down tag="div" class='float-right text-right' style='display:none;'>
+            <drop-down tag="div" class='float-right text-right'>
               <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon">
                 <i class="tim-icons icon-settings-gear-63"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
-                <a href="#duplicate" class="dropdown-item">Duplicate</a>
-                <a href="#delete" class="dropdown-item">Delete</a>
+                <a href="#" class="dropdown-item">Archive <i class="tim-icons icon-settings-gear-63" tooltip='Save to a folder & remove from the list'></i></a>
+                <a href="#" class="dropdown-item">Duplicate</a>
+                <a href="#" class="dropdown-item">Delete</a>
               </ul>
             </drop-down>
 
