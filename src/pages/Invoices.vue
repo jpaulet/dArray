@@ -26,21 +26,22 @@
 
         <div v-if='table1.data.length'>
             <h6 class="title d-inline text-left float-left">Invoices ({{table1.data.length}})</h6>
-            <drop-down tag="div" class='float-right text-right' style='display:none;'>
+            <drop-down tag="div" class='float-right text-right'>
               <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon">
                 <i class="tim-icons icon-settings-gear-63"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
-                <a href="#duplicate" class="dropdown-item">Duplicate</a>
-                <a href="#delete" class="dropdown-item">Delete</a>
+                <a href="#" class="dropdown-item" @click.prevent='archiveInvoices()'>Archive <i class="tim-icons icon-alert-circle-exc ml-2" data-toggle="tooltip" data-html="true" title="Save to folder & delete from list" style='font-size:12px;color:#777;margin-top:-10px;'></i></a>
+                <a href="#" class="dropdown-item" @click.prevent='duplicateInvoices()'>Duplicate</a>
+                <a href="#" class="dropdown-item" @click.prevent='deleteInvoices()'>Delete</a>
               </ul>
             </drop-down>
 
             <div class="table-responsive text-left mb-3" style='overflow-x:inherit;'>
                 <base-table :data="table1.data" :columns="table1.columns" thead-classes="text-primary">
                     <template slot-scope="{row}">
-                        <td style='display:none;'>
-                            <base-checkbox v-model="row.done"></base-checkbox>
+                        <td>
+                            <base-checkbox v-model="row.done" class='rowDone'></base-checkbox>
                         </td>
                         <td class="text-left">
                             <p class="title">{{row.name}}</p>
@@ -63,22 +64,22 @@
                                   <i class="tim-icons icon-settings-gear-63" style='display:none;'></i>
                                 </span>
                                 <ul class="dropdown-menu dropdown-menu-left">
-                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Paid",row.id)'>
+                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Paid",row.id)'>
                                     <span class='badge badge-success' style='font-size:13px;width:100%;'>Paid</span>
                                   </a>
-                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Pending",row.id)'>
+                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Pending",row.id)'>
                                     <span class='badge badge-warning' style='font-size:13px;width:100%;'>Pending</span>
                                   </a>
-                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Not paid",row.id)'>
+                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Not paid",row.id)'>
                                     <span class='badge badge-danger' style='font-size:13px;width:100%;'>Not paid</span>
                                   </a>
-                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Overdue",row.id)'>
+                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Overdue",row.id)'>
                                     <span class='badge badge-light' style='font-size:13px;width:100%;'>Overdue</span>
                                   </a>
-                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Void",row.id)'>
+                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Void",row.id)'>
                                     <span class='badge badge-info' style='font-size:13px;width:100%;'>Void</span>
                                   </a>
-                                  <a href="#" class="dropdown-item mt-0" @click='changeStatus("Draft",row.id)'>
+                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Draft",row.id)'>
                                     <span class='badge badge-secondary' style='font-size:13px;width:100%;'>Draft</span>
                                   </a>
                                 </ul>
@@ -293,19 +294,25 @@
         </div>
     </card>
 
-    <card id='previewInvoice' v-if='showPreview'>
+    <card id='previewInvoice' v-show='showPreview'>
         <!-- INVOICE PREVIEW -->
         <template slot="header">
-          <div class='row'>
-            <h6 class='col-8'>
+          <div class='row mb-3'>
+            <h6 class='col-5 mb-0' style='line-height:36px;'>
               <a href='' @click.prevent='showPreview = false'><i class="tim-icons icon-minimal-left text-light mr-3"></i></a> Preview Invoice
             </h6>
-            <a class='col-4 float-right text-right' href='' @click.prevent='showPreview = false'>
+            <div class='col-4 text-left'>
+              <button type="button" class='btn btn-sm btn-light' @click="printPDF" id='printButton'>
+                  <span v-if='!loadingDownload'><i class='tim-icons icon-cloud-download-93 text-white mr-2'></i>Print Invoice</span>
+                  <span v-if='loadingDownload'><img src='@/assets/img/loader.gif' style='width:20px;' />Downloading</span>
+               </button>
+            </div>
+            <a class='col-3 float-right text-right' href='' @click.prevent='showPreview = false' style='line-height:36px;'>
               <i class="tim-icons icon-simple-remove text-dark mr-3"></i>
             </a>
           </div>
         </template>
-        <div class="invoice-box col-8 col-offset-2 card" style='font-size:13px;'>
+        <div id='printInvoice' class="invoice-box col-8 col-offset-2 card pt-1 mt-0" style='font-size:13px;max-width:595px;margin:0px auto;transform:scale(0.9);' ref="printInvoice">
           <table cellpadding="0" cellspacing="0">
             <tr class="top">
               <td colspan="4">
@@ -318,7 +325,7 @@
                       </div>
                     </td>
 
-                    <td>
+                    <td class='pb-0 mb-0'>
                       <strong style='font-size:14px;width:100%;text-align: right;'>Invoice #: {{invoice.name}}</strong><br>
                       <label>Created</label>
                       <div style="border: 0px none; width: 90px; text-align: right; float: right; cursor: pointer;padding-right:0px;">{{invoice.date}}</div><br>
@@ -364,16 +371,16 @@
             </tr>
 
             <tr class="item" v-for="(item,index) in invoice.items" v-bind:key='index'>
-              <td style='line-height: 40px;'>
+              <td>
                 {{ item.description }}
               </td>
-              <td style='line-height: 40px;text-align:right;'>
+              <td style='text-align:right;'>
                 {{ item.price }}
               </td>
-              <td style='line-height: 40px;'>
+              <td>
                 {{ item.quantity }}
               </td>
-              <td style='line-height: 40px;min-width:90px;'>
+              <td style='min-width:90px;'>
                 ${{ item.price * item.quantity | currency }}
               </td>
             </tr>
@@ -412,20 +419,46 @@
        </div>
        <!-- END INVOICE PREVIEW -->
     </card>
+
+    <modal :show.sync="showArchive" body-classes="p-0" modal-classes="modal-dialog-centered modal-sm" style='transform:translate(0,0);'>
+      <template slot="header">
+        <h5 class="modal-title ml-2" id="exampleModalLabel">Archive Invoices</h5>
+      </template>
+      <form class='row text-center mb-4 mt-4 pt-2 pb-2' role="form">
+        <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Folder:</label>
+        <!-- <input type='text' class='form-control col-7' name='Folder' placeholder='Invoices' value='Invoices' /> -->
+        <drop-down tag="div">
+          <button aria-label="Dropdown link" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-secondary">
+            Invoices
+          </button>
+          <ul class="dropdown-menu">
+            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'>Invoices</a>
+            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - Octover 2019</a>
+            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - November 2019</a>
+            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - Dicember 2019</a>
+          </ul>
+        </drop-down>
+      </form>
+      <template slot="footer">
+        <base-button type="danger" @click="modals.modal0 = false" style='opacity:0.5;'>Close</base-button>
+        <base-button type="light">Archive</base-button>
+      </template>      
+    </modal>
+
   </div>
 </template>
-
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script>
-import { userSession } from '@/userSession'
 import {
-  Card
+  Card, BaseButton, BaseTable, BaseCheckbox, Modal
 } from '@/components/index'
-import BaseButton from '@/components/BaseButton'
-import BaseTable from '@/components/BaseTable'
-import BaseCheckbox from '@/components/BaseCheckbox'
+import { userSession } from '@/userSession'
 import { uuid } from 'vue-uuid'
+import * as jsPDF from 'jspdf'
+import html2canvas from "html2canvas"
+window.html2canvas = html2canvas //html2canvas must be set as global var
 
-const tableColumns = ['Name', 'Client', 'Date', 'Total', 'Status', 'View', 'Edit']
+const tableColumns = ['', 'Name', 'Client', 'Date', 'Total', 'Status', 'View', 'Edit']
 
 var STORAGE_FILE = 'invoices.json'
 var COMPANY_FILE = 'company.json'
@@ -436,10 +469,12 @@ export default {
     Card,
     BaseButton,
     BaseTable,
-    BaseCheckbox
+    BaseCheckbox,
+    Modal
   },
   data () {
     return {
+      loadingDownload: false,
       showPreview: false,
       tableData: [{}],
       newInvoice: false,
@@ -482,10 +517,111 @@ export default {
       customersList: [],
       invoicesList: [],
       invoices: [],
-      imageSrc: null
+      imageSrc: null,
+      selected: [],
+      showArchive: false
     }
   },
   methods: {
+    checkHasSelected() {
+      this.selected = this.invoices.filter((item) => { return item.done === true })
+      
+      if(this.selected.length === 0){
+        this.$notify({
+          message: 'Select one or more invoice/s first',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'danger',
+          timeout: 1500
+        })
+        return false
+      }
+
+      return true
+    },
+    archiveInvoices() {
+      if(!this.checkHasSelected()){
+        return false
+      }
+      this.showArchive = true
+    },
+    duplicateInvoices() {
+      if(!this.checkHasSelected()){
+        return false
+      }
+
+      this.selected.filter((el) => {
+        let newInvoice = Object.assign({}, el);
+        newInvoice.id = uuid.v4()
+        newInvoice.name = el.name+" (Copy)"
+        delete newInvoice.done
+        this.invoicesList.push(newInvoice.id)
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoicesList))
+        
+        let invoiceFile = newInvoice.id + '.json'
+        userSession.putFile(invoiceFile, JSON.stringify(newInvoice))
+        this.invoices.push(newInvoice)
+      });
+    },
+    deleteInvoices() {
+      if(!this.checkHasSelected()){
+        return false
+      }
+
+      const newInvoicesList = this.invoicesList.filter((el) => {
+        return !this.selected.some((f) => {
+          return f.id === el
+        })
+      })
+
+      this.selected.map((el) => {
+        userSession.deleteFile(el.id+'.json')
+      })
+      
+      userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList))
+      this.invoices = this.invoices.filter((el) => {
+        return !this.selected.some((f) => {
+          return f.id === el.id
+        })
+      })
+
+      this.table1.data = this.invoices
+      this.selected = []
+      this.deselectAll()
+    },
+    deselectAll(){
+      this.invoices.map( item => {
+        delete item.done        
+      })
+    },
+    printPDF() {
+      this.loadingDownload = true
+      var pdf = new jsPDF('p', 'pt', 'letter');
+      let invoice = document.getElementById('printInvoice')
+      pdf.html(invoice, {
+        callback: (pdf) => {
+          pdf.save(this.invoice.name+'.pdf');
+
+          this.$notify({
+            message: 'Invoice PDF saved successfully',
+            icon: 'tim-icons icon-bell-55',
+            horizontalAlign: 'center',
+            verticalAlign: 'bottom',
+            type: 'success',
+            timeout: 1500
+          })
+
+          this.loadingDownload = false
+          /*
+          var iframe = document.createElement('iframe');
+          iframe.setAttribute('style', 'position:fixed;right:0; top:0; bottom:0; height:100%; width:100%; z-index:10000;');
+          document.body.appendChild(iframe);
+          iframe.src = pdf.output('datauristring');
+          */
+        }
+      });
+    },
     loadCompanyLogo () {
       userSession.getFile(this.company.logo).then((logoImage) => {
         this.imageSrc = logoImage
@@ -576,7 +712,7 @@ export default {
             if (invoice === null) {
               return false
             }
-            this.invoices.unshift(JSON.parse(invoice))
+            this.invoices.push(JSON.parse(invoice))
             this.table1.data = this.invoices
           })
         }
@@ -734,7 +870,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
   .content-main-card .card{
     min-height: 560px;
@@ -846,38 +981,37 @@ export default {
     font-family: Tahoma, "Helvetica Neue", "Helvetica", Helvetica, Arial,
       sans-serif;
   }
-
   .rtl table {
     text-align: right;
   }
-
   .rtl table tr td:nth-child(2) {
     text-align: left;
   }
-
   .btn-success.btn-simple.active:hover, .btn-success.btn-simple.active:focus, .btn-success.btn-simple.active:active, .btn-success.btn-simple.active:not(:disabled):not(.disabled):active{
       background-color: #000 !important;
       background-image: none;
   }
-
   .form-control{
       background-color: #fff;
       border-color: rgba(29, 37, 59, 0.25);
   }
-
   .badge-success {
     background-color: #c2e8ce !important;
   }
-
   .badge-warning {
     background-color: #f6cd90 !important;
   }
-
   .badge-danger{
     background-color: #f0b7a4 !important;
   }
-
   .badge-info{
     background-color: #deecff !important;
+  }
+  .modal-dialog{
+    transform: translate(0,-15%) !important;
+  }
+  .modal .modal-header .close{
+    margin-top:-22px !important;
+    color:#000 !important;
   }
 </style>

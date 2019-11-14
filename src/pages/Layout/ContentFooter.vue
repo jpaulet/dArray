@@ -1,6 +1,6 @@
 <template>
-  <footer class="footer">
-    <div class="container-fluid">
+  <footer class="footer pt-0">
+    <div class="container-fluid px-2">
       <ul class="nav">
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link">
@@ -21,7 +21,7 @@
       <div class="copyright">
         &copy;
         {{ new Date().getFullYear() }} made with <i class="tim-icons icon-heart-2"></i> by
-        <a href="javascript:void(0)" target="_blank">J.P. Aulet</a>.
+        <a href="javascript:void(0)" target="_blank" style='color:#344675;'>J.P. Aulet</a>.
       </div>
     </div>
   </footer>

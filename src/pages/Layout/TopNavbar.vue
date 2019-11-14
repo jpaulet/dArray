@@ -24,7 +24,7 @@
       </button>
 
       <div class="collapse navbar-collapse show text-left" v-show="showMenu">
-        <ul class="navbar-nav addMoreItems">
+        <ul class="navbar-nav addMoreItems" style='display:none;'>
           <drop-down>
             <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle nav-link">
               <div class="d-none d-lg-block d-xl-block"></div>
@@ -66,7 +66,7 @@
         <ul class="navbar-nav ml-auto">
 
           <!-- SEARCH -->
-          <li class="search-bar input-group"  @click="searchModalVisible = true">
+          <li class="search-bar input-group"  @click="searchModalVisible = true" style='display:none;'>
             <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
               <span class="d-lg-none d-md-block">Search</span>
             </button>
@@ -81,7 +81,7 @@
 
           <!-- NOTIFICATIONS -->
           <drop-down>
-            <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle nav-link">
+            <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle nav-link" style='display:none;'>
               <div class="notification d-none d-lg-block d-xl-block"></div>
               <i class="tim-icons icon-sound-wave"></i>
               <p class="d-lg-none text-left">

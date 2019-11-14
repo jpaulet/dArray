@@ -2,7 +2,6 @@
   <div class="center">
     <landing v-if="! userSession.isUserSignedIn()"></landing>
     <dashboard v-if="user" :user="user"></dashboard>
-
   </div>
 </template>
 

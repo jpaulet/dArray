@@ -31,9 +31,9 @@
                 <i class="tim-icons icon-settings-gear-63"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
-                <a href="#" class="dropdown-item">Archive <i class="tim-icons icon-alert-circle-exc ml-2" data-toggle="tooltip" data-html="true" title="Save to folder & delete from list" style='font-size:12px;color:#777;margin-top:-10px;'></i></a>
-                <a href="#" class="dropdown-item">Duplicate</a>
-                <a href="#" class="dropdown-item">Delete</a>
+                <a href="#" class="dropdown-item" @click.prevent='archiveInvoices()'>Archive <i class="tim-icons icon-alert-circle-exc ml-2" data-toggle="tooltip" data-html="true" title="Save to folder & delete from list" style='font-size:12px;color:#777;margin-top:-10px;'></i></a>
+                <a href="#" class="dropdown-item" @click.prevent='duplicateInvoices()'>Duplicate</a>
+                <a href="#" class="dropdown-item" @click.prevent='deleteInvoices()'>Delete</a>
               </ul>
             </drop-down>
 
@@ -114,18 +114,18 @@
 
                 <div class='row text-left'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'> Title </label>
-                    <input class='form-control ml-3 col-7' type='text' v-model='expense.title' name='expense' placeholder="Expense name" />
+                    <input class='form-control ml-1 col-7' type='text' v-model='expense.title' name='expense' placeholder="Expense name" />
                 </div>
                 <div class='row text-left mt-2'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'> Category </label>
-                    <drop-down tag="li" class='form-control ml-3 col-7 float-right text-left'>
+                    <drop-down tag="li" class='form-control ml-1 col-7 float-right text-left'>
                       {{expense.category}}
                       <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon float-right">
                         <i class="tim-icons icon-single-02"></i>
                       </button>
                       <ul class="dropdown-menu dropdown-menu-right" v-if="categories">
                         <a href="" class="dropdown-item" v-for="(category,index) in categories" @click.prevent='expense.category = category.name' :key='index'><strong>{{category.name}}</strong></a>
-                        <div v-if='category.subItems'>
+                        <div v-if='category && category.subItems'>
                           <a href="" class="dropdown-item" v-for="(subcategory,subindex) in category.subItems" @click.prevent='expense.category = subcategory.name' style='font-size:10px;' :key='subindex'>{{subcategory.name}}</a>
                         </div>
                       </ul>
@@ -134,12 +134,12 @@
 
                 <div class='row text-left mt-2'>
                   <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>Created</label>
-                  <input type="date" class="form-control ml-3 col-7 text-right" v-model='expense.date'><br>
+                  <input type="date" class="form-control ml-1 col-7 text-right" v-model='expense.date'><br>
                 </div>
 
                 <div class='row text-left mt-2'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>VAT</label>
-                    <input class='form-control ml-3 col-7 text-right' type='number' v-model='expense.tax' name='vat' min='0' />
+                    <input class='form-control ml-1 col-7 text-right' type='number' v-model='expense.tax' name='vat' min='0' />
                 </div>
 
                 <div class='row text-left mt-4 ml-0'>
@@ -250,30 +250,42 @@
     <card v-if='showPreview'>
         <!-- INVOICE PREVIEW -->
         <template slot="header">
-          <div class='row'>
-            <h6 class='col-8'>
+          <div class='row mb-3'>
+            <h6 class='col-5' style='line-height:36px;'>
               <a href='' @click.prevent='showPreview = false'><i class="tim-icons icon-minimal-left text-light mr-3"></i></a> Preview Expense
             </h6>
-            <a class='col-4 float-right text-right' href='' @click.prevent='showPreview = false'>
+            <div class='col-4 text-left'>
+              <button type="button" class='btn btn-sm btn-light' @click="printPDF" id='printButton'>
+                  <span v-if='!loadingDownload'><i class='tim-icons icon-cloud-download-93 text-white mr-2'></i>Print Expense</span>
+                  <span v-if='loadingDownload'><img src='@/assets/img/loader.gif' style='width:20px;' />Downloading</span>
+               </button>
+            </div>
+            <a class='col-3 float-right text-right' href='' @click.prevent='showPreview = false' style='line-height:36px;'>
               <i class="tim-icons icon-simple-remove text-dark mr-3"></i>
             </a>
           </div>
         </template>
-        <div class="expense-box col-8 col-offset-2 card" style='font-size:13px;margin:0px auto;'>
-          <table cellpadding="0" cellspacing="0">
-            <tr class="top">
-              <td colspan="4">
-                <table class='mb-3'>
-                  <tr>
-                    <td>
-                      <strong>Expense #: {{expense.name}}</strong><br>
-                      <label style='line-height:40px;vertical-align:middle;'>Created</label>
-                      <div style="border: 0px none; width: 120px; text-align: right; float: right; cursor: pointer;padding-right:0px;margin-right:-20px;">{{expense.date}}</div><br>
-                    </td>
-                  </tr>
-                </table>
+        <div id='printExpense' class="expense-box col-8 col-offset-2 card pt-1 mt-0" style='font-size:13px;margin:0px auto;width:595px;transform:scale(0.9);' ref="printExpense">
+          <table cellpadding="0" cellspacing="0" class='col-10' style='margin:0px auto;'>
+            <tr>
+              <td colspan='8'>
+                <h6 class='text-center'>- Ticket -</h6>
               </td>
             </tr>
+
+            <tr>
+              <td colspan="8" class='text-center'>
+                <strong>Expense #: {{expense.title}}</strong>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="8" class='text-center'>
+                  <label><strong style='margin-right:10px;'>Date:</strong> {{expense.date}}</label>
+              </td>
+            </tr>
+
+            <tr><td><br /></td></tr>
 
             <tr class="heading" style='font-size:12px;'>
               <td style='background-color: #fff;'>Item</td>
@@ -313,7 +325,7 @@
             </tr>
         </table>
 
-        <div class='row col-8 mt-5' style='margin:0px auto;'>
+        <div class='row col-10 mt-5' style='margin:0px auto;'>
             <div class='col-6 text-left mb-5' v-if='expense.comments'>
                 <h6>Comments</h6>
                 <div style="white-space: pre-line;" class='ml-2'>{{expense.comments}}</div>
@@ -326,18 +338,43 @@
        </div>
        <!-- END INVOICE PREVIEW -->
     </card>
+
+    <modal :show.sync="showArchive" body-classes="p-0" modal-classes="modal-dialog-centered modal-sm" style='transform:translate(0,0) !important;'>
+      <template slot="header">
+        <h5 class="modal-title ml-2" id="exampleModalLabel">Archive Expenses</h5>
+      </template>
+      <form class='row text-center mb-4 mt-4 pt-2 pb-2' role="form">
+        <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Folder:</label>
+        <drop-down tag="div">
+          <button aria-label="Dropdown link" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-secondary">
+            Expenses
+          </button>
+          <ul class="dropdown-menu">
+            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'>Expenses</a>
+            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - Octover 2019</a>
+            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - November 2019</a>
+            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - Dicember 2019</a>
+          </ul>
+        </drop-down>
+      </form>
+      <template slot="footer">
+        <base-button type="danger" @click="modals.modal0 = false" style='opacity:0.5;'>Close</base-button>
+        <base-button type="light">Archive</base-button>
+      </template>      
+    </modal>
+
   </div>
 </template>
-
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script>
 import { userSession } from '@/userSession'
 import {
-  Card
+  Card, BaseButton, BaseCheckbox, BaseTable, Modal
 } from '@/components/index'
-import BaseButton from '@/components/BaseButton'
-import BaseTable from '@/components/BaseTable'
-import BaseCheckbox from '@/components/BaseCheckbox'
 import { uuid } from 'vue-uuid'
+import * as jsPDF from 'jspdf'
+import html2canvas from "html2canvas"
+window.html2canvas = html2canvas //html2canvas must be set as global var
 
 const tableColumns = ['', 'Title', 'Category', 'Date', 'Total', 'Status', 'View', 'Edit']
 
@@ -349,10 +386,14 @@ export default {
     Card,
     BaseButton,
     BaseTable,
-    BaseCheckbox
+    BaseCheckbox,
+    Modal
   },
   data () {
     return {
+      showArchive: false,
+      selected: [],
+      loadingDownload: false,
       showPreview: false,
       tableData: [{}],
       newExpense: false,
@@ -491,6 +532,105 @@ export default {
     }
   },
   methods: {
+    checkHasSelected() {
+      this.selected = this.expenses.filter((item) => { return item.done === true })
+      
+      if(this.selected.length === 0){
+        this.$notify({
+          message: 'Select one or more expense/s first',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'danger',
+          timeout: 1500
+        })
+        return false
+      }
+
+      return true
+    },
+    archiveInvoices() {
+      if(!this.checkHasSelected()){
+        return false
+      }
+      this.showArchive = true
+    },
+    duplicateInvoices() {
+      if(!this.checkHasSelected()){
+        return false
+      }
+
+      this.selected.filter((el) => {
+        let newExpense = Object.assign({}, el);
+        newExpense.id = uuid.v4()
+        newExpense.title = el.title+" (Copy)"
+        delete newExpense.done
+        this.expensesList.push(newExpense.id)
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.expensesList))
+        
+        let expenseFile = newExpense.id + '.json'
+        userSession.putFile(expenseFile, JSON.stringify(newExpense))
+        this.expenses.push(newExpense)
+      });
+    },
+    deleteInvoices() {
+      if(!this.checkHasSelected()){
+        return false
+      }
+
+      const newExpensesList = this.expensesList.filter((el) => {
+        return !this.selected.some((f) => {
+          return f.id === el
+        })
+      })
+
+      this.selected.map((el) => {
+        userSession.deleteFile(el.id+'.json')
+      })
+      
+      userSession.putFile(STORAGE_FILE, JSON.stringify(newExpensesList))
+      this.expenses = this.expenses.filter((el) => {
+        return !this.selected.some((f) => {
+          return f.id === el.id
+        })
+      })
+
+      this.table1.data = this.expenses
+      this.selected = []
+      this.deselectAll()
+    },
+    deselectAll(){
+      this.expenses.map( item => {
+        delete item.done        
+      })
+    },
+    printPDF() {
+      this.loadingDownload = true
+      var pdf = new jsPDF('p', 'pt', 'letter');
+      let expense = document.getElementById('printExpense')
+      pdf.html(expense, {
+        callback: (pdf) => {
+          pdf.save(this.expense.title+'.pdf');
+
+          this.$notify({
+            message: 'Invoice PDF saved successfully',
+            icon: 'tim-icons icon-bell-55',
+            horizontalAlign: 'center',
+            verticalAlign: 'bottom',
+            type: 'success',
+            timeout: 1500
+          })
+
+          this.loadingDownload = false
+          /*
+          var iframe = document.createElement('iframe');
+          iframe.setAttribute('style', 'position:fixed;right:0; top:0; bottom:0; height:100%; width:100%; z-index:10000;');
+          document.body.appendChild(iframe);
+          iframe.src = pdf.output('datauristring');
+          */
+        }
+      });
+    },
     openNewExpense () {
       this.clearExpense()
       this.newExpense = true
