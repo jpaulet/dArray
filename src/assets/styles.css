@@ -57,3 +57,9 @@ html,body{
 .router-link-active a p{
 	color: #000 !important;
 }
+
+.modal .modal-header .close{
+	margin-top:-22px !important;
+	color:#000 !important;
+}
+
