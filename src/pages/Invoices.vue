@@ -24,7 +24,16 @@
             </div>
         </template>
 
-        <div v-if='table1.data.length'>
+        <div class='text-center pt-5 mt-5' v-if='loadingPage'>
+          <breeding-rhombus-spinner
+            :animation-duration="2000"
+            :size="65"
+            color="#344675"
+            style='margin:0px auto;'
+          />
+        </div>
+
+        <div v-if='table1.data.length && !loadingPage'>
             <h6 class="title d-inline text-left float-left">Invoices ({{table1.data.length}})</h6>
             <drop-down tag="div" class='float-right text-right'>
               <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon">
@@ -101,7 +110,7 @@
             </div>
         </div>
 
-        <div v-if='!table1.data.length' class='py-4 text-center my-4'>
+        <div v-if='!table1.data.length && !loadingPage' class='py-4 text-center my-4'>
             <p>No invoices yet. </p>
             <img src='@/assets/img/invoice.png' class='mt-3 mb-5' height='200' />
         </div>
@@ -449,6 +458,7 @@
 </template>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script>
+import { BreedingRhombusSpinner } from 'epic-spinners'
 import {
   Card, BaseButton, BaseTable, BaseCheckbox, Modal
 } from '@/components/index'
@@ -470,10 +480,12 @@ export default {
     BaseButton,
     BaseTable,
     BaseCheckbox,
-    Modal
+    Modal,
+    BreedingRhombusSpinner
   },
   data () {
     return {
+      loadingPage: false,
       loadingDownload: false,
       showPreview: false,
       tableData: [{}],
@@ -692,6 +704,8 @@ export default {
       }
     },
     fetchData () {
+      this.loadingPage = true
+
       // Load Company data
       userSession.getFile(COMPANY_FILE).then((company) => {
         this.company = JSON.parse(company || '{}')
@@ -838,7 +852,11 @@ export default {
         return false
       }
 
+      console.log("search Invoice: "+searchInvoice)
+      console.log("invoiceList: "+this.invoicesList)
+
       this.invoice = this.invoices[searchInvoice]
+      console.log(this.invoice)
       this.invoice.status = status
       let invoiceFile = this.invoice.id + '.json'
       userSession.putFile(invoiceFile, JSON.stringify(this.invoice))
@@ -866,7 +884,8 @@ export default {
   async mounted () {
     this.i18n = this.$i18n
     this.initBigChart(2)
-    this.fetchData()
+    await this.fetchData()    
+    this.loadingPage = false
   }
 }
 </script>

@@ -13,7 +13,9 @@
       <!-- Navbar Section -->
       <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top effect-main">
         <div class="container container-s">
-          <a class="navbar-brand" href="#">array.</a>
+          <a class="navbar-brand" href="#">
+            <img src='@/assets/img/darray.png' style="width:30px;margin-right:10px;" />dArray.
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -21,8 +23,8 @@
             <ul class="navbar-nav ml-auto navbar-right">
               <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#products">Product</a></li>
               <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#features">Features</a></li>
-              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#reviews">Reviews</a></li>
-              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#pricing">Pricing</a></li>
+              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#video-demo">Demo</a></li>
+              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#pricing">Support</a></li>
               <li class="nav-item"><a class="nav-link js-scroll-trigger btn btn-primary" href="#" @click.prevent="signIn" style='color:#fff;'>Sign In</a></li>
             </ul>
           </div>
@@ -56,21 +58,20 @@
             <div class="row text-center">
               <div class="col-md-12">
                 <div class="features-intro">
-                  <h2>Welcome to array, where data matters.</h2>
-                  <p>We’ll Deliver the best stories and ideas on the topics you care about most straight to your
-                  homepage, app, or inbox. </p>
+                  <h2>Welcome to array, a all-in-one place for your business.</h2>
+                  <p>A decentralized platform for your business & accouting.</p>
                 </div>
               </div>
               <div class="col-md-6 col-lg-4">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
-                      <img src="@/assets/img/landing/a1.png" alt="Feature" width="35">
+                      <img src="@/assets/img/landing/a3.png" alt="Feature" width="35">
                     </div>
                   </div>
                   <div class="card-text">
-                    <h3>Responsive</h3>
-                    <p>Deliver the best stories and ideas on the topics you care about most straight to you.</p>
+                    <h3>Secure</h3>
+                    <p>Encrypt all your data in a secure way. Only you will be able to access it.</p>
                   </div>
                 </div>
               </div>
@@ -82,8 +83,8 @@
                     </div>
                   </div>
                   <div class="card-text">
-                    <h3>Responsive</h3>
-                    <p>Deliver the best stories and ideas on the topics you care about most straight to you.</p>
+                    <h3>Private</h3>
+                    <p>Own all your business data: Invoices, Expenses, Tasks, Calendar, Files...</p>
                   </div>
                 </div>
               </div>
@@ -91,38 +92,12 @@
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
-                      <img src="@/assets/img/landing/a3.png" alt="Feature" width="35">
+                      <img src="@/assets/img/landing/a1.png" alt="Feature" width="35">
                     </div>
                   </div>
                   <div class="card-text">
-                    <h3>Responsive</h3>
-                    <p>Deliver the best stories and ideas on the topics you care about most straight to you.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="feature-list">
-                  <div class="card-icon">
-                    <div class="card-img">
-                      <img src="@/assets/img/landing/a4.png" alt="Feature" width="35">
-                    </div>
-                  </div>
-                  <div class="card-text">
-                    <h3>User Friendly</h3>
-                    <p>Deliver the best stories and ideas on the topics you care about most straight to you.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4">
-                <div class="feature-list">
-                  <div class="card-icon">
-                    <div class="card-img">
-                      <img src="@/assets/img/landing/a5.png" alt="Feature" width="35">
-                    </div>
-                  </div>
-                  <div class="card-text">
-                    <h3> AI Algorithms</h3>
-                    <p>Deliver the best stories and ideas on the topics you care about most straight to you.</p>
+                    <h3>Decentralized</h3>
+                    <p>We use Blockstack tech.</p>
                   </div>
                 </div>
               </div>
@@ -134,8 +109,34 @@
                     </div>
                   </div>
                   <div class="card-text">
-                    <h3>Built-in Camera</h3>
-                    <p>Deliver the best stories and ideas on the topics you care about most straight to you.</p>
+                    <h3>Productive</h3>
+                    <p>The all-in-one place for your business</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="feature-list">
+                  <div class="card-icon">
+                    <div class="card-img">
+                      <img src="@/assets/img/landing/a5.png" alt="Feature" width="35">
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    <h3>Easy to Use</h3>
+                    <p>Create invoices in 60 sec.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="feature-list">
+                  <div class="card-icon">
+                    <div class="card-img">
+                      <img src="@/assets/img/landing/a4.png" alt="Feature" width="35">
+                    </div>
+                  </div>
+                  <div class="card-text">
+                    <h3>Free</h3>
+                    <p>It's free! Yes, 0$.</p>
                   </div>
                 </div>
               </div>
@@ -153,26 +154,76 @@
              </div>
              <div class="flex-inner align-center">
                  <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/feature.png" alt="Feature">
+                   <img class="img-fluid" src="@/assets/img/landing/invoice_sm.png" alt="Invoice screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                  </div>
-                 <div class="f-text">
+                 <div class="f-text" style='margin-top:-20px;'>
                    <div class="left-content">
-                     <h2>Dynamic charts.</h2>
-                     <p> When you get staright to the point the presentation looks attractive on your web pages.</p>
-                     <a href="#">Know more</a>
+                     <h2 class="mt-0">Invoices.</h2>
+                     <p> Crate & manage your invoices in a easy & private way.</p>
+                     <a href="#" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
              </div>
 
              <div class="flex-inner flex-inverted align-center">
                <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/feature.png" alt="Feature">
+                 <img class="img-fluid" src="@/assets/img/landing/print_invoice_nice2.png" alt="Expenses screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                </div>
-               <div class="f-text">
+               <div class="f-text" style='margin-top:-20px;'>
                  <div class="left-content">
-                   <h2>Mobile Analytics.</h2>
-                   <p> When you get staright to the point the presentation looks attractive on your web pages.</p>
-                   <a href="#">Know more</a>
+                   <h2 class="mt-0">Expenses.</h2>
+                   <p> Track all your expenses by client, type, status & more. Attach the real receipt to keep things organized.</p>
+                   <a href="#" style='font-size:10px;'>Know more</a>
+                 </div>
+               </div>
+             </div>
+             <div class="flex-inner align-center">
+                 <div class="f-image">
+                   <img class="img-fluid" src="@/assets/img/landing/feature.png" alt="Customers List screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 </div>
+                 <div class="f-text" style='margin-top:-20px;'>
+                   <div class="left-content">
+                     <h2 class="mt-0">Customers.</h2>
+                     <p> All your customers, partners, offerings in one place.</p>
+                     <a href="#" style='font-size:10px;'>Know more</a>
+                   </div>
+                 </div>
+             </div>
+
+             <div class="flex-inner flex-inverted align-center">
+               <div class="f-image f-image-inverted">
+                 <img class="img-fluid" src="@/assets/img/landing/files_card.png" alt="Documents & Files screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+               </div>
+               <div class="f-text" style='margin-top:-20px;'>
+                 <div class="left-content">
+                   <h2 class="mt-0">Docs & File</h2>
+                   <p> Store all your data in a private & secure storage. Invoices, Expenses & any other important docs.</p>
+                   <a href="#" style='font-size:10px;'>Know more</a>
+                 </div>
+               </div>
+             </div>
+             <div class="flex-inner align-center">
+                 <div class="f-image">
+                   <img class="img-fluid" src="@/assets/img/landing/tasks_nice.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 </div>
+                 <div class="f-text" style='margin-top:-20px;'>
+                   <div class="left-content">
+                     <h2 class="mt-0">Tasks.</h2>
+                     <p> Easy to use everyday tasks & events.</p>
+                     <a href="#" style='font-size:10px;'>Know more</a>
+                   </div>
+                 </div>
+             </div>
+
+             <div class="flex-inner flex-inverted align-center">
+               <div class="f-image f-image-inverted">
+                 <img class="img-fluid" src="@/assets/img/landing/settings_nice.png" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+               </div>
+               <div class="f-text" style='margin-top:-20px;'>
+                 <div class="left-content">
+                   <h2 class="mt-0">Your Business Swiss Knife.</h2>
+                   <p> A lot more features for your productivity: Calendar, Tasks, Pomodoro, ToDO lists...</p>
+                   <a href="#" style='font-size:10px;'>Know more</a>
                  </div>
                </div>
              </div>
@@ -180,8 +231,8 @@
          </div>
 
          <div class="yd-ft wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-           <div class="yd-ft-inner">
-             <div class="yd-ft-left">
+           <div class="yd-ft-inner py-5">
+             <div class="yd-ft-left" style='margin-top:-20px;'>
                <h2>Welcome to array, where data matters.</h2>
                    <p>We’ll Deliver the best analytics and graphs you care about most straight to your
                    dashboard, app, or inbox. </p>
@@ -193,48 +244,31 @@
            </div>
          </div>
 
-        <div class="ar-ft-single">
+        <div class="ar-ft-single" id='video-demo'>
           <div class="container-m">
-            <div class="ar-feature">
+            <div class="ar-feature mt-4">
               <div class="ar-list">
                 <ul>
                   <li>
-                    <div class="ar-icon">
-                      <img src="@/assets/img/landing/f1.png" alt="Icon" width="30">
-                    </div>
                     <div class="ar-text">
-                      <h3>Client Support</h3>
-                      <p>Team hangouts and instant text messaging right from the dashboard.</p>
+                      <h3 class='text-left pb-3'>Demo</h3>
+                      <p>Check the video to see a live demo of <span style='color:#344675;'>dArray</span>.</p>
                     </div>
-                  </li>
-                  <li>
-                    <div class="ar-icon">
-                      <img src="@/assets/img/landing/f4.png" alt="Icon" width="30">
-                    </div>
-                    <div class="ar-text">
-                      <h3>Secure Servers</h3>
-                      <p>Team hangouts and instant text messaging right from the dashboard.</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="ar-icon">
-                      <img src="@/assets/img/landing/f11.png" alt="Icon" width="30">
-                    </div>
-                    <div class="ar-text">
-                      <h3>Product Feedback</h3>
-                      <p>Team hangouts and instant text messaging right from the dashboard.</p>
-                    </div>
-                  </li>
+                  </li>                  
                 </ul>
               </div>
               <div class="ar-image">
-                <img class="ar-img img-fluid" src="@/assets/img/landing/feature-2.png" alt="Hero Image">
+                <video controls poster="@/assets/img/landing/video_preview.png" width='90%' height='100%' style='border-radius:42px;padding:20px;'>
+                  <source src="@/assets/img/landing/crm2.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <!-- <img class="ar-img img-fluid" src="@/assets/img/landing/feature-2.png" alt="Hero Image"> -->
               </div>
             </div>
           </div>
         </div>
 
-         <div id="reviews" class="yd-reviews wow fadeIn" style="visibility: visible; animation-name: fadeIn;"><!-- Array Reviews -->
+         <div id="reviews" class="yd-reviews wow fadeIn" style="display:none;visibility: visible; animation-name: fadeIn;"><!-- dArray Reviews -->
            <div class="container">
              <div class="row text-center">
                <div class="col-sm-12 col-lg-8 offset-lg-2">
@@ -313,50 +347,72 @@
              </div>
            </div>
          </div>
-         <!-- Array Reviews Ends -->
+         <!-- dArray Reviews Ends -->
 
-        <!-- Array Pricing Section -->
+        <!-- dArray Pricing Section -->
         <div id="pricing" class="pricing-section text-center">
           <div class="container">
             <div class="row">
               <div class="col-sm-12">
                 <div class="pricing-intro wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                  <h1>Pricing Plans.</h1>
-                  <p>
-                    Our plans are designed to meet the requirements of both beginners <br class="hidden-xs"> and players.
-                    Get the right plan that suits you.
+                  <h1>Suport.</h1>
+                  <p style='max-width:800px;margin:0px auto;'>
+                    <span style='color:#344675;'>dArray</span> is free, but you could support it & myself <span style='color:#aaa;'>a solo-maker</span> in various ways:<br />Thanks you in advance <span style='color:#344675;'>❤️</span>.
                   </p>
                 </div>
                 <div class="row">
                   <div class="col-lg-4 offset-lg-2 col-md-6">
                    <div class="table-left wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
                      <div class="pricing-details">
-                       <h2>Freemium</h2>
+                       <h2>Free!</h2>
                        <img src="@/assets/img/landing/free.png" alt="Icon" width="60">
 
                        <span>$0.00</span>
                           <ul>
-                           <li>First basic feature </li>
-                           <li>Second feature goes here</li>
-                           <li>Any other third feature</li>
-                           </ul>
-                         <button class="btn-action">Get Plan</button>
+                            <li>All the features*</li>
+                            <li>Create & store invoices</li>
+                            <li>Save documents</li>
+                          </ul>
+                          <p style='font-size:10px;color:#555;width:72%margin:0px auto;'>*: In the future we could develop<br />new premium features.</p>
+                         <button class="btn-action" @click='signIn'>Sign In</button>
                       </div>
                     </div>
                   </div>
                   <div class="col-lg-4 col-md-6">
-                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                      <div class="pricing-details">
-                         <h2>Beginner</h2>
-                         <img src="@/assets/img/landing/paid.png" alt="Icon" width="60">
-                         <span>$24.99</span>
-                         <ul>
-                           <li>First premium feature </li>
-                           <li>Second premium one goes here</li>
-                           <li>Third premium feature here</li>
-                         </ul>
-                         <button class="btn-action">Buy Now</button>
-                      </div>
+                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:20px 20px 30px 20px;">
+                      <table class='text-center'>
+                        <tr><th>Twitter</th></tr>
+                        <tr>
+                          <td class=''>
+                            <blockquote class="twitter-tweet">
+                              <p lang="en" dir="ltr">
+                                Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a>
+                              </p>
+                              &mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a>
+                            </blockquote>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:20px 20px 30px 20px;">
+                      <table class='text-center' style='width:100%;'>
+                        <tr><th>Buy Me a Coffee</th></tr>
+                        <tr>
+                          <td class='text-center pt-3'>
+                            <a href=''><img src='@/assets/img/landing/Button_orange.png' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:20px 20px 30px 20px;">
+                      <table class='text-center' style='width:100%;'>
+                        <tr><th>ProductHunt</th></tr>
+                        <tr>
+                          <td class='text-center pt-3'>
+                            <a href="https://www.producthunt.com/posts/roastme-4?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-roastme-4" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=137613&theme=light" alt="roastMe - Real feedback 🔥 and critics 🎯 from community & expert users | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" /></a>
+                          </td>
+                        </tr>
+                      </table>
                     </div>
                   </div>
                 </div>
@@ -364,7 +420,7 @@
             </div>
           </div>
         </div>
-        <!-- Array Pricing Ends -->
+        <!-- dArray Pricing Ends -->
 
         <!-- CTA Signup Section -->
         <div id="signup" class="cta-sm wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
@@ -374,18 +430,20 @@
                <h1>Start now and turn your online business into a profitable route.</h1>
                <a class="btn-action js-scroll-trigger btn btn-primary btn-lg" href="#" @click.prevent='signIn'>Sign In now</a>
               <div class="form-note">
-                <p>Free forever. Sign in now with Blockstack to get access to your decentralized CRM.</p>
+                <p>It's Free. Sign in now with Blockstack to get access to your decentralized CRM.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Array Footer Section -->
+        <!-- dArray Footer Section -->
         <div class="footer-sm">
           <div class="container">
             <div class="row">
               <div class="col-md-3">
-                <a class="footer-logo" href="#">array.</a>
+                <a class="footer-logo" href="#">
+                  <img src='@/assets/img/darray.png' style="width:20px;margin-right:10px;" />dArray.
+                </a>
               </div>
               <div class="col-md-6 text-center">
                 <h6>© J.P.Aulet 2019 Rights Reserved</h6>
@@ -1184,7 +1242,7 @@ body {
 }
 
 .flex-inner .f-image {
-  padding: 0 35px;
+  padding: 0 25px;
 }
 
 .flex-inner .f-text {
@@ -1478,15 +1536,15 @@ body {
 
 .ar-feature .ar-list {
   -webkit-box-flex: 1;
-  -ms-flex: 1 0 40%;
-  flex: 1 0 40%;
+  -ms-flex: 1 0 20%;
+  flex: 1 0 20%;
   text-align: left;
 }
 
 .ar-feature .ar-image {
   -webkit-box-flex: 1;
-  -ms-flex: 1 0 60%;
-  flex: 1 0 60%;
+  -ms-flex: 1 0 80%;
+  flex: 1 0 80%;
   margin-left: 0;
 }
 
@@ -2321,5 +2379,9 @@ html,body{
 
 .btn-primary {
   background-image: linear-gradient(to bottom left, #344675, #344675, #344675) !important;
+}
+
+.Tweet-card{
+  display:none !important;
 }
 </style>
