@@ -1,15 +1,7 @@
 <template>
   <div class="panel-landing" id="section-1">
-    <!--
-    <h1 class="landing-heading">Hello, Blockstack!</h1>
-    <p class="lead">
-      <a href="#" class="btn btn-primary btn-lg" id="signin-button" @click.prevent="signIn">
-        Sign In with Blockstack
-      </a>
-    </p>
-    -->
 
-    <div class="wrapper">
+    <div class="wrapper" style='background-image:url("https://www.zaperp.com/wp-content/uploads/2019/09/hero-map-1.png");background-repeat:no-repeat;margin: 0px auto;background-position:center center;'>
       <!-- Navbar Section -->
       <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top effect-main">
         <div class="container container-s">
@@ -35,9 +27,9 @@
         <div class="container-m text-center">
           <div class="home hero-2"><!-- Hero Section-->
             <div class="hero-content wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <h1>The Descentralized <strong>Invoicing Software</strong><br /> for Makers, Freelancers & SME</h1>
-              <p>Keep your business and data <strong>secure & private</strong>.<br />Manage Invoices, Expenses, Customers, Files & more from everywhere.</p>
-              <div class="form-alt">
+              <h1>The Descentralized <strong>Invoicing Software</strong> for Makers, Freelancers & SME</h1>
+              <p>Put your business on the <strong>Blockchain</strong> & keep your data <strong>secure & private</strong>.<br />Manage Invoices, Expenses, Customers, Files & more from everywhere.</p>
+              <div class="form-alt mt-5">
                 <div class="subscribe-form wow zoomIn animated" style="visibility: visible;">
                   <a href="#" class="btn btn-primary btn-lg" id="signin-button" @click.prevent="signIn">
                     Sign In Now
@@ -58,8 +50,8 @@
             <div class="row text-center">
               <div class="col-md-12">
                 <div class="features-intro">
-                  <h2>Welcome to array, a all-in-one place for your business.</h2>
-                  <p>A decentralized platform for your business & accouting.</p>
+                  <h2><span style='color:#344675;'>dArray</span> is a privacity-focus blockchain platform</h2>
+                  <p>A place to run your business & accouting where you own all your data.</p>
                 </div>
               </div>
               <div class="col-md-6 col-lg-4">
@@ -97,7 +89,7 @@
                   </div>
                   <div class="card-text">
                     <h3>Decentralized</h3>
-                    <p>We use Blockstack tech.</p>
+                    <p>We use Blockchain & Blockstack tech.</p>
                   </div>
                 </div>
               </div>
@@ -148,9 +140,10 @@
         <div id="features" class="flex-split wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
            <div class="container-s">
              <div class="flex-intro align-center">
-               <h2>Build better landing pages</h2>
-               <p> When you get staright to the point the presentation looks attractive on your web pages.
-                   Keep it simple and clean always.</p>
+               <h2>Manage your accounting in a easy & private way</h2>
+               <p>
+                A blockchain-based invoice software & accouting for your business.
+               </p>
              </div>
              <div class="flex-inner align-center">
                  <div class="f-image">
@@ -233,9 +226,8 @@
          <div class="yd-ft wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
            <div class="yd-ft-inner py-5">
              <div class="yd-ft-left" style='margin-top:-20px;'>
-               <h2>Welcome to array, where data matters.</h2>
-                   <p>We’ll Deliver the best analytics and graphs you care about most straight to your
-                   dashboard, app, or inbox. </p>
+               <h2>Welcome to dArray, where privacity matters.</h2>
+                   <p>A free & private alternative to Zoho, QuickBooks and Freshbooks.</p>
                <a href="#" class="btn-action btn-edge">Get Started</a>
              </div>
              <div class="yd-ft-right">
@@ -246,7 +238,7 @@
 
         <div class="ar-ft-single" id='video-demo'>
           <div class="container-m">
-            <div class="ar-feature mt-4">
+            <div class="ar-feature mt-5 mb-1">
               <div class="ar-list">
                 <ul>
                   <li>
@@ -426,8 +418,8 @@
         <div id="signup" class="cta-sm wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
           <div class="container-m text-center">
             <div class="cta-content">
-               <h4>GRAB ARRAY FOR BEST PRICE TODAY</h4>
-               <h1>Start now and turn your online business into a profitable route.</h1>
+               <h4>DARRAY IS A FULL-FEATURED PRIVATE ONLINE INVOICING SOFTWARE</h4>
+               <h1 class='mb-2'>Start now and put your business<br /> into the blockchain for free.</h1>
                <a class="btn-action js-scroll-trigger btn btn-primary btn-lg" href="#" @click.prevent='signIn'>Sign In now</a>
               <div class="form-note">
                 <p>It's Free. Sign in now with Blockstack to get access to your decentralized CRM.</p>
@@ -967,24 +959,68 @@ body {
 }
 
 .home h1 {
-  font-size: 28px;
-  font-weight: 600;
-  color: #FFFFFF;
+  font-size: 3rem;
+  font-weight: 300;
   color: #364655;
   line-height: 1.2;
   letter-spacing: 0;
 }
 
 .home p {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 1.3rem;
+  font-weight: 300;
   color: rgb(129, 129, 152);
-  max-width: 630px;
+  max-width: 830px;
   margin: 0 auto;
   letter-spacing: 0;
   line-height: 1.6;
   margin-top: 15px;
+  margin-bottom: 15px;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .home h1 {
+    font-size: 1.5rem;
+  }
+
+  .home p {
+    font-size: 0.8rem;
+  }  
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .home h1 {
+    font-size: 2rem;
+  }
+
+  .home p {
+    font-size: 1rem;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .home h1 {
+    font-size: 2rem;
+  }
+
+  .home p {
+    font-size: 1rem;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .home h1 {
+    font-size: 2.5rem;
+  }
+
+  .home p {
+    font-size: 1.3rem;
+  }
+} 
 
 .btn-action {
   font-family: 'Montserrat';
@@ -2383,5 +2419,9 @@ html,body{
 
 .Tweet-card{
   display:none !important;
+}
+
+.flex-inner{
+  min-height: 330px;
 }
 </style>
