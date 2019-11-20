@@ -265,7 +265,7 @@ export default {
             this.table1.data = this.customers
           })
 
-          setTimeout(() => { this.loadingPage = false}, 100);
+          setTimeout(() => { this.loadingPage = false }, 100)
         }
       })
     },

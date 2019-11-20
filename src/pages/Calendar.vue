@@ -21,7 +21,7 @@
         </template>
         <form class='row text-center mb-4 mt-4 pt-2 pb-2' role="form" v-on:submit.prevent>
           <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Title:</label>
-          <input type='text' class='form-control col-7' name='Title' placeholder='Event name' v-model='newEvent.title' /> 
+          <input type='text' class='form-control col-7' name='Title' placeholder='Event name' v-model='newEvent.title' />
           <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Start:</label>
           <input type="date" class="form-control col-7" v-model='newEvent.start'><br>
           <label v-if='newEvent.end !== null'  class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>End:</label>
@@ -30,7 +30,7 @@
         <template slot="footer">
           <base-button type="danger" @click="createEvent = false" style='opacity:0.5;'>Close</base-button>
           <base-button type="light" @click='createNewEvent'>Create</base-button>
-        </template>      
+        </template>
       </modal>
 
     </div>
@@ -38,18 +38,16 @@
 </template>
 <script>
 import {
-  Card, Modal, BaseButton
+  Modal, BaseButton
 } from '@/components/index'
 import { userSession } from '@/userSession'
-import { uuid } from 'vue-uuid'
 import FullCalendar from '@fullcalendar/vue'
-import interactionPlugin from '@fullcalendar/interaction'; // for selectable
+import interactionPlugin from '@fullcalendar/interaction' // for selectable
 import dayGridPlugin from '@fullcalendar/daygrid'
 
 const STORAGE_FILE = 'events.json'
 export default {
   components: {
-    Card,
     Modal,
     BaseButton,
     FullCalendar // make the <FullCalendar> tag available
@@ -65,43 +63,43 @@ export default {
         end: null
       }
     }
-  }, 
+  },
   methods: {
-    handleDateClick(info){
+    handleDateClick (info) {
       this.newEvent.start = info.dateStr
       this.newEvent.end = null
       this.createEvent = true
     },
-    handleEventClick(info){
+    handleEventClick (info) {
       console.log('handleEventClick')
       console.log(info)
       console.log(info.event.title)
       console.log(info.event.start)
       console.log(info.event.end)
     },
-    handleSelect(info){
+    handleSelect (info) {
       this.newEvent.start = info.startStr
       this.newEvent.end = info.endStr
       this.createEvent = true
     },
-    fetchData(){
+    fetchData () {
       userSession.getFile(STORAGE_FILE).then((events) => {
         this.events = JSON.parse(events || '[]')
         this.addEventStyles(this.events)
       })
     },
-    addEventStyles(events){
+    addEventStyles (events) {
       events.map((event) => {
         event.backgroundColor = '#263148'
         event.borderColor = '#263148'
         event.textColor = '#fff'
       })
     },
-    createNewEvent(){
+    createNewEvent () {
       this.addEventStyles([this.newEvent])
       this.events.push(this.newEvent)
 
-      userSession.putFile(STORAGE_FILE,JSON.stringify(this.events))
+      userSession.putFile(STORAGE_FILE, JSON.stringify(this.events))
       this.newEvent = {
         title: '',
         start: '',
@@ -118,7 +116,7 @@ export default {
       })
     }
   },
-  mounted(){
+  mounted () {
     this.fetchData()
   }
 }

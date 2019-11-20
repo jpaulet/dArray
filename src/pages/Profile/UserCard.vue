@@ -85,7 +85,7 @@ export default {
           return null
         }
         userSession.getFile(path).then((logoImage) => {
-          if(logoImage){
+          if (logoImage) {
             this.imageSrc = logoImage
           }
         })
@@ -93,8 +93,8 @@ export default {
     }
   },
   computed: {
-    imageLogo (){
-      if(this.company.logo !== null){
+    imageLogo () {
+      if (this.company.logo !== null) {
         this.fetchFile()
       }
       return this.company.logo

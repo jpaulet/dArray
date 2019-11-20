@@ -89,7 +89,7 @@
         <user-card :company="model" v-on:newLogo='saveLogo' style='height:96%;'></user-card>
       </div>
 
-      <template v-if='loadingPage'>        
+      <template v-if='loadingPage'>
         <div class='col-12' style='text-align:center;'>
           <div class='text-center pt-5 mt-5'>
             <breeding-rhombus-spinner
@@ -105,7 +105,7 @@
   </div>
 </template>
 <script>
-import { BreedingRhombusSpinner } from 'epic-spinners'  
+import { BreedingRhombusSpinner } from 'epic-spinners'
 import { userSession } from '@/userSession'
 import BaseButton from '@/components/BaseButton'
 import UserCard from './Profile/UserCard.vue'
@@ -188,7 +188,7 @@ export default {
     fetchData () {
       userSession.getFile(STORAGE_FILE).then((company) => {
         this.model = JSON.parse(company || '{}')
-        setTimeout(() => { this.loadingPage = false}, 500);
+        setTimeout(() => { this.loadingPage = false }, 500)
       })
     }
   },

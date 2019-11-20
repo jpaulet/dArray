@@ -167,7 +167,7 @@ export default {
 
       if (task) {
         Vue.set(task, 'completed', !task.completed)
-        this.message = `Task ${id} Updated.`        
+        this.message = `Task ${id} Updated.`
       }
     },
     deleteTask: function (id) {
@@ -215,7 +215,7 @@ export default {
 
       let taskID = this.nextID
       this.task.id = taskID
-      this.tasks.push({...this.task})
+      this.tasks.push({ ...this.task })
       this.clear()
 
       this.message = `Task ${taskID} Created.`
@@ -224,7 +224,7 @@ export default {
       userSession.getFile(STORAGE_FILE).then((tasks) => {
         this.tasks = JSON.parse(tasks || '[]')
 
-        setTimeout(() => { this.loadingPage = false}, 100);
+        setTimeout(() => { this.loadingPage = false }, 100)
       })
     },
     saveTasks () {

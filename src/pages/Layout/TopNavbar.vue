@@ -148,9 +148,9 @@ export default {
       imageSrc: null,
       messages: [
         {
-          title : 'Add Company Info',
-          msg : 'Add your company basic info to create better invoices, expenses & more.',
-          url : '/settings'
+          title: 'Add Company Info',
+          msg: 'Add your company basic info to create better invoices, expenses & more.',
+          url: '/settings'
         }
       ]
     }
@@ -166,16 +166,16 @@ export default {
       userSession.signUserOut()
       location.reload()
     },
-    checkInicialization (){
+    checkInicialization () {
       blockstack.getFile('company.json').then((fileContents) => {
-        if(!fileContents){
+        if (!fileContents) {
           let message = {}
           message.title = 'Add Company Info'
           message.msg = 'Add your company basic info to create better invoices, expenses & more.'
           message.url = 'settings'
           this.messages.push(message)
         }
-      });
+      })
     }
   },
   mounted () {
@@ -189,9 +189,9 @@ export default {
       this.checkInicialization()
     } else if (blockstack.isSignInPending()) {
       blockstack.handlePendingSignIn()
-      .then((userData) => {
-        window.location = window.location.origin
-      })
+        .then((userData) => {
+          window.location = window.location.origin
+        })
     }
   }
 }

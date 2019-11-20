@@ -449,7 +449,7 @@
       <template slot="footer">
         <base-button type="danger" @click="showArchive = false" style='opacity:0.5;'>Close</base-button>
         <base-button type="light" @click.prevent='saveToFolder()'>Archive</base-button>
-      </template>      
+      </template>
     </modal>
 
   </div>
@@ -538,7 +538,7 @@ export default {
   methods: {
     checkHasSelected() {
       this.selected = this.invoices.filter((item) => { return item.done === true })
-      
+
       if(this.selected.length === 0){
         this.$notify({
           message: 'Select one or more invoice/s first',
@@ -576,7 +576,7 @@ export default {
         delete newInvoice.done
         this.invoicesList.push(newInvoice.id)
         userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoicesList))
-        
+
         let invoiceFile = newInvoice.id + '.json'
         userSession.putFile(invoiceFile, JSON.stringify(newInvoice))
         this.invoices.push(newInvoice)
@@ -597,7 +597,7 @@ export default {
       this.selected.map((el) => {
         userSession.deleteFile(el.id+'.json')
       })
-      
+
       userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList))
       this.invoices = this.invoices.filter((el) => {
         return !this.selected.some((f) => {
@@ -614,7 +614,7 @@ export default {
 
     deselectAll(){
       this.invoices.map( item => {
-        delete item.done        
+        delete item.done
       })
     },
 
@@ -722,7 +722,7 @@ export default {
       }
     },
 
-    fetchData () {      
+    fetchData () {
       // Load Company data
       userSession.getFile(COMPANY_FILE).then((company) => {
         this.company = JSON.parse(company || '{}')
@@ -731,7 +731,7 @@ export default {
         this.invoice.comments = this.company.comments
         this.invoice.tax = this.company.vat
         this.invoice.logo = this.company.logo
-      
+
         // Load Invoices data
         userSession.getFile(STORAGE_FILE).then((invoices) => {
           this.invoicesList = JSON.parse(invoices || '[]')
@@ -742,18 +742,17 @@ export default {
               if (invoice === null) {
                 return false
               }
-              
+
               invoice = JSON.parse(invoice)
-              let searchInvoice = this.invoicesList.indexOf(invoice.id)            
+              let searchInvoice = this.invoicesList.indexOf(invoice.id)
               Vue.set(this.invoices, searchInvoice, invoice)
 
-              
             })
-          }          
-          
-          setTimeout(() => { 
+          }
+
+          setTimeout(() => {
             this.table1.data = this.invoices
-            this.loadingPage = false            
+            this.loadingPage = false
           }, 500);
         })
       })
@@ -909,7 +908,7 @@ export default {
             }else{
               var files = JSON.parse(uploads)
             }
-            
+
             const upload = {
               id: files.length + 1,
               name: el.name.toLowerCase().replace(/\s/g, '')+'.json',
@@ -928,7 +927,7 @@ export default {
           })
         })
       })
-      
+
       userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList))
       this.invoices = this.invoices.filter((el) => {
         return !this.selected.some((f) => {
@@ -974,7 +973,7 @@ export default {
     }
   },
   async created() {
-    this.fetchData()   
+    this.fetchData()
   },
   async mounted () {
     this.i18n = this.$i18n

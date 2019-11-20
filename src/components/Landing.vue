@@ -246,7 +246,7 @@
                       <h3 class='text-left pb-3'>Demo</h3>
                       <p>Check the video to see a live demo of <span style='color:#344675;'>dArray</span>.</p>
                     </div>
-                  </li>                  
+                  </li>
                 </ul>
               </div>
               <div class="ar-image">
@@ -273,8 +273,8 @@
                </div>
 
                <div class="col-sm-12 col-lg-8 offset-lg-2 text-center">
-                 <div class="review-cards owl-carousel owl-theme owl-loaded owl-drag">                                      
-                   
+                 <div class="review-cards owl-carousel owl-theme owl-loaded owl-drag">
+
                  <div class="owl-stage-outer">
                   <div class="owl-stage" style="transform: translate3d(-1460px, 0px, 0px); transition: all 0.25s ease 0s; width: 2190px;">
                     <div class="owl-item" style="width: 730px;"><div class="card-single">
@@ -459,7 +459,7 @@
        <!-- Scroll To Top Ends-->
 
       </div> <!-- Main -->
-    </div><!-- Wrapper -->   
+    </div><!-- Wrapper -->
   </div>
 </template>
 
@@ -471,29 +471,29 @@ export default {
     signIn () {
       userSession.redirectToSignIn()
     },
-    loadRemoteScripts(){
+    loadRemoteScripts () {
       let popper = document.createElement('script')
-      popper.setAttribute('src', "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js")
+      popper.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js')
       document.head.appendChild(popper)
     }
   },
-  data (){
+  data () {
     return {
       publicPath: 'http://localhost:8080' || process.env.BASE_URL
     }
   },
-  created() {
+  created () {
     (async () => {
       await this.loadRemoteScripts()
     })()
   },
-  mounted() {
+  mounted () {
     let plugins = document.createElement('script')
-    plugins.setAttribute('src', this.publicPath+"/landing/plugins.js")
+    plugins.setAttribute('src', this.publicPath + '/landing/plugins.js')
     document.head.appendChild(plugins)
 
     let custom = document.createElement('script')
-    custom.setAttribute('src', this.publicPath+"/landing/custom.js")
+    custom.setAttribute('src', this.publicPath + '/landing/custom.js')
     document.head.appendChild(custom)
   }
 }
@@ -986,7 +986,7 @@ body {
 
   .home p {
     font-size: 0.8rem;
-  }  
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -1020,7 +1020,7 @@ body {
   .home p {
     font-size: 1.3rem;
   }
-} 
+}
 
 .btn-action {
   font-family: 'Montserrat';
@@ -1138,7 +1138,6 @@ body {
 .hero-2 .hero-img {
   border-radius: 24px;
 }
-
 
 .hero-2 .hero-img img {
   border-radius: 10px;
@@ -1501,7 +1500,6 @@ body {
   border-bottom: 1px solid #fff;
 }
 
-
 .yd-ft {
   padding: 75px 0;
   background: #E8F3EC;
@@ -1549,7 +1547,6 @@ body {
 .yd-ft .yd-ft-inner .yd-ft-right {
   text-align: center;
 }
-
 
 .yd-ft .yd-ft-inner .yd-ft-right img {
   max-width: 90%;
@@ -1691,7 +1688,6 @@ body {
   margin: 20px 0;
 }
 
-
 .table-left .pricing-details h2, .table-right .pricing-details h2 {
   font-size: 21px;
   font-weight: 600;
@@ -1752,7 +1748,6 @@ body {
     display: block;
     padding: 50px;
   }
-
 
   .ar-box .ar-right {
     margin-top: 50px;
@@ -1824,7 +1819,6 @@ body {
   text-decoration: none;
 }
 
-
 .yd-reviews .card-single {
     display: block;
 }
@@ -1845,7 +1839,6 @@ body {
   padding: 60px;
   background: #FFFFFF;
 }
-
 
 .yd-reviews .card-single h1 {
   font-size: 18px;
@@ -1906,7 +1899,6 @@ body {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
 }
-
 
 .yd-reviews .card-single .review-attribution .review-img {
   text-align: center;

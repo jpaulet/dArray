@@ -369,7 +369,7 @@
       <template slot="footer">
         <base-button type="danger" @click="showArchive = false" style='opacity:0.5;'>Close</base-button>
         <base-button type="light">Archive</base-button>
-      </template>      
+      </template>
     </modal>
 
   </div>
@@ -546,7 +546,7 @@ export default {
   methods: {
     checkHasSelected() {
       this.selected = this.expenses.filter((item) => { return item.done === true })
-      
+
       if(this.selected.length === 0){
         this.$notify({
           message: 'Select one or more expense/s first',
@@ -579,7 +579,7 @@ export default {
         delete newExpense.done
         this.expensesList.push(newExpense.id)
         userSession.putFile(STORAGE_FILE, JSON.stringify(this.expensesList))
-        
+
         let expenseFile = newExpense.id + '.json'
         userSession.putFile(expenseFile, JSON.stringify(newExpense))
         this.expenses.push(newExpense)
@@ -599,7 +599,7 @@ export default {
       this.selected.map((el) => {
         userSession.deleteFile(el.id+'.json')
       })
-      
+
       userSession.putFile(STORAGE_FILE, JSON.stringify(newExpensesList))
       this.expenses = this.expenses.filter((el) => {
         return !this.selected.some((f) => {
@@ -613,7 +613,7 @@ export default {
     },
     deselectAll(){
       this.expenses.map( item => {
-        delete item.done        
+        delete item.done
       })
     },
     printPDF() {

@@ -71,7 +71,7 @@ export default {
     return {
       path: '/',
       uploads: [],
-      folders: ['Invoices','Expenses'],
+      folders: ['Invoices', 'Expenses'],
       colors: ['#24bddf', '#5fcc9c', '#6a65d8'],
       newFolder: false,
       folderName: '',
@@ -92,52 +92,52 @@ export default {
       })
 
       userSession.getFile(FOLDERS).then((folders) => {
-        if(!folders){
-          if(this.path === '/'){
-            this.folders = ['Invoices','Expenses']            
-            userSession.putFile(FOLDERS,JSON.stringify(this.folders))
+        if (!folders) {
+          if (this.path === '/') {
+            this.folders = ['Invoices', 'Expenses']
+            userSession.putFile(FOLDERS, JSON.stringify(this.folders))
           }
-        }else{
-          this.folders = JSON.parse(folders || [])        
+        } else {
+          this.folders = JSON.parse(folders || [])
         }
       })
     },
 
-    changeFolder (folder,depth) {
-      console.log("folder: "+folder+" - Depth: "+depth)
+    changeFolder (folder, depth) {
+      console.log('folder: ' + folder + ' - Depth: ' + depth)
 
       let localPath = this.path
-      if(localPath === '/'){
+      if (localPath === '/') {
         localPath = folder + '/'
-      }else{
+      } else {
         localPath = localPath + folder + '/'
       }
-      
-      if(folder === '/'){
+
+      if (folder === '/') {
         this.path = ''
-      }else{
+      } else {
         this.path = localPath
       }
 
-      console.log("This.path: "+this.path)
+      console.log('This.path: ' + this.path)
 
       this.currentDepth = depth
 
-      userSession.getFile(this.path+FOLDERS).then((filesystem) => {
-        if(!filesystem){
-          if(this.path === '/'){
-            this.folders = ['Invoices','Expenses']            
-          }else{
-            this.folders = []          
+      userSession.getFile(this.path + FOLDERS).then((filesystem) => {
+        if (!filesystem) {
+          if (this.path === '/') {
+            this.folders = ['Invoices', 'Expenses']
+          } else {
+            this.folders = []
           }
           return false
         }
         this.folders = JSON.parse(filesystem || [])
       })
 
-      userSession.getFile(this.path+FILESYSTEM).then((filesystem) => {
-        if(!filesystem){
-          this.uploads = []          
+      userSession.getFile(this.path + FILESYSTEM).then((filesystem) => {
+        if (!filesystem) {
+          this.uploads = []
           return false
         }
         this.uploads = JSON.parse(filesystem || [])
@@ -157,10 +157,10 @@ export default {
       this.newFolder = false
 
       let localPath = this.path
-      if(localPath === '/'){
+      if (localPath === '/') {
         localPath = ''
       }
-      userSession.putFile(localPath+FOLDERS, JSON.stringify(this.folders))
+      userSession.putFile(localPath + FOLDERS, JSON.stringify(this.folders))
     },
 
     openNewFolder () {
@@ -196,7 +196,7 @@ export default {
       const upload = {
         id: this.uploads.length + 1,
         name: file.name,
-        path: this.path+"/"+file.name,
+        path: this.path + '/' + file.name,
         size: this.getFileSize(file.size),
         progress: '0%',
         ext: file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length),
@@ -211,12 +211,12 @@ export default {
 
       reader.onload = () => {
         dataURL = reader.result
-        userSession.putFile(this.path+upload.id + '_' + upload.name, dataURL)
+        userSession.putFile(this.path + upload.id + '_' + upload.name, dataURL)
       }
       reader.readAsArrayBuffer(input.files[0])
 
       // userSession.putFile( upload.id+"_"+upload.name, dataURL )
-      userSession.putFile(this.path+FILESYSTEM, JSON.stringify(this.uploads))
+      userSession.putFile(this.path + FILESYSTEM, JSON.stringify(this.uploads))
     },
 
     getFileSize (size) {
@@ -235,8 +235,7 @@ export default {
     },
 
     downloadFile (id, filename, extension, type) {
-
-      if(type === 'Invoice'){
+      if (type === 'Invoice') {
         userSession.getFile(this.path + filename).then((theFile) => {
           if (theFile === null) {
             this.$notify({
