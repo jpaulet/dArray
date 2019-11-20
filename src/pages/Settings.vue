@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-8" v-if='!loadingPage'>
         <card>
           <template slot="header">
             <h5 class="title">Profile</h5>
@@ -84,13 +84,28 @@
           </template>
         </card>
       </div>
-      <div class="col-md-4">
+
+      <div class="col-md-4" v-if='!loadingPage'>
         <user-card :company="model" v-on:newLogo='saveLogo' style='height:96%;'></user-card>
       </div>
+
+      <template v-if='loadingPage'>        
+        <div class='col-12' style='text-align:center;'>
+          <div class='text-center pt-5 mt-5'>
+            <breeding-rhombus-spinner
+              :animation-duration="2000"
+              :size="65"
+              color="#344675"
+              style='margin:100px auto;'
+            />
+          </div>
+        </div>
+      </template>
     </div>
   </div>
 </template>
 <script>
+import { BreedingRhombusSpinner } from 'epic-spinners'  
 import { userSession } from '@/userSession'
 import BaseButton from '@/components/BaseButton'
 import UserCard from './Profile/UserCard.vue'
@@ -106,10 +121,12 @@ export default {
     Card,
     UserCard,
     BaseInput,
-    BaseButton
+    BaseButton,
+    BreedingRhombusSpinner
   },
   data () {
     return {
+      loadingPage: true,
       model: {
         company: '',
         email: '',
@@ -171,6 +188,7 @@ export default {
     fetchData () {
       userSession.getFile(STORAGE_FILE).then((company) => {
         this.model = JSON.parse(company || '{}')
+        setTimeout(() => { this.loadingPage = false}, 500);
       })
     }
   },

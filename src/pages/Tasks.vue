@@ -32,6 +32,11 @@
                 </form>
               </div>
             </div>
+            <div class="item mt-5" v-if="message">
+              <div class="ui message blue">
+                <i class="icon info" ></i> {{message}}
+              </div>
+            </div>
           </div>
 
           <div class="col-8 text-left px-3">
@@ -45,28 +50,39 @@
               </div>
             </div>
 
-            <div v-if='!tasks.length' class='text-center mt-5'>
-              <p>No tasks yet. </p>
-              <img src='@/assets/img/tasks.jpg' class='mt-3 mb-5' height='200' />
+            <div class='text-center pt-5 mt-5' v-if='loadingPage'>
+              <breeding-rhombus-spinner
+                :animation-duration="2000"
+                :size="65"
+                color="#344675"
+                style='margin:0px auto;'
+              />
             </div>
 
-            <div v-if='tasks.length' id="todo" class="tasklist pt-2">
-              <div class="ui">
-                <h6><i class="tim-icons icon-triangle-right-17 text-light mr-3"></i>In Progress Tasks ({{todoTasks.length}})</h6>
+            <template v-if='!loadingPage'>
+              <div v-if='!tasks.length' class='text-center mt-5'>
+                <p>No tasks yet. </p>
+                <img src='@/assets/img/tasks.jpg' class='mt-3 mb-5' height='200' />
               </div>
 
-              <task v-bind:task="task" v-for="task in todoTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
-              <p v-if='!todoTasks.length' class='text-center my-1' style='font-size:12px;'>No pending tasks</p>
-            </div>
+              <div v-if='tasks.length' id="todo" class="tasklist pt-2">
+                <div class="ui">
+                  <h6><i class="tim-icons icon-triangle-right-17 text-light mr-3"></i>In Progress Tasks ({{todoTasks.length}})</h6>
+                </div>
 
-            <div v-if='tasks.length' id="completed" class="tasklist pt-3">
-              <div class="ui">
-                  <h6><i class="tim-icons icon-check-2 text-light mr-3"></i>Completed Tasks ({{completedTasks.length}})</h6>
+                <task v-bind:task="task" v-for="task in todoTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
+                <p v-if='!todoTasks.length' class='text-center my-1' style='font-size:12px;'>No pending tasks</p>
               </div>
 
-              <task v-bind:task="task" v-for="task in completedTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
-              <p v-if='!completedTasks.length' class='text-center my-1' style='font-size:12px;'>No completed tasks yet</p>
-            </div>
+              <div v-if='tasks.length' id="completed" class="tasklist pt-3">
+                <div class="ui">
+                    <h6><i class="tim-icons icon-check-2 text-light mr-3"></i>Completed Tasks ({{completedTasks.length}})</h6>
+                </div>
+
+                <task v-bind:task="task" v-for="task in completedTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
+                <p v-if='!completedTasks.length' class='text-center my-1' style='font-size:12px;'>No completed tasks yet</p>
+              </div>
+            </template>
           </div>
       </div>
 
@@ -74,17 +90,18 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
 // localStorage persistence
+import { BreedingRhombusSpinner } from 'epic-spinners'
 import { userSession } from '@/userSession'
 import {
   Card
 } from '@/components/index'
 var STORAGE_FILE = 'todos.json'
 
-// <i class="tim-icons icon-pencil text-light mr-1 text-white" alt="Edit" @click="$parent.editTask($event, task.id)"></i>
-
 export default {
   components: {
+    BreedingRhombusSpinner,
     Card,
     'task': { props: ['task'],
       template: `
@@ -118,6 +135,7 @@ export default {
   },
   data: function () {
     return {
+      loadingPage: true,
       tasks: [],
       task: {},
       action: 'create',
@@ -126,9 +144,11 @@ export default {
   },
   computed: {
     completedTasks: function () {
+      this.$nextTick()
       return this.tasks.filter(item => item.completed === true)
     },
     todoTasks: function () {
+      this.$nextTick()
       return this.tasks.filter(item => item.completed === false)
     },
     nextID: function () {
@@ -144,10 +164,10 @@ export default {
     },
     toggleDone: function (id) {
       let task = this.tasks.find(item => item.id === id)
-      if (task) {
-        task.completed = !task.completed
 
-        this.message = `Task ${id} Updated.`
+      if (task) {
+        Vue.set(task, 'completed', !task.completed)
+        this.message = `Task ${id} Updated.`        
       }
     },
     deleteTask: function (id) {
@@ -195,7 +215,7 @@ export default {
 
       let taskID = this.nextID
       this.task.id = taskID
-      this.tasks.push(this.task)
+      this.tasks.push({...this.task})
       this.clear()
 
       this.message = `Task ${taskID} Created.`
@@ -203,6 +223,8 @@ export default {
     fetchData () {
       userSession.getFile(STORAGE_FILE).then((tasks) => {
         this.tasks = JSON.parse(tasks || '[]')
+
+        setTimeout(() => { this.loadingPage = false}, 100);
       })
     },
     saveTasks () {
@@ -221,8 +243,8 @@ export default {
     this.fetchData()
   }
 }
-
 </script>
+
 <style>
   .task.done label {
     text-decoration: line-through;

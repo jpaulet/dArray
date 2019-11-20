@@ -8,25 +8,28 @@
             <input type="file" ref="filepicker" @change="uploadFile" />
           </div>
           <div class='text-left row mb-3'>
-            <h6 class='col-2'> Path: </h6>
-            <a href='#' @click.prevent='changeFolder()' class='text-left text-muted badge badge-light' style='font-size:11px;line-height:14px;color:#fff !important;'> /Home </a>
+            <h6 style='width: 50px;margin-left:15px;line-height:14px;'> Path: </h6>
+            <a href='#' @click.prevent='changeFolder("/",0)' class='text-left text-muted badge badge-light' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /Home </a>
+            <a v-if='path !== "/" && folder !== "/" && folder !== ""' v-for='(folder,index) in path.split("/")' :key='index' @click.prevent='changeFolder(folder,index+1)' href='#' class='text-left text-muted badge badge-light ml-2' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /{{folder}} </a>
           </div>
+
           <h4 class='text-left'> Folders </h4>
           <div class='text-left row' style='clear:both;'>
             <div v-for='(folder,index) in folders' :key='index' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:90px;margin-right:30px;float:left;' @click='changeFolder(folder)'>
               <img src='@/assets/img/folder.png' height='42' />
               <p style='font-size:11px;margin-top:5px;'>{{folder}}</p>
             </div>
-            <div class='text-center folder' style='cursor:pointer;padding:8px 15px;width:115px;margin-right:30px;float:left;' @mousedown='openNewFolder()' v-if='path === "/"'>
+            <div class='text-center folder' style='cursor:pointer;padding:8px 15px;width:115px;margin-right:30px;float:left;' @mousedown='openNewFolder()'>
               <img src='@/assets/img/folderplus.png' height='42' />
               <div v-if='!newFolder' style='font-size:11px;margin-top:5px;'>New Folder</div>
               <input v-if='newFolder' v-model='folderName' ref="newFolder" id='newFolder' type='form-control' name='New Folder' placeholder="Folder name" style='width:90px;height:26px;font-size:11px;padding:3px;border-radius:8px;border:1px solid #eee;' />
               <button v-if='newFolder' @click.prevent='saveFolder()' type='submit' class='btn btn-primary btn-sm' style='font-size:11px;width:90px;'> Save </button>
             </div>
           </div>
+
           <h4 class='mt-4 text-left' style='width:100%;clear:both;'> Your Files </h4>
           <div class='row'>
-            <div class="upload col-6" v-for="(upload, index) in uploads" :key="index" style='cursor:pointer;' @click='downloadFile(upload.id,upload.name,upload.extension)'>
+            <div class="upload col-6" v-for="(upload, index) in uploads" :key="index" style='cursor:pointer;min-width:280px;' @click='downloadFile(upload.id,upload.name,upload.extension,upload.type)'>
               <div class="ext" :style="{'background-color': upload.color}">
                 <p>{{upload.ext.toUpperCase()}}</p>
               </div>
@@ -43,6 +46,9 @@
                 </div>
               </div>
             </div>
+            <div class='' v-if='!uploads.length'>
+                <div class='p-5'> No files yet. </div>
+            </div>
           </div>
         </div>
       </div>
@@ -55,7 +61,7 @@ import {
   Card
 } from '@/components/index'
 var FILESYSTEM = 'filesystem.json'
-// var FOLDERS = 'folders.json'
+var FOLDERS = 'folders.json'
 
 export default {
   components: {
@@ -65,16 +71,75 @@ export default {
     return {
       path: '/',
       uploads: [],
-      folders: [],
+      folders: ['Invoices','Expenses'],
       colors: ['#24bddf', '#5fcc9c', '#6a65d8'],
       newFolder: false,
-      folderName: ''
+      folderName: '',
+      currentDepth: 0
     }
   },
   methods: {
     fetchData () {
-      // Load Customers
+      console.log('fetching data!!')
+      // Load Files
       userSession.getFile(FILESYSTEM).then((filesystem) => {
+        this.uploads = JSON.parse(filesystem || [])
+        let i = 0
+
+        for (i in this.uploads) {
+          this.uploads[i].progress = '100%'
+        }
+      })
+
+      userSession.getFile(FOLDERS).then((folders) => {
+        if(!folders){
+          if(this.path === '/'){
+            this.folders = ['Invoices','Expenses']            
+            userSession.putFile(FOLDERS,JSON.stringify(this.folders))
+          }
+        }else{
+          this.folders = JSON.parse(folders || [])        
+        }
+      })
+    },
+
+    changeFolder (folder,depth) {
+      console.log("folder: "+folder+" - Depth: "+depth)
+
+      let localPath = this.path
+      if(localPath === '/'){
+        localPath = folder + '/'
+      }else{
+        localPath = localPath + folder + '/'
+      }
+      
+      if(folder === '/'){
+        this.path = ''
+      }else{
+        this.path = localPath
+      }
+
+      console.log("This.path: "+this.path)
+
+      this.currentDepth = depth
+
+      userSession.getFile(this.path+FOLDERS).then((filesystem) => {
+        if(!filesystem){
+          if(this.path === '/'){
+            this.folders = ['Invoices','Expenses']            
+          }else{
+            this.folders = []          
+          }
+          return false
+        }
+        this.folders = JSON.parse(filesystem || [])
+      })
+
+      userSession.getFile(this.path+FILESYSTEM).then((filesystem) => {
+        if(!filesystem){
+          this.uploads = []          
+          return false
+        }
         this.uploads = JSON.parse(filesystem || [])
         let i = 0
 
@@ -84,16 +149,18 @@ export default {
       })
     },
 
-    changeFolder (folder) {
-
-    },
-
     saveFolder () {
-      this.folderName = this.folderName.toLowerCase()
+      this.folderName = this.folderName.toLowerCase().replace(/\s/g, '')
       this.folders.push(this.folderName)
 
       this.folderName = ''
       this.newFolder = false
+
+      let localPath = this.path
+      if(localPath === '/'){
+        localPath = ''
+      }
+      userSession.putFile(localPath+FOLDERS, JSON.stringify(this.folders))
     },
 
     openNewFolder () {
@@ -129,10 +196,12 @@ export default {
       const upload = {
         id: this.uploads.length + 1,
         name: file.name,
+        path: this.path+"/"+file.name,
         size: this.getFileSize(file.size),
         progress: '0%',
         ext: file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length),
         progressTimer: null,
+        type: 'file',
         color: this.getRandomColor()
       }
 
@@ -140,14 +209,14 @@ export default {
       const timer = setInterval(this.updateProgress, 300, upload.id)
       upload.progressTimer = timer
 
-      reader.onload = function () {
+      reader.onload = () => {
         dataURL = reader.result
-        userSession.putFile(upload.id + '_' + upload.name, dataURL)
+        userSession.putFile(this.path+upload.id + '_' + upload.name, dataURL)
       }
       reader.readAsArrayBuffer(input.files[0])
 
       // userSession.putFile( upload.id+"_"+upload.name, dataURL )
-      userSession.putFile(FILESYSTEM, JSON.stringify(this.uploads))
+      userSession.putFile(this.path+FILESYSTEM, JSON.stringify(this.uploads))
     },
 
     getFileSize (size) {
@@ -165,8 +234,36 @@ export default {
       if (progress + 10 === 100) clearInterval(this.uploads[index].progressTimer)
     },
 
-    downloadFile (id, filename, extension) {
-      userSession.getFile(id + '_' + filename).then((theFile) => {
+    downloadFile (id, filename, extension, type) {
+
+      if(type === 'Invoice'){
+        userSession.getFile(this.path + filename).then((theFile) => {
+          if (theFile === null) {
+            this.$notify({
+              message: 'Something wrong happened',
+              icon: 'tim-icons icon-bell-55',
+              horizontalAlign: 'center',
+              verticalAlign: 'bottom',
+              type: 'danger',
+              timeout: 1500
+            })
+            return false
+          }
+
+          var element = document.createElement('a')
+          element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(theFile))
+          element.setAttribute('download', filename)
+
+          element.style.display = 'none'
+          document.body.appendChild(element)
+          element.click()
+          document.body.removeChild(element)
+        })
+
+        return true
+      }
+
+      userSession.getFile(this.path + id + '_' + filename).then((theFile) => {
         if (theFile === null) {
           this.$notify({
             message: 'Something wrong happened',

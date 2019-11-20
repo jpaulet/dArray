@@ -9,7 +9,16 @@
             </div>
         </template>
 
-        <div v-if='table1.data.length'>
+        <div class='text-center pt-5 mt-5' v-if='loadingPage'>
+          <breeding-rhombus-spinner
+            :animation-duration="2000"
+            :size="65"
+            color="#344675"
+            style='margin:0px auto;'
+          />
+        </div>
+
+        <div v-if='table1.data.length && !loadingPage'>
             <h6 class="title d-inline text-left float-left">Customers ({{table1.data.length}})</h6>
             <drop-down tag="div" class='float-right text-right' style='display:none;'>
               <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon">
@@ -52,7 +61,7 @@
             </div>
         </div>
 
-        <div v-if='!table1.data.length' class='py-4 text-center my-4'>
+        <div v-if='!table1.data.length && !loadingPage' class='py-4 text-center my-4'>
             <p>No customers yet. </p>
             <img src='@/assets/img/customers.png' class='mt-3 mb-5' height='200' />
         </div>
@@ -175,6 +184,7 @@
 </template>
 
 <script>
+import { BreedingRhombusSpinner } from 'epic-spinners'
 import { userSession } from '@/userSession'
 import {
   Card,
@@ -194,10 +204,12 @@ export default {
     Card,
     BaseInput,
     BaseButton,
-    BaseTable
+    BaseTable,
+    BreedingRhombusSpinner
   },
   data () {
     return {
+      loadingPage: true,
       showPreview: false,
       tableData: [{}],
       newCustomer: false,
@@ -252,6 +264,8 @@ export default {
             this.customers.push(JSON.parse(customer))
             this.table1.data = this.customers
           })
+
+          setTimeout(() => { this.loadingPage = false}, 100);
         }
       })
     },

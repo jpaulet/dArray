@@ -46,23 +46,23 @@
               </ul>
             </drop-down>
 
-            <div class="table-responsive text-left mb-3" style='overflow-x:inherit;'>
+            <div v-if='table1.data.length' class="table-responsive text-left mb-3" style='overflow-x:inherit;'>
                 <base-table :data="table1.data" :columns="table1.columns" thead-classes="text-primary">
                     <template slot-scope="{row}">
                         <td>
                             <base-checkbox v-model="row.done" class='rowDone'></base-checkbox>
                         </td>
-                        <td class="text-left">
-                            <p class="title">{{row.name}}</p>
+                        <td class="text-left" style="cursor:pointer;">
+                          <a @click='orderBy("name")'><p class="title">{{row.name}}</p></a>
                         </td>
-                        <td class="text-left">
-                            <p class="text-muted">{{row.client.legal}}</p>
+                        <td class="text-left" style="cursor:pointer;">
+                          <a @click='orderBy("legal")'><p class="text-muted">{{row.client.legal}}</p></a>
                         </td>
-                        <td class="text-left">
-                            <p class="text-muted">{{row.date}}</p>
+                        <td class="text-left" style="cursor:pointer;">
+                          <a @click='orderBy("date")'><p class="text-muted">{{row.date}}</p></a>
                         </td>
-                        <td class="text-left">
-                            <p class="text-muted">{{row.total | currency}} €</p>
+                        <td class="text-left" style="cursor:pointer;">
+                          <a @click='orderBy("total")'><p class="text-muted">{{row.total | currency}} €</p></a>
                         </td>
                         <td class="text-left">
                             <p class="text-muted">
@@ -438,19 +438,17 @@
         <!-- <input type='text' class='form-control col-7' name='Folder' placeholder='Invoices' value='Invoices' /> -->
         <drop-down tag="div">
           <button aria-label="Dropdown link" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-secondary">
-            Invoices
+            {{selectedFolder}}
           </button>
           <ul class="dropdown-menu">
-            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'>Invoices</a>
-            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - Octover 2019</a>
-            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - November 2019</a>
-            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - Dicember 2019</a>
+            <a href="#" class="dropdown-item py-1" @click.prevent='selectedFolder = "Invoices"'>Invoices</a>
+            <a v-for='(invoiceFolder,index) in invoiceFolders' :key='index' href="#" class="dropdown-item py-1" @click.prevent='selectedFolder = "Invoices/" + invoiceFolder'> - {{invoiceFolder}}</a>
           </ul>
         </drop-down>
       </form>
       <template slot="footer">
-        <base-button type="danger" @click="modals.modal0 = false" style='opacity:0.5;'>Close</base-button>
-        <base-button type="light">Archive</base-button>
+        <base-button type="danger" @click="showArchive = false" style='opacity:0.5;'>Close</base-button>
+        <base-button type="light" @click.prevent='saveToFolder()'>Archive</base-button>
       </template>      
     </modal>
 
@@ -458,6 +456,7 @@
 </template>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 <script>
+import Vue from 'vue'
 import { BreedingRhombusSpinner } from 'epic-spinners'
 import {
   Card, BaseButton, BaseTable, BaseCheckbox, Modal
@@ -485,7 +484,7 @@ export default {
   },
   data () {
     return {
-      loadingPage: false,
+      loadingPage: true,
       loadingDownload: false,
       showPreview: false,
       tableData: [{}],
@@ -495,6 +494,7 @@ export default {
         'Today',
         'All'
       ],
+      invoiceFolders: [],
       activeIndex: 0,
       table1: {
         title: 'Invoices',
@@ -531,7 +531,8 @@ export default {
       invoices: [],
       imageSrc: null,
       selected: [],
-      showArchive: false
+      showArchive: false,
+      selectedFolder: 'Invoices',
     }
   },
   methods: {
@@ -549,15 +550,20 @@ export default {
         })
         return false
       }
-
       return true
     },
+
     archiveInvoices() {
       if(!this.checkHasSelected()){
         return false
       }
       this.showArchive = true
+
+      userSession.getFile('Invoices/folders.json').then(invoiceFolders => {
+        this.invoiceFolders = JSON.parse(invoiceFolders || [])
+      })
     },
+
     duplicateInvoices() {
       if(!this.checkHasSelected()){
         return false
@@ -576,6 +582,7 @@ export default {
         this.invoices.push(newInvoice)
       });
     },
+
     deleteInvoices() {
       if(!this.checkHasSelected()){
         return false
@@ -598,15 +605,19 @@ export default {
         })
       })
 
-      this.table1.data = this.invoices
+      this.$set(this.table1, 'data', this.invoices)
+      //this.table1.data = this.invoices
+
       this.selected = []
       this.deselectAll()
     },
+
     deselectAll(){
       this.invoices.map( item => {
         delete item.done        
       })
     },
+
     printPDF() {
       this.loadingDownload = true
       var pdf = new jsPDF('p', 'pt', 'letter');
@@ -634,11 +645,13 @@ export default {
         }
       });
     },
+
     loadCompanyLogo () {
       userSession.getFile(this.company.logo).then((logoImage) => {
         this.imageSrc = logoImage
       })
     },
+
     openNewInvoice () {
       this.clearInvoice()
       this.newInvoice = true
@@ -648,12 +661,15 @@ export default {
 
       this.loadCompanyLogo()
     },
+
     closeNewInvoice () {
       this.newInvoice = false
     },
+
     addRow () {
       this.invoice.items.push({ description: '', quantity: 1, price: 0 })
     },
+
     clearInvoice () {
       this.invoice = {
         id: null,
@@ -678,9 +694,11 @@ export default {
         vat: 0
       }
     },
+
     initBigChart (index) {
       this.activeIndex = index
     },
+
     selectCustomer (index) {
       let searchInvoice = this.customersList.indexOf(index)
       if (searchInvoice === -1) {
@@ -703,9 +721,8 @@ export default {
         this.invoice.comments = this.company.comments
       }
     },
-    fetchData () {
-      this.loadingPage = true
 
+    fetchData () {      
       // Load Company data
       userSession.getFile(COMPANY_FILE).then((company) => {
         this.company = JSON.parse(company || '{}')
@@ -714,22 +731,31 @@ export default {
         this.invoice.comments = this.company.comments
         this.invoice.tax = this.company.vat
         this.invoice.logo = this.company.logo
-      })
+      
+        // Load Invoices data
+        userSession.getFile(STORAGE_FILE).then((invoices) => {
+          this.invoicesList = JSON.parse(invoices || '[]')
+          let i = 0
 
-      // Load Invoices data
-      userSession.getFile(STORAGE_FILE).then((invoices) => {
-        this.invoicesList = JSON.parse(invoices || '[]')
-        let i = 0
+          for (i in this.invoicesList) {
+            userSession.getFile(this.invoicesList[i] + '.json').then((invoice) => {
+              if (invoice === null) {
+                return false
+              }
+              
+              invoice = JSON.parse(invoice)
+              let searchInvoice = this.invoicesList.indexOf(invoice.id)            
+              Vue.set(this.invoices, searchInvoice, invoice)
 
-        for (i in this.invoicesList) {
-          userSession.getFile(this.invoicesList[i] + '.json').then((invoice) => {
-            if (invoice === null) {
-              return false
-            }
-            this.invoices.push(JSON.parse(invoice))
+              
+            })
+          }          
+          
+          setTimeout(() => { 
             this.table1.data = this.invoices
-          })
-        }
+            this.loadingPage = false            
+          }, 500);
+        })
       })
 
       // Load Customers
@@ -744,6 +770,7 @@ export default {
         }
       })
     },
+
     isFilled () {
       if (!this.invoice.name || !this.invoice.client.legal || this.total === 0) {
         this.$notify({
@@ -758,6 +785,7 @@ export default {
       }
       return true
     },
+
     saveInvoice () {
       let canSave = this.isFilled()
       if (!canSave) {
@@ -798,6 +826,7 @@ export default {
         timeout: 1500
       })
     },
+
     editInvoice (id) {
       let searchInvoice = this.invoicesList.indexOf(id)
       if (searchInvoice === -1) {
@@ -815,6 +844,7 @@ export default {
       this.invoice = this.invoices[searchInvoice]
       this.newInvoice = true
     },
+
     showInvoice (id) {
       if (!this.newInvoice) {
         let searchInvoice = this.invoicesList.indexOf(id)
@@ -829,7 +859,6 @@ export default {
           })
           return false
         }
-
         this.invoice = this.invoices[searchInvoice]
       }
       let canSave = this.isFilled()
@@ -838,6 +867,7 @@ export default {
       }
       this.showPreview = true
     },
+
     changeStatus (status, id) {
       let searchInvoice = this.invoicesList.indexOf(id)
       if (searchInvoice === -1) {
@@ -852,15 +882,77 @@ export default {
         return false
       }
 
-      console.log("search Invoice: "+searchInvoice)
-      console.log("invoiceList: "+this.invoicesList)
-
       this.invoice = this.invoices[searchInvoice]
-      console.log(this.invoice)
       this.invoice.status = status
       let invoiceFile = this.invoice.id + '.json'
       userSession.putFile(invoiceFile, JSON.stringify(this.invoice))
+    },
+
+    saveToFolder(folder) {
+      if(!this.checkHasSelected()){
+        return false
+      }
+
+      const newInvoicesList = this.invoicesList.filter((el) => {
+        return !this.selected.some((f) => {
+          return f.id === el
+        })
+      })
+
+      this.selected.map((el) => {
+        userSession.getFile(el.id+'.json').then((theFile) => {
+          userSession.putFile(this.selectedFolder+'/'+el.name.toLowerCase().replace(/\s/g, '')+'.json',theFile)
+
+          userSession.getFile(this.selectedFolder+'/filesystem.json').then((uploads) => {
+            if(!uploads){
+              var files = []
+            }else{
+              var files = JSON.parse(uploads)
+            }
+            
+            const upload = {
+              id: files.length + 1,
+              name: el.name.toLowerCase().replace(/\s/g, '')+'.json',
+              path: this.selectedFolder+'/'+el.name.toLowerCase().replace(/\s/g, '')+'.json',
+              size: '',
+              progress: '100%',
+              ext: 'json',
+              type: 'Invoice',
+              progressTimer: null,
+              color: '#24bddf'
+            }
+
+            files.push(upload)
+            userSession.putFile(this.selectedFolder+'/filesystem.json', JSON.stringify(files))
+            userSession.deleteFile(el.id+'.json')
+          })
+        })
+      })
+      
+      userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList))
+      this.invoices = this.invoices.filter((el) => {
+        return !this.selected.some((f) => {
+          return f.id === el.id
+        })
+      })
+
+      this.table1.data = this.invoices
+      this.selected = []
+      this.deselectAll()
+      this.showArchive = false
+    },
+
+    orderBy(field){
+      console.log("order by field: "+field)
+      this.invoices.sort((a,b) => {
+        if(field === "name" || field === "client"){
+          return (a.field.toUpperCase() <= b.field.toUpperCase()) ? -1 : 1;
+        }else if(field === "total" || field === "date"){
+          return a.field - b.field
+        }
+      })
     }
+
   },
   filters: {
     currency (value) {
@@ -881,11 +973,12 @@ export default {
       )
     }
   },
+  async created() {
+    this.fetchData()   
+  },
   async mounted () {
     this.i18n = this.$i18n
     this.initBigChart(2)
-    await this.fetchData()    
-    this.loadingPage = false
   }
 }
 </script>

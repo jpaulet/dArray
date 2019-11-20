@@ -43,12 +43,14 @@
           <p>Documents</p>
         </template>
       </sidebar-link>
+      <!--
       <sidebar-link to="/table">
         <i class="tim-icons icon-puzzle-10"></i>
         <template>
           <p>Resources</p>
         </template>
       </sidebar-link>
+      -->
       <sidebar-link to="/settings">
         <i class="tim-icons icon-settings"></i>
         <p>Settings</p>

@@ -12,6 +12,7 @@
       <div style='width:90%;margin:0px auto 50px;'>
         <FullCalendar :selectable='true' defaultView="dayGridMonth" :plugins="calendarPlugins" @dateClick="handleDateClick" @eventClick="handleEventClick" @select='handleSelect' :events="events"
         />
+        <p class='text-mutted mt-3' style='font-size:12px;'> You can create event by clicking or multiple day events by selecting multiple days </p>
       </div>
 
       <modal :show.sync="createEvent" body-classes="p-0" modal-classes="modal-dialog-centered modal-sm" style='transform:translate(0,0);'>

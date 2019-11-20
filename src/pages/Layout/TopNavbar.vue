@@ -80,8 +80,8 @@
           </modal>
 
           <!-- NOTIFICATIONS -->
-          <drop-down>
-            <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle nav-link" style='display:none;'>
+          <drop-down v-if='messages.length !== 0'>
+            <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle nav-link">
               <div class="notification d-none d-lg-block d-xl-block"></div>
               <i class="tim-icons icon-sound-wave"></i>
               <p class="d-lg-none text-left">
@@ -89,24 +89,12 @@
               </p>
             </a>
             <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
-              <li class="nav-link">
-                  <a href="#" class="nav-item dropdown-item">
-                    <p class="title" style="color:#000;">Abc Def</p>
-                      <p style="color:#333;">Mike John responded to your email</p>
-                    <label style="color:#ccc;font-size:11px;">Yesterday, 12:00</label>
-                  </a>
-              </li>
-              <li class="nav-link">
-                <a href="" class="nav-item dropdown-item">You have 5 more tasks</a>
-              </li>
-              <li class="nav-link">
-                <a href="" class="nav-item dropdown-item">Your friend Michael is in town</a>
-              </li>
-              <li class="nav-link">
-                <a href="" class="nav-item dropdown-item">Another notification</a>
-              </li>
-              <li class="nav-link">
-                <a href="" class="nav-item dropdown-item">Another one</a>
+              <li v-for='(message,index) in messages' :key='index'>
+                <router-link :to="message.url" class="nav-item dropdown-item">
+                  <p class="title" style="color:#000;">{{message.title}}</p>
+                  <p style="color:#333;">{{message.msg}}</p>
+                  <label style="color:#ccc;font-size:11px;text-decoration: underline">Do it now</label>
+                </router-link>
               </li>
             </ul>
           </drop-down>
@@ -123,8 +111,8 @@
               </p>
             </a>
             <ul class="dropdown-menu dropdown-navbar">
-              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
-              <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
+              <li class="nav-link"><router-link to="" class="nav-item dropdown-item">Profile</a></router-link>
+              <li class="nav-link"><router-link to="settings" class="nav-item dropdown-item">Settings</a></router-link>
               <li class="dropdown-divider"></li>
               <li class="nav-link">
                  <a href="#" id="signout-button" @click.prevent="signOut" class="nav-item dropdown-item">Log out</a>
@@ -157,7 +145,14 @@ export default {
       blockstack: window.blockstack,
       avatar: 'https://s3.amazonaws.com/onename/avatar-placeholder.png',
       givenName: 'Anonymous',
-      imageSrc: null
+      imageSrc: null,
+      messages: [
+        {
+          title : 'Add Company Info',
+          msg : 'Add your company basic info to create better invoices, expenses & more.',
+          url : '/settings'
+        }
+      ]
     }
   },
   methods: {
@@ -170,6 +165,17 @@ export default {
     signOut () {
       userSession.signUserOut()
       location.reload()
+    },
+    checkInicialization (){
+      blockstack.getFile('company.json').then((fileContents) => {
+        if(!fileContents){
+          let message = {}
+          message.title = 'Add Company Info'
+          message.msg = 'Add your company basic info to create better invoices, expenses & more.'
+          message.url = 'settings'
+          this.messages.push(message)
+        }
+      });
     }
   },
   mounted () {
@@ -180,6 +186,7 @@ export default {
       this.givenName = user.name() ? user.name() : 'Nameless Person'
       if (user.avatarUrl()) this.avatar = user.avatarUrl()
       this.imageSrc = user.avatarUrl()
+      this.checkInicialization()
     } else if (blockstack.isSignInPending()) {
       blockstack.handlePendingSignIn()
       .then((userData) => {
