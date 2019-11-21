@@ -147,7 +147,7 @@ export default {
   },
   methods: {
     saveCompany () {
-      userSession.putFile(STORAGE_FILE, JSON.stringify(this.model))
+      userSession.putFile(STORAGE_FILE, JSON.stringify(this.model), this.$ENCRYPT)
 
       this.$notify({
         message: 'Settings saved',
@@ -186,7 +186,7 @@ export default {
       this.saveCompany()
     },
     fetchData () {
-      userSession.getFile(STORAGE_FILE).then((company) => {
+      userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((company) => {
         this.model = JSON.parse(company || '{}')
         setTimeout(() => { this.loadingPage = false }, 500)
       })

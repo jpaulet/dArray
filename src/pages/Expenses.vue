@@ -133,10 +133,12 @@
                         <i class="tim-icons icon-single-02"></i>
                       </button>
                       <ul class="dropdown-menu dropdown-menu-right" v-if="categories">
-                        <a href="" class="dropdown-item" v-for="(category,index) in categories" @click.prevent='expense.category = category.name' :key='index'><strong>{{category.name}}</strong></a>
-                        <div v-if='category && category.subItems'>
-                          <a href="" class="dropdown-item" v-for="(subcategory,subindex) in category.subItems" @click.prevent='expense.category = subcategory.name' style='font-size:10px;' :key='subindex'>{{subcategory.name}}</a>
-                        </div>
+                        <a class="dropdown-item" v-for="(category,index) in categories" @click.prevent='expense.category = category.name' :key='index'><strong>{{category.name}}</strong></a>
+                        <!--
+                        <template v-if='category && category.subItems.length > 0'>
+                          <a class="dropdown-item" v-for="(subcategory,name,subindex) in category.subItems" @click.prevent='expense.category = subcategory.name' style='font-size:10px;' :key='subindex'>{{subcategory.name}}</a>
+                        </template>
+                        -->
                       </ul>
                     </drop-down>
                 </div>
@@ -407,7 +409,6 @@ export default {
       selected: [],
       loadingDownload: false,
       showPreview: false,
-      tableData: [{}],
       newExpense: false,
       expenseOptions: [
         'This Month',
@@ -434,112 +435,114 @@ export default {
         ],
         subtotal: 0,
         total: 0,
-        vat: 0
+        vat: 0,
+        category: ''
       },
       company: {},
       expensesList: [],
       expenses: [],
-      categories: [{
-        name: 'Advertising'
-      },
-      {
-        name: 'Car & Truck Expenses',
-        subItems: [
-          { name: 'Gas' },
-          { name: 'Mileage' },
-          { name: 'Repairs' },
-          { name: 'Vehicle Insurance' },
-          { name: 'Vehicle Licensing' }
-        ]
-      },
-      {
-        name: 'Contractors'
-      },
-      {
-        name: 'Education and Training'
-      },
-      {
-        name: 'Employee Benefits',
-        subItems: [
-          { name: 'Accident Insurance' },
-          { name: 'Health Insurance' },
-          { name: 'Life Insurance' }
-        ]
-      },
-      {
-        name: 'Meals & Entertainment',
-        subItems: [
-          { name: 'Entertainment' },
-          { name: 'Restaurants/Dining' }
-        ]
-      },
-      {
-        name: 'Office Expenses & Postage',
-        subItems: [
-          { name: 'Hardware' },
-          { name: 'Office Supplies' },
-          { name: 'Packaging' },
-          { name: 'Postage' },
-          { name: 'Printing' },
-          { name: 'Shipping & Couriers' },
-          { name: 'Software' },
-          { name: 'Stationery' }
-        ]
-      },
-      {
-        name: 'Other Expenses',
-        subItems: [
-          { name: 'Bank Fees' },
-          { name: 'Business Insurance' },
-          { name: 'Commissions' },
-          { name: 'Depreciation' },
-          { name: 'Interest - Mortgage' },
-          { name: 'Interest - Other' },
-          { name: 'Online Services' },
-          { name: 'Reference Materials' },
-          { name: 'Repairs & Maintenance' },
-          { name: 'Subscriptions/Dues/Memberships' },
-          { name: 'Taxes & Licenses' },
-          { name: 'Wages' }
-        ]
-      },
-      {
-        name: 'Personal'
-      },
-      {
-        name: 'Professional Services',
-        subItems: [
-          { name: 'Accounting' },
-          { name: 'Legal Fees' }
-        ]
-      },
-      {
-        name: 'Rent or Lease',
-        subItems: [
-          { name: 'Equipment' },
-          { name: 'Machinery' },
-          { name: 'Office Space' },
-          { name: 'Vehicles' }
-        ]
-      },
-      {
-        name: 'Supplies'
-      },
-      {
-        name: 'Travel',
-        subItems: [
-          { name: 'Airfare' },
-          { name: 'Hotel/Lodging/Accommodation' },
-          { name: 'Taxi & Parking' }
-        ]
-      },
-      {
-        name: 'Utilities',
-        subItems: [
-          { name: 'Gas & Electrical' },
-          { name: 'Phone' }
-        ]
-      }
+      categories: [
+        {
+          name: 'Advertising'
+        },
+        {
+          name: 'Vehicle Expenses',
+          subItems: [
+            { name: 'Gas' },
+            { name: 'Mileage' },
+            { name: 'Repairs' },
+            { name: 'Vehicle Insurance' },
+            { name: 'Vehicle Licensing' }
+          ]
+        },
+        {
+          name: 'Contractors'
+        },
+        {
+          name: 'Education and Training'
+        },
+        {
+          name: 'Employee Benefits',
+          subItems: [
+            { name: 'Accident Insurance' },
+            { name: 'Health Insurance' },
+            { name: 'Life Insurance' }
+          ]
+        },
+        {
+          name: 'Meals & Entertainment',
+          subItems: [
+            { name: 'Entertainment' },
+            { name: 'Restaurants/Dining' }
+          ]
+        },
+        {
+          name: 'Office Expenses & Postage',
+          subItems: [
+            { name: 'Hardware' },
+            { name: 'Office Supplies' },
+            { name: 'Packaging' },
+            { name: 'Postage' },
+            { name: 'Printing' },
+            { name: 'Shipping & Couriers' },
+            { name: 'Software' },
+            { name: 'Stationery' }
+          ]
+        },
+        {
+          name: 'Other Expenses',
+          subItems: [
+            { name: 'Bank Fees' },
+            { name: 'Business Insurance' },
+            { name: 'Commissions' },
+            { name: 'Depreciation' },
+            { name: 'Interest - Mortgage' },
+            { name: 'Interest - Other' },
+            { name: 'Online Services' },
+            { name: 'Reference Materials' },
+            { name: 'Repairs & Maintenance' },
+            { name: 'Subscriptions/Dues/Memberships' },
+            { name: 'Taxes & Licenses' },
+            { name: 'Wages' }
+          ]
+        },
+        {
+          name: 'Personal'
+        },
+        {
+          name: 'Professional Services',
+          subItems: [
+            { name: 'Accounting' },
+            { name: 'Legal Fees' }
+          ]
+        },
+        {
+          name: 'Rent or Lease',
+          subItems: [
+            { name: 'Equipment' },
+            { name: 'Machinery' },
+            { name: 'Office Space' },
+            { name: 'Vehicles' }
+          ]
+        },
+        {
+          name: 'Supplies'
+        },
+        {
+          name: 'Travel',
+          subItems: [
+            { name: 'Airfare' },
+            { name: 'Hotel/Lodging/Accommodation' },
+            { name: 'Taxi & Parking' }
+          ]
+        },
+        {
+          name: 'Utilities',
+          subItems: [
+            { name: 'Gas & Electrical' },
+            { name: 'Phone' }
+          ]
+        }
       ]
     }
   },
@@ -578,10 +581,10 @@ export default {
         newExpense.title = el.title+" (Copy)"
         delete newExpense.done
         this.expensesList.push(newExpense.id)
-        userSession.putFile(STORAGE_FILE, JSON.stringify(this.expensesList))
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.expensesList), this.$ENCRYPT)
 
         let expenseFile = newExpense.id + '.json'
-        userSession.putFile(expenseFile, JSON.stringify(newExpense))
+        userSession.putFile(expenseFile, JSON.stringify(newExpense), this.$ENCRYPT)
         this.expenses.push(newExpense)
       });
     },
@@ -600,7 +603,7 @@ export default {
         userSession.deleteFile(el.id+'.json')
       })
 
-      userSession.putFile(STORAGE_FILE, JSON.stringify(newExpensesList))
+      userSession.putFile(STORAGE_FILE, JSON.stringify(newExpensesList), this.$ENCRYPT)
       this.expenses = this.expenses.filter((el) => {
         return !this.selected.some((f) => {
           return f.id === el.id
@@ -673,27 +676,32 @@ export default {
     },
     fetchData () {
       // Load Company data
-      userSession.getFile(COMPANY_FILE).then((company) => {
+      userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
         this.company = JSON.parse(company || '{}')
         this.expense.tax = this.company.vat
       })
 
       // Load Expenses data
-      userSession.getFile(STORAGE_FILE).then((expenses) => {
+      userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((expenses) => {
         this.expensesList = JSON.parse(expenses || '[]')
         let i = 0
 
         for (i in this.expensesList) {
-          userSession.getFile(this.expensesList[i] + '.json').then((expense) => {
+          userSession.getFile(this.expensesList[i] + '.json', this.$DECRYPT).then((expense) => {
             if (expense === null) {
               return false
             }
-            this.expenses.push(JSON.parse(expense))
-            this.table1.data = this.expenses
+
+            expense = JSON.parse(expense)
+            let searchExpense = this.expensesList.indexOf(expense.id)
+            this.$set(this.expenses, searchExpense, expense)
           })
         }
 
-        setTimeout(() => { this.loadingPage = false}, 500);
+        setTimeout(() => { 
+          this.table1.data = this.expenses
+          this.loadingPage = false
+        }, 700);
       })
     },
     saveExpense () {
@@ -701,7 +709,7 @@ export default {
       if (this.expense.id === null) {
         this.expense.id = uuid.v4()
         this.expensesList.push(this.expense.id)
-        userSession.putFile(STORAGE_FILE, JSON.stringify(this.expensesList))
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.expensesList), this.$ENCRYPT)
         isNew = true
       }
 
@@ -709,7 +717,7 @@ export default {
       this.expense.total = this.total
       this.expense.vat = this.vat
       this.expense.subtotal = this.subtotal
-      userSession.putFile(expenseFile, JSON.stringify(this.expense))
+      userSession.putFile(expenseFile, JSON.stringify(this.expense), this.$ENCRYPT)
 
       if (isNew) {
         this.expenses.push(this.expense)
@@ -778,7 +786,7 @@ export default {
       this.expense = this.expenses[searchExpense]
       this.expense.status = status
       let expenseFile = this.expense.id + '.json'
-      userSession.putFile(expenseFile, JSON.stringify(this.expense))
+      userSession.putFile(expenseFile, JSON.stringify(this.expense), this.$ENCRYPT)
     }
   },
   filters: {
@@ -809,7 +817,7 @@ export default {
 
 <style scoped>
   .content-main-card .card{
-    min-height: 560px;
+    height: 100%;
   }
   .table > thead > tr > th{
       text-align: center !important;

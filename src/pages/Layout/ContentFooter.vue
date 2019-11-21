@@ -4,12 +4,12 @@
       <ul class="nav">
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link">
-            J.P. Aulet
+            About Us
           </a>
         </li>
         <li class="nav-item">
           <a href="javascript:void(0)" class="nav-link">
-            About Us
+            Support Us
           </a>
         </li>
         <li class="nav-item">
@@ -21,7 +21,7 @@
       <div class="copyright">
         &copy;
         {{ new Date().getFullYear() }} made with <i class="tim-icons icon-heart-2"></i> by
-        <a href="javascript:void(0)" target="_blank" style='color:#344675;'>J.P. Aulet</a>.
+        <a href="www.jpaulet.com" alt='J.P. Aulet' target="_blank" style='color:#344675;'>J.P. Aulet</a>.
       </div>
     </div>
   </footer>

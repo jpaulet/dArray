@@ -559,7 +559,7 @@ export default {
       }
       this.showArchive = true
 
-      userSession.getFile('Invoices/folders.json').then(invoiceFolders => {
+      userSession.getFile('Invoices/folders.json', this.$DECRYPT).then(invoiceFolders => {
         this.invoiceFolders = JSON.parse(invoiceFolders || [])
       })
     },
@@ -575,10 +575,10 @@ export default {
         newInvoice.name = el.name+" (Copy)"
         delete newInvoice.done
         this.invoicesList.push(newInvoice.id)
-        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoicesList))
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoicesList), this.$ENCRYPT)
 
         let invoiceFile = newInvoice.id + '.json'
-        userSession.putFile(invoiceFile, JSON.stringify(newInvoice))
+        userSession.putFile(invoiceFile, JSON.stringify(newInvoice), this.$ENCRYPT)
         this.invoices.push(newInvoice)
       });
     },
@@ -598,7 +598,7 @@ export default {
         userSession.deleteFile(el.id+'.json')
       })
 
-      userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList))
+      userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList), this.$ENCRYPT)
       this.invoices = this.invoices.filter((el) => {
         return !this.selected.some((f) => {
           return f.id === el.id
@@ -647,7 +647,7 @@ export default {
     },
 
     loadCompanyLogo () {
-      userSession.getFile(this.company.logo).then((logoImage) => {
+      userSession.getFile(this.company.logo, this.$DECRYPT).then((logoImage) => {
         this.imageSrc = logoImage
       })
     },
@@ -724,7 +724,7 @@ export default {
 
     fetchData () {
       // Load Company data
-      userSession.getFile(COMPANY_FILE).then((company) => {
+      userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
         this.company = JSON.parse(company || '{}')
 
         this.invoice.payment = this.company.payment
@@ -733,37 +733,36 @@ export default {
         this.invoice.logo = this.company.logo
 
         // Load Invoices data
-        userSession.getFile(STORAGE_FILE).then((invoices) => {
+        userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((invoices) => {
           this.invoicesList = JSON.parse(invoices || '[]')
           let i = 0
 
           for (i in this.invoicesList) {
-            userSession.getFile(this.invoicesList[i] + '.json').then((invoice) => {
+            userSession.getFile(this.invoicesList[i] + '.json', this.$DECRYPT).then((invoice) => {
               if (invoice === null) {
                 return false
               }
 
               invoice = JSON.parse(invoice)
               let searchInvoice = this.invoicesList.indexOf(invoice.id)
-              Vue.set(this.invoices, searchInvoice, invoice)
-
+              this.$set(this.invoices, searchInvoice, invoice)
             })
           }
 
           setTimeout(() => {
             this.table1.data = this.invoices
             this.loadingPage = false
-          }, 500);
+          }, 700);
         })
       })
 
       // Load Customers
-      userSession.getFile(CUSTOMERS_FILE).then((customers) => {
+      userSession.getFile(CUSTOMERS_FILE, this.$DECRYPT).then((customers) => {
         this.customersList = JSON.parse(customers || '[]')
         let i = 0
 
         for (i in this.customersList) {
-          userSession.getFile(this.customersList[i] + '.json').then((customer) => {
+          userSession.getFile(this.customersList[i] + '.json', this.$DECRYPT).then((customer) => {
             this.customers.push(JSON.parse(customer))
           })
         }
@@ -799,7 +798,7 @@ export default {
         } else {
           this.invoicesList.push(this.invoice.id)
         }
-        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoicesList))
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoicesList), this.$ENCRYPT)
         isNew = true
       }
 
@@ -807,7 +806,7 @@ export default {
       this.invoice.total = this.total
       this.invoice.vat = this.vat
       this.invoice.subtotal = this.subtotal
-      userSession.putFile(invoiceFile, JSON.stringify(this.invoice))
+      userSession.putFile(invoiceFile, JSON.stringify(this.invoice), this.$ENCRYPT)
 
       if (isNew) {
         this.invoices.push(this.invoice)
@@ -884,7 +883,7 @@ export default {
       this.invoice = this.invoices[searchInvoice]
       this.invoice.status = status
       let invoiceFile = this.invoice.id + '.json'
-      userSession.putFile(invoiceFile, JSON.stringify(this.invoice))
+      userSession.putFile(invoiceFile, JSON.stringify(this.invoice), this.$ENCRYPT)
     },
 
     saveToFolder(folder) {
@@ -899,10 +898,10 @@ export default {
       })
 
       this.selected.map((el) => {
-        userSession.getFile(el.id+'.json').then((theFile) => {
-          userSession.putFile(this.selectedFolder+'/'+el.name.toLowerCase().replace(/\s/g, '')+'.json',theFile)
+        userSession.getFile(el.id+'.json', this.$DECRYPT).then((theFile) => {
+          userSession.putFile(this.selectedFolder+'/'+el.name.toLowerCase().replace(/\s/g, '')+'.json',theFile, this.$ENCRYPT)
 
-          userSession.getFile(this.selectedFolder+'/filesystem.json').then((uploads) => {
+          userSession.getFile(this.selectedFolder+'/filesystem.json', this.$DECRYPT).then((uploads) => {
             if(!uploads){
               var files = []
             }else{
@@ -922,13 +921,13 @@ export default {
             }
 
             files.push(upload)
-            userSession.putFile(this.selectedFolder+'/filesystem.json', JSON.stringify(files))
+            userSession.putFile(this.selectedFolder+'/filesystem.json', JSON.stringify(files), this.$ENCRYPT)
             userSession.deleteFile(el.id+'.json')
           })
         })
       })
 
-      userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList))
+      userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList), this.$ENCRYPT)
       this.invoices = this.invoices.filter((el) => {
         return !this.selected.some((f) => {
           return f.id === el.id
@@ -983,7 +982,7 @@ export default {
 </script>
 <style scoped>
   .content-main-card .card{
-    min-height: 560px;
+    height: 100%;
   }
   .table > thead > tr > th{
       text-align: center !important;

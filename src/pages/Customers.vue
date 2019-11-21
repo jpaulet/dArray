@@ -56,6 +56,11 @@
                               <i class="tim-icons icon-pencil"></i>
                             </base-button>
                         </td>
+                        <td class="td-actions text-center" style='width:50px;'>
+                            <base-button type="link" artia-label="delete button" @click='deleteCustomer(row.id)'>
+                              <i class="tim-icons icon-simple-remove"></i>
+                            </base-button>
+                        </td>
                     </template>
                 </base-table>
             </div>
@@ -194,7 +199,7 @@ import BaseButton from '@/components/BaseButton'
 import BaseTable from '@/components/BaseTable'
 import { uuid } from 'vue-uuid'
 
-const tableColumns = ['Legal', 'Address', 'City / Country', 'Contact', 'Type', 'Edit']
+const tableColumns = ['Legal', 'Address', 'City / Country', 'Contact', 'Type', 'Edit', 'Delete']
 
 // var COMPANY_FILE = 'company.json'
 var CUSTOMERS_FILE = 'customers.json'
@@ -252,21 +257,28 @@ export default {
     },
     fetchData () {
       // Load Customers
-      userSession.getFile(CUSTOMERS_FILE).then((customers) => {
+      userSession.getFile(CUSTOMERS_FILE, this.$DECRYPT).then((customers) => {
         this.customersList = JSON.parse(customers || '[]')
+        //this.customersList = ["a7ef2d0f-530c-4886-b188-2af2647826bf"]
+        //userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList))
         let i = 0
 
         for (i in this.customersList) {
-          userSession.getFile(this.customersList[i] + '.json').then((customer) => {
+          userSession.getFile(this.customersList[i] + '.json', this.$DECRYPT).then((customer) => {
             if (customer === null) {
               return false
             }
-            this.customers.push(JSON.parse(customer))
-            this.table1.data = this.customers
+            
+            customer = JSON.parse(customer)
+            let searchCustomer = this.customersList.indexOf(customer.id)
+            this.$set(this.customers, searchCustomer, customer)
           })
-
-          setTimeout(() => { this.loadingPage = false }, 100)
         }
+
+        setTimeout(() => { 
+          this.table1.data = this.customers
+          this.loadingPage = false 
+        }, 700)
       })
     },
     saveCustomer () {
@@ -275,12 +287,12 @@ export default {
       if (this.customer.id === null) {
         this.customer.id = uuid.v4()
         this.customersList.push(this.customer.id)
-        userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList))
+        userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList), this.$ENCRYPT)
         isNew = true
       }
 
       let customerFile = this.customer.id + '.json'
-      userSession.putFile(customerFile, JSON.stringify(this.customer))
+      userSession.putFile(customerFile, JSON.stringify(this.customer), this.$ENCRYPT)
 
       if (isNew) {
         this.customers.push(this.customer)
@@ -297,6 +309,9 @@ export default {
         type: 'success',
         timeout: 1500
       })
+
+      console.log(this.customersList)
+      console.log(this.customers)
     },
     showCustomer (id) {
 
@@ -318,6 +333,26 @@ export default {
       this.customer = this.customers[searchCustomer]
       this.model = this.customer
       this.newCustomer = true
+    },
+    deleteCustomer (id){
+      let searchCustomer = this.customersList.indexOf(id)
+      if (searchCustomer === -1) {
+        this.$notify({
+          message: 'Something wrong happened',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'danger',
+          timeout: 1500
+        })
+        return false
+      }
+      
+      this.customersList.splice(searchCustomer, 1)
+      this.customers.splice(searchCustomer, 1)
+
+      userSession.deleteFile(id + '.json')
+      userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList), this.$ENCRYPT)      
     },
     clearCustomer () {
       this.model = {
@@ -349,7 +384,7 @@ export default {
 </script>
 <style>
   .content-main-card .card{
-    min-height: 560px;
+    height: 100%;
   }
   .btn-dropdown:hover{
     background-color: #fff !important;
@@ -365,5 +400,8 @@ export default {
     background-color: #fff !important;
     font-weight: 600;
     background-image: none !important;
+  }
+  tbody tr:hover td{
+    background-color: #f8f8f8;
   }
 </style>

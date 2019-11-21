@@ -10,9 +10,8 @@
         </div>
       </div>
       <div style='width:90%;margin:0px auto 50px;'>
-        <FullCalendar :selectable='true' defaultView="dayGridMonth" :plugins="calendarPlugins" @dateClick="handleDateClick" @eventClick="handleEventClick" @select='handleSelect' :events="events"
-        />
-        <p class='text-mutted mt-3' style='font-size:12px;'> You can create event by clicking or multiple day events by selecting multiple days </p>
+        <FullCalendar :selectable='true' defaultView="dayGridMonth" :plugins="calendarPlugins" @dateClick="handleDateClick" @eventClick="handleEventClick" @select='handleSelect' :events="events" />
+        <p class='text-mutted mt-3' style='font-size:12px;'>You can create event by clicking or multiple day events by selecting multiple days</p>
       </div>
 
       <modal :show.sync="createEvent" body-classes="p-0" modal-classes="modal-dialog-centered modal-sm" style='transform:translate(0,0);'>
@@ -22,14 +21,31 @@
         <form class='row text-center mb-4 mt-4 pt-2 pb-2' role="form" v-on:submit.prevent>
           <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Title:</label>
           <input type='text' class='form-control col-7' name='Title' placeholder='Event name' v-model='newEvent.title' />
+          <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Description:</label>
+          <input type='text' class='form-control col-7' name='Description' placeholder='Event description' v-model='newEvent.description' />
           <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Start:</label>
           <input type="date" class="form-control col-7" v-model='newEvent.start'><br>
           <label v-if='newEvent.end !== null'  class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>End:</label>
           <input v-if='newEvent.end !== null' type="date" class="form-control col-7" v-model='newEvent.end'>
+          <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Color</label>
+          <div class='col-7 pl-0 ml-0'>
+            <span class='square' v-for="(color,index) in colors" :style="{ background: color }" @click='selectColor(color)' :key='index' :class="{ 'colorSelected' : color == newEvent.color}"></span>
+          </div>
         </form>
         <template slot="footer">
           <base-button type="danger" @click="createEvent = false" style='opacity:0.5;'>Close</base-button>
           <base-button type="light" @click='createNewEvent'>Create</base-button>
+        </template>
+      </modal>
+
+      <modal :show.sync='viewEvent' body-classes="p-0" modal-classes="modal-dialog-centered modal-sm" style='transform:translate(0,0);'>
+        <div class='mb-3 p-5'>
+          <h6>{{event.title}}</h6>
+          <p>{{event.description}}</p>
+          <div> <span>{{event.start}}</span> <span v-if='event.end && (event.start !== event.end)'>/ {{event.end}}</span></div>
+        </div>
+        <template slot="footer" class="text-center">
+          <base-button type="danger" @click="viewEvent = false" style='opacity:0.5;'>Close</base-button>          
         </template>
       </modal>
 
@@ -57,25 +73,36 @@ export default {
       calendarPlugins: [ dayGridPlugin, interactionPlugin ],
       events: [],
       createEvent: false,
+      viewEvent: false,
       newEvent: {
         title: '',
+        description: '',
         start: '',
-        end: null
-      }
+        end: null,
+        color: '#263148'
+      },
+      colors: ['#263148', '#1abc9c', '#2980b9', '#7f8c8d', '#f1c40f', '#d35400', '#27ae60'],
+      event: {}
     }
   },
   methods: {
+    selectColor (color){
+      this.newEvent.color = color
+    },
     handleDateClick (info) {
       this.newEvent.start = info.dateStr
       this.newEvent.end = null
       this.createEvent = true
     },
     handleEventClick (info) {
-      console.log('handleEventClick')
-      console.log(info)
-      console.log(info.event.title)
-      console.log(info.event.start)
-      console.log(info.event.end)
+      this.event = {
+        title: info.event.title,
+        description: info.event.description,
+        start: info.event.start.getMonth()+'-'+info.event.start.getDate()+'-'+info.event.start.getFullYear(),
+        end: info.event.end ? info.event.end.getMonth()+'-'+info.event.end.getDate()+'-'+info.event.end.getFullYear() : null,
+        color: info.event.color,
+      }
+      this.viewEvent = true
     },
     handleSelect (info) {
       this.newEvent.start = info.startStr
@@ -83,15 +110,15 @@ export default {
       this.createEvent = true
     },
     fetchData () {
-      userSession.getFile(STORAGE_FILE).then((events) => {
+      userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((events) => {
         this.events = JSON.parse(events || '[]')
         this.addEventStyles(this.events)
       })
     },
     addEventStyles (events) {
       events.map((event) => {
-        event.backgroundColor = '#263148'
-        event.borderColor = '#263148'
+        event.backgroundColor = event.color
+        event.borderColor = event.color
         event.textColor = '#fff'
       })
     },
@@ -99,11 +126,13 @@ export default {
       this.addEventStyles([this.newEvent])
       this.events.push(this.newEvent)
 
-      userSession.putFile(STORAGE_FILE, JSON.stringify(this.events))
+      userSession.putFile(STORAGE_FILE, JSON.stringify(this.events), this.$ENCRYPT)
       this.newEvent = {
         title: '',
+        description: '',
         start: '',
-        end: null
+        end: null,
+        color: '#263148'
       }
       this.createEvent = false
       this.$notify({
@@ -135,6 +164,19 @@ export default {
   }
   .fc-unthemed td.fc-today {
     background: #e3effc !important;
+  }
+  .square {
+    width: 18px;
+    height: 18px;
+    margin: .5em;
+    display: inline-block;
+    border: 1px solid #777;
+    cursor: pointer;
+    margin-top:10px;
+  }
+  .colorSelected{
+    box-shadow: 0 15px 35px rgba(50,50,93,0.2),0 5px 15px rgba(0,0,0,0.57);
+    border: 1px solid #444 !important;
   }
 </style>
 

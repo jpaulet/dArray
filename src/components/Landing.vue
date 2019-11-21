@@ -1,7 +1,8 @@
 <template>
-  <div class="panel-landing" id="section-1">
+  <div class="panel-landing" id="landing">
 
-    <div class="wrapper" style='background-image:url("https://www.zaperp.com/wp-content/uploads/2019/09/hero-map-1.png");background-repeat:no-repeat;margin: 0px auto;background-position:center center;'>
+    <div class="wrapper">
+      <!-- :style="{ backgroundImage: 'url(' + require('@/assets/img/landing/map.png') + ')' }" style='background-repeat:no-repeat;margin: 0px auto;background-position:bottom center;background-size:contain;' -->
       <!-- Navbar Section -->
       <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top effect-main">
         <div class="container container-s">
@@ -27,8 +28,8 @@
         <div class="container-m text-center">
           <div class="home hero-2"><!-- Hero Section-->
             <div class="hero-content wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <h1>The Descentralized <strong>Invoicing Software</strong> for Makers, Freelancers & SME</h1>
-              <p>Put your business on the <strong>Blockchain</strong> & keep your data <strong>secure & private</strong>.<br />Manage Invoices, Expenses, Customers, Files & more from everywhere.</p>
+              <h1>The Descentralized <strong style='font-weight:500;'>Invoicing Software</strong> for Makers, Freelancers & SME</h1>
+              <p>Put your business on the <strong style='font-weight:500;'>Blockchain</strong> & keep your data <strong style='font-weight:500;'>secure & private</strong>.<br />Manage Invoices, Expenses, Customers, Files & more from everywhere.</p>
               <div class="form-alt mt-5">
                 <div class="subscribe-form wow zoomIn animated" style="visibility: visible;">
                   <a href="#" class="btn btn-primary btn-lg" id="signin-button" @click.prevent="signIn">
@@ -50,8 +51,8 @@
             <div class="row text-center">
               <div class="col-md-12">
                 <div class="features-intro">
-                  <h2><span style='color:#344675;'>dArray</span> is a privacity-focus blockchain platform</h2>
-                  <p>A place to run your business & accouting where you own all your data.</p>
+                  <h2><span style='color:#344675;'>dArray</span> is a privacity-focus Blockchain accounting platform</h2>
+                  <p>The place to run your business & accouting. You own all your data!</p>
                 </div>
               </div>
               <div class="col-md-6 col-lg-4">
@@ -153,7 +154,7 @@
                    <div class="left-content">
                      <h2 class="mt-0">Invoices.</h2>
                      <p> Crate & manage your invoices in a easy & private way.</p>
-                     <a href="#" style='font-size:10px;'>Know more</a>
+                     <a href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
              </div>
@@ -166,7 +167,7 @@
                  <div class="left-content">
                    <h2 class="mt-0">Expenses.</h2>
                    <p> Track all your expenses by client, type, status & more. Attach the real receipt to keep things organized.</p>
-                   <a href="#" style='font-size:10px;'>Know more</a>
+                   <a href="#landing" style='font-size:10px;'>Know more</a>
                  </div>
                </div>
              </div>
@@ -178,7 +179,7 @@
                    <div class="left-content">
                      <h2 class="mt-0">Customers.</h2>
                      <p> All your customers, partners, offerings in one place.</p>
-                     <a href="#" style='font-size:10px;'>Know more</a>
+                     <a href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
              </div>
@@ -191,10 +192,11 @@
                  <div class="left-content">
                    <h2 class="mt-0">Docs & File</h2>
                    <p> Store all your data in a private & secure storage. Invoices, Expenses & any other important docs.</p>
-                   <a href="#" style='font-size:10px;'>Know more</a>
+                   <a href="#landing" style='font-size:10px;'>Know more</a>
                  </div>
                </div>
              </div>
+
              <div class="flex-inner align-center">
                  <div class="f-image">
                    <img class="img-fluid" src="@/assets/img/landing/tasks_nice.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
@@ -203,22 +205,35 @@
                    <div class="left-content">
                      <h2 class="mt-0">Tasks.</h2>
                      <p> Easy to use everyday tasks & events.</p>
-                     <a href="#" style='font-size:10px;'>Know more</a>
+                     <a href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
              </div>
 
              <div class="flex-inner flex-inverted align-center">
                <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/settings_nice.png" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 <img class="img-fluid" src="@/assets/img/landing/calendar.png" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                </div>
                <div class="f-text" style='margin-top:-20px;'>
                  <div class="left-content">
-                   <h2 class="mt-0">Your Business Swiss Knife.</h2>
-                   <p> A lot more features for your productivity: Calendar, Tasks, Pomodoro, ToDO lists...</p>
-                   <a href="#" style='font-size:10px;'>Know more</a>
+                   <h2 class="mt-0">Calendar.</h2>
+                   <p> Create events in your private calendar for meetings, tasks, remember things...</p>
+                   <a href="#landing" style='font-size:10px;'>Know more</a>
                  </div>
                </div>
+             </div>
+
+             <div class="flex-inner align-center">
+                 <div class="f-image">
+                   <img class="img-fluid" src="@/assets/img/landing/settings_nice.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 </div>
+                 <div class="f-text" style='margin-top:-20px;'>
+                   <div class="left-content">
+                     <h2 class="mt-0">Your Business Swiss Knife.</h2>
+                     <p> All the features for your productivity: Calendar, Tasks, Pomodoro (WIP), ToDO lists, Organize Files...</p>
+                     <a href="#landing" style='font-size:10px;'>Know more</a>
+                   </div>
+                 </div>
              </div>
            </div>
          </div>
@@ -228,7 +243,7 @@
              <div class="yd-ft-left" style='margin-top:-20px;'>
                <h2>Welcome to dArray, where privacity matters.</h2>
                    <p>A free & private alternative to Zoho, QuickBooks and Freshbooks.</p>
-               <a href="#" class="btn-action btn-edge">Get Started</a>
+               <a href="#landing" class="btn-action btn-edge">Get Started</a>
              </div>
              <div class="yd-ft-right">
                <img src="@/assets/img/landing/test.png" alt="Feature">
@@ -254,13 +269,13 @@
                   <source src="@/assets/img/landing/crm2.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
-                <!-- <img class="ar-img img-fluid" src="@/assets/img/landing/feature-2.png" alt="Hero Image"> -->
               </div>
             </div>
           </div>
         </div>
 
-         <div id="reviews" class="yd-reviews wow fadeIn" style="display:none;visibility: visible; animation-name: fadeIn;"><!-- dArray Reviews -->
+        <!-- dArray Reviews 
+        <div v-if='false' id="reviews" class="yd-reviews wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
            <div class="container">
              <div class="row text-center">
                <div class="col-sm-12 col-lg-8 offset-lg-2">
@@ -339,7 +354,7 @@
              </div>
            </div>
          </div>
-         <!-- dArray Reviews Ends -->
+         dArray Reviews Ends -->
 
         <!-- dArray Pricing Section -->
         <div id="pricing" class="pricing-section text-center">
@@ -442,8 +457,7 @@
               </div>
               <div class="col-md-3">
                 <ul>
-                  <li><a href="https://twitter.com/jpaulet">Twitter</a></li>
-                  <li><a href="https://linkedin.com/jpaulet">Linkedin</a></li>
+                  <li><a href="https://twitter.com/jpaulet">@jpaulet</a></li>
                 </ul>
               </div>
             </div>
@@ -2224,8 +2238,8 @@ body {
 
   .flex-inner .f-image {
       -webkit-box-flex: 0;
-      -ms-flex: 0 0 500px;
-      flex: 0 0 500px;
+      -ms-flex: 0 0 550px;
+      flex: 0 0 550px;
   }
 
   .flex-inner .f-text h2 {

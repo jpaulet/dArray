@@ -17,6 +17,13 @@ window.axios = require('axios')
 
 Vue.config.productionTip = false
 
+Vue.prototype.$ENCRYPT = {
+  encrypt: true
+}
+Vue.prototype.$DECRYPT = {
+  decrypt: true
+}
+
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes

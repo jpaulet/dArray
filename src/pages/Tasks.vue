@@ -45,7 +45,7 @@
                 <i class="tim-icons icon-notes text-light mr-3"></i>Your Tasks
               </div>
 
-              <div v-if='tasks.length' class='col-8 text-right'>
+              <div class='col-8 text-right'>
                 <button type="button" class="btn btn-light btn-sm px-5 text-white" @click='saveTasks'>Save</button>
               </div>
             </div>
@@ -221,14 +221,14 @@ export default {
       this.message = `Task ${taskID} Created.`
     },
     fetchData () {
-      userSession.getFile(STORAGE_FILE).then((tasks) => {
+      userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((tasks) => {
         this.tasks = JSON.parse(tasks || '[]')
 
         setTimeout(() => { this.loadingPage = false }, 100)
       })
     },
     saveTasks () {
-      userSession.putFile(STORAGE_FILE, JSON.stringify(this.tasks))
+      userSession.putFile(STORAGE_FILE, JSON.stringify(this.tasks), this.$ENCRYPT)
       this.$notify({
         message: 'Tasks status saved successfully',
         icon: 'tim-icons icon-bell-55',
@@ -246,6 +246,10 @@ export default {
 </script>
 
 <style>
+  .content-main-card .card{
+    height: 100;
+  }
+  
   .task.done label {
     text-decoration: line-through;
   }

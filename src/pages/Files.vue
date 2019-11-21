@@ -15,11 +15,11 @@
 
           <h4 class='text-left'> Folders </h4>
           <div class='text-left row' style='clear:both;'>
-            <div v-for='(folder,index) in folders' :key='index' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:90px;margin-right:30px;float:left;' @click='changeFolder(folder)'>
+            <div v-for='(folder,index) in folders' :key='index' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:90px;margin-right:30px;float:left;' @click='changeFolder(folder,currentDepth+1)'>
               <img src='@/assets/img/folder.png' height='42' />
               <p style='font-size:11px;margin-top:5px;'>{{folder}}</p>
             </div>
-            <div class='text-center folder' style='cursor:pointer;padding:8px 15px;width:115px;margin-right:30px;float:left;' @mousedown='openNewFolder()'>
+            <div v-if='currentDepth < 5' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:115px;margin-right:30px;float:left;' @mousedown='openNewFolder()'>
               <img src='@/assets/img/folderplus.png' height='42' />
               <div v-if='!newFolder' style='font-size:11px;margin-top:5px;'>New Folder</div>
               <input v-if='newFolder' v-model='folderName' ref="newFolder" id='newFolder' type='form-control' name='New Folder' placeholder="Folder name" style='width:90px;height:26px;font-size:11px;padding:3px;border-radius:8px;border:1px solid #eee;' />
@@ -38,7 +38,7 @@
                   <p class="filename">{{upload.name}}</p>
                   <div>
                     <p class="filesize">{{upload.size}}</p>
-                    <p @click="removeUpload(index)" class="cancel-btn" v-if="upload.progress !== '100%'">x</p>
+                    <p @click="removeUpload(index)" class="cancel-btn" style='display:none;'>x</p>
                   </div>
                 </div>
                 <div class="upload-bar" v-if="upload.progress !== '100%'">
@@ -80,9 +80,8 @@ export default {
   },
   methods: {
     fetchData () {
-      console.log('fetching data!!')
       // Load Files
-      userSession.getFile(FILESYSTEM).then((filesystem) => {
+      userSession.getFile(FILESYSTEM, this.$DECRYPT).then((filesystem) => {
         this.uploads = JSON.parse(filesystem || [])
         let i = 0
 
@@ -91,11 +90,11 @@ export default {
         }
       })
 
-      userSession.getFile(FOLDERS).then((folders) => {
+      userSession.getFile(FOLDERS, this.$DECRYPT).then((folders) => {
         if (!folders) {
           if (this.path === '/') {
             this.folders = ['Invoices', 'Expenses']
-            userSession.putFile(FOLDERS, JSON.stringify(this.folders))
+            userSession.putFile(FOLDERS, JSON.stringify(this.folders), this.$ENCRYPT)
           }
         } else {
           this.folders = JSON.parse(folders || [])
@@ -104,13 +103,19 @@ export default {
     },
 
     changeFolder (folder, depth) {
-      console.log('folder: ' + folder + ' - Depth: ' + depth)
-
       let localPath = this.path
       if (localPath === '/') {
         localPath = folder + '/'
       } else {
-        localPath = localPath + folder + '/'
+        if(this.currentDepth > depth){
+          var the_arr = localPath.replace(/^\/|\/$/g, '').split('/')
+          for(let i=depth;i<this.currentDepth;i++){ 
+            the_arr.pop()
+          }
+          localPath = the_arr.join('/') + '/'
+        }else{
+          localPath = localPath + folder + '/'
+        }
       }
 
       if (folder === '/') {
@@ -118,12 +123,9 @@ export default {
       } else {
         this.path = localPath
       }
-
-      console.log('This.path: ' + this.path)
-
       this.currentDepth = depth
 
-      userSession.getFile(this.path + FOLDERS).then((filesystem) => {
+      userSession.getFile(this.path + FOLDERS, this.$DECRYPT).then((filesystem) => {
         if (!filesystem) {
           if (this.path === '/') {
             this.folders = ['Invoices', 'Expenses']
@@ -135,7 +137,7 @@ export default {
         this.folders = JSON.parse(filesystem || [])
       })
 
-      userSession.getFile(this.path + FILESYSTEM).then((filesystem) => {
+      userSession.getFile(this.path + FILESYSTEM, this.$DECRYPT).then((filesystem) => {
         if (!filesystem) {
           this.uploads = []
           return false
@@ -160,7 +162,7 @@ export default {
       if (localPath === '/') {
         localPath = ''
       }
-      userSession.putFile(localPath + FOLDERS, JSON.stringify(this.folders))
+      userSession.putFile(localPath + FOLDERS, JSON.stringify(this.folders), this.$ENCRYPT)
     },
 
     openNewFolder () {
@@ -211,12 +213,12 @@ export default {
 
       reader.onload = () => {
         dataURL = reader.result
-        userSession.putFile(this.path + upload.id + '_' + upload.name, dataURL)
+        userSession.putFile(this.path + upload.id + '_' + upload.name, dataURL, this.$ENCRYPT)
       }
       reader.readAsArrayBuffer(input.files[0])
 
       // userSession.putFile( upload.id+"_"+upload.name, dataURL )
-      userSession.putFile(this.path + FILESYSTEM, JSON.stringify(this.uploads))
+      userSession.putFile(this.path + FILESYSTEM, JSON.stringify(this.uploads), this.$ENCRYPT)
     },
 
     getFileSize (size) {
@@ -236,7 +238,7 @@ export default {
 
     downloadFile (id, filename, extension, type) {
       if (type === 'Invoice') {
-        userSession.getFile(this.path + filename).then((theFile) => {
+        userSession.getFile(this.path + filename, this.$DECRYPT).then((theFile) => {
           if (theFile === null) {
             this.$notify({
               message: 'Something wrong happened',
@@ -262,7 +264,7 @@ export default {
         return true
       }
 
-      userSession.getFile(this.path + id + '_' + filename).then((theFile) => {
+      userSession.getFile(this.path + id + '_' + filename, this.$DECRYPT).then((theFile) => {
         if (theFile === null) {
           this.$notify({
             message: 'Something wrong happened',
@@ -308,6 +310,10 @@ export default {
   box-shadow:1px 1px 2px #eee;
 }
 
+.upload:hover{
+  background-color:#d5dcff70;
+}
+
 #uploader {
   height: 100px;
   border: 2px dashed #9092a5bd;
@@ -335,7 +341,8 @@ export default {
 }
 
 .upload {
-  margin-bottom: 24px;
+  padding:12px;
+  border-radius:12px;
   display: flex;
   align-items: center;
 
