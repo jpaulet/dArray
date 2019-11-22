@@ -28,7 +28,7 @@
         <div class="container-m text-center">
           <div class="home hero-2"><!-- Hero Section-->
             <div class="hero-content wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <h1>The Descentralized <strong style='font-weight:500;'>Invoicing Software</strong> for Makers, Freelancers & SME</h1>
+              <h1>The <transition name="slide-fade" mode="out-in"><span class='mr-3'>{{rotateText}}</span></transition> <strong style='font-weight:500;'>Invoicing Software</strong> for Makers, Freelancers & SME</h1>
               <p>Put your business on the <strong style='font-weight:500;'>Blockchain</strong> & keep your data <strong style='font-weight:500;'>secure & private</strong>.<br />Manage Invoices, Expenses, Customers, Files & more from everywhere.</p>
               <div class="form-alt mt-5">
                 <div class="subscribe-form wow zoomIn animated" style="visibility: visible;">
@@ -493,7 +493,20 @@ export default {
   },
   data () {
     return {
+      rotatingText: ['Descentralized','Private','Secure','Blockchain','Free'],
+      i: 0,
       publicPath: 'http://localhost:8080' || process.env.BASE_URL
+    }
+  },
+  computed: {
+    rotateText: function(){
+      setTimeout(() => {
+        this.i++
+        if(this.i>=this.rotatingText.length){
+          this.i = 0
+        }
+      },10000,this.i)
+      return this.rotatingText[this.i]
     }
   },
   created () {
@@ -609,8 +622,8 @@ export default {
   font-weight: 500;
   src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3g3D_u50.woff2) format('woff2');
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
+
+}/* vietnamese */
 @font-face {
   font-family: 'Montserrat';
   font-style: normal;

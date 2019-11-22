@@ -111,7 +111,7 @@
               </p>
             </a>
             <ul class="dropdown-menu dropdown-navbar">
-              <li class="nav-link"><router-link to="" class="nav-item dropdown-item">Profile</a></router-link>
+              <!-- <li class="nav-link"><router-link to="" class="nav-item dropdown-item">Profile</a></router-link> -->
               <li class="nav-link"><router-link to="settings" class="nav-item dropdown-item">Settings</a></router-link>
               <li class="dropdown-divider"></li>
               <li class="nav-link">
@@ -119,7 +119,6 @@
               </li>
             </ul>
           </drop-down>
-
         </ul>
       </div>
     </div>
