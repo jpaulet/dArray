@@ -112,6 +112,7 @@ export default {
     fetchData () {
       userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((events) => {
         this.events = JSON.parse(events || '[]')
+        this.events = []
         this.addEventStyles(this.events)
       })
     },

@@ -212,7 +212,7 @@
 
              <div class="flex-inner flex-inverted align-center">
                <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/calendar.png" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 <img class="img-fluid" src="@/assets/img/landing/calendar1.png" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                </div>
                <div class="f-text" style='margin-top:-20px;'>
                  <div class="left-content">
