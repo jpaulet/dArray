@@ -6,15 +6,15 @@
                 <div class="col-sm-6 text-left">
                   <button type="button" class="btn btn-light btn-sm px-5 text-white" fill="" @click="openNewExpense">+ New Expense</button>
                 </div>
-                <div class="col-sm-6 text-right" v-if='table1.data.length' style='display:none;'>
+                <div class="col-sm-6 text-right">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
                        <label v-for="(option, index) in expenseOptions"
                               :key="option"
-                              class="btn btn-success btn-sm btn-simple"
+                              class="btn btn-light btn-sm btn-simple"
                               :class="{active:activeIndex === index}"
                               :id="index">
                           <input type="radio"
-                                @click="initBigChart(index)"
+                                @click="changeViewType(index,option)"
                                 name="options" autocomplete="off"
                                 :checked="activeIndex === index">
                           {{ option }}
@@ -40,9 +40,9 @@
                 <i class="tim-icons icon-settings-gear-63"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
-                <a href="#" class="dropdown-item" @click.prevent='archiveInvoices()'>Archive <i class="tim-icons icon-alert-circle-exc ml-2" data-toggle="tooltip" data-html="true" title="Save to folder & delete from list" style='font-size:12px;color:#777;margin-top:-10px;'></i></a>
-                <a href="#" class="dropdown-item" @click.prevent='duplicateInvoices()'>Duplicate</a>
-                <a href="#" class="dropdown-item" @click.prevent='deleteInvoices()'>Delete</a>
+                <a v-if='activeIndex === 0' href="#" class="dropdown-item" @click.prevent='archiveExpenses()'>Archive <i class="tim-icons icon-alert-circle-exc ml-2" data-toggle="tooltip" data-html="true" title="Save to folder & delete from list" style='font-size:12px;color:#777;margin-top:-10px;'></i></a>
+                <a v-if='activeIndex === 0' href="#" class="dropdown-item" @click.prevent='duplicateExpenses()'>Duplicate</a>
+                <a href="#" class="dropdown-item" @click.prevent='deleteExpenses()'>Delete</a>
               </ul>
             </drop-down>
 
@@ -103,7 +103,7 @@
 
         <div v-if='!table1.data.length && !loadingPage' class='py-4 text-center my-4'>
             <p>No expenses yet. </p>
-            <img src='@/assets/img/expense.jpg' class='mt-3 mb-5' height='150' />
+            <img src='@/assets/img/expense.jpg' class='mt-3 mb-5' height='200' />
         </div>
     </card>
 
@@ -117,7 +117,7 @@
 
         <div class='row mb-3 mt-3 px-4 pl-0'>
 
-        <!-- INVOICE CONFIGURATOR -->
+        <!-- EXPENSE CONFIGURATOR -->
             <div class='col-4 ml-0 pl-0 pr-4' style='min-width: 250px;'>
                 <h4 style='display:none;' class="card-title text-left"><i class="tim-icons icon-bell-55 text-primary "></i> Configure Expense </h4>
 
@@ -163,9 +163,9 @@
                     <textarea class='form-control ml-1 px-2 col-10' v-model="expense.payment" placeholder="Payment info" style='border:1px solid rgba(29, 37, 59, 0.25);border-radius:6px;'></textarea>
                 </div>
             </div>
-        <!-- END INVOICE CONFIGURATOR -->
+        <!-- END EXPENSE CONFIGURATOR -->
 
-        <!-- INVOICE PREVIEW -->
+        <!-- EXPENSE PREVIEW -->
             <div class="expense-box col-8 card pt-0" style='font-size:13px;'>
               <table cellpadding="0" cellspacing="0" class='col-10' style='margin:0px auto;'>
                 <tr>
@@ -243,23 +243,23 @@
                 </div>
             </div>
           </div>
-          <!-- END INVOICE PREVIEW -->
+          <!-- END EXPENSE PREVIEW -->
         </div>
 
         <div class='row px-2'>
             <div class='col-4 text-left mt-3'>
-                <button class='btn btn-danger btn-sm ml-1' @click='clearExpense' style='opacity:0.75;color:#ec250d;'>Clear</button>
+                <button class='btn btn-danger btn-sm ml-1' @click='clearExpense' style='opacity:0.75;color:#333;'>Clear</button>
             </div>
 
             <div class='col-8 text-right mt-3'>
                 <button class='btn btn-light btn-sm' style='opacity:0.9;' @click='showExpense(expense.id)'>Preview</button>
-                <button class='btn btn-secondary btn-sm px-5' @click='saveExpense'>Save</button>
+                <button class='btn btn-secondary btn-sm px-5' @click='saveExpense' v-if='activeIndex === 0'>Save</button>
             </div>
         </div>
     </card>
 
     <card v-if='showPreview'>
-        <!-- INVOICE PREVIEW -->
+        <!-- EXPENSE PREVIEW -->
         <template slot="header">
           <div class='row mb-3'>
             <h6 class='col-5' style='line-height:36px;'>
@@ -347,7 +347,7 @@
             </div>
         </div>
        </div>
-       <!-- END INVOICE PREVIEW -->
+       <!-- END EXPENSE PREVIEW -->
     </card>
 
     <modal :show.sync="showArchive" body-classes="p-0" modal-classes="modal-dialog-centered modal-sm" style='transform:translate(0,0) !important;'>
@@ -358,19 +358,17 @@
         <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Folder:</label>
         <drop-down tag="div">
           <button aria-label="Dropdown link" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-secondary">
-            Expenses
+            {{selectedFolder}}
           </button>
           <ul class="dropdown-menu">
-            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'>Expenses</a>
-            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - Octover 2019</a>
-            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - November 2019</a>
-            <a href="#" class="dropdown-item py-1" @click.prevent='saveToFolder()'> - Dicember 2019</a>
+            <a href="#" class="dropdown-item py-1" @click.prevent='selectedFolder = "Expenses"'>Expenses</a>
+            <a v-for='(expenseFolder,index) in expenseFolders' :key='index' href="#" class="dropdown-item py-1" @click.prevent='selectedFolder = "Expenses/" + expenseFolder'> - {{expenseFolder}}</a>
           </ul>
         </drop-down>
       </form>
       <template slot="footer">
         <base-button type="danger" @click="showArchive = false" style='opacity:0.5;'>Close</base-button>
-        <base-button type="light">Archive</base-button>
+        <base-button type="light" @click.prevent='saveToFolder()'>Archive</base-button>
       </template>
     </modal>
 
@@ -392,6 +390,7 @@ const tableColumns = ['', 'Title', 'Category', 'Date', 'Total', 'Status', 'View'
 
 var STORAGE_FILE = 'expenses.json'
 var COMPANY_FILE = 'company.json'
+var ARCHIVED_FILE = 'archiveExpenses.json'
 
 export default {
   components: {
@@ -407,13 +406,15 @@ export default {
       loadingPage: true,
       showArchive: false,
       selected: [],
+      showArchive: false,
+      selectedFolder: 'Expenses',
       loadingDownload: false,
       showPreview: false,
       newExpense: false,
+      expenseFolders: [],
       expenseOptions: [
-        'This Month',
-        'Today',
-        'All'
+        'Active',
+        'Archived'
       ],
       activeIndex: 0,
       table1: {
@@ -547,6 +548,7 @@ export default {
     }
   },
   methods: {
+
     checkHasSelected() {
       this.selected = this.expenses.filter((item) => { return item.done === true })
 
@@ -564,13 +566,23 @@ export default {
 
       return true
     },
-    archiveInvoices() {
+
+    archiveExpenses() {
       if(!this.checkHasSelected()){
         return false
       }
       this.showArchive = true
+
+      userSession.getFile('Expenses/folders.json', this.$DECRYPT).then(expenseFolders => {
+        if(!expenseFolders){
+          this.expenseFolders = []
+          return false
+        }
+        this.expenseFolders = JSON.parse(expenseFolders)
+      })
     },
-    duplicateInvoices() {
+
+    duplicateExpenses() {
       if(!this.checkHasSelected()){
         return false
       }
@@ -588,7 +600,8 @@ export default {
         this.expenses.push(newExpense)
       });
     },
-    deleteInvoices() {
+
+    deleteExpenses() {
       if(!this.checkHasSelected()){
         return false
       }
@@ -599,26 +612,37 @@ export default {
         })
       })
 
-      this.selected.map((el) => {
-        userSession.deleteFile(el.id+'.json')
-      })
-
-      userSession.putFile(STORAGE_FILE, JSON.stringify(newExpensesList), this.$ENCRYPT)
-      this.expenses = this.expenses.filter((el) => {
-        return !this.selected.some((f) => {
-          return f.id === el.id
+      if(activeIndex === 0){
+        this.selected.map((el) => {
+          userSession.deleteFile(el.id+'.json')
         })
-      })
+
+        userSession.putFile(STORAGE_FILE, JSON.stringify(newExpensesList), this.$ENCRYPT)
+        this.expenses = this.expenses.filter((el) => {
+          return !this.selected.some((f) => {
+            return f.id === el.id
+          })
+        })
+      }else{
+        userSession.putFile(ARCHIVED_FILE, JSON.stringify(newExpensesList), this.$ENCRYPT)
+        this.expenses = this.expenses.filter((el) => {
+          return !this.selected.some((f) => {
+            return f.id === el.id
+          })
+        })
+      }
 
       this.table1.data = this.expenses
       this.selected = []
       this.deselectAll()
     },
+
     deselectAll(){
       this.expenses.map( item => {
         delete item.done
       })
     },
+
     printPDF() {
       this.loadingDownload = true
       var pdf = new jsPDF('p', 'pt', 'letter');
@@ -628,7 +652,7 @@ export default {
           pdf.save(this.expense.title+'.pdf');
 
           this.$notify({
-            message: 'Invoice PDF saved successfully',
+            message: 'Expense PDF saved successfully',
             icon: 'tim-icons icon-bell-55',
             horizontalAlign: 'center',
             verticalAlign: 'bottom',
@@ -646,16 +670,20 @@ export default {
         }
       });
     },
+
     openNewExpense () {
       this.clearExpense()
       this.newExpense = true
     },
+
     closeNewExpense () {
       this.newExpense = false
     },
+
     addRow () {
       this.expense.items.push({ description: '', quantity: 1, price: 0 })
     },
+
     clearExpense () {
       this.expense = {
         id: null,
@@ -674,21 +702,31 @@ export default {
         vat: 0
       }
     },
+
     fetchData () {
       // Load Company data
       userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
-        this.company = JSON.parse(company || '{}')
+        if(!company){
+          this.company = {}
+        }else{
+          this.company = JSON.parse(company)
+        }        
         this.expense.tax = this.company.vat
       })
 
       // Load Expenses data
       userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((expenses) => {
-        this.expensesList = JSON.parse(expenses || '[]')
-        let i = 0
-
+        if(!expenses){
+          this.expensesList = []
+        }else{
+          this.expensesList = JSON.parse(expenses)
+        }
+        var i = 0
+        
         for (i in this.expensesList) {
           userSession.getFile(this.expensesList[i] + '.json', this.$DECRYPT).then((expense) => {
-            if (expense === null) {
+            if (!expense) {
+              this.expensesList.splice(i,1)
               return false
             }
 
@@ -704,6 +742,7 @@ export default {
         }, 700);
       })
     },
+
     saveExpense () {
       let isNew = false
       if (this.expense.id === null) {
@@ -735,6 +774,7 @@ export default {
         timeout: 1500
       })
     },
+
     editExpense (id) {
       let searchExpense = this.expensesList.indexOf(id)
       if (searchExpense === -1) {
@@ -752,6 +792,7 @@ export default {
       this.expense = this.expenses[searchExpense]
       this.newExpense = true
     },
+
     showExpense (id) {
       let searchExpense = this.expensesList.indexOf(id)
       if (searchExpense === -1) {
@@ -769,6 +810,7 @@ export default {
       this.expense = this.expenses[searchExpense]
       this.showPreview = true
     },
+
     changeStatus (status, id) {
       let searchExpense = this.expensesList.indexOf(id)
       if (searchExpense === -1) {
@@ -787,6 +829,121 @@ export default {
       this.expense.status = status
       let expenseFile = this.expense.id + '.json'
       userSession.putFile(expenseFile, JSON.stringify(this.expense), this.$ENCRYPT)
+    },
+
+    changeViewType (index,option) {
+      this.activeIndex = index
+
+      if(option === 'Archived'){
+        this.loadArchived()
+      }else{
+        this.loadingPage = true
+        this.expenses = []
+        this.fetchData()
+      }
+    },
+
+    loadArchived(){
+      this.loadingPage = true
+      this.expenses = []
+
+      // Load Expenses data
+      userSession.getFile(ARCHIVED_FILE, this.$DECRYPT).then((expenses) => {
+        if(!expenses){ 
+          this.expensesList = []
+        }else{
+          this.expensesList = JSON.parse(expenses)
+        }
+        var i = 0
+
+        for (i in this.expensesList) {
+          userSession.getFile(this.expensesList[i], this.$DECRYPT).then((expense) => {
+            if (expense === null) {
+              return false
+            }
+
+            expense = JSON.parse(expense)
+            this.$set(this.expenses, this.expenses.length, expense)
+            this.expensesList[i] = expense.id
+          })
+        }
+
+        setTimeout(() => {
+          this.table1.data = this.expenses
+          this.loadingPage = false
+        }, 700);
+      })
+    },
+
+    saveToFolder(folder) {
+      if(!this.checkHasSelected()){
+        return false
+      }
+
+      //Remove from current file list
+      const newExpensesList = this.expensesist.filter((el) => {
+        return !this.selected.some((f) => {
+          return f.id === el
+        })
+      })
+
+      this.selected.map((el) => {
+        userSession.getFile(el.id+'.json', this.$DECRYPT).then((theFile) => {
+          if(!theFile){ return false }
+          //Save the file
+          userSession.putFile(this.selectedFolder+'/'+el.name.toLowerCase().replace(/\s/g, '')+'.json',theFile, this.$ENCRYPT)
+
+          //Save to Archived File
+          userSession.getFile(ARCHIVED_FILE).then((archived) => {
+            if(!archived){
+              var files = []
+            }else{
+              var files = JSON.parse(archived)
+            }
+
+            files.push(this.selectedFolder+'/'+el.name.toLowerCase().replace(/\s/g, '')+'.json')
+            userSession.putFile(ARCHIVED_FILE, JSON.stringify(files), this.$ENCRYPT)
+          })
+
+          //Delete from Invoice Filesystem and transfer to Files/Filesystem
+          userSession.getFile(this.selectedFolder+'/filesystem.json', this.$DECRYPT).then((uploads) => {
+            if(!uploads){
+              var files = []
+            }else{
+              var files = JSON.parse(uploads)
+            }
+
+            const upload = {
+              id: files.length + 1,
+              name: el.name.toLowerCase().replace(/\s/g, '')+'.json',
+              path: this.selectedFolder+'/'+el.name.toLowerCase().replace(/\s/g, '')+'.json',
+              size: '',
+              progress: '100%',
+              ext: 'json',
+              type: 'Expense',
+              progressTimer: null,
+              color: '#24bddf'
+            }
+
+            files.push(upload)
+            userSession.putFile(this.selectedFolder+'/filesystem.json', JSON.stringify(files), this.$ENCRYPT)
+            userSession.deleteFile(el.id+'.json')
+          })
+        })
+      })
+
+      //Upload the new files list
+      userSession.putFile(STORAGE_FILE, JSON.stringify(newExpensesList), this.$ENCRYPT)
+      this.expenses = this.expenses.filter((el) => {
+        return !this.selected.some((f) => {
+          return f.id === el.id
+        })
+      })
+
+      this.table1.data = this.expenses
+      this.selected = []
+      this.deselectAll()
+      this.showArchive = false
     }
   },
   filters: {
@@ -810,7 +967,12 @@ export default {
   },
   async mounted () {
     this.i18n = this.$i18n
+    this.changeViewType(0)
     this.fetchData()
+
+    if(this.$route.query.newExpense){
+      this.openNewExpense()
+    }
   }
 }
 </script>
@@ -943,8 +1105,9 @@ export default {
   }
 
   .btn-danger{
-    color:#fd5d93d4 !important;
+    color:#333 !important;
     background:transparent;
     background-color: none;
+    text-decoration: underline;
   }
 </style>

@@ -7,7 +7,7 @@
       <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top effect-main">
         <div class="container container">
           <a class="navbar-brand" href="#">
-            <img src='@/assets/img/darray.png' style="width:30px;margin-right:10px;" />dArray.
+            <img src='@/assets/img/darray.png' style="width:30px;margin-right:10px;" alt='dArray Logo' />dArray.
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="hero-img wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <img class="img-fluid" src="@/assets/img/landing/features/show.gif" alt="Home">
+              <img class="img-fluid" src="@/assets/img/landing/darray.gif" alt="Home">
             </div>
           </div>
         </div><!-- Hero End -->
@@ -51,8 +51,8 @@
             <div class="row text-center">
               <div class="col-md-12">
                 <div class="features-intro">
-                  <h2><span style='color:#344675;'>dArray</span> is a privacity-focus Blockchain accounting platform</h2>
-                  <p>The place to run your business & accounting. You own all your data!</p>
+                  <h2>A privacy-focus accounting platform</h2>
+                  <p>The place to run your business & accounting on the Blockchain. <br /><strong>You own all your data!</strong></p>
                 </div>
               </div>
               <div class="col-md-6 col-lg-4 col-sm-6">
@@ -141,9 +141,9 @@
         <div id="features" class="flex-split wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
            <div class="container">
              <div class="flex-intro align-center">
-               <h2>Manage your accounting in a easy & private way</h2>
+               <h2>Manage your accounting in an easy & private way</h2>
                <p>
-                Take control of your professional activity with dArray, a blockchain-based invoice software & accouting for Makers, Freelancers & SME.
+                Take control of your professional activity with dArray, a blockchain-based invoice software & accounting for Makers, Freelancers & SME.
                </p>
              </div>
 
@@ -194,7 +194,7 @@
                  <div class="f-text">
                    <div class="left-content">
                      <h2 class="mt-0">Invoices.</h2>
-                     <p> Forget the paperwork that involves saving tickets and invoices! Crate & manage your invoices in a easy & private way.</p>
+                     <p> Forget the paperwork that involves saving tickets and invoices! Crate & manage your invoices in an easy & private way.</p>
                      <a href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
@@ -260,7 +260,7 @@
                <div class="f-text">
                  <div class="left-content">
                    <h2 class="mt-0">Docs & File</h2>
-                   <p> Store all your data in a private & secure storage. Invoices, Expenses & any other important docs.</p>
+                   <p> Store all your data in private & secure storage. Invoices, Expenses & any other important docs.</p>
                    <a href="#landing" style='font-size:10px;'>Know more</a>
                  </div>
                </div>
@@ -310,7 +310,7 @@
          <div class="yd-ft wow fadeIn py-5" style="visibility: visible; animation-name: fadeIn;">
            <div class="yd-ft-inner py-5">
              <div class="yd-ft-left" style='margin-top:-20px;'>
-               <h2>Welcome to dArray, where privacity matters.</h2>
+               <h2>Welcome to dArray, where privacy matters.</h2>
                    <p>A free & private alternative to Zoho, QuickBooks and Freshbooks.</p>
                <a href="#landing" class="btn-action btn-edge">Get Started</a>
              </div>
@@ -320,6 +320,7 @@
            </div>
          </div>
 
+        <!-- VIDEO DEMO -->
         <div class="ar-ft-single" id='video-demo'>
           <div class="container">
             <div class="ar-feature mt-5 mb-1">
@@ -343,88 +344,6 @@
           </div>
         </div>
 
-        <!-- dArray Reviews 
-        <div v-if='false' id="reviews" class="yd-reviews wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-           <div class="container">
-             <div class="row text-center">
-               <div class="col-sm-12 col-lg-8 offset-lg-2">
-                 <div class="intro wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-                   <h1>Customers say nice things</h1>
-                   <p>We have  very fair pricing policy that would benefit you and us at the same time.
-                      Get the free plan &amp; if you need more - pay.
-                   </p>
-                 </div>
-               </div>
-
-               <div class="col-sm-12 col-lg-8 offset-lg-2 text-center">
-                 <div class="review-cards owl-carousel owl-theme owl-loaded owl-drag">
-
-                 <div class="owl-stage-outer">
-                  <div class="owl-stage" style="transform: translate3d(-1460px, 0px, 0px); transition: all 0.25s ease 0s; width: 2190px;">
-                    <div class="owl-item" style="width: 730px;"><div class="card-single">
-                     <div class="review-text">
-                       <h1>"We have very fair pricing policy that would benefit you and us at the same time.
-                         Choose what price you're willing to pay. Get the free plan &amp; if you need more - pay."
-                       </h1>
-                     </div>
-                     <div class="review-attribution">
-                       <div class="review-img">
-                         <img class="img-fluid rounded-circle" src="@/assets/img/landing/review-1.png" alt="Review">
-                       </div>
-                       <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                      <i class="ion ion-ios-star-half"></i>
-                       <h2> Albert Rossi</h2>
-                       <h6>Stack Developer</h6>
-                       <a href="#">Dropboxes Inc</a>
-                     </div>
-                   </div></div><div class="owl-item" style="width: 730px;"><div class="card-single">
-                     <div class="review-text">
-                       <h1>"We have very fair pricing policy that would benefit you and us at the same time.
-                         Choose what price you're willing to pay. Get the free plan &amp; if you need more - pay."
-                       </h1>
-                     </div>
-                     <div class="review-attribution">
-                       <div class="review-img">
-                         <img class="img-fluid rounded-circle" src="@/assets/img/landing/review-2.png" alt="Review">
-                       </div>
-                       <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                      <i class="ion ion-ios-star-half"></i>
-                       <h2> Melissa Vanbergh</h2>
-                       <h6>Vice President</h6>
-                       <a href="#">Vestor Corp</a>
-                     </div>
-                   </div></div><div class="owl-item active" style="width: 730px;"><div class="card-single">
-                     <div class="review-text">
-                       <h1>"We have very fair pricing policy that would benefit you and us at the same time.
-                         Choose what price you're willing to pay. Get the free plan &amp; if you need more - pay."
-                       </h1>
-                     </div>
-                     <div class="review-attribution">
-                       <div class="review-img">
-                         <img class="img-fluid rounded-circle" src="@/assets/img/landing/review-3.png" alt="Review">
-                       </div>
-                       <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                      <i class="ion ion-star"></i>
-                       <h2> Joshua Peterson</h2>
-                       <h6>Product Developer</h6>
-                       <a href="#">Betabet Inc</a>
-                     </div>
-                   </div></div></div></div><div class="owl-nav disabled"><button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">‹</span></button><button type="button" role="presentation" class="owl-next"><span aria-label="Next">›</span></button></div><div class="owl-dots"><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot"><span></span></button><button role="button" class="owl-dot active"><span></span></button></div></div>
-               </div>
-             </div>
-           </div>
-         </div>
-         dArray Reviews Ends -->
-
         <!-- dArray Pricing Section -->
         <div id="pricing" class="pricing-section text-center">
           <div class="container">
@@ -433,7 +352,7 @@
                 <div class="pricing-intro wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
                   <h1>Suport.</h1>
                   <p style='max-width:800px;margin:0px auto;'>
-                    <span style='color:#344675;'>dArray</span> is free, but you could support it & myself <span style='color:#aaa;'>a solo-maker</span> in various ways:<br />Thanks you in advance <span style='color:#344675;'>❤️</span>.
+                    <span style='color:#344675;'>dArray</span> is free, but you could support it & myself <span style='color:#aaa;'>a solo-maker</span> in various ways:<br />Thank you in advance <span style='color:#344675;'>❤️</span>.
                   </p>
                 </div>
                 <div class="row">
@@ -441,7 +360,7 @@
                    <div class="table-left wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
                      <div class="pricing-details">
                        <h2>Free!</h2>
-                       <img src="@/assets/img/landing/free.png" alt="Icon" width="60">
+                       <img src="@/assets/img/landing/free.png" alt="Free dArray Icon" width="60">
 
                        <span>$0.00</span>
                           <ul>
@@ -475,7 +394,7 @@
                         <tr><th>Buy Me a Coffee</th></tr>
                         <tr>
                           <td class='text-center pt-3'>
-                            <a href=''><img src='@/assets/img/landing/Button_orange.png' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
+                            <a href='https://www.buymeacoffee.com/mpSEk0R' target='_blank'><img src='@/assets/img/landing/Button_orange.png' alt='Buy me a coffee' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
                           </td>
                         </tr>
                       </table>
@@ -485,7 +404,9 @@
                         <tr><th>ProductHunt</th></tr>
                         <tr>
                           <td class='text-center pt-3'>
-                            <a href="https://www.producthunt.com/posts/roastme-4?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-roastme-4" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=137613&theme=light" alt="roastMe - Real feedback 🔥 and critics 🎯 from community & expert users | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" /></a>
+                            <a href="https://www.producthunt.com/posts/roastme-4?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-roastme-4" target="_blank">
+                              <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=137613&theme=light" alt="roastMe - Real feedback 🔥 and critics 🎯 from community & expert users | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" />
+                            </a>
                           </td>
                         </tr>
                       </table>
@@ -518,7 +439,7 @@
             <div class="row">
               <div class="col-md-3">
                 <a class="footer-logo" href="#">
-                  <img src='@/assets/img/darray.png' style="width:20px;margin-right:10px;" />dArray.
+                  <img src='@/assets/img/darray.png' style="width:20px;margin-right:10px;" alt='dArray logo' />dArray.
                 </a>
               </div>
               <div class="col-md-6 text-center">

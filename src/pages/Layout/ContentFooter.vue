@@ -1,7 +1,7 @@
 <template>
-  <footer class="footer pt-0">
-    <div class="container-fluid px-2">
-      <ul class="nav">
+  <footer class="footer pt-0 pb-0">
+    <div class="container-fluid px-2 row">
+      <ul class="col-4 nav my-0 text-left pl-5">
         <li class="nav-item" v-if='false'>
           <a href="javascript:void(0)" class="nav-link">
             About Us
@@ -18,14 +18,14 @@
           </a>
         </li>
       </ul>
-      <div class="copyright">
+      <div class="col-8 copyright my-0 text-right" style='margin-right:0px;'>
         &copy;
         {{ new Date().getFullYear() }} made with <i class="tim-icons icon-heart-2"></i> by
         <a href="http://www.jpaulet.com" alt='J.P. Aulet' target="_blank" style='color:#344675;'>J.P. Aulet</a>.
       </div>
     </div>
 
-    <modal :show.sync="showContent" body-classes="p-0" modal-classes="modal-dialog-centered modal-md mt-2" style='transform:translate(0,0) !important;padding-top:50px;'>
+    <modal :show.sync="showContent" body-classes="p-0" modal-classes="modal-dialog-centered modal-lg mt-2" style='transform:translate(0,0) !important;padding-top:50px;'>
       <template slot="header">
         <h4 class="modal-title ml-2" id="exampleModalLabel">Support Us</h4>
       </template>
@@ -50,7 +50,7 @@
             <tr><th>Buy Me a Coffee</th></tr>
             <tr>
               <td class='text-center pt-1'>
-                <a href=''><img src='@/assets/img/landing/Button_orange.png' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
+                <a href='https://www.buymeacoffee.com/mpSEk0R' target='_blank'><img src='@/assets/img/landing/Button_orange.png' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
               </td>
             </tr>
           </table>

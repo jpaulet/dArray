@@ -9,7 +9,7 @@
             <span class="navbar-toggler-bar bar3"></span>
           </button>
         </div>
-        <a class="navbar-brand" href=""> {{ $route.name }}</a>
+        <a class="navbar-brand" href=""> <img src='@/assets/img/darray.png' style='width:32px;margin-right:5px;margin-left:-10px;' /> <strong>DARRAY</strong> / {{ $route.name }}</a>
       </div>
 
       <button class="navbar-toggler" type="button"
@@ -24,7 +24,7 @@
       </button>
 
       <div class="collapse navbar-collapse show text-left" v-show="showMenu">
-        <ul class="navbar-nav addMoreItems" style='display:none;'>
+        <ul class="navbar-nav addMoreItems" style=''>
           <drop-down>
             <a href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle nav-link">
               <div class="d-none d-lg-block d-xl-block"></div>
@@ -35,29 +35,29 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-right dropdown-navbar py-3">
               <li class="nav-link mb-2">
-                  <a href="#" class="nav-item dropdown-item">
+                  <router-link to="invoices?newInvoice=true" class="nav-item dropdown-item">
                     <i class="tim-icons icon-paper text-info" style='color:#222 !important;'></i> New Invoice
-                  </a>
+                  </router-link>
               </li>
               <li class="nav-link mb-2">
-                  <a href="#" class="nav-item dropdown-item">
+                  <router-link to="expenses?newExpense=true" class="nav-item dropdown-item">
                     <i class="tim-icons icon-pin text-info" style='color:#222 !important;'></i> New Expense
-                  </a>
+                  </router-link>
               </li>
               <li class="nav-link mb-2">
-                  <a href="#" class="nav-item dropdown-item">
+                  <router-link to="customers?newCustomer=true" class="nav-item dropdown-item">
                     <i class="tim-icons icon-single-02 text-info" style='color:#222 !important;'></i> New Customer
-                  </a>
+                  </router-link>
               </li>
               <li class="nav-link mb-2">
-                  <a href="#" class="nav-item dropdown-item">
+                  <router-link to="tasks" class="nav-item dropdown-item">
                     <i class="tim-icons icon-pin text-info" style='color:#222 !important;'></i> New Task
-                  </a>
+                  </router-link>
               </li>
               <li class="nav-link mb-2">
-                  <a href="#" class="nav-item dropdown-item">
+                  <router-link to="calendar?newEvent=true" class="nav-item dropdown-item">
                     <i class="tim-icons icon-calendar-60 text-info" style='color:#222 !important;'></i> New Event
-                  </a>
+                  </router-link>
               </li>
             </ul>
           </drop-down>
@@ -145,13 +145,7 @@ export default {
       avatar: 'https://s3.amazonaws.com/onename/avatar-placeholder.png',
       givenName: 'Anonymous',
       imageSrc: null,
-      messages: [
-        {
-          title: 'Add Company Info',
-          msg: 'Add your company basic info to create better invoices, expenses & more.',
-          url: '/settings'
-        }
-      ]
+      messages: []
     }
   },
   methods: {
@@ -183,8 +177,12 @@ export default {
       const profile = blockstack.loadUserData().profile
       const user = new blockstack.Person(profile)
       this.givenName = user.name() ? user.name() : 'Nameless Person'
-      if (user.avatarUrl()) this.avatar = user.avatarUrl()
-      this.imageSrc = user.avatarUrl()
+      if (user.avatarUrl()){
+        this.avatar = user.avatarUrl()
+        this.imageSrc = user.avatarUrl()
+      }else{
+        this.imageSrc = 'https://s3.amazonaws.com/onename/avatar-placeholder.png'
+      }
       this.checkInicialization()
     } else if (blockstack.isSignInPending()) {
       blockstack.handlePendingSignIn()

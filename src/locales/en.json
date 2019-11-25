@@ -1,10 +1,10 @@
 {
   "dashboard": {
     "completedTasks": "Completed Tasks",
-    "dailySales": "Daily Sales",
+    "dailySales": "Monthly Expenses",
     "performance": "Performance",
-    "simpleTable": "Simple Table",
-    "totalShipments": "Total Shipments",
+    "simpleTable": "Customers",
+    "totalShipments": "Total VAT",
     "chartCategories": [
       "Accounts",
       "Purchases",
@@ -111,8 +111,8 @@
     ]
   },
   "sidebar": {
-    "title": "Creative Tim",
-    "shortTitle": "CT",
+    "title": "dArray",
+    "shortTitle": "dA",
     "dashboard": "dashboard",
     "icons": "Icons",
     "maps": "Maps",

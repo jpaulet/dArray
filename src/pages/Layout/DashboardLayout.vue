@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
-    <side-bar :background-color="backgroundColor" v-if="user" :user="user" :title="user.name">
-      <sidebar-link to="/dashboard">
+    <side-bar :background-color="backgroundColor" v-if="user" :title="user.name">
+      <sidebar-link to="/dashboard" @click.prevent=''>
         <i class="tim-icons icon-chart-pie-36"></i>
         <template>
-          <p>Dashboard</p>
+          <p>Dashboard <span style='margin-left:10px;font-size:9px !important;color:#555;text-decoration:none;'>Coming Soon!</span></p>
         </template>
       </sidebar-link>
       <sidebar-link to="/invoices">
@@ -107,7 +107,7 @@ export default {
       this.userData = userSession.loadUserData()
       this.user = new Person(this.userData.profile)
       this.user.username = this.userData.username
-      this.user.name = this.userData.name
+      this.user.name = this.userData.name ? this.userData.name : this.userData.username.substr(0,this.userData.username.indexOf("."))
     } else if (userSession.isSignInPending()) {
       userSession.handlePendingSignIn()
         .then((userData) => {

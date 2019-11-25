@@ -2,12 +2,13 @@
   <card type="user">
     <h5 class='text-left mb-4'> <strong>Preview</strong> </h5>
     <div class="author">
-      <a href="#" @click='saveLogo'>
+      <a href="" @click.prevent='saveLogo'>
         <input type="file" accept="image/*" @change="onFileChange" id="file-input" ref='uploadImage' style='display:none;'>
         <img v-if='!imageLogo' style='height:124px;width:124px;border-radius:0px;' class="avatar" src="@/assets/img/company.png" alt="Logo Default" id='imageLogoDefault' v-on:load='fetchFile'>
+        <div v-if='!imageLogo' class='col-12 text-center'><button class='btn btn-light btn-sm' style='font-size:11px;clear:both;'> Upload your logo </button></div>
         <img v-if='imageLogo' style='height:124px;width:124px;border-radius:0px;' class="avatar" :src="imageSrc" alt="Logo" id='imageLogo'>
-        <h5 class="title">{{ company.company }}</h5>
       </a>
+      <h5 class="title">{{ company.company }}</h5>
       <p class="description">
         {{company.firstName}} {{company.lastName}}
       </p>

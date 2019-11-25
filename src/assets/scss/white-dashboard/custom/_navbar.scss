@@ -70,6 +70,9 @@
   }
 
   &.bg-white{
+    border-bottom:1px solid #eee;
+    box-shadow: 0 3px 2px -2px #80808033;
+    
     .navbar-nav{
       .search-bar.input-group{
         i{

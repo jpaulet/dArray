@@ -148,6 +148,10 @@ export default {
   },
   mounted () {
     this.fetchData()
+
+    if(this.$route.query.newEvent){
+      this.createEvent = true
+    }
   }
 }
 </script>

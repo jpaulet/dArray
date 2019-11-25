@@ -1,13 +1,14 @@
 <template>
-  <div class="content">
+  <div class="content" style='opacity:0.35;'>
+    <div style='position: relative;  top: 300px; z-index: 9999; text-align: center;  font-size: 64px;margin-top:-90px;'>Cooming Soon!</div>
     <div class="row">
       <div class="col-12">
         <card type="chart">
           <template slot="header">
             <div class="row">
               <div class="col-sm-6 text-left">
-                  <h5 class="card-category">Total Shipments</h5>
-                  <h2 class="card-title">Performance</h2>
+                  <h5 class="card-category">Total Earnings</h5>
+                  <h2 class="card-title">$ Income</h2>
               </div>
               <div class="col-sm-6 text-right" style='display:none;'>
                 <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
@@ -119,8 +120,8 @@
       </div>
       <div class="col-lg-6 col-md-12">
         <card class="card">
-          <h4 slot="header" class="card-title">
-            Simple Table
+          <h4 slot="header" class="card-title mb-0 pb-0">
+            Customers
           </h4>
           <div class="table-responsive">
             <user-table></user-table>
@@ -160,7 +161,7 @@ export default {
       ],
       bigLineChart: {
         allData: [
-          [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100],
+          [1000, 700, 900, 700, 850, 600, 750, 600, 900, 800, 1100, 1000],
           [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120],
           [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
         ],
@@ -198,9 +199,9 @@ export default {
       blueBarChart: {
         extraOptions: chartConfigs.barChartOptions,
         chartData: {
-          labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
+          labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
           datasets: [{
-            label: 'Countries',
+            label: 'Data',
             fill: true,
             borderColor: config.colors.primary,
             borderWidth: 2,

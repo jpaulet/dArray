@@ -4,7 +4,7 @@
       <div id="container">
         <div>
           <div @click="openFilePicker" id="uploader" class='mb-5'>
-            <p><span>Click</span> to choose a file to upload :)</p>
+            <p><span style='color:rgb(52, 70, 117);'>Click</span> to choose a file to upload :)</p>
             <input type="file" ref="filepicker" @change="uploadFile" />
           </div>
           <div class='text-left row mb-3'>
@@ -19,7 +19,7 @@
               <img src='@/assets/img/folder.png' height='42' />
               <p style='font-size:11px;margin-top:5px;'>{{folder}}</p>
             </div>
-            <div v-if='currentDepth < 5' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:115px;margin-right:30px;float:left;' @mousedown='openNewFolder()'>
+            <div v-if='currentDepth < 5' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:115px;margin-right:0px;float:left;' @mousedown='openNewFolder()'>
               <img src='@/assets/img/folderplus.png' height='42' />
               <div v-if='!newFolder' style='font-size:11px;margin-top:5px;'>New Folder</div>
               <input v-if='newFolder' v-model='folderName' ref="newFolder" id='newFolder' type='form-control' name='New Folder' placeholder="Folder name" style='width:90px;height:26px;font-size:11px;padding:3px;border-radius:8px;border:1px solid #eee;' />
@@ -82,12 +82,17 @@ export default {
     fetchData () {
       // Load Files
       userSession.getFile(FILESYSTEM, this.$DECRYPT).then((filesystem) => {
+        if(!filesystem){
+          return false
+        }
         this.uploads = JSON.parse(filesystem || [])
         let i = 0
 
         for (i in this.uploads) {
           this.uploads[i].progress = '100%'
         }
+      }).catch(function(e) {
+        console.log("Error: "+e);
       })
 
       userSession.getFile(FOLDERS, this.$DECRYPT).then((folders) => {
@@ -99,6 +104,8 @@ export default {
         } else {
           this.folders = JSON.parse(folders || [])
         }
+      }).catch(function(e) {
+        console.log("Error: "+e);
       })
     },
 
@@ -124,6 +131,8 @@ export default {
         this.path = localPath
       }
       this.currentDepth = depth
+
+      console.log("PATH: "+this.path)
 
       userSession.getFile(this.path + FOLDERS, this.$DECRYPT).then((filesystem) => {
         if (!filesystem) {
@@ -193,6 +202,12 @@ export default {
       const input = this.$refs.filepicker
       const file = input.files[0]
       var dataURL = null
+      let extension = file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length)
+      if (extension === 'jpg' || extension === 'jpeg' || extension === 'gif' || extension === 'png' || extension === 'bmp') {
+        var type = 'image'
+      }else{
+        var type = 'file'
+      }
 
       const upload = {
         id: this.uploads.length + 1,
@@ -200,10 +215,15 @@ export default {
         path: this.path + '/' + file.name,
         size: this.getFileSize(file.size),
         progress: '0%',
-        ext: file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length),
+        ext: extension,
         progressTimer: null,
-        type: 'file',
-        color: this.getRandomColor(file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length))
+        type: type,
+        color: this.getRandomColor(extension)
+      }
+
+      let localPath = this.path
+      if (localPath === '/') {
+        localPath = ''
       }
 
       this.uploads.push(upload)
@@ -214,7 +234,12 @@ export default {
         dataURL = reader.result
         userSession.putFile(this.path + upload.id + '_' + upload.name, dataURL, this.$ENCRYPT)
       }
-      reader.readAsArrayBuffer(input.files[0])
+
+      if(extension === 'image'){
+        reader.readAsDataURL(input.files[0])
+      }else{
+        reader.readAsArrayBuffer(input.files[0])
+      }
 
       // userSession.putFile( upload.id+"_"+upload.name, dataURL )
       userSession.putFile(this.path + FILESYSTEM, JSON.stringify(this.uploads), this.$ENCRYPT)

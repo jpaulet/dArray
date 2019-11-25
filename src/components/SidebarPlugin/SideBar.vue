@@ -2,18 +2,18 @@
   <div class="sidebar" :data="backgroundColor">
     <div class="sidebar-wrapper text-left">
       <div class="logo">
-        <a href="javascript:void(0)" class="simple-text logo-mini" style='background-color:#0000000f;border-radius:40px;height:34px;margin-top:5px;line-height:17px;font-size:11px;'>
+        <a href="javascript:void(0)" class="simple-text logo-mini mt-0" style='background-color:#0000000f;border-radius:40px;height:34px;margin-top:5px;line-height:17px;font-size:11px;'>
           {{ abv }}
         </a>
 
         <drop-down style='list-style-type: none;'>
-          <a href="javascript:void(0)" class="simple-text logo-normal text-left float-left col-7">
-            {{ title }}
+          <a href="javascript:void(0)" class="simple-text logo-normal text-left float-left col-7 pt-0">
+            <span style='font-weight:200;font-size:14px;'>{{ title }}</span>
             <b class="caret d-none d-lg-block d-xl-block" style='float:right;right:0px;top:25px;color:#999;display:none !important;'></b>
           </a>
 
           <!-- TODO -->
-          <ul class="dropdown-menu dropdown-navbar" style='float:right;right:0px;left:0px;margin-top:45px;box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2);display:none !important;'>
+          <ul v-if='false' class="dropdown-menu dropdown-navbar pt-3 mt-4" style='float:right;right:0px;left:0px;margin-top:45px;box-shadow:0px 10px 10px 0px rgba(0, 0, 0, 0.2);display:none !important;'>
             <li class="nav-link">
               <a href="javascript:void(0)" class="nav-item dropdown-item">Startup 2</a>
             </li>
@@ -48,7 +48,7 @@ export default {
     },
     title: {
       type: String,
-      default: ' Aulet'
+      default: ' Your Business'
     },
     backgroundColor: {
       type: String,

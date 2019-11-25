@@ -35,7 +35,7 @@ html,body{
 }
 
 .content-main-card .card {
-	min-height: 760px;
+	min-height: 75vh;
 }
 
 .addMoreItems{

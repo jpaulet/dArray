@@ -68,7 +68,7 @@
 
         <div v-if='!table1.data.length && !loadingPage' class='py-4 text-center my-4'>
             <p>No customers yet. </p>
-            <img src='@/assets/img/customers.png' class='mt-3 mb-5' height='200' />
+            <img src='@/assets/img/customers.jpg' class='mt-3 mb-5' height='200' />
         </div>
     </card>
 
@@ -379,6 +379,10 @@ export default {
   async mounted () {
     this.i18n = this.$i18n
     this.fetchData()
+
+    if(this.$route.query.newCustomer){
+      this.openNewCustomer()
+    }
   }
 }
 </script>

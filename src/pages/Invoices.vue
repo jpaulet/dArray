@@ -6,15 +6,15 @@
                 <div class="col-sm-6 text-left">
                   <button type="button" class="btn btn-light btn-sm px-5 text-white" fill="" @click="openNewInvoice">+ New Invoice</button>
                 </div>
-                <div class="col-sm-6 text-right" v-if='false'>
+                <div class="col-sm-6 text-right">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
                        <label v-for="(option, index) in invoiceOptions"
                               :key="option"
-                              class="btn btn-success btn-sm btn-simple"
+                              class="btn btn-light btn-sm btn-simple"
                               :class="{active:activeIndex === index}"
                               :id="index">
                           <input type="radio"
-                                @click="initBigChart(index)"
+                                @click="changeViewType(index,option)"
                                 name="options" autocomplete="off"
                                 :checked="activeIndex === index">
                           {{ option }}
@@ -40,8 +40,8 @@
                 <i class="tim-icons icon-settings-gear-63"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
-                <a href="#" class="dropdown-item" @click.prevent='archiveInvoices()'>Archive <i class="tim-icons icon-alert-circle-exc ml-2" data-toggle="tooltip" data-html="true" title="Save to folder & delete from list" style='font-size:12px;color:#777;margin-top:-10px;'></i></a>
-                <a href="#" class="dropdown-item" @click.prevent='duplicateInvoices()'>Duplicate</a>
+                <a v-if='activeIndex === 0' href="#" class="dropdown-item" @click.prevent='archiveInvoices()'>Archive <i class="tim-icons icon-alert-circle-exc ml-2" data-toggle="tooltip" data-html="true" title="Save to folder & delete from list" style='font-size:12px;color:#777;margin-top:-10px;'></i></a>
+                <a v-if='activeIndex === 0' href="#" class="dropdown-item" @click.prevent='duplicateInvoices()'>Duplicate</a>
                 <a href="#" class="dropdown-item" @click.prevent='deleteInvoices()'>Delete</a>
               </ul>
             </drop-down>
@@ -112,7 +112,7 @@
 
         <div v-if='!table1.data.length && !loadingPage' class='py-4 text-center my-4'>
             <p>No invoices yet. </p>
-            <img src='@/assets/img/invoice.png' class='mt-3 mb-5' height='200' />
+            <img src='@/assets/img/invoice.jpg' class='mt-3 mb-5' height='200' />
         </div>
     </card>
 
@@ -290,7 +290,7 @@
 
         <div class='row px-2'>
             <div class='col-1 text-left mt-3'>
-                <button class='btn btn-danger btn-sm ml-1' @click='clearInvoice' style='opacity:0.75;color:#ec250d;'>Clear</button>
+                <button class='btn btn-danger btn-sm ml-1' @click='clearInvoice' style='opacity:0.75;color:#333;'>Clear</button>
             </div>
             <div class='col-3 text-right mt-3 pr-3'>
               <button class='btn btn-light btn-sm mr-5' style='opacity:0.8;'>Save Customer</button>
@@ -298,7 +298,7 @@
 
             <div class='col-8 text-right mt-3'>
                 <button class='btn btn-light btn-sm' style='opacity:0.9;' @click='showInvoice(invoice.id)'>Preview</button>
-                <button class='btn btn-secondary btn-sm px-5' @click='saveInvoice'>Save</button>
+                <button class='btn btn-secondary btn-sm px-5' @click='saveInvoice' v-if='activeIndex === 0'>Save</button>
             </div>
         </div>
     </card>
@@ -472,6 +472,7 @@ const tableColumns = ['', 'Name', 'Client', 'Date', 'Total', 'Status', 'View', '
 var STORAGE_FILE = 'invoices.json'
 var COMPANY_FILE = 'company.json'
 var CUSTOMERS_FILE = 'customers.json'
+var ARCHIVED_FILE = 'archievedInvoices.json'
 
 export default {
   components: {
@@ -490,9 +491,8 @@ export default {
       tableData: [{}],
       newInvoice: false,
       invoiceOptions: [
-        'This Month',
-        'Today',
-        'All'
+        'Active',
+        'Archived'
       ],
       invoiceFolders: [],
       activeIndex: 0,
@@ -560,7 +560,11 @@ export default {
       this.showArchive = true
 
       userSession.getFile('Invoices/folders.json', this.$DECRYPT).then(invoiceFolders => {
-        this.invoiceFolders = JSON.parse(invoiceFolders || [])
+        if(!invoiceFolders){
+          this.invoiceFolders = []
+          return false
+        }
+        this.invoiceFolders = JSON.parse(invoiceFolders)
       })
     },
 
@@ -594,16 +598,25 @@ export default {
         })
       })
 
-      this.selected.map((el) => {
-        userSession.deleteFile(el.id+'.json')
-      })
-
-      userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList), this.$ENCRYPT)
-      this.invoices = this.invoices.filter((el) => {
-        return !this.selected.some((f) => {
-          return f.id === el.id
+      if(this.activeIndex === 0){
+        this.selected.map((el) => {
+          userSession.deleteFile(el.id+'.json')
         })
-      })
+
+        userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList), this.$ENCRYPT)
+        this.invoices = this.invoices.filter((el) => {
+          return !this.selected.some((f) => {
+            return f.id === el.id
+          })
+        })
+      }else{
+        userSession.putFile(ARCHIVED_FILE, JSON.stringify(newInvoicesList), this.$ENCRYPT)
+        this.invoices = this.invoices.filter((el) => {
+          return !this.selected.some((f) => {
+            return f.id === el.id
+          })
+        })
+      }
 
       this.$set(this.table1, 'data', this.invoices)
       //this.table1.data = this.invoices
@@ -648,6 +661,7 @@ export default {
 
     loadCompanyLogo () {
       userSession.getFile(this.company.logo, this.$DECRYPT).then((logoImage) => {
+        if(!logoImage){ return false }
         this.imageSrc = logoImage
       })
     },
@@ -695,8 +709,49 @@ export default {
       }
     },
 
-    initBigChart (index) {
+    changeViewType (index,option) {
       this.activeIndex = index
+
+      if(option === 'Archived'){
+        this.loadArchived()
+      }else{
+        this.loadingPage = true
+        this.invoices = []
+        this.fetchData()
+      }
+    },
+
+    loadArchived(){
+      this.loadingPage = true
+      this.invoices = []
+
+      // Load Invoices data
+      userSession.getFile(ARCHIVED_FILE, this.$DECRYPT).then((invoices) => {
+        if(!invoices){ 
+          this.invoicesList = []
+        }else{
+          this.invoicesList = JSON.parse(invoices)
+        }
+        var i = 0
+
+        for (i in this.invoicesList) {
+          userSession.getFile(this.invoicesList[i], this.$DECRYPT).then((invoice) => {
+            if (invoice === null) {
+              return false
+            }
+
+            invoice = JSON.parse(invoice)
+            //let searchInvoice = this.invoicesList.indexOf(invoice.id)
+            this.$set(this.invoices, this.invoices.length, invoice)
+            this.invoicesList[i] = invoice.id
+          })
+        }
+
+        setTimeout(() => {
+          this.table1.data = this.invoices
+          this.loadingPage = false
+        }, 700);
+      })
     },
 
     selectCustomer (index) {
@@ -725,7 +780,11 @@ export default {
     fetchData () {
       // Load Company data
       userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
-        this.company = JSON.parse(company || '{}')
+        if(!company){ 
+          this.company = {}
+        }else{
+          this.company = JSON.parse(company)
+        }
 
         this.invoice.payment = this.company.payment
         this.invoice.comments = this.company.comments
@@ -734,12 +793,16 @@ export default {
 
         // Load Invoices data
         userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((invoices) => {
-          this.invoicesList = JSON.parse(invoices || '[]')
-          let i = 0
+          if(!invoices){ 
+            this.invoicesList = []
+          }
+          this.invoicesList = JSON.parse(invoices)
+          var i = 0
 
           for (i in this.invoicesList) {
             userSession.getFile(this.invoicesList[i] + '.json', this.$DECRYPT).then((invoice) => {
               if (invoice === null) {
+                this.invoicesList.splice(i,1)
                 return false
               }
 
@@ -758,12 +821,20 @@ export default {
 
       // Load Customers
       userSession.getFile(CUSTOMERS_FILE, this.$DECRYPT).then((customers) => {
-        this.customersList = JSON.parse(customers || '[]')
-        let i = 0
+        if(!customers){
+          this.customersList = []
+        }
+        this.customersList = JSON.parse(customers)
+        var i = 0
 
         for (i in this.customersList) {
           userSession.getFile(this.customersList[i] + '.json', this.$DECRYPT).then((customer) => {
-            this.customers.push(JSON.parse(customer))
+            if(!customer){
+              return false
+            }
+            customer = JSON.parse(customer)
+            let searchCustomer = this.customersList.indexOf(customer.id)
+            this.$set(this.customers, searchCustomer, customer)
           })
         }
       })
@@ -891,6 +962,7 @@ export default {
         return false
       }
 
+      //Remove from current file list
       const newInvoicesList = this.invoicesList.filter((el) => {
         return !this.selected.some((f) => {
           return f.id === el
@@ -899,8 +971,23 @@ export default {
 
       this.selected.map((el) => {
         userSession.getFile(el.id+'.json', this.$DECRYPT).then((theFile) => {
+          if(!theFile){ return false }
+          //Save the file
           userSession.putFile(this.selectedFolder+'/'+el.name.toLowerCase().replace(/\s/g, '')+'.json',theFile, this.$ENCRYPT)
 
+          //Save to Archived File
+          userSession.getFile(ARCHIVED_FILE).then((archived) => {
+            if(!archived){
+              var files = []
+            }else{
+              var files = JSON.parse(archived)
+            }
+
+            files.push(this.selectedFolder+'/'+el.name.toLowerCase().replace(/\s/g, '')+'.json')
+            userSession.putFile(ARCHIVED_FILE, JSON.stringify(files), this.$ENCRYPT)
+          })
+
+          //Delete from Invoice Filesystem and transfer to Files/Filesystem
           userSession.getFile(this.selectedFolder+'/filesystem.json', this.$DECRYPT).then((uploads) => {
             if(!uploads){
               var files = []
@@ -927,6 +1014,7 @@ export default {
         })
       })
 
+      //Upload the new files list
       userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList), this.$ENCRYPT)
       this.invoices = this.invoices.filter((el) => {
         return !this.selected.some((f) => {
@@ -973,10 +1061,14 @@ export default {
   },
   async created() {
     this.fetchData()
+
+    if(this.$route.query.newInvoice){
+      this.openNewInvoice()
+    }
   },
   async mounted () {
     this.i18n = this.$i18n
-    this.initBigChart(2)
+    this.changeViewType(0)
   }
 }
 </script>
@@ -1125,8 +1217,9 @@ export default {
     color:#000 !important;
   }
   .btn-danger{
-    color:#fd5d93d4 !important;
+    color:#333 !important;
     background:transparent;
     background-color: none;
+    text-decoration: underline;
   }
 </style>
