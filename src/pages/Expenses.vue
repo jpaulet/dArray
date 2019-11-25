@@ -248,7 +248,7 @@
 
         <div class='row px-2'>
             <div class='col-4 text-left mt-3'>
-                <button class='btn btn-danger btn-sm ml-1' @click='clearExpense' style='opacity:0.75;'>Clear</button>
+                <button class='btn btn-danger btn-sm ml-1' @click='clearExpense' style='opacity:0.75;color:#ec250d;'>Clear</button>
             </div>
 
             <div class='col-8 text-right mt-3'>
@@ -940,5 +940,11 @@ export default {
 
   .badge-danger{
     background-color: #f0b7a4 !important;
+  }
+
+  .btn-danger{
+    color:#fd5d93d4 !important;
+    background:transparent;
+    background-color: none;
   }
 </style>

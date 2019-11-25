@@ -171,12 +171,11 @@ export default {
     },
 
     closeNewFolder () {
-      this.newFolder = false
-      console.log('close new folder' + this.newFolder)
+      this.newFolder = false      
     },
 
-    getRandomColor () {
-      const randomIndex = Math.floor(Math.random() * 2)
+    getRandomColor (type) {
+      const randomIndex = Math.floor(Math.random() * 3)
       return this.colors[randomIndex]
     },
 
@@ -204,7 +203,7 @@ export default {
         ext: file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length),
         progressTimer: null,
         type: 'file',
-        color: this.getRandomColor()
+        color: this.getRandomColor(file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length))
       }
 
       this.uploads.push(upload)

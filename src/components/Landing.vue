@@ -5,7 +5,7 @@
       <!-- :style="{ backgroundImage: 'url(' + require('@/assets/img/landing/map.png') + ')' }" style='background-repeat:no-repeat;margin: 0px auto;background-position:bottom center;background-size:contain;' -->
       <!-- Navbar Section -->
       <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top effect-main">
-        <div class="container container-s">
+        <div class="container container">
           <a class="navbar-brand" href="#">
             <img src='@/assets/img/darray.png' style="width:30px;margin-right:10px;" />dArray.
           </a>
@@ -25,10 +25,10 @@
       </nav><!-- Navbar End -->
 
       <div id="main" class="main">
-        <div class="container-m text-center">
+        <div class="container text-center">
           <div class="home hero-2"><!-- Hero Section-->
             <div class="hero-content wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <h1>The <transition name="slide-fade" mode="out-in"><span class='mr-3'>{{rotateText}}</span></transition> <strong style='font-weight:500;'>Invoicing Software</strong> for Makers, Freelancers & SME</h1>
+              <h1>The <transition name="slide-fade" mode="out-in"><span class='mr-3'>{{rotateText}}</span></transition> <strong style='font-weight:500;'>Accounting Software</strong><br /> for Makers, Freelancers & SME</h1>
               <p>Put your business on the <strong style='font-weight:500;'>Blockchain</strong> & keep your data <strong style='font-weight:500;'>secure & private</strong>.<br />Manage Invoices, Expenses, Customers, Files & more from everywhere.</p>
               <div class="form-alt mt-5">
                 <div class="subscribe-form wow zoomIn animated" style="visibility: visible;">
@@ -41,21 +41,21 @@
               </div>
             </div>
             <div class="hero-img wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <img class="img-fluid" src="@/assets/img/landing/hero.png" alt="Home">
+              <img class="img-fluid" src="@/assets/img/landing/features/show.gif" alt="Home">
             </div>
           </div>
         </div><!-- Hero End -->
 
         <div id="products" class="features wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-          <div class="container-m">
+          <div class="container">
             <div class="row text-center">
               <div class="col-md-12">
                 <div class="features-intro">
                   <h2><span style='color:#344675;'>dArray</span> is a privacity-focus Blockchain accounting platform</h2>
-                  <p>The place to run your business & accouting. You own all your data!</p>
+                  <p>The place to run your business & accounting. You own all your data!</p>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-6 col-lg-4 col-sm-6">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -68,7 +68,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-6 col-lg-4 col-sm-6">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -81,7 +81,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-6 col-lg-4 col-sm-6">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -94,7 +94,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-6 col-lg-4 col-sm-6">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -107,7 +107,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-6 col-lg-4 col-sm-6">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -120,7 +120,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4">
+              <div class="col-md-6 col-lg-4 col-sm-6">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -139,31 +139,100 @@
 
         <!-- Features Section -->
         <div id="features" class="flex-split wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-           <div class="container-s">
+           <div class="container">
              <div class="flex-intro align-center">
                <h2>Manage your accounting in a easy & private way</h2>
                <p>
-                A blockchain-based invoice software & accouting for your business.
+                Take control of your professional activity with dArray, a blockchain-based invoice software & accouting for Makers, Freelancers & SME.
                </p>
              </div>
-             <div class="flex-inner align-center">
+
+             <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
                  <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/invoice_sm.png" alt="Invoice screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                   <!-- <img class="img-fluid" src="@/assets/img/landing/features/invoice1.png" alt="Invoice screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'> -->
+                   <ul class="slides">
+                    <input type="radio" name="radio-btn" id="img-1" checked />
+                    <li class="slide-container">
+                    <div class="slide">
+                      <img src="@/assets/img/landing/features/invoice1.png" />
+                        </div>
+                    <div class="nav">
+                      <label for="img-3" class="prev">&#x2039;</label>
+                      <label for="img-2" class="next">&#x203a;</label>
+                    </div>
+                    </li>
+
+                    <input type="radio" name="radio-btn" id="img-2" />
+                    <li class="slide-container">
+                        <div class="slide">
+                          <img src="@/assets/img/landing/features/invoice2.png" />
+                        </div>
+                    <div class="nav">
+                      <label for="img-1" class="prev">&#x2039;</label>
+                      <label for="img-3" class="next">&#x203a;</label>
+                    </div>
+                    </li>
+
+                    <input type="radio" name="radio-btn" id="img-3" />
+                    <li class="slide-container">
+                        <div class="slide">
+                          <img src="@/assets/img/landing/features/invoice3.png" />
+                        </div>
+                    <div class="nav">
+                      <label for="img-2" class="prev">&#x2039;</label>
+                      <label for="img-1" class="next">&#x203a;</label>
+                    </div>
+                    </li>
+
+                    <li class="nav-dots">
+                      <label for="img-1" class="nav-dot" id="img-dot-1"></label>
+                      <label for="img-2" class="nav-dot" id="img-dot-2"></label>
+                      <label for="img-3" class="nav-dot" id="img-dot-3"></label>
+                    </li>
+                  </ul>
                  </div>
-                 <div class="f-text" style='margin-top:-20px;'>
+                 <div class="f-text">
                    <div class="left-content">
                      <h2 class="mt-0">Invoices.</h2>
-                     <p> Crate & manage your invoices in a easy & private way.</p>
+                     <p> Forget the paperwork that involves saving tickets and invoices! Crate & manage your invoices in a easy & private way.</p>
                      <a href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
              </div>
 
-             <div class="flex-inner flex-inverted align-center">
+             <div class="flex-inner flex-inverted align-center py-1 py-md-4 py-lg-5">
                <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/print_invoice_nice2.png" alt="Expenses screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 <!-- <img class="img-fluid" src="@/assets/img/landing/features/expense1.png" alt="Expenses screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'> -->
+                 <ul class="slides">
+                    <input type="radio" name="radio-btn2" id="img-4" checked />
+                    <li class="slide-container">
+                    <div class="slide2">
+                      <img src="@/assets/img/landing/features/expense1.png" />
+                        </div>
+                    <div class="nav">
+                      <label for="img-5" class="prev">&#x2039;</label>
+                      <label for="img-5" class="next">&#x203a;</label>
+                    </div>
+                    </li>
+
+                    <input type="radio" name="radio-btn2" id="img-5" />
+                    <li class="slide-container">
+                        <div class="slide2">
+                          <img src="@/assets/img/landing/features/expense2.png" />
+                        </div>
+                    <div class="nav">
+                      <label for="img-4" class="prev">&#x2039;</label>
+                      <label for="img-4" class="next">&#x203a;</label>
+                    </div>
+                    </li>
+
+                    <li class="nav-dots">
+                      <label for="img-4" class="nav-dot" id="img-dot-4"></label>
+                      <label for="img-5" class="nav-dot" id="img-dot-5"></label>
+                    </li>
+                  </ul>
                </div>
-               <div class="f-text" style='margin-top:-20px;'>
+               <div class="f-text">
                  <div class="left-content">
                    <h2 class="mt-0">Expenses.</h2>
                    <p> Track all your expenses by client, type, status & more. Attach the real receipt to keep things organized.</p>
@@ -171,11 +240,11 @@
                  </div>
                </div>
              </div>
-             <div class="flex-inner align-center">
+             <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
                  <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/feature.png" alt="Customers List screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                   <img class="img-fluid" src="@/assets/img/landing/features/customer1.png" alt="Customers List screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                  </div>
-                 <div class="f-text" style='margin-top:-20px;'>
+                 <div class="f-text">
                    <div class="left-content">
                      <h2 class="mt-0">Customers.</h2>
                      <p> All your customers, partners, offerings in one place.</p>
@@ -184,11 +253,11 @@
                  </div>
              </div>
 
-             <div class="flex-inner flex-inverted align-center">
+             <div class="flex-inner flex-inverted align-center py-5">
                <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/files_card.png" alt="Documents & Files screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 <img class="img-fluid" src="@/assets/img/landing/features/filesystem.png" alt="Documents & Files screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                </div>
-               <div class="f-text" style='margin-top:-20px;'>
+               <div class="f-text">
                  <div class="left-content">
                    <h2 class="mt-0">Docs & File</h2>
                    <p> Store all your data in a private & secure storage. Invoices, Expenses & any other important docs.</p>
@@ -197,11 +266,11 @@
                </div>
              </div>
 
-             <div class="flex-inner align-center">
+             <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
                  <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/tasks_nice.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                   <img class="img-fluid" src="@/assets/img/landing/features/tasks.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                  </div>
-                 <div class="f-text" style='margin-top:-20px;'>
+                 <div class="f-text">
                    <div class="left-content">
                      <h2 class="mt-0">Tasks.</h2>
                      <p> Easy to use everyday tasks & events.</p>
@@ -210,11 +279,11 @@
                  </div>
              </div>
 
-             <div class="flex-inner flex-inverted align-center">
+             <div class="flex-inner flex-inverted align-center py-1 py-md-4 py-lg-5">
                <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/calendar1.png" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 <img class="img-fluid" src="@/assets/img/landing/features/calendar.png" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                </div>
-               <div class="f-text" style='margin-top:-20px;'>
+               <div class="f-text">
                  <div class="left-content">
                    <h2 class="mt-0">Calendar.</h2>
                    <p> Create events in your private calendar for meetings, tasks, remember things...</p>
@@ -223,11 +292,11 @@
                </div>
              </div>
 
-             <div class="flex-inner align-center">
+             <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
                  <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/settings_nice.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                   <img class="img-fluid" src="@/assets/img/landing/features/settings.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                  </div>
-                 <div class="f-text" style='margin-top:-20px;'>
+                 <div class="f-text">
                    <div class="left-content">
                      <h2 class="mt-0">Your Business Swiss Knife.</h2>
                      <p> All the features for your productivity: Calendar, Tasks, Pomodoro (WIP), ToDO lists, Organize Files...</p>
@@ -238,7 +307,7 @@
            </div>
          </div>
 
-         <div class="yd-ft wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+         <div class="yd-ft wow fadeIn py-5" style="visibility: visible; animation-name: fadeIn;">
            <div class="yd-ft-inner py-5">
              <div class="yd-ft-left" style='margin-top:-20px;'>
                <h2>Welcome to dArray, where privacity matters.</h2>
@@ -252,7 +321,7 @@
          </div>
 
         <div class="ar-ft-single" id='video-demo'>
-          <div class="container-m">
+          <div class="container">
             <div class="ar-feature mt-5 mb-1">
               <div class="ar-list">
                 <ul>
@@ -431,10 +500,10 @@
 
         <!-- CTA Signup Section -->
         <div id="signup" class="cta-sm wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-          <div class="container-m text-center">
+          <div class="container text-center">
             <div class="cta-content">
-               <h4>DARRAY IS A FULL-FEATURED PRIVATE ONLINE INVOICING SOFTWARE</h4>
-               <h1 class='mb-2'>Start now and put your business<br /> into the blockchain for free.</h1>
+               <h4>DARRAY IS A FULL-FEATURED PRIVATE ONLINE ACCOUNTING SOFTWARE</h4>
+               <h1 class='mb-2'>Start now and put your business<br /> on the Blockchain for free.</h1>
                <a class="btn-action js-scroll-trigger btn btn-primary btn-lg" href="#" @click.prevent='signIn'>Sign In now</a>
               <div class="form-note">
                 <p>It's Free. Sign in now with Blockstack to get access to your decentralized CRM.</p>
@@ -1304,11 +1373,12 @@ body {
 }
 
 .flex-inner .f-image {
-  padding: 0 25px;
+  padding: 0 0px 40px 0px;
 }
 
 .flex-inner .f-text {
   padding: 0 35px;
+  min-height:250px;
 }
 
  .flex-inner .f-text {
@@ -2251,8 +2321,8 @@ body {
 
   .flex-inner .f-image {
       -webkit-box-flex: 0;
-      -ms-flex: 0 0 550px;
-      flex: 0 0 550px;
+      -ms-flex: 0 0 650px;
+      flex: 0 0 650px;
   }
 
   .flex-inner .f-text h2 {
@@ -2442,5 +2512,132 @@ html,body{
 
 .flex-inner{
   min-height: 330px;
+}
+
+/* SLIDES */
+.slides {
+  padding: 0;
+  width: 609px;
+  height: 420px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+}
+
+.slides * {
+  user-select: none;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.slides input { display: none; }
+
+.slide-container { display: block; }
+
+.slide {
+  top: 0;
+  opacity: 0;
+  width: 609px;
+  height: 420px;
+  display: block;
+  position: absolute;
+  /*transform: scale(0);*/
+  transition: all .7s ease-in-out;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+}
+
+.slide2 {
+  top: 0;
+  opacity: 0;
+  width: 609px;
+  height: 420px;
+  display: block;
+  position: absolute;
+  /*transform: scale(0);*/
+  transition: all .7s ease-in-out;
+}
+
+.slide2 img {
+  width: 100%;
+  height: 100%;
+}
+
+.nav label {
+  width: 100px;
+  height: 100%;
+  display: none;
+  position: absolute;
+
+  opacity: 0;
+  z-index: 9;
+  cursor: pointer;
+  transition: opacity .2s;
+
+  color: #FFF;
+  font-size: 96pt;
+  text-align: center;
+  line-height: 380px;
+  font-family: "Varela Round", sans-serif;
+  background-color: rgba(255, 255, 255, .3);
+  text-shadow: 0px 0px 15px rgb(119, 119, 119);
+}
+
+.slide:hover + .nav label { opacity: 0.5; }
+.slide2:hover + .nav label { opacity: 0.5; }
+.nav label:hover { opacity: 1; }
+.nav .next { right: 0; }
+
+input:checked + .slide-container  .slide {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1s ease-in-out;
+}
+
+input:checked + .slide-container  .slide2 {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1s ease-in-out;
+}
+
+input:checked + .slide-container .nav label { display: block; }
+
+.nav-dots {
+  width: 100%;
+  bottom: -25px;
+  height: 11px;
+  display: block;
+  position: absolute;
+  text-align: center;
+}
+
+.nav-dots .nav-dot {
+  top: -5px;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  position: relative;
+  border-radius: 100%;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.nav-dots .nav-dot:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+input#img-1:checked ~ .nav-dots label#img-dot-1,
+input#img-2:checked ~ .nav-dots label#img-dot-2,
+input#img-3:checked ~ .nav-dots label#img-dot-3,
+input#img-4:checked ~ .nav-dots label#img-dot-4,
+input#img-5:checked ~ .nav-dots label#img-dot-5, {
+  background: rgba(0, 0, 0, 0.8);
 }
 </style>

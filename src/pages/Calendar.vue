@@ -81,7 +81,8 @@ export default {
         end: null,
         color: '#263148'
       },
-      colors: ['#263148', '#1abc9c', '#2980b9', '#7f8c8d', '#f1c40f', '#d35400', '#27ae60'],
+      //colors: ['#263148', '#1abc9c', '#2980b9', '#7f8c8d', '#f1c40f', '#d35400', '#27ae60'],
+      colors: ['#263148', '#1abc9ca3', '#263148a3', '#7f8c8d', '#f1c40f', '#d354009e', '#2980b991'],
       event: {}
     }
   },
@@ -112,7 +113,6 @@ export default {
     fetchData () {
       userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((events) => {
         this.events = JSON.parse(events || '[]')
-        this.events = []
         this.addEventStyles(this.events)
       })
     },

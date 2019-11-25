@@ -290,7 +290,7 @@
 
         <div class='row px-2'>
             <div class='col-1 text-left mt-3'>
-                <button class='btn btn-danger btn-sm ml-1' @click='clearInvoice' style='opacity:0.75;'>Clear</button>
+                <button class='btn btn-danger btn-sm ml-1' @click='clearInvoice' style='opacity:0.75;color:#ec250d;'>Clear</button>
             </div>
             <div class='col-3 text-right mt-3 pr-3'>
               <button class='btn btn-light btn-sm mr-5' style='opacity:0.8;'>Save Customer</button>
@@ -1123,5 +1123,10 @@ export default {
   .modal .modal-header .close{
     margin-top:-22px !important;
     color:#000 !important;
+  }
+  .btn-danger{
+    color:#fd5d93d4 !important;
+    background:transparent;
+    background-color: none;
   }
 </style>

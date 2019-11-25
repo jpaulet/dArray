@@ -27,7 +27,7 @@
                     <input class='ml-3' type="checkbox" ref="checkbox" name="completed" v-model="task.completed"/>
                   </div>
 
-                  <button type="button" class="btn btn-danger btn-sm px-3 text-white mt-3 mr-3" @click='clear' style='opacity:0.8;'>Clear</button>
+                  <button type="button" class="btn btn-danger btn-sm px-3 mt-3 mr-3" @click='clear' style='opacity:0.8;color:#ec250d;'>Clear</button>
                   <button type="submit" class="btn btn-light btn-sm px-5 text-white mt-3">Submit</button>
                 </form>
               </div>
@@ -139,7 +139,7 @@ export default {
       tasks: [],
       task: {},
       action: 'create',
-      message: 'Welcome'
+      message: ''
     }
   },
   computed: {
@@ -255,15 +255,21 @@ export default {
   }
 
   .task.done {
-    background-color: #c2e8ce !important;
+    background-color: #c2e8ceb3 !important;
   }
 
   .task.todo {
-    background-color: #f6cd90 !important;
+    background-color: #f6cd90a1 !important;
   }
 
   .description {
     color: slategray;
     font-style: italic;
+  }
+
+  .btn-danger{
+    color:#fd5d93d4 !important;
+    background:transparent;
+    background-color: none;
   }
 </style>
