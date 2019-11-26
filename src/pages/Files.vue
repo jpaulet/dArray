@@ -3,12 +3,12 @@
     <card>
       <div id="container">
         <div>
-          <div @click="openFilePicker" id="uploader" class='mb-5'>
-            <p><span style='color:rgb(52, 70, 117);'>Click</span> to choose a file to upload :)</p>
+          <div @click="openFilePicker" id="uploader" class='mb-4'>
+            <p><span style='color:rgb(52, 70, 117);'>Click</span> to choose a file to upload</p>
             <input type="file" ref="filepicker" @change="uploadFile" />
           </div>
-          <div class='text-left row mb-3'>
-            <h6 style='width: 50px;margin-left:15px;line-height:14px;'> Path: </h6>
+          <h4 class='text-left'> Path </h4>
+          <div class='text-left mb-3'>
             <a href='#' @click.prevent='changeFolder("/",0)' class='text-left text-muted badge badge-light' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /Home </a>
             <a v-if='path !== "/" && folder !== "/" && folder !== ""' v-for='(folder,index) in path.split("/")' :key='index' @click.prevent='changeFolder(folder,index+1)' href='#' class='text-left text-muted badge badge-light ml-2' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /{{folder}} </a>
           </div>
@@ -235,13 +235,7 @@ export default {
         userSession.putFile(this.path + upload.id + '_' + upload.name, dataURL, this.$ENCRYPT)
       }
 
-      if(extension === 'image'){
-        reader.readAsDataURL(input.files[0])
-      }else{
-        reader.readAsArrayBuffer(input.files[0])
-      }
-
-      // userSession.putFile( upload.id+"_"+upload.name, dataURL )
+      reader.readAsDataURL(input.files[0])
       userSession.putFile(this.path + FILESYSTEM, JSON.stringify(this.uploads), this.$ENCRYPT)
     },
 
@@ -261,6 +255,8 @@ export default {
     },
 
     downloadFile (id, filename, extension, type) {
+      console.log("type: "+type)
+
       if (type === 'Invoice') {
         userSession.getFile(this.path + filename, this.$DECRYPT).then((theFile) => {
           if (theFile === null) {
@@ -301,8 +297,10 @@ export default {
           return false
         }
 
+        extension = filename.substr(filename.indexOf('.') + 1,filename.lenght)
+        console.log('extension: '+extension)
         var element = document.createElement('a')
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(theFile))
+        element.setAttribute('href', theFile)
         element.setAttribute('download', filename)
 
         element.style.display = 'none'

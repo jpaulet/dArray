@@ -127,13 +127,12 @@
                 </div>
                 <div class='row text-left mt-2'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'> Category </label>
-                    <drop-down tag="li" class='form-control ml-1 col-7 float-right text-left'>
+                    <drop-down tag="li" class='form-control ml-1 col-7 float-right text-left' style='font-size:9px;line-height:22px;'>
                       {{expense.category}}
                       <button aria-label="Settings menu" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-link btn-icon float-right">
-                        <i class="tim-icons icon-single-02"></i>
                       </button>
                       <ul class="dropdown-menu dropdown-menu-right" v-if="categories">
-                        <a class="dropdown-item" v-for="(category,index) in categories" @click.prevent='expense.category = category.name' :key='index'><strong>{{category.name}}</strong></a>
+                        <a class="dropdown-item" v-for="(category,index) in categories" @click.prevent='changeCategory(category.name)' :key='index'><strong>{{category.name}}</strong></a>
                         <!--
                         <template v-if='category && category.subItems.length > 0'>
                           <a class="dropdown-item" v-for="(subcategory,name,subindex) in category.subItems" @click.prevent='expense.category = subcategory.name' style='font-size:10px;' :key='subindex'>{{subcategory.name}}</a>
@@ -150,7 +149,7 @@
 
                 <div class='row text-left mt-2'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>VAT</label>
-                    <input class='form-control ml-1 col-7 text-right' type='number' v-model='expense.tax' name='vat' min='0' />
+                    <input class='form-control ml-1 col-7 text-center' type='number' v-model='expense.tax' name='vat' min='0' />
                 </div>
 
                 <div class='row text-left mt-4 ml-0'>
@@ -382,6 +381,7 @@ import {
   Card, BaseButton, BaseCheckbox, BaseTable, Modal
 } from '@/components/index'
 import { uuid } from 'vue-uuid'
+import Vue from 'vue'
 import * as jsPDF from 'jspdf'
 import html2canvas from "html2canvas"
 window.html2canvas = html2canvas //html2canvas must be set as global var
@@ -548,6 +548,10 @@ export default {
     }
   },
   methods: {
+
+    changeCategory(name){
+      this.$set(this.expense, 'category', name)
+    },
 
     checkHasSelected() {
       this.selected = this.expenses.filter((item) => { return item.done === true })
@@ -1109,5 +1113,9 @@ export default {
     background:transparent;
     background-color: none;
     text-decoration: underline;
+  }
+
+  .btn.btn-link.dropdown-toggle{
+    margin-right: 0px !important;
   }
 </style>

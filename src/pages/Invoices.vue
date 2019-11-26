@@ -1201,7 +1201,7 @@ export default {
     background-color: #c2e8ce !important;
   }
   .badge-warning {
-    background-color: #f6cd90 !important;
+    background-color: #f6cd90a6 !important;
   }
   .badge-danger{
     background-color: #f0b7a4 !important;
