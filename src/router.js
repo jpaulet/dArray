@@ -15,7 +15,7 @@ import Files from '@/pages/Files.vue'
 const routes = [{
   path: '/',
   component: DashboardLayout,
-  redirect: 'invoices',
+  redirect: 'dashboard',
   children: [
     {
       path: 'dashboard',

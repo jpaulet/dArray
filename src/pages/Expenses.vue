@@ -616,7 +616,7 @@ export default {
         })
       })
 
-      if(activeIndex === 0){
+      if(this.activeIndex === 0){
         this.selected.map((el) => {
           userSession.deleteFile(el.id+'.json')
         })

@@ -1,7 +1,7 @@
 {
   "dashboard": {
     "completedTasks": "Completed Tasks",
-    "dailySales": "Monthly Expenses",
+    "dailySales": "Total Expenses",
     "performance": "Performance",
     "simpleTable": "Customers",
     "totalShipments": "Total VAT",

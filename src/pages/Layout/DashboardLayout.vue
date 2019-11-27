@@ -4,7 +4,7 @@
       <sidebar-link to="/dashboard" @click.prevent=''>
         <i class="tim-icons icon-chart-pie-36"></i>
         <template>
-          <p>Dashboard <span style='margin-left:10px;font-size:9px !important;color:#555;text-decoration:none;'>Coming Soon!</span></p>
+          <p>Dashboard</p>
         </template>
       </sidebar-link>
       <sidebar-link to="/invoices">

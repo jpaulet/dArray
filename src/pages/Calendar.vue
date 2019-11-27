@@ -27,6 +27,8 @@
           <input type="date" class="form-control col-7" v-model='newEvent.start'><br>
           <label v-if='newEvent.end !== null'  class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>End:</label>
           <input v-if='newEvent.end !== null' type="date" class="form-control col-7" v-model='newEvent.end'>
+          <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Hour:</label>
+          <input type="time" class="form-control col-7" v-model='newEvent.time'><br>
           <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Color</label>
           <div class='col-7 pl-0 ml-0'>
             <span class='square' v-for="(color,index) in colors" :style="{ background: color }" @click='selectColor(color)' :key='index' :class="{ 'colorSelected' : color == newEvent.color}"></span>
@@ -42,7 +44,7 @@
         <div class='mb-3 p-5'>
           <h6>{{event.title}}</h6>
           <p>{{event.description}}</p>
-          <div> <span>{{event.start}}</span> <span v-if='event.end && (event.start !== event.end)'>/ {{event.end}}</span></div>
+          <div> <span>{{event.start}}</span> <span v-if='event.end && (event.start !== event.end)'>/ {{event.end}}</span> <span v-if='event.hour'>at {{event.hour}}</span></div>
         </div>
         <template slot="footer" class="text-center">
           <base-button type="danger" @click="viewEvent = false" style='opacity:0.5;'>Close</base-button>          
@@ -79,6 +81,7 @@ export default {
         description: '',
         start: '',
         end: null,
+        time: '',
         color: '#263148'
       },
       //colors: ['#263148', '#1abc9c', '#2980b9', '#7f8c8d', '#f1c40f', '#d35400', '#27ae60'],
@@ -98,9 +101,10 @@ export default {
     handleEventClick (info) {
       this.event = {
         title: info.event.title,
-        description: info.event.description,
+        description: info.event.extendedProps.description,
         start: info.event.start.getMonth()+'-'+info.event.start.getDate()+'-'+info.event.start.getFullYear(),
         end: info.event.end ? info.event.end.getMonth()+'-'+info.event.end.getDate()+'-'+info.event.end.getFullYear() : null,
+        hour: info.event.extendedProps.time,
         color: info.event.color,
       }
       this.viewEvent = true
@@ -133,6 +137,7 @@ export default {
         description: '',
         start: '',
         end: null,
+        time: '',
         color: '#263148'
       }
       this.createEvent = false

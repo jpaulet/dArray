@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="hero-img wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <img class="img-fluid" src="@/assets/img/landing/darray.gif" alt="Home">
+              <img class="img-fluid" src="@/assets/img/landing/darray.mp4" alt="Darray demo">
             </div>
           </div>
         </div><!-- Hero End -->
@@ -77,7 +77,7 @@
                   </div>
                   <div class="card-text">
                     <h3>Private</h3>
-                    <p>Own all your business data: Invoices, Expenses, Tasks, Calendar, Files...</p>
+                    <p>Own all your business data: Invoices, Expenses, Tasks, Calendar, Files, etc.</p>
                   </div>
                 </div>
               </div>
@@ -195,7 +195,7 @@
                    <div class="left-content">
                      <h2 class="mt-0">Invoices.</h2>
                      <p> Forget the paperwork that involves saving tickets and invoices! Crate & manage your invoices in an easy & private way.</p>
-                     <a href="#landing" style='font-size:10px;'>Know more</a>
+                     <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
              </div>
@@ -236,7 +236,7 @@
                  <div class="left-content">
                    <h2 class="mt-0">Expenses.</h2>
                    <p> Track all your expenses by client, type, status & more. Attach the real receipt to keep things organized.</p>
-                   <a href="#landing" style='font-size:10px;'>Know more</a>
+                   <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
                  </div>
                </div>
              </div>
@@ -248,7 +248,7 @@
                    <div class="left-content">
                      <h2 class="mt-0">Customers.</h2>
                      <p> All your customers, partners, offerings in one place.</p>
-                     <a href="#landing" style='font-size:10px;'>Know more</a>
+                     <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
              </div>
@@ -261,7 +261,7 @@
                  <div class="left-content">
                    <h2 class="mt-0">Docs & File</h2>
                    <p> Store all your data in private & secure storage. Invoices, Expenses & any other important docs.</p>
-                   <a href="#landing" style='font-size:10px;'>Know more</a>
+                   <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
                  </div>
                </div>
              </div>
@@ -274,7 +274,7 @@
                    <div class="left-content">
                      <h2 class="mt-0">Tasks.</h2>
                      <p> Easy to use everyday tasks & events.</p>
-                     <a href="#landing" style='font-size:10px;'>Know more</a>
+                     <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
              </div>
@@ -286,21 +286,49 @@
                <div class="f-text">
                  <div class="left-content">
                    <h2 class="mt-0">Calendar.</h2>
-                   <p> Create events in your private calendar for meetings, tasks, remember things...</p>
-                   <a href="#landing" style='font-size:10px;'>Know more</a>
+                   <p> Create events in your private calendar for meetings, tasks, remember things, etc.</p>
+                   <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
                  </div>
                </div>
              </div>
 
              <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
                  <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/features/settings.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                  <ul class="slides">
+                    <input type="radio" name="radio-btn3" id="img-6" checked />
+                    <li class="slide-container">
+                    <div class="slide3">
+                      <img src="@/assets/img/landing/features/dashboard.png" />
+                        </div>
+                    <div class="nav">
+                      <label for="img-7" class="prev">&#x2039;</label>
+                      <label for="img-7" class="next">&#x203a;</label>
+                    </div>
+                    </li>
+
+                    <input type="radio" name="radio-btn3" id="img-7" />
+                    <li class="slide-container">
+                        <div class="slide3">
+                          <img src="@/assets/img/landing/features/settings.png" />
+                        </div>
+                    <div class="nav">
+                      <label for="img-6" class="prev">&#x2039;</label>
+                      <label for="img-6" class="next">&#x203a;</label>
+                    </div>
+                    </li>
+
+                    <li class="nav-dots">
+                      <label for="img-6" class="nav-dot" id="img-dot-6"></label>
+                      <label for="img-7" class="nav-dot" id="img-dot-7"></label>
+                    </li>
+                  </ul>
+                   <!-- <img class="img-fluid" src="@/assets/img/landing/features/dashboard.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'> -->
                  </div>
                  <div class="f-text">
                    <div class="left-content">
                      <h2 class="mt-0">Your Business Swiss Knife.</h2>
-                     <p> All the features for your productivity: Calendar, Tasks, Pomodoro (WIP), ToDO lists, Organize Files...</p>
-                     <a href="#landing" style='font-size:10px;'>Know more</a>
+                     <p> All the features for your productivity: Dashboard, Calendar, Tasks, Pomodoro (WIP), ToDO lists, Organize Files & much more to come!</p>
+                     <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
              </div>
@@ -311,7 +339,7 @@
            <div class="yd-ft-inner py-5">
              <div class="yd-ft-left" style='margin-top:-20px;'>
                <h2>Welcome to dArray, where privacy matters.</h2>
-                   <p>A free & private alternative to Zoho, QuickBooks and Freshbooks.</p>
+               <p>A free & private alternative to Zoho, QuickBooks and Freshbooks.</p>
                <a href="#landing" class="btn-action btn-edge">Get Started</a>
              </div>
              <div class="yd-ft-right">
@@ -336,7 +364,7 @@
               </div>
               <div class="ar-image">
                 <video controls poster="@/assets/img/landing/video_preview.png" width='90%' height='100%' style='border-radius:42px;padding:20px;'>
-                  <source src="@/assets/img/landing/crm2.mp4" type="video/mp4">
+                  <source src="@/assets/img/landing/darray.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -371,10 +399,10 @@
                           <p style='font-size:10px;color:#555;width:72%margin:0px auto;'>*: In the future we could develop<br />new premium features.</p>
                          <button class="btn-action" @click='signIn'>Sign In</button>
                       </div>
-                    </div>
+                    </div>                    
                   </div>
                   <div class="col-lg-4 col-md-6">
-                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:20px 20px 30px 20px;">
+                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
                       <table class='text-center'>
                         <tr><th>Twitter</th></tr>
                         <tr>
@@ -389,23 +417,35 @@
                         </tr>
                       </table>
                     </div>
-                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:20px 20px 30px 20px;">
+                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
                       <table class='text-center' style='width:100%;'>
                         <tr><th>Buy Me a Coffee</th></tr>
                         <tr>
-                          <td class='text-center pt-3'>
+                          <td class='text-center pt-2'>
                             <a href='https://www.buymeacoffee.com/mpSEk0R' target='_blank'><img src='@/assets/img/landing/Button_orange.png' alt='Buy me a coffee' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
                           </td>
                         </tr>
                       </table>
                     </div>
-                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:20px 20px 30px 20px;">
+                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
                       <table class='text-center' style='width:100%;'>
                         <tr><th>ProductHunt</th></tr>
                         <tr>
-                          <td class='text-center pt-3'>
+                          <td class='text-center pt-2'>
                             <a href="https://www.producthunt.com/posts/roastme-4?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-roastme-4" target="_blank">
                               <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=137613&theme=light" alt="roastMe - Real feedback 🔥 and critics 🎯 from community & expert users | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" />
+                            </a>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
+                      <table class='text-center' style='width:100%;'>
+                        <tr><th>Patreon</th></tr>
+                        <tr>
+                          <td class='text-center pt-2'>
+                            <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank'>
+                              <img src='@/assets/img/Patreon+Button.png' style='width:210px;margin:0px auto;opacity:0.8;' />
                             </a>
                           </td>
                         </tr>
@@ -2490,6 +2530,23 @@ html,body{
   height: 100%;
 }
 
+
+.slide3 {
+  top: 0;
+  opacity: 0;
+  width: 609px;
+  height: 420px;
+  display: block;
+  position: absolute;
+  /*transform: scale(0);*/
+  transition: all .7s ease-in-out;
+}
+
+.slide3 img {
+  width: 100%;
+  height: 100%;
+}
+
 .nav label {
   width: 100px;
   height: 100%;
@@ -2512,6 +2569,7 @@ html,body{
 
 .slide:hover + .nav label { opacity: 0.5; }
 .slide2:hover + .nav label { opacity: 0.5; }
+.slide3:hover + .nav label { opacity: 0.5; }
 .nav label:hover { opacity: 1; }
 .nav .next { right: 0; }
 
@@ -2522,6 +2580,12 @@ input:checked + .slide-container  .slide {
 }
 
 input:checked + .slide-container  .slide2 {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1s ease-in-out;
+}
+
+input:checked + .slide-container  .slide3 {
   opacity: 1;
   transform: scale(1);
   transition: opacity 1s ease-in-out;
@@ -2558,7 +2622,9 @@ input#img-1:checked ~ .nav-dots label#img-dot-1,
 input#img-2:checked ~ .nav-dots label#img-dot-2,
 input#img-3:checked ~ .nav-dots label#img-dot-3,
 input#img-4:checked ~ .nav-dots label#img-dot-4,
-input#img-5:checked ~ .nav-dots label#img-dot-5, {
+input#img-5:checked ~ .nav-dots label#img-dot-5,
+input#img-6:checked ~ .nav-dots label#img-dot-6,
+input#img-7:checked ~ .nav-dots label#img-dot-7 {
   background: rgba(0, 0, 0, 0.8);
 }
 </style>

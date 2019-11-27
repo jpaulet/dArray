@@ -66,7 +66,7 @@ export let purpleChartOptions = {
       barPercentage: 1.6,
       gridLines: {
         drawBorder: false,
-        color: 'rgba(29,140,248,0.0)',
+        color: 'rgba(29,37,59,0.05)',
         zeroLineColor: 'transparent'
       },
       ticks: {
@@ -81,7 +81,7 @@ export let purpleChartOptions = {
       barPercentage: 1.6,
       gridLines: {
         drawBorder: false,
-        color: 'rgba(225,78,202,0.1)',
+        color: 'rgba(225,78,202,0.0)',
         zeroLineColor: 'transparent'
       },
       ticks: {
