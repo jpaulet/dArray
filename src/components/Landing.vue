@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="hero-img wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <img class="img-fluid" src="@/assets/img/landing/darray.mp4" alt="Darray demo">
+              <img class="img-fluid" src="@/assets/img/landing/darray2.gif" alt="Darray demo gif">
             </div>
           </div>
         </div><!-- Hero End -->
