@@ -41,7 +41,7 @@
               </div>
             </div>
             <div class="hero-img wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <img class="img-fluid" src="@/assets/img/landing/darray2.gif" alt="Darray demo gif">
+              <img class="img-fluid" src="@/assets/img/landing/features/dashboard.png" alt="Darray dashboard">
             </div>
           </div>
         </div><!-- Hero End -->
@@ -384,7 +384,7 @@
                   </p>
                 </div>
                 <div class="row">
-                  <div class="col-lg-4 offset-lg-2 col-md-6">
+                  <div class="col-lg-5 offset-lg-1 col-md-6">
                    <div class="table-left wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
                      <div class="pricing-details">
                        <h2>Free!</h2>
@@ -401,17 +401,14 @@
                       </div>
                     </div>                    
                   </div>
-                  <div class="col-lg-4 col-md-6">
+                  <div class="col-lg-5 col-md-6">
                     <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
                       <table class='text-center'>
                         <tr><th>Twitter</th></tr>
                         <tr>
                           <td class=''>
-                            <blockquote class="twitter-tweet">
-                              <p lang="en" dir="ltr">
-                                Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a>
-                              </p>
-                              &mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a>
+                            <blockquote class="twitter-tweet" data-width='350'>
+                              <p lang="en" dir="ltr">🔥🔥🔥 We&#39;re launching dArray very soon! 🔥🔥🔥<br>The Privacy-focused Accounting Software for Makers, Freelancers &amp; SME! <a href="https://twitter.com/hashtag/dapp?src=hash&amp;ref_src=twsrc%5Etfw">#dapp</a> <a href="https://twitter.com/hashtag/blockstack?src=hash&amp;ref_src=twsrc%5Etfw">#blockstack</a> <a href="https://t.co/Lububy5XaA">https://t.co/Lububy5XaA</a> <a href="https://t.co/RVoGzHjz57">pic.twitter.com/RVoGzHjz57</a></p>&mdash; dArray (@dArray_dapp) <a href="https://twitter.com/dArray_dapp/status/1199727746114605057?ref_src=twsrc%5Etfw">November 27, 2019</a>
                             </blockquote>
                           </td>
                         </tr>
@@ -427,7 +424,7 @@
                         </tr>
                       </table>
                     </div>
-                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
+                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;" v-if='false'>
                       <table class='text-center' style='width:100%;'>
                         <tr><th>ProductHunt</th></tr>
                         <tr>
@@ -525,7 +522,8 @@ export default {
     return {
       rotatingText: ['Descentralized','Private','Secure','Blockchain','Free'],
       i: 0,
-      publicPath: 'http://localhost:8080' || process.env.BASE_URL
+      //publicPath: 'http://localhost:8080' || process.env.BASE_URL
+      publicPath: ''
     }
   },
   computed: {
