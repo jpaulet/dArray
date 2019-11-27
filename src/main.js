@@ -26,6 +26,8 @@ Vue.prototype.$DECRYPT = {
 
 // configure router
 const router = new VueRouter({
+  mode: 'history',
+  root: '/',
   routes, // short for routes: routes
   linkExactActiveClass: 'active'
 })
