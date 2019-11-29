@@ -308,7 +308,7 @@ export default {
       this.blueBarChart = {
         extraOptions: chartConfigs.purpleChartOptions,
         chartData: {
-          labels: this.listMonths.slice(-6),
+          labels: this.listMonths,
           datasets: [{
             label: 'Data',
             fill: true,
@@ -322,7 +322,7 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.monthlyExpenses.slice(-6)
+            data: this.monthlyExpenses
           }]
         },
         gradientColors: config.colors.primaryGradient,

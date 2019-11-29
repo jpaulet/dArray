@@ -12,6 +12,16 @@
             Support Us
           </a>
         </li>
+        <li class="nav-item">
+          <a href="https://jpaulet.typeform.com/to/sVUrrj" class="nav-link" target='_blank'>
+            Contact Us & Bugs
+          </a>
+        </li>
+        <li class="nav-item" v-if='false'>
+          <a href="" class="nav-link" target='_blank'>
+            Roadmap
+          </a>
+        </li>
         <li class="nav-item" v-if='false'>
           <a href="javascript:void(0)" class="nav-link">
             Terms & Privacity
@@ -35,11 +45,8 @@
             <tr><th>Twitter</th></tr>
             <tr style='width:100%;'>
               <td class='' style='width:100%;'>
-                <blockquote class="twitter-tweet" style='width:100%;min-width:100% !important;' data-width='550' data-dnt='false' data-cards='false'>
-                  <p lang="en" dir="ltr">
-                    Sunsets don&#39;t get much better than this one over <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw">@GrandTetonNPS</a>. <a href="https://twitter.com/hashtag/nature?src=hash&amp;ref_src=twsrc%5Etfw">#nature</a> <a href="https://twitter.com/hashtag/sunset?src=hash&amp;ref_src=twsrc%5Etfw">#sunset</a> <a href="http://t.co/YuKy2rcjyU">pic.twitter.com/YuKy2rcjyU</a>
-                  </p>
-                  &mdash; US Department of the Interior (@Interior) <a href="https://twitter.com/Interior/status/463440424141459456?ref_src=twsrc%5Etfw">May 5, 2014</a>
+                <blockquote class="twitter-tweet" data-width='350'>
+                  <p lang="en" dir="ltr">🔥🔥🔥 We&#39;re launching dArray very soon! 🔥🔥🔥<br>The Privacy-focused Accounting Software for Makers, Freelancers &amp; SME! <a href="https://twitter.com/hashtag/dapp?src=hash&amp;ref_src=twsrc%5Etfw">#dapp</a> <a href="https://twitter.com/hashtag/blockstack?src=hash&amp;ref_src=twsrc%5Etfw">#blockstack</a> <a href="https://t.co/Lububy5XaA">https://t.co/Lububy5XaA</a> <a href="https://t.co/RVoGzHjz57">pic.twitter.com/RVoGzHjz57</a></p>&mdash; dArray (@dArray_dapp) <a href="https://twitter.com/dArray_dapp/status/1199727746114605057?ref_src=twsrc%5Etfw">November 27, 2019</a>
                 </blockquote>
               </td>
             </tr>
@@ -60,7 +67,7 @@
             <tr><th>ProductHunt</th></tr>
             <tr>
               <td class='text-center pt-1'>
-                <a href="https://www.producthunt.com/posts/roastme-4?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-roastme-4" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=137613&theme=light" alt="roastMe - Real feedback 🔥 and critics 🎯 from community & expert users | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" /></a>
+                <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=176110&theme=dark" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" /></a>
               </td>
             </tr>
           </table>

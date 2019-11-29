@@ -505,7 +505,9 @@ export default {
         id: null,
         number: '',
         date: new Date().toISOString().split('T')[0],
-        year: 2019,
+        year: '',
+        month: '',
+        quarter: '',
         due_date: new Date().toISOString().split('T')[0],
         company: {},
         payment: null,
@@ -689,7 +691,9 @@ export default {
         id: null,
         name: '',
         date: new Date().toISOString().split('T')[0],
-        year: 2019,
+        year: '',
+        month: '',
+        quarter: '',
         due_date: new Date().toISOString().split('T')[0],
         payment: null,
         logo: null,
@@ -877,6 +881,9 @@ export default {
       this.invoice.total = this.total
       this.invoice.vat = this.vat
       this.invoice.subtotal = this.subtotal
+      this.invoice.year = this.invoice.date.substr(0,4)
+      this.invoice.month = this.invoice.date.substr(5,2)
+      this.invoice.quarter = 'Q'+(this.invoice.month % 4)
       userSession.putFile(invoiceFile, JSON.stringify(this.invoice), this.$ENCRYPT)
 
       if (isNew) {

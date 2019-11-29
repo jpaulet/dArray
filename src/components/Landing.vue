@@ -55,7 +55,7 @@
                   <p>The place to run your business & accounting on the Blockchain. <br /><strong>You own all your data!</strong></p>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4 col-sm-6">
+              <div class="col-md-6 col-lg-4 col-sm-6 feature">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -68,7 +68,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4 col-sm-6">
+              <div class="col-md-6 col-lg-4 col-sm-6 feature">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -81,7 +81,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4 col-sm-6">
+              <div class="col-md-6 col-lg-4 col-sm-6 feature">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -94,7 +94,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4 col-sm-6">
+              <div class="col-md-6 col-lg-4 col-sm-6 feature">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -107,7 +107,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4 col-sm-6">
+              <div class="col-md-6 col-lg-4 col-sm-6 feature">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -120,7 +120,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6 col-lg-4 col-sm-6">
+              <div class="col-md-6 col-lg-4 col-sm-6 feature">
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
@@ -194,7 +194,7 @@
                  <div class="f-text">
                    <div class="left-content">
                      <h2 class="mt-0">Invoices.</h2>
-                     <p> Forget the paperwork that involves saving tickets and invoices! Crate & manage your invoices in an easy & private way.</p>
+                     <p> Forget the paperwork that involves saving tickets and invoices! Create & manage your invoices in an easy & private way.</p>
                      <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
                    </div>
                  </div>
@@ -429,8 +429,7 @@
                         <tr><th>ProductHunt</th></tr>
                         <tr>
                           <td class='text-center pt-2'>
-                            <a href="https://www.producthunt.com/posts/roastme-4?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-roastme-4" target="_blank">
-                              <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=137613&theme=light" alt="roastMe - Real feedback 🔥 and critics 🎯 from community & expert users | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" />
+                            <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=176110&theme=dark" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" />
                             </a>
                           </td>
                         </tr>
@@ -498,6 +497,8 @@
           </div>
         </div>
        <!-- Scroll To Top Ends-->
+
+       <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=176110&theme=dark" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 250px; height: 54px; bottom: 5px; left: -10px; position: fixed;transform:scale(0.75);opacity:0.9;" width="250px" height="54px" /></a>
 
       </div> <!-- Main -->
     </div><!-- Wrapper -->
@@ -2624,5 +2625,10 @@ input#img-5:checked ~ .nav-dots label#img-dot-5,
 input#img-6:checked ~ .nav-dots label#img-dot-6,
 input#img-7:checked ~ .nav-dots label#img-dot-7 {
   background: rgba(0, 0, 0, 0.8);
+}
+
+.feature:hover{
+	box-shadow:0px 0px 10px 0px rgba(0,0,0,.1);
+	border-radius:12px;
 }
 </style>

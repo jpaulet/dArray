@@ -426,6 +426,9 @@ export default {
         id: null,
         title: '',
         date: new Date().toISOString().split('T')[0],
+        year: '',
+        month: '',
+        quarter: '',
         payment: null,
         comments: '',
         status: 'Pending',
@@ -693,6 +696,9 @@ export default {
         id: null,
         title: '',
         date: new Date().toISOString().split('T')[0],
+        year: '',
+        month: '',
+        quarter: '',
         payment: null,
         comments: '',
         status: 'Pending',
@@ -760,6 +766,9 @@ export default {
       this.expense.total = this.total
       this.expense.vat = this.vat
       this.expense.subtotal = this.subtotal
+      this.expense.year = this.expense.date.substr(0,4)
+      this.expense.month = this.expense.date.substr(5,2)
+      this.expense.quarter = "Q"+(this.expense.month % 4)
       userSession.putFile(expenseFile, JSON.stringify(this.expense), this.$ENCRYPT)
 
       if (isNew) {

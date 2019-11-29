@@ -7,55 +7,68 @@
             <p><span style='color:rgb(52, 70, 117);'>Click</span> to choose a file to upload</p>
             <input type="file" ref="filepicker" @change="uploadFile" />
           </div>
-          <h4 class='text-left'> Path </h4>
-          <div class='text-left mb-3'>
-            <a href='#' @click.prevent='changeFolder("/",0)' class='text-left text-muted badge badge-light' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /Home </a>
-            <a v-if='path !== "/" && folder !== "/" && folder !== ""' v-for='(folder,index) in path.split("/")' :key='index' @click.prevent='changeFolder(folder,index+1)' href='#' class='text-left text-muted badge badge-light ml-2' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /{{folder}} </a>
-          </div>
 
-          <h4 class='text-left'> Folders </h4>
-          <div class='text-left row' style='clear:both;'>
-            <div v-for='(folder,index) in folders' :key='index' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:90px;margin-right:30px;float:left;' @click='changeFolder(folder,currentDepth+1)'>
-              <img src='@/assets/img/folder.png' height='42' />
-              <p style='font-size:11px;margin-top:5px;'>{{folder}}</p>
+          <div v-if='!loadingPage'>
+            <h4 class='text-left'> Path </h4>
+            <div class='text-left mb-3'>
+              <a href='#' @click.prevent='changeFolder("/",0)' class='text-left text-muted badge badge-light' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /Home </a>
+              <a v-if='path !== "/" && folder !== "/" && folder !== ""' v-for='(folder,index) in path.split("/")' :key='index' @click.prevent='changeFolder(folder,index+1)' href='#' class='text-left text-muted badge badge-light ml-2' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /{{folder}} </a>
             </div>
-            <div v-if='currentDepth < 5' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:115px;margin-right:0px;float:left;' @mousedown='openNewFolder()'>
-              <img src='@/assets/img/folderplus.png' height='42' />
-              <div v-if='!newFolder' style='font-size:11px;margin-top:5px;'>New Folder</div>
-              <input v-if='newFolder' v-model='folderName' ref="newFolder" id='newFolder' type='form-control' name='New Folder' placeholder="Folder name" style='width:90px;height:26px;font-size:11px;padding:3px;border-radius:8px;border:1px solid #eee;' />
-              <button v-if='newFolder' @click.prevent='saveFolder()' type='submit' class='btn btn-primary btn-sm' style='font-size:11px;width:90px;'> Save </button>
-            </div>
-          </div>
 
-          <h4 class='mt-4 text-left' style='width:100%;clear:both;'> Your Files </h4>
-          <div class='row'>
-            <div class="upload col-6" v-for="(upload, index) in uploads" :key="index" style='cursor:pointer;min-width:280px;' @click='downloadFile(upload.id,upload.name,upload.extension,upload.type)'>
-              <div class="ext" :style="{'background-color': upload.color}">
-                <p>{{upload.ext.toUpperCase()}}</p>
+            <h4 class='text-left'> Folders </h4>
+            <div class='text-left row' style='clear:both;'>
+              <div v-for='(folder,index) in folders' :key='index' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:90px;margin-right:30px;float:left;' @click='changeFolder(folder,currentDepth+1)'>
+                <img src='@/assets/img/folder.png' height='42' />
+                <p style='font-size:11px;margin-top:5px;'>{{folder}}</p>
               </div>
-              <div class="upload-details">
-                <div class="name-container">
-                  <p class="filename">{{upload.name}}</p>
-                  <div>
-                    <p class="filesize">{{upload.size}}</p>
-                    <p @click="removeUpload(index)" class="cancel-btn" style='display:none;'>x</p>
+              <div v-if='currentDepth < 5' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:115px;margin-right:0px;float:left;' @mousedown='openNewFolder()'>
+                <img src='@/assets/img/folderplus.png' height='42' />
+                <div v-if='!newFolder' style='font-size:11px;margin-top:5px;'>New Folder</div>
+                <input v-if='newFolder' v-model='folderName' ref="newFolder" id='newFolder' type='form-control' name='New Folder' placeholder="Folder name" style='width:90px;height:26px;font-size:11px;padding:3px;border-radius:8px;border:1px solid #eee;' />
+                <button v-if='newFolder' @click.prevent='saveFolder()' type='submit' class='btn btn-primary btn-sm' style='font-size:11px;width:90px;'> Save </button>
+              </div>
+            </div>
+
+            <h4 class='mt-4 text-left' style='width:100%;clear:both;'> Your Files </h4>
+            <div class='row'>
+              <div class="upload col-6" v-for="(upload, index) in uploads" :key="index" style='cursor:pointer;min-width:280px;' @click='downloadFile(upload.id,upload.name,upload.extension,upload.type)'>
+                <div class="ext" :style="{'background-color': upload.color}">
+                  <p>{{upload.ext.toUpperCase()}}</p>
+                </div>
+                <div class="upload-details">
+                  <div class="name-container">
+                    <p class="filename">{{upload.name}}</p>
+                    <div>
+                      <p class="filesize">{{upload.size}}</p>
+                      <p @click.prevent="removeUpload(index)" class="cancel-btn" style='border:1px solid #eee;border-radius:50%;width:18px;height:18px;line-height:15px;font-size:12px;text-align:center;'>x</p>
+                    </div>
+                  </div>
+                  <div class="upload-bar" v-if="upload.progress !== '100%'">
+                    <div class="upload-progress" :style="{width: upload.progress}"></div>
                   </div>
                 </div>
-                <div class="upload-bar" v-if="upload.progress !== '100%'">
-                  <div class="upload-progress" :style="{width: upload.progress}"></div>
-                </div>
               </div>
-            </div>
-            <div class='' v-if='!uploads.length'>
-                <div class='p-5'> No files yet. </div>
+              <div class='' v-if='!uploads.length'>
+                  <div class='p-5'> No files yet. </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class='text-center pt-5 mt-5' v-if='loadingPage'>
+        <breeding-rhombus-spinner
+          :animation-duration="2000"
+          :size="65"
+          color="#344675"
+          style='margin:0px auto;'
+        />
       </div>
     </card>
   </div>
 </template>
 <script>
+import { BreedingRhombusSpinner } from 'epic-spinners'
 import { userSession } from '@/userSession'
 import {
   Card
@@ -65,7 +78,8 @@ var FOLDERS = 'folders.json'
 
 export default {
   components: {
-    Card
+    Card,
+    BreedingRhombusSpinner
   },
   data () {
     return {
@@ -75,11 +89,13 @@ export default {
       colors: ['#24bddf', '#5fcc9c', '#6a65d8'],
       newFolder: false,
       folderName: '',
-      currentDepth: 0
+      currentDepth: 0,
+      loadingPage: false
     }
   },
   methods: {
     fetchData () {
+      this.loadingPage = true
       // Load Files
       userSession.getFile(FILESYSTEM, this.$DECRYPT).then((filesystem) => {
         if(!filesystem){
@@ -91,25 +107,28 @@ export default {
         for (i in this.uploads) {
           this.uploads[i].progress = '100%'
         }
-      }).catch(function(e) {
-        console.log("Error: "+e);
-      })
 
-      userSession.getFile(FOLDERS, this.$DECRYPT).then((folders) => {
-        if (!folders) {
-          if (this.path === '/') {
-            this.folders = ['Invoices', 'Expenses']
-            userSession.putFile(FOLDERS, JSON.stringify(this.folders), this.$ENCRYPT)
+        userSession.getFile(FOLDERS, this.$DECRYPT).then((folders) => {
+          if (!folders) {
+            if (this.path === '/') {
+              this.folders = ['Invoices', 'Expenses']
+              userSession.putFile(FOLDERS, JSON.stringify(this.folders), this.$ENCRYPT)
+            }
+          } else {
+            this.folders = JSON.parse(folders || [])
           }
-        } else {
-          this.folders = JSON.parse(folders || [])
-        }
+          this.loadingPage = false
+        }).catch(function(e) {
+          console.log("Error: "+e);
+        })
+
       }).catch(function(e) {
         console.log("Error: "+e);
-      })
+      })      
     },
 
     changeFolder (folder, depth) {
+      this.loadingPage = true
       let localPath = this.path
       if (localPath === '/') {
         localPath = folder + '/'
@@ -131,8 +150,7 @@ export default {
         this.path = localPath
       }
       this.currentDepth = depth
-
-      console.log("PATH: "+this.path)
+      this.uploads = []
 
       userSession.getFile(this.path + FOLDERS, this.$DECRYPT).then((filesystem) => {
         if (!filesystem) {
@@ -141,22 +159,26 @@ export default {
           } else {
             this.folders = []
           }
+          this.loadingPage = false
           return false
         }
         this.folders = JSON.parse(filesystem || [])
-      })
 
-      userSession.getFile(this.path + FILESYSTEM, this.$DECRYPT).then((filesystem) => {
-        if (!filesystem) {
-          this.uploads = []
-          return false
-        }
-        this.uploads = JSON.parse(filesystem || [])
-        let i = 0
+        userSession.getFile(this.path + FILESYSTEM, this.$DECRYPT).then((filesystem) => {
+          if (!filesystem) {
+            this.uploads = []
+            this.loadingPage = false
+            return false
+          }
+          this.uploads = JSON.parse(filesystem || [])
+          let i = 0
 
-        for (i in this.uploads) {
-          this.uploads[i].progress = '100%'
-        }
+          for (i in this.uploads) {
+            this.uploads[i].progress = '100%'
+          }
+
+          this.loadingPage = false
+        })
       })
     },
 
@@ -189,8 +211,14 @@ export default {
     },
 
     removeUpload (index) {
+      let localPath = this.path
+      if (localPath === '/') {
+        localPath = ''
+      }
       clearInterval(this.uploads[index].progressTimer)
+      userSession.deleteFile(localPath + this.uploads[index].id + '_' + this.uploads[index].name)
       this.uploads.splice(index, 1)
+      userSession.putFile(localPath + FILESYSTEM, JSON.stringify(this.uploads), this.$ENCRYPT)
     },
 
     openFilePicker () {
@@ -255,8 +283,6 @@ export default {
     },
 
     downloadFile (id, filename, extension, type) {
-      console.log("type: "+type)
-
       if (type === 'Invoice') {
         userSession.getFile(this.path + filename, this.$DECRYPT).then((theFile) => {
           if (theFile === null) {
@@ -298,7 +324,6 @@ export default {
         }
 
         extension = filename.substr(filename.indexOf('.') + 1,filename.lenght)
-        console.log('extension: '+extension)
         var element = document.createElement('a')
         element.setAttribute('href', theFile)
         element.setAttribute('download', filename)
@@ -428,6 +453,11 @@ export default {
       transition: all 400ms;
     }
   }
+}
+
+.upload:hover .cancel-btn{
+  border:1px solid #bbb !important;
+  color:#bbb !important;
 }
 
 @media screen and (max-width: 567px){
