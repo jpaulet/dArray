@@ -119,11 +119,12 @@ export default {
           }
           this.loadingPage = false
         }).catch(function(e) {
-          console.log("Error: "+e);
+          console.log("Error: "+e)
+          this.loadingPage = false
         })
-
       }).catch(function(e) {
-        console.log("Error: "+e);
+        console.log("Error: "+e)
+        this.loadingPage = false
       })      
     },
 
