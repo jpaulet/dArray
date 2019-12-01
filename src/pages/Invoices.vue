@@ -53,21 +53,20 @@
                             <base-checkbox v-model="row.done" class='rowDone'></base-checkbox>
                         </td>
                         <td class="text-left" style="cursor:pointer;">
-                          <a @click='orderBy("name")'><p class="title">{{row.name}}</p></a>
+                          <p class="title">{{row.client.legal}}</p>
+                          <p class="text-muted" style='font-size:13px'>{{row.name}}</p>
                         </td>
                         <td class="text-left" style="cursor:pointer;">
-                          <a @click='orderBy("legal")'><p class="text-muted">{{row.client.legal}}</p></a>
+                          <p class="text-muted">{{row.date | moment("D MMM YY")}}</p>
+                          <p class="text-muted" style='color:#ddd;font-size:11px;'>Due: {{row.due_date | moment("from")}}</p>
                         </td>
                         <td class="text-left" style="cursor:pointer;">
-                          <a @click='orderBy("date")'><p class="text-muted">{{row.date}}</p></a>
-                        </td>
-                        <td class="text-left" style="cursor:pointer;">
-                          <a @click='orderBy("total")'><p class="text-muted">{{row.total | currency}} €</p></a>
+                          <p class="text-muted">{{row.total | currency}} €</p>
                         </td>
                         <td class="text-left">
                             <p class="text-muted">
                               <drop-down tag="div">
-                                <span aria-label="Invoice Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge" :class="{ 'badge-success' : (row.status === 'Paid'), 'badge-warning' : (row.status === 'Pending'), 'badge-danger' : (row.status === 'Not paid'), 'badge-light' : (row.status === 'Overdue'), 'badge-ingo' : (row.status === 'Void'), 'badge-secondary' : (row.status === 'Draft') }" style='font-size:12px;margin-bottom:3px;width:100px;'>
+                                <span aria-label="Invoice Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge" :class="{ 'badge-success' : (row.status === 'Paid'), 'badge-warning' : (row.status === 'Pending'), 'badge-danger' : (row.status === 'Not paid'), 'badge-light' : (row.status === 'Overdue'), 'badge-info' : (row.status === 'Void'), 'badge-secondary' : (row.status === 'Draft') }" style='font-size:12px;margin-bottom:3px;width:100px;'>
                                   {{row.status}}
                                   <!-- Do not remove, the icon has a ::after property with a dropdown arrow -->
                                   <i class="tim-icons icon-settings-gear-63" style='display:none;'></i>
@@ -298,7 +297,7 @@
 
             <div class='col-8 text-right mt-3'>
                 <button class='btn btn-light btn-sm' style='opacity:0.9;' @click='showInvoice(invoice.id)'>Preview</button>
-                <button class='btn btn-secondary btn-sm px-5' @click='saveInvoice' v-if='activeIndex === 0'>Save</button>
+                <button class='btn btn-secondary btn-sm px-5' @click='saveInvoice' v-if='activeIndex === 0 || newInvoice'>Save</button>
             </div>
         </div>
     </card>
@@ -435,14 +434,13 @@
       </template>
       <form class='row text-center mb-4 mt-4 pt-2 pb-2' role="form">
         <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Folder:</label>
-        <!-- <input type='text' class='form-control col-7' name='Folder' placeholder='Invoices' value='Invoices' /> -->
         <drop-down tag="div">
-          <button aria-label="Dropdown link" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-secondary">
+          <button aria-label="Dropdown link" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-secondary" @click.prevent>
             {{selectedFolder}}
           </button>
           <ul class="dropdown-menu">
-            <a href="#" class="dropdown-item py-1" @click.prevent='selectedFolder = "Invoices"'>Invoices</a>
-            <a v-for='(invoiceFolder,index) in invoiceFolders' :key='index' href="#" class="dropdown-item py-1" @click.prevent='selectedFolder = "Invoices/" + invoiceFolder'> - {{invoiceFolder}}</a>
+            <a href="" class="dropdown-item py-1" @click.prevent='selectedFolder = "Invoices"'>Invoices</a>
+            <a v-for='(invoiceFolder,index) in invoiceFolders' :key='index' href="" class="dropdown-item py-1" @click.prevent='selectedFolder = "Invoices/" + invoiceFolder'> - {{invoiceFolder}}</a>
           </ul>
         </drop-down>
       </form>
@@ -465,9 +463,12 @@ import { userSession } from '@/userSession'
 import { uuid } from 'vue-uuid'
 import * as jsPDF from 'jspdf'
 import html2canvas from "html2canvas"
+const axios = require('axios');
+require('promise.prototype.finally').shim();
+
 window.html2canvas = html2canvas //html2canvas must be set as global var
 
-const tableColumns = ['', 'Name', 'Client', 'Date', 'Total', 'Status', 'View', 'Edit']
+const tableColumns = ['', 'CLIENT', 'DATE', 'AMOUNT', 'STATUS', 'VIEW', 'EDIT']
 
 var STORAGE_FILE = 'invoices.json'
 var COMPANY_FILE = 'company.json'
@@ -561,11 +562,13 @@ export default {
       }
       this.showArchive = true
 
+      console.log('Invoices/folders.json')
       userSession.getFile('Invoices/folders.json', this.$DECRYPT).then(invoiceFolders => {
         if(!invoiceFolders){
           this.invoiceFolders = []
           return false
         }
+        console.log(invoiceFolders)
         this.invoiceFolders = JSON.parse(invoiceFolders)
       })
     },
@@ -782,47 +785,56 @@ export default {
     },
 
     fetchData () {
+
       // Load Company data
-      userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
-        if(!company){ 
-          this.company = {}
-        }else{
-          this.company = JSON.parse(company)
-        }
-
-        this.invoice.payment = this.company.payment
-        this.invoice.comments = this.company.comments
-        this.invoice.tax = this.company.vat
-        this.invoice.logo = this.company.logo
-
-        // Load Invoices data
-        userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((invoices) => {
-          if(!invoices){ 
-            this.invoicesList = []
-          }
-          this.invoicesList = JSON.parse(invoices)
-          var i = 0
-
-          for (i in this.invoicesList) {
-            userSession.getFile(this.invoicesList[i] + '.json', this.$DECRYPT).then((invoice) => {
-              if (invoice === null) {
-                this.invoicesList.splice(i,1)
-                return false
-              }
-
-              invoice = JSON.parse(invoice)
-              let searchInvoice = this.invoicesList.indexOf(invoice.id)
-              this.$set(this.invoices, searchInvoice, invoice)
-            })
+      const loadInvoicesAll = async () => {
+        const data = await userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
+          if(!company){ 
+            this.company = {}
+          }else{
+            this.company = JSON.parse(company)
           }
 
-          setTimeout(() => {
-            this.table1.data = this.invoices
-            this.loadingPage = false
-          }, 700);
-        })
+          this.invoice.payment = this.company.payment
+          this.invoice.comments = this.company.comments
+          this.invoice.tax = this.company.vat
+          this.invoice.logo = this.company.logo
+
+          // Load Invoices data
+          return userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((invoices) => {
+            if(invoices){ 
+              this.invoicesList = JSON.parse(invoices)
+            }
+            
+            return Promise.all(
+              this.invoicesList.map((invoiceFile) => {
+                userSession.getFile(invoiceFile + '.json', this.$DECRYPT).then((invoice) => {
+                  if (invoice === null) {
+                    this.invoicesList.splice(i,1)
+                    return false
+                  }
+
+                  invoice = JSON.parse(invoice)
+                  let searchInvoice = this.invoicesList.indexOf(invoice.id)
+                  this.$set(this.invoices, searchInvoice, invoice)
+                },(error) => {
+                  console.log("Error loading the Invoice file: "+error)
+                })
+              })
+            )
+          },(error) => {
+            console.log("Error loading the Invoices files: "+error)
+          })       
+        })        
+      }
+
+      loadInvoicesAll().then( () => {
+        setTimeout(() => { 
+          this.table1.data = this.invoices
+          this.loadingPage = false
+        }, 700)
       })
-
+      
       // Load Customers
       userSession.getFile(CUSTOMERS_FILE, this.$DECRYPT).then((customers) => {
         if(!customers){
@@ -841,7 +853,7 @@ export default {
             this.$set(this.customers, searchCustomer, customer)
           })
         }
-      })
+      })      
     },
 
     isFilled () {
@@ -884,6 +896,8 @@ export default {
       this.invoice.year = this.invoice.date.substr(0,4)
       this.invoice.month = this.invoice.date.substr(5,2)
       this.invoice.quarter = 'Q'+(this.invoice.month % 4)
+
+      console.log(this.invoice)
       userSession.putFile(invoiceFile, JSON.stringify(this.invoice), this.$ENCRYPT)
 
       if (isNew) {
@@ -965,6 +979,7 @@ export default {
     },
 
     saveToFolder(folder) {
+      console.log('saveToFolder '+folder)
       if(!this.checkHasSelected()){
         return false
       }
@@ -1067,6 +1082,7 @@ export default {
     }
   },
   async created() {
+    this.loadingPage = true
     this.fetchData()
 
     if(this.$route.query.newInvoice){
@@ -1075,7 +1091,13 @@ export default {
   },
   async mounted () {
     this.i18n = this.$i18n
-    this.changeViewType(0)
+    this.activeIndex = 0
+
+    this.$on('online', () => {
+      if(this.invoices.length === 0){
+        this.fetchData()
+      }
+    })
   }
 }
 </script>
@@ -1205,16 +1227,20 @@ export default {
       border-color: rgba(29, 37, 59, 0.25);
   }
   .badge-success {
-    background-color: #c2e8ce !important;
+    background-color: #c2e8cea3 !important;
+    color:#8ebb9c;
   }
   .badge-warning {
-    background-color: #f6cd90a6 !important;
+    color:#ff8d7287;
+    background-color: #f6cd9061 !important;
   }
   .badge-danger{
-    background-color: #f0b7a4 !important;
+    color:#fd5d93b8;
+    background-color: #f3b9a66b !important;
   }
   .badge-info{
-    background-color: #deecff !important;
+    color:#1d8cf894;
+    background-color: #deecff94 !important;
   }
   .modal-dialog{
     transform: translate(0,-15%) !important;
@@ -1228,5 +1254,8 @@ export default {
     background:transparent;
     background-color: none;
     text-decoration: underline;
+  }
+  .table>thead>tr>th{
+    color:#041f658c;
   }
 </style>

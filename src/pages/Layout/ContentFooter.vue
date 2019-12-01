@@ -101,6 +101,28 @@ export default {
     return {
       showContent: false
     }
+  },
+  mounted () {
+    this.$on('offline', () => {
+        this.$notify({
+          message: 'You are offline!',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'danger',
+          timeout: 2500
+        })
+    })
+    this.$on('online', () => {
+        this.$notify({
+          message: 'You are online now!',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'success',
+          timeout: 2500
+        })
+    })
   }
 }
 </script>

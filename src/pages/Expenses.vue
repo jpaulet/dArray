@@ -356,7 +356,7 @@
       <form class='row text-center mb-4 mt-4 pt-2 pb-2' role="form">
         <label class='col-3 ml-3 text-mutted' style='font-size:12px;line-height:40px;color:#555;'>Folder:</label>
         <drop-down tag="div">
-          <button aria-label="Dropdown link" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-secondary">
+          <button aria-label="Dropdown link" data-toggle="dropdown" class="dropdown-toggle btn-rotate btn btn-secondary" @click.prevent>
             {{selectedFolder}}
           </button>
           <ul class="dropdown-menu">
@@ -1104,17 +1104,22 @@ export default {
       background-color: #fff;
       border-color: rgba(29, 37, 59, 0.25);
   }
-
+  
   .badge-success {
-    background-color: #c2e8ce !important;
+    background-color: #c2e8cea3 !important;
+    color:#8ebb9c;
   }
-
   .badge-warning {
-    background-color: #f6cd90 !important;
+    color:#ff8d7287;
+    background-color: #f6cd9061 !important;
   }
-
   .badge-danger{
-    background-color: #f0b7a4 !important;
+    color:#fd5d93b8;
+    background-color: #f3b9a66b !important;
+  }
+  .badge-info{
+    color:#1d8cf894;
+    background-color: #deecff94 !important;
   }
 
   .btn-danger{

@@ -8,6 +8,7 @@ import GlobalDirectives from './globalDirectives'
 import Notify from '@/components/NotificationPlugin'
 import i18n from './i18n'
 import SideBar from '@/components/SidebarPlugin'
+import VueOffline from 'vue-offline'
 
 // router setup
 import routes from './router'
@@ -38,6 +39,8 @@ Vue.use(GlobalDirectives)
 Vue.use(SideBar)
 Vue.use(Notify)
 Vue.use(UUID)
+Vue.use(VueOffline)
+Vue.use(require('vue-moment'))
 
 new Vue({
   router,
