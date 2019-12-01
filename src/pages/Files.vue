@@ -125,7 +125,11 @@ export default {
       }).catch(function(e) {
         console.log("Error: "+e)
         this.loadingPage = false
-      })      
+      })
+
+      setTimeout(() => {
+        this.loadingPage = false
+      }, 1500);      
     },
 
     changeFolder (folder, depth) {
