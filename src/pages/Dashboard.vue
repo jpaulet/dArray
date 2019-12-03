@@ -23,25 +23,25 @@
               <div class="row">
                 <div class="col-sm-12 text-left">
                   <h5 class="card-category">Lasts 12 Months</h5>
-                  <h2 class="card-title">Total Earnings: <span class='ml-3' style='font-weight:400;'>+{{totalInvoices}}</span> <span style='font-size:0.8rem;'>$</span></h2>
+                  <h2 class="card-title">
+                    Total Earnings: <span class='ml-3' style='font-weight:400;'>+{{totalInvoices}}</span> <span style='font-size:0.8rem;'>{{company.currencySymbol}}</span>
+                  </h2>
                   <div class='row px-1' style='font-size:13px;font-weight: 200;'>
-                    <div class='col-4 text-center'>Avg Month: <strong>{{averageInvoice.total}}</strong><span style='font-size:0.5rem;'>$</span></div>
-                    <div class='col-4 text-center'>Avg Invoice: <strong>{{averageInvoice.perInvoice}}</strong><span style='font-size:0.5rem;'>$</span></div>
-                    <div class='col-4 text-center'>Last Month: <strong>+{{averageInvoice.lastMonthTendency}}%</strong> <span class='ml-1 tim-icons icon-minimal-up'></span></div>
+                    <div class='col-4 text-center'>
+                      Avg Month: <strong>{{averageInvoice.total}}</strong> <span style='font-size:0.5rem;'>{{company.currencySymbol}}</span>
+                    </div>
+                    <div class='col-4 text-center'>
+                      Avg Invoice: <strong>{{averageInvoice.perInvoice}}</strong><span style='font-size:0.5rem;'>{{company.currencySymbol}}</span>
+                    </div>
+                    <div class='col-4 text-center'>
+                      Last Month: <strong>+{{averageInvoice.lastMonthTendency}}%</strong> <span class='ml-1 tim-icons icon-minimal-up'></span>
+                    </div>
                   </div>
-                  <!-- averageInvoice: { 'total':0, 'perInvoice':0, 'tendency':0, 'lastMonthTendency':0 }, -->
                 </div>
                 <div class="col-sm-6 text-right" style='display:none;' v-if='false'>
                   <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
-                     <label v-for="(option, index) in bigLineChartCategories"
-                            :key="option"
-                            class="btn btn-success btn-sm btn-simple"
-                            :class="{active:bigLineChart.activeIndex === index}"
-                            :id="index">
-                        <input type="radio"
-                              @click="initBigChart(index)"
-                              name="options" autocomplete="off"
-                              :checked="bigLineChart.activeIndex === index">
+                     <label v-for="(option, index) in bigLineChartCategories" :key="option" class="btn btn-success btn-sm btn-simple" :class="{active:bigLineChart.activeIndex === index}" :id="index">
+                        <input type="radio" @click="initBigChart(index)" name="options" autocomplete="off" :checked="bigLineChart.activeIndex === index">
                         {{ option }}
                      </label>
                   </div>
@@ -65,7 +65,9 @@
               <div class="row">
                 <div class="col-sm-12 text-left mb-3">
                   <h5 class="card-category">Lasts 6 Months</h5>
-                  <h2 class="card-title">{{$t('dashboard.totalShipments')}}: <span class='ml-3' style='font-weight:400;'>{{totalInvoicesVAT}}</span> <span style='font-size:0.8rem;'>$</span></h2>
+                  <h2 class="card-title">
+                    {{$t('dashboard.totalShipments')}}: <span class='ml-3' style='font-weight:400;'>{{totalInvoicesVAT}}</span> <span style='font-size:0.8rem;'>{{company.currencySymbol}}</span>
+                  </h2>
                 </div>
               </div>
             </template>
@@ -86,10 +88,12 @@
           <card type="chart" cardCol >
           <template slot="header">
             <h5 class="card-category">Lasts 12 Months</h5>
-            <h3 class="card-title">{{$t('dashboard.dailySales')}}: <span class='ml-3' style='font-weight:400;'>-{{totalExpenses}}</span> <span style='font-size:0.8rem;'>$</span></h3>
+            <h3 class="card-title">
+              {{$t('dashboard.dailySales')}}: <span class='ml-3' style='font-weight:400;'>-{{totalExpenses}}</span> <span style='font-size:0.8rem;'>{{company.currencySymbol}}</span>
+            </h3>
             <div class='row px-1' style='font-size:13px;font-weight: 200;'>
-              <div class='col-4 text-center'>Avg Month: <strong>{{averageExpense.total}}</strong><span style='font-size:0.5rem;'>$</span></div>
-              <div class='col-4 text-center'>Avg Expense: <strong>{{averageExpense.perExpense}}</strong><span style='font-size:0.5rem;'>$</span></div>
+              <div class='col-4 text-center'>Avg Month: <strong>{{averageExpense.total}}</strong><span style='font-size:0.5rem;'>{{company.currencySymbol}}</span></div>
+              <div class='col-4 text-center'>Avg Expense: <strong>{{averageExpense.perExpense}}</strong><span style='font-size:0.5rem;'>{{company.currencySymbol}}</span></div>
               <div class='col-4 text-center'>Last Month: <strong>+{{averageExpense.lastMonthTendency}}%</strong> <span class='ml-1 tim-icons icon-minimal-up'></span></div>
             </div>
           </template>
@@ -108,7 +112,9 @@
           <card type="chart" cardCol>
             <template slot="header" class='mb-3'>
               <h5 class="card-category">Lasts 6 Months</h5>
-              <h3 class="card-title mb-4">Expenses VAT: <span class='ml-3' style='font-weight:400;'>{{totalExpensesVAT}}</span> <span style='font-size:0.8rem;'>$</span></h3>
+              <h3 class="card-title mb-4">
+                Expenses VAT: <span class='ml-3' style='font-weight:400;'>{{totalExpensesVAT}}</span> <span style='font-size:0.8rem;'>{{company.currencySymbol}}</span>
+              </h3>
             </template>
             <line-chart
               class="chart-area"
@@ -175,6 +181,7 @@ import config from '@/config'
 
 var INVOICES_FILE = 'invoices.json'
 var EXPENSES_FILE = 'expenses.json'
+var COMPANY_FILE = 'company.json'
 
 export default {
   components: {
@@ -187,6 +194,7 @@ export default {
   },
   data () {
     return {
+      company: {},
       loadingPage: true,
       listMonths: [],
       invoicesList: [],
@@ -242,9 +250,9 @@ export default {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: this.monthlyInvoices
+          data: this.monthlyInvoices.slice(-12)
         }],
-        labels: this.listMonths
+        labels: this.listMonths.slice(-12)
       }
 
       this.bigLineChart.activeIndex = index
@@ -308,7 +316,7 @@ export default {
       this.blueBarChart = {
         extraOptions: chartConfigs.purpleChartOptions,
         chartData: {
-          labels: this.listMonths,
+          labels: this.listMonths.slice(-12),
           datasets: [{
             label: 'Data',
             fill: true,
@@ -322,7 +330,7 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.monthlyExpenses
+            data: this.monthlyExpenses.slice(-12)
           }]
         },
         gradientColors: config.colors.primaryGradient,
@@ -395,6 +403,16 @@ export default {
           })
         }
       })
+
+      // Load Customers
+      userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
+        if(!company){ 
+          this.company = {}
+          this.company.currency = '$'
+        }else{
+          this.company = JSON.parse(company)
+        }
+      })
     },
 
     getLastMonths() {
@@ -417,7 +435,7 @@ export default {
       var monthlyInvoices = []
       var monthlyVAT = []
 
-      for(let i=0;i<=11;i++){
+      for(let i=1;i<=12;i++){
         monthlyInvoices[i] = 0
         monthlyVAT[i] = 0
       }
@@ -428,6 +446,9 @@ export default {
         total = total + invoice.total
         totalVAT = totalVAT + invoice.vat
       })
+
+      delete monthlyInvoices[0]
+      delete monthlyVAT[0]
 
       this.totalInvoices = (total).toFixed(2)
       this.totalInvoicesVAT = (totalVAT).toFixed(2)
@@ -440,7 +461,7 @@ export default {
         this.averageInvoice.lastMonthTendency = 0
       }else{
         this.averageInvoice.perInvoice = (total / this.invoices.length).toFixed(2)
-        this.averageInvoice.lastMonthTendency = (100 - ((monthlyInvoices[10] * 100) / (monthlyInvoices[11] === 0 ? 1 : monthlyInvoices[11]))).toFixed(2)
+        this.averageInvoice.lastMonthTendency = (100 - ((monthlyInvoices[11] * 100) / (monthlyInvoices[12] === 0 ? 1 : monthlyInvoices[12]))).toFixed(2)
 
       }
       this.averageInvoice.tendency = 0
@@ -457,7 +478,7 @@ export default {
       var monthlyExpenses = []
       var monthlyVAT = []
       
-      for(let i=0;i<=11;i++){
+      for(let i=1;i<=12;i++){
         monthlyExpenses[i] = 0
         monthlyVAT[i] = 0
       }
@@ -468,6 +489,9 @@ export default {
         total = total + expense.total
         totalVAT = totalVAT + expense.vat
       })
+
+      delete monthlyExpenses[0]
+      delete monthlyVAT[0]
 
       this.totalExpenses = (total).toFixed(2)
       this.totalExpensesVAT = (totalVAT).toFixed(2)
@@ -480,7 +504,7 @@ export default {
         this.averageExpense.lastMonthTendency = 0
       }else{
         this.averageExpense.perInvoice = (total / this.expenses.length).toFixed(2)
-        this.averageExpense.lastMonthTendency = (100 - ((monthlyExpenses[10] * 100) / (monthlyExpenses[11] === 0 ? 1 : monthlyExpenses[11]))).toFixed(2)
+        this.averageExpense.lastMonthTendency = (100 - ((monthlyExpenses[11] * 100) / (monthlyExpenses[12] === 0 ? 1 : monthlyExpenses[12]))).toFixed(2)
       }
       this.averageExpense.tendency = 0
 
