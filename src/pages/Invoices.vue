@@ -61,7 +61,11 @@
                           <p class="text-muted" style='color:#ddd;font-size:11px;'>Due: {{row.due_date | moment("from")}}</p>
                         </td>
                         <td class="text-left" style="cursor:pointer;">
-                          <p class="text-muted">{{row.total | currency}} €</p>
+                          <p class="text-muted">
+                            <span v-if='company.position === "prefix"'>{{row.currency ? row.currency : company.currency}}</span> 
+                            {{row.total | currency}} 
+                            <span v-if='company.position === "suffix"'>{{row.currency ? row.currency : company.currency}}</span>
+                          </p> 
                         </td>
                         <td class="text-left">
                             <p class="text-muted">
@@ -156,11 +160,24 @@
                 </div>
 
                 <div class='row text-left mt-4'>
-                    <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>VAT (%)</label><input class='form-control ml-4' type='number' v-model='invoice.tax' name='vat' min='0' style='width:100px;' />
+                    <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>VAT (%)</label><input class='form-control ml-4' type='number' v-model='invoice.tax' name='vat' min='0' value='0' style='width:100px;' />
                 </div>
 
                 <div class='row text-left mt-1'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>Discount</label><input class='form-control ml-4' type='number' v-model='invoice.discount' min='0' name='discount' style='width:100px;' />
+                </div>
+
+                <div class='row text-left mt-1'>
+                    <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>Currency</label>
+                    <select v-model="invoice.currency" class='form-control col-4 ml-4' style='border:1px solid rgba(34, 42, 66, 0.4);'>
+                      <option value="€">EUR</option>
+                      <option value="$">USD</option>
+                      <option value="¥">JPY</option>
+                      <option value="£">GBP</option>
+                      <option value="₿">BRL</option>
+                      <option value="₹">INR</option>
+                      <option value="¥">CNY</option>
+                    </select>
                 </div>
 
                 <div class='text-left row mt-4 ml-0'>
@@ -176,7 +193,7 @@
         <!-- END INVOICE CONFIGURATOR -->
 
         <!-- INVOICE PREVIEW -->
-            <div class="invoice-box col-8 card pt-0" style='font-size:13px;'>
+            <div class="invoice-box col-8 card pt-0 pr-0" style='font-size:13px;'>
               <table cellpadding="0" cellspacing="0">
                 <tr class="top">
                   <td colspan="4">
@@ -242,7 +259,7 @@
                     <input class='form-control float-right text-center' type="number" v-model="item.quantity" />
                   </td>
                   <td style='line-height: 40px;min-width:90px;'>
-                    ${{ item.price * item.quantity | currency }}
+                    {{invoice.currency}}{{ item.price * item.quantity | currency }}
                   </td>
                 </tr>
 
@@ -254,22 +271,22 @@
 
                 <tr class="subtotal">
                   <td colspan="3" class='text-right pr-3'>Subtotal:</td>
-                  <td>${{ subtotal | currency }}</td>
+                  <td>{{invoice.currency}}{{ subtotal | currency }}</td>
                 </tr>
 
                 <tr class="vat">
                   <td colspan="3" class='text-right pr-3'>VAT <span style='font-size:12px;'>({{invoice.tax}} %)</span>:</td>
-                  <td>${{ vat | currency }}</td>
+                  <td>{{invoice.currency}}{{ vat | currency }}</td>
                 </tr>
 
                 <tr class="discount" v-if='invoice.discount !== 0 && invoice.discount !== "0"'>
                   <td colspan="3" class='text-right pr-3'>Discount:</td>
-                  <td>$ -{{invoice.discount}}</td>
+                  <td>{{invoice.currency}} -{{invoice.discount}}</td>
                 </tr>
 
                 <tr class="total">
                   <td colspan="3" class='text-right pr-3'><strong>Total:</strong></td>
-                  <td>${{ total | currency }}</td>
+                  <td>{{invoice.currency}}{{ total | currency }}</td>
                 </tr>
             </table>
 
@@ -292,7 +309,8 @@
                 <button class='btn btn-danger btn-sm ml-1' @click='clearInvoice' style='opacity:0.75;color:#333;'>Clear</button>
             </div>
             <div class='col-3 text-right mt-3 pr-3'>
-              <button class='btn btn-light btn-sm mr-5' style='opacity:0.8;'>Save Customer</button>
+              <button v-if='!invoice.client.hasOwnProperty("id")' class='btn btn-light btn-sm mr-5' style='opacity:0.8;' @click='saveCustomer()'>Save Customer</button>
+              <button v-if='invoice.client.hasOwnProperty("id")' class='btn btn-light btn-sm mr-5' style='opacity:0.8;' @click='saveCustomer()'>Update Customer</button>
             </div>
 
             <div class='col-8 text-right mt-3'>
@@ -389,28 +407,28 @@
                 {{ item.quantity }}
               </td>
               <td style='min-width:90px;'>
-                ${{ item.price * item.quantity | currency }}
+                {{invoice.currency}}{{ item.price * item.quantity | currency }}
               </td>
             </tr>
 
             <tr class="subtotal">
               <td colspan="3" class='text-right pr-3'>Subtotal:</td>
-              <td>${{ subtotal | currency }}</td>
+              <td>{{invoice.currency}}{{ subtotal | currency }}</td>
             </tr>
 
             <tr class="vat">
               <td colspan="3" class='text-right pr-3'>VAT <span style='font-size:12px;'>({{invoice.tax}} %)</span>:</td>
-              <td>${{ vat | currency }}</td>
+              <td>{{invoice.currency}}{{ vat | currency }}</td>
             </tr>
 
             <tr class="discount" v-if='invoice.discount !== 0 && invoice.discount !== "0"'>
               <td colspan="3" class='text-right pr-3'>Discount:</td>
-              <td>$ -{{invoice.discount}}</td>
+              <td>{{invoice.currency}} -{{invoice.discount}}</td>
             </tr>
 
             <tr class="total">
               <td colspan="3" class='text-right pr-3'><strong>Total:</strong></td>
-              <td>${{ total | currency }}</td>
+              <td>{{invoice.currency}}{{ total | currency }}</td>
             </tr>
         </table>
 
@@ -463,9 +481,9 @@ import { userSession } from '@/userSession'
 import { uuid } from 'vue-uuid'
 import * as jsPDF from 'jspdf'
 import html2canvas from "html2canvas"
+import { CurrencyInput } from 'vue-currency-input'
 const axios = require('axios');
 require('promise.prototype.finally').shim();
-
 window.html2canvas = html2canvas //html2canvas must be set as global var
 
 const tableColumns = ['', 'CLIENT', 'DATE', 'AMOUNT', 'STATUS', 'VIEW', 'EDIT']
@@ -482,7 +500,8 @@ export default {
     BaseTable,
     BaseCheckbox,
     Modal,
-    BreedingRhombusSpinner
+    BreedingRhombusSpinner,
+    CurrencyInput
   },
   data () {
     return {
@@ -518,7 +537,7 @@ export default {
         comments: '',
         status: 'Pending',
         tax: 0,
-        currency: '$',
+        currency: null,
         discount: 0,
         items: [
           { description: '', quantity: 1, price: 0 }
@@ -562,13 +581,11 @@ export default {
       }
       this.showArchive = true
 
-      console.log('Invoices/folders.json')
       userSession.getFile('Invoices/folders.json', this.$DECRYPT).then(invoiceFolders => {
         if(!invoiceFolders){
           this.invoiceFolders = []
           return false
         }
-        console.log(invoiceFolders)
         this.invoiceFolders = JSON.parse(invoiceFolders)
       })
     },
@@ -624,7 +641,6 @@ export default {
       }
 
       this.$set(this.table1, 'data', this.invoices)
-      //this.table1.data = this.invoices
 
       this.selected = []
       this.deselectAll()
@@ -654,12 +670,6 @@ export default {
           })
 
           this.loadingDownload = false
-          /*
-          var iframe = document.createElement('iframe');
-          iframe.setAttribute('style', 'position:fixed;right:0; top:0; bottom:0; height:100%; width:100%; z-index:10000;');
-          document.body.appendChild(iframe);
-          iframe.src = pdf.output('datauristring');
-          */
         }
       });
     },
@@ -677,6 +687,7 @@ export default {
       this.invoice.payment = this.company.payment
       this.invoice.comments = this.company.comments
       this.invoice.tax = this.company.vat
+      this.invoice.currency = this.company.currencySymbol
 
       this.loadCompanyLogo()
     },
@@ -748,7 +759,6 @@ export default {
             }
 
             invoice = JSON.parse(invoice)
-            //let searchInvoice = this.invoicesList.indexOf(invoice.id)
             this.$set(this.invoices, this.invoices.length, invoice)
             this.invoicesList[i] = invoice.id
           })
@@ -791,6 +801,7 @@ export default {
         const data = await userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
           if(!company){ 
             this.company = {}
+            this.company.currency = '$'
           }else{
             this.company = JSON.parse(company)
           }
@@ -800,11 +811,16 @@ export default {
           this.invoice.tax = this.company.vat
           this.invoice.logo = this.company.logo
 
+          if(!this.invoice.currency){
+            this.invoice.currency = this.company.currency
+          }
+
           // Load Invoices data
           return userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((invoices) => {
             if(invoices){ 
               this.invoicesList = JSON.parse(invoices)
             }
+            //this.invoicesList = []
             
             return Promise.all(
               this.invoicesList.map((invoiceFile) => {
@@ -839,8 +855,9 @@ export default {
       userSession.getFile(CUSTOMERS_FILE, this.$DECRYPT).then((customers) => {
         if(!customers){
           this.customersList = []
+        }else{
+          this.customersList = JSON.parse(customers)
         }
-        this.customersList = JSON.parse(customers)
         var i = 0
 
         for (i in this.customersList) {
@@ -897,7 +914,6 @@ export default {
       this.invoice.month = this.invoice.date.substr(5,2)
       this.invoice.quarter = 'Q'+(this.invoice.month % 4)
 
-      console.log(this.invoice)
       userSession.putFile(invoiceFile, JSON.stringify(this.invoice), this.$ENCRYPT)
 
       if (isNew) {
@@ -979,7 +995,6 @@ export default {
     },
 
     saveToFolder(folder) {
-      console.log('saveToFolder '+folder)
       if(!this.checkHasSelected()){
         return false
       }
@@ -1051,7 +1066,6 @@ export default {
     },
 
     orderBy(field){
-      console.log("order by field: "+field)
       this.invoices.sort((a,b) => {
         if(field === "name" || field === "client"){
           return (a.field.toUpperCase() <= b.field.toUpperCase()) ? -1 : 1;
@@ -1059,7 +1073,59 @@ export default {
           return a.field - b.field
         }
       })
-    }
+    },
+
+    saveCustomer () {
+      let isNew = false
+      let newCustomer = this.invoice.client
+      newCustomer.legal = this.invoice.client.legal
+      newCustomer.address = this.invoice.client.address
+      newCustomer.city = this.invoice.client.city
+      newCustomer.country = this.invoice.client.country
+      newCustomer.nif = this.invoice.client.nif
+      newCustomer.email = this.invoice.client.email
+      newCustomer.phone = this.invoice.client.phone
+      newCustomer.tax = this.invoice.tax
+      newCustomer.discount = this.invoice.discount
+      newCustomer.currency = this.invoice.currency
+      newCustomer.comments = this.invoice.comments
+      newCustomer.payment = this.invoice.payment
+
+      if (newCustomer.id === null || newCustomer.id === undefined) {
+        newCustomer.id = uuid.v4()
+        this.customersList.push(newCustomer.id)
+        userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList), this.$ENCRYPT)
+        isNew = true
+      }
+
+      let customerFile = newCustomer.id + '.json'
+      userSession.putFile(customerFile, JSON.stringify(newCustomer), this.$ENCRYPT)
+
+      if(isNew){
+        this.customers.push(newCustomer)
+        this.$notify({
+          message: 'Customer created successfully',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'success',
+          timeout: 1500
+        })
+      }else{
+        this.$notify({
+          message: 'Customer updated successfully',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'success',
+          timeout: 1500
+        })
+      }      
+    },
+
+    changeSymbol(symbol){
+      this.$set(this.invoice,"currency",symbol)      
+    },
 
   },
   filters: {

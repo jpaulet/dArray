@@ -309,9 +309,6 @@ export default {
         type: 'success',
         timeout: 1500
       })
-
-      console.log(this.customersList)
-      console.log(this.customers)
     },
     showCustomer (id) {
 

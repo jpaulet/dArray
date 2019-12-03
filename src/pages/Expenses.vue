@@ -62,7 +62,11 @@
                             <p class="text-muted">{{row.date}}</p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted">{{row.total | currency}} €</p>
+                            <p class="text-muted">
+                              <span v-if='company.position === "prefix"'>{{row.currency ? row.currency : company.currency}}</span> 
+                              {{row.total | currency}} 
+                              <span v-if='company.position === "suffix"'>{{row.currency ? row.currency : company.currency}}</span>
+                            </p>
                         </td>
                         <td class="text-left">
                             <p class="text-muted">
@@ -152,6 +156,19 @@
                     <input class='form-control ml-1 col-7 text-center' type='number' v-model='expense.tax' name='vat' min='0' />
                 </div>
 
+                <div class='row text-left mt-2'>
+                    <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'>Currency</label>
+                    <select v-model="expense.currency" class='form-control col-7 ml-1' style='border:1px solid rgba(34, 42, 66, 0.4);'>
+                      <option value="€">EUR</option>
+                      <option value="$">USD</option>
+                      <option value="¥">JPY</option>
+                      <option value="£">GBP</option>
+                      <option value="₿">BRL</option>
+                      <option value="₹">INR</option>
+                      <option value="¥">CNY</option>
+                    </select>
+                </div>
+
                 <div class='row text-left mt-4 ml-0'>
                     <h6>Comments/Notes</h6>
                     <textarea class='form-control ml-1 px-2 col-10' v-model="expense.comments" placeholder="Introduce any comment / note" style='border:1px solid rgba(29, 37, 59, 0.25);border-radius:6px;'></textarea>
@@ -205,7 +222,7 @@
                     <input class='form-control float-right text-center' type="number" v-model="item.quantity" />
                   </td>
                   <td style='line-height: 40px;min-width:90px;'>
-                    ${{ item.price * item.quantity | currency }}
+                    {{expense.currency}}{{ item.price * item.quantity | currency }}
                   </td>
                 </tr>
 
@@ -217,17 +234,17 @@
 
                 <tr class="subtotal">
                   <td colspan="3" class='text-right pr-3'>Subtotal:</td>
-                  <td>${{ subtotal | currency }}</td>
+                  <td>{{expense.currency}}{{ subtotal | currency }}</td>
                 </tr>
 
                 <tr class="vat">
                   <td colspan="3" class='text-right pr-3'>VAT <span style='font-size:12px;'>({{expense.tax}} %)</span>:</td>
-                  <td>${{ vat | currency }}</td>
+                  <td>{{expense.currency}}{{ vat | currency }}</td>
                 </tr>
 
                 <tr class="total">
                   <td colspan="3" class='text-right pr-3'><strong>Total:</strong></td>
-                  <td>${{ total | currency }}</td>
+                  <td>{{expense.currency}}{{ total | currency }}</td>
                 </tr>
             </table>
 
@@ -315,23 +332,23 @@
                 {{ item.quantity }}
               </td>
               <td style='line-height: 40px;min-width:90px;'>
-                ${{ item.price * item.quantity | currency }}
+                {{expense.currency}}{{ item.price * item.quantity | currency }}
               </td>
             </tr>
 
             <tr class="subtotal">
               <td colspan="3" class='text-right pr-3'>Subtotal:</td>
-              <td>${{ subtotal | currency }}</td>
+              <td>{{expense.currency}}{{ subtotal | currency }}</td>
             </tr>
 
             <tr class="vat">
               <td colspan="3" class='text-right pr-3'>VAT <span style='font-size:12px;'>({{expense.tax}} %)</span>:</td>
-              <td>${{ vat | currency }}</td>
+              <td>{{expense.currency}}{{ vat | currency }}</td>
             </tr>
 
             <tr class="total">
               <td colspan="3" class='text-right pr-3'><strong>Total:</strong></td>
-              <td>${{ total | currency }}</td>
+              <td>{{expense.currency}}{{ total | currency }}</td>
             </tr>
         </table>
 
@@ -681,6 +698,7 @@ export default {
     openNewExpense () {
       this.clearExpense()
       this.newExpense = true
+      this.newExpense.currency = company.currencySymbol
     },
 
     closeNewExpense () {
@@ -718,10 +736,15 @@ export default {
       userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
         if(!company){
           this.company = {}
+          this.company.currency = '$'
         }else{
           this.company = JSON.parse(company)
         }        
         this.expense.tax = this.company.vat
+
+        if(!this.invoice.currency){
+          this.expense.currency = this.company.currency
+        }
       })
 
       // Load Expenses data

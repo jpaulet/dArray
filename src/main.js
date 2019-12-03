@@ -10,6 +10,13 @@ import i18n from './i18n'
 import SideBar from '@/components/SidebarPlugin'
 import VueOffline from 'vue-offline'
 
+import VueCurrencyInput from 'vue-currency-input'
+
+const pluginOptions = {
+  globalOptions: { currency: 'USD' }
+}
+Vue.use(VueCurrencyInput, pluginOptions)
+
 // router setup
 import routes from './router'
 
