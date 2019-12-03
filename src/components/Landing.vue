@@ -2,7 +2,6 @@
   <div class="panel-landing" id="landing">
 
     <div class="wrapper">
-      <!-- :style="{ backgroundImage: 'url(' + require('@/assets/img/landing/map.png') + ')' }" style='background-repeat:no-repeat;margin: 0px auto;background-position:bottom center;background-size:contain;' -->
       <!-- Navbar Section -->
       <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top effect-main">
         <div class="container container">
@@ -59,7 +58,7 @@
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
-                      <img src="@/assets/img/landing/a3.png" alt="Feature" width="35">
+                      <img src="@/assets/img/landing/a3.png" alt="Secure" width="35">
                     </div>
                   </div>
                   <div class="card-text">
@@ -72,7 +71,7 @@
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
-                      <img src="@/assets/img/landing/a2.png" alt="Feature" width="35">
+                      <img src="@/assets/img/landing/a2.png" alt="Private" width="35">
                     </div>
                   </div>
                   <div class="card-text">
@@ -85,7 +84,7 @@
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
-                      <img src="@/assets/img/landing/a1.png" alt="Feature" width="35">
+                      <img src="@/assets/img/landing/a1.png" alt="Decentralized" width="35">
                     </div>
                   </div>
                   <div class="card-text">
@@ -98,7 +97,7 @@
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
-                      <img src="@/assets/img/landing/a6.png" alt="Feature" width="35">
+                      <img src="@/assets/img/landing/a6.png" alt="Productive" width="35">
                     </div>
                   </div>
                   <div class="card-text">
@@ -111,7 +110,7 @@
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
-                      <img src="@/assets/img/landing/a5.png" alt="Feature" width="35">
+                      <img src="@/assets/img/landing/a5.png" alt="Easy to use" width="35">
                     </div>
                   </div>
                   <div class="card-text">
@@ -124,7 +123,7 @@
                 <div class="feature-list">
                   <div class="card-icon">
                     <div class="card-img">
-                      <img src="@/assets/img/landing/a4.png" alt="Feature" width="35">
+                      <img src="@/assets/img/landing/a4.png" alt="Free" width="35">
                     </div>
                   </div>
                   <div class="card-text">
@@ -149,12 +148,11 @@
 
              <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
                  <div class="f-image">
-                   <!-- <img class="img-fluid" src="@/assets/img/landing/features/invoice1.png" alt="Invoice screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'> -->
                    <ul class="slides">
                     <input type="radio" name="radio-btn" id="img-1" checked />
                     <li class="slide-container">
                     <div class="slide">
-                      <img src="@/assets/img/landing/features/invoice1.png" />
+                      <img src="@/assets/img/landing/features/invoice1.png" alt='Invoice screenshot 1' />
                         </div>
                     <div class="nav">
                       <label for="img-3" class="prev">&#x2039;</label>
@@ -165,7 +163,7 @@
                     <input type="radio" name="radio-btn" id="img-2" />
                     <li class="slide-container">
                         <div class="slide">
-                          <img src="@/assets/img/landing/features/invoice2.png" />
+                          <img src="@/assets/img/landing/features/invoice2.png" alt='Invoice screenshot 2' />
                         </div>
                     <div class="nav">
                       <label for="img-1" class="prev">&#x2039;</label>
@@ -176,7 +174,7 @@
                     <input type="radio" name="radio-btn" id="img-3" />
                     <li class="slide-container">
                         <div class="slide">
-                          <img src="@/assets/img/landing/features/invoice3.png" />
+                          <img src="@/assets/img/landing/features/invoice3.png" alt='Invoice screenshot 3' />
                         </div>
                     <div class="nav">
                       <label for="img-2" class="prev">&#x2039;</label>
@@ -207,7 +205,7 @@
                     <input type="radio" name="radio-btn2" id="img-4" checked />
                     <li class="slide-container">
                     <div class="slide2">
-                      <img src="@/assets/img/landing/features/expense1.png" />
+                      <img src="@/assets/img/landing/features/expense1.png" alt='Expense screenshot 2' />
                         </div>
                     <div class="nav">
                       <label for="img-5" class="prev">&#x2039;</label>
@@ -218,7 +216,7 @@
                     <input type="radio" name="radio-btn2" id="img-5" />
                     <li class="slide-container">
                         <div class="slide2">
-                          <img src="@/assets/img/landing/features/expense2.png" />
+                          <img src="@/assets/img/landing/features/expense2.png" alt='Expense screenshot 2' />
                         </div>
                     <div class="nav">
                       <label for="img-4" class="prev">&#x2039;</label>
@@ -298,7 +296,7 @@
                     <input type="radio" name="radio-btn3" id="img-6" checked />
                     <li class="slide-container">
                     <div class="slide3">
-                      <img src="@/assets/img/landing/features/dashboard.png" />
+                      <img src="@/assets/img/landing/features/dashboard.png" alt='Dashboard screenshot 1' />
                         </div>
                     <div class="nav">
                       <label for="img-7" class="prev">&#x2039;</label>
@@ -309,7 +307,7 @@
                     <input type="radio" name="radio-btn3" id="img-7" />
                     <li class="slide-container">
                         <div class="slide3">
-                          <img src="@/assets/img/landing/features/settings.png" />
+                          <img src="@/assets/img/landing/features/settings.png" alt='Settings screenshot 1' />
                         </div>
                     <div class="nav">
                       <label for="img-6" class="prev">&#x2039;</label>
@@ -322,7 +320,6 @@
                       <label for="img-7" class="nav-dot" id="img-dot-7"></label>
                     </li>
                   </ul>
-                   <!-- <img class="img-fluid" src="@/assets/img/landing/features/dashboard.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'> -->
                  </div>
                  <div class="f-text">
                    <div class="left-content">
@@ -343,7 +340,7 @@
                <a href="#landing" class="btn-action btn-edge">Get Started</a>
              </div>
              <div class="yd-ft-right">
-               <img src="@/assets/img/landing/test.png" alt="Feature">
+               <img src="@/assets/img/landing/test.png" alt="Get started">
              </div>
            </div>
          </div>
@@ -407,9 +404,7 @@
                         <tr><th>Twitter</th></tr>
                         <tr>
                           <td class=''>
-                            <blockquote class="twitter-tweet" data-width='350'>
-                              <p lang="en" dir="ltr">🔥🔥🔥 We&#39;re launching dArray very soon! 🔥🔥🔥<br>The Privacy-focused Accounting Software for Makers, Freelancers &amp; SME! <a href="https://twitter.com/hashtag/dapp?src=hash&amp;ref_src=twsrc%5Etfw">#dapp</a> <a href="https://twitter.com/hashtag/blockstack?src=hash&amp;ref_src=twsrc%5Etfw">#blockstack</a> <a href="https://t.co/Lububy5XaA">https://t.co/Lububy5XaA</a> <a href="https://t.co/RVoGzHjz57">pic.twitter.com/RVoGzHjz57</a></p>&mdash; dArray (@dArray_dapp) <a href="https://twitter.com/dArray_dapp/status/1199727746114605057?ref_src=twsrc%5Etfw">November 27, 2019</a>
-                            </blockquote>
+                            <a href='https://twitter.com/dArray_dapp/status/1199727746114605057' target='_blank'><img src='@/assets/img/twitter_img.png' alt='Twitter img' style='border:1px solid #eee;boder-radius:8px;padding:6px;' /></a>
                           </td>
                         </tr>
                       </table>
@@ -515,13 +510,13 @@ export default {
     },
     loadRemoteScripts () {
       let popper = document.createElement('script')
-      popper.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js')
+      popper.setAttribute('src', this.publicPath + '/popper.min.js')
       document.head.appendChild(popper)
     }
   },
   data () {
     return {
-      rotatingText: ['Descentralized','Private','Secure','Blockchain','Free'],
+      rotatingText: ['Decentralized','Private','Secure','Blockchain','Free'],
       i: 0,
       //publicPath: 'http://localhost:8080' || process.env.BASE_URL
       publicPath: ''
@@ -594,166 +589,6 @@ export default {
   font-style: normal;
   font-weight: 300;
   src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gnD_g.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459W1hyzbi.woff2) format('woff2');
-  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459WZhyzbi.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459Wdhyzbi.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459Wlhyw.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3gTD_u50.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3g3D_u50.woff2) format('woff2');
-  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-
-}/* vietnamese */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3gbD_u50.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3gfD_u50.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  src: local('Montserrat Medium'), local('Montserrat-Medium'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_ZpC3gnD_g.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gTD_u50.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3g3D_u50.woff2) format('woff2');
-  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gbD_u50.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gfD_u50.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_bZF3gnD_g.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gTD_u50.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3g3D_u50.woff2) format('woff2');
-  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gbD_u50.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gfD_u50.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Montserrat Bold'), local('Montserrat-Bold'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_dJE3gnD_g.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 

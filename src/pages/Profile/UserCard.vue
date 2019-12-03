@@ -26,24 +26,31 @@
     </div>
 
     <div class='col-12 text-left mb-2 mt-3' v-if='company.comments'>
-        <h6>Comments</h6>
-        <div style="white-space: pre-line;" class='ml-2'>{{company.comments}}</div>
+      <h6>Comments</h6>
+      <div style="white-space: pre-line;" class='ml-2'>{{company.comments}}</div>
     </div>
-    <div class='col-12 text-left mt-3 mb-5' v-if='company.payment'>
-        <h6>Payment Method</h6>
-        <div style="white-space: pre-line;" class='ml-2'>{{company.payment}}</div>
+    <div class='col-12 text-left mb-2 mt-3' v-if='company.payment'>
+      <h6>Payment Method</h6>
+      <div style="white-space: pre-line;" class='ml-2'>{{company.payment}}</div>
+    </div>
+
+    <div class='col-12 text-left mt-5 mb-5' style='position: absolute;bottom: 70px;'>
+      <h6>Currency:</h6>
+      <CurrencyInput v-model="value" :currency="currency" :locale="company.locale" class="demo__currency-input" style='border:0px;padding-left:10px;background:none;' disabled='disabled' />
     </div>
   </card>
 </template>
 <script>
 import { userSession } from '@/userSession'
+import { CurrencyInput } from 'vue-currency-input'
 import {
   Card
 } from '@/components/index'
 
 export default {
   components: {
-    Card
+    Card,
+    CurrencyInput
   },
   props: {
     company: {
@@ -55,7 +62,8 @@ export default {
   },
   data () {
     return {
-      imageSrc: null
+      imageSrc: null,
+      value: 1234.5
     }
   },
   methods: {
@@ -99,6 +107,9 @@ export default {
         this.fetchFile()
       }
       return this.company.logo
+    },
+    currency () {
+      return { [this.company.position]: this.company.currencySymbol }
     }
   }
 }

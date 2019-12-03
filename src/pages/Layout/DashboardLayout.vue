@@ -108,6 +108,7 @@ export default {
       this.user = new Person(this.userData.profile)
       this.user.username = this.userData.username
       this.user.name = this.userData.name ? this.userData.name : this.userData.username.substr(0,this.userData.username.indexOf("."))
+      
     } else if (userSession.isSignInPending()) {
       userSession.handlePendingSignIn()
         .then((userData) => {

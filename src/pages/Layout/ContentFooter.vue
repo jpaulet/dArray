@@ -45,9 +45,7 @@
             <tr><th>Twitter</th></tr>
             <tr style='width:100%;'>
               <td class='' style='width:100%;'>
-                <blockquote class="twitter-tweet" data-width='350'>
-                  <p lang="en" dir="ltr">🔥🔥🔥 We&#39;re launching dArray very soon! 🔥🔥🔥<br>The Privacy-focused Accounting Software for Makers, Freelancers &amp; SME! <a href="https://twitter.com/hashtag/dapp?src=hash&amp;ref_src=twsrc%5Etfw">#dapp</a> <a href="https://twitter.com/hashtag/blockstack?src=hash&amp;ref_src=twsrc%5Etfw">#blockstack</a> <a href="https://t.co/Lububy5XaA">https://t.co/Lububy5XaA</a> <a href="https://t.co/RVoGzHjz57">pic.twitter.com/RVoGzHjz57</a></p>&mdash; dArray (@dArray_dapp) <a href="https://twitter.com/dArray_dapp/status/1199727746114605057?ref_src=twsrc%5Etfw">November 27, 2019</a>
-                </blockquote>
+                <a href='https://twitter.com/dArray_dapp/status/1199727746114605057' target='_blank'><img src='@/assets/img/twitter_img.png' alt='Twitter img' style='border:1px solid #eee;boder-radius:8px;padding:6px;' /></a>
               </td>
             </tr>
           </table>
