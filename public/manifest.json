@@ -1,10 +1,10 @@
 {
-  "name": "Hello, Blockstack App",
+  "name": "dArray",
   "start_url": "./index.html",
-  "description": "A simple Hello, Blockstack app",
+  "description": "The Decentralized Accounting Software for your Business",
   "icons": [{
-    "src": "favicon.ico",
-    "sizes": "400x400",
+    "src": "favicon.png",
+    "sizes": "200x200",
     "type": "image/png"
   }]
 }

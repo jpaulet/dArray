@@ -24,6 +24,7 @@ window.blockstack = require('blockstack')
 window.axios = require('axios')
 
 Vue.config.productionTip = false
+//Vue.http.headers.common["can't-be-evil"] = true
 
 Vue.prototype.$ENCRYPT = {
   encrypt: true

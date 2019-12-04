@@ -99,9 +99,9 @@
             <div class="col-md-4 text-left">
               <label class='control-label'>Position</label>
               <br />
-              <div style='line-height: 40px;height:35px;text-align:center;'>
-                <label class='col-6'><input type='radio' label="Prefix" v-model='model.position' name='position' value='prefix' /> Prefix</label>
-                <label class='col-6'><input type='radio' label="Suffix" v-model='model.position' name='position' class='ml-3' value='suffix' /> Suffix</label>
+              <div style='line-height: 30px;height:35px;text-align:center;'>
+                <label><input type='radio' label="Prefix" v-model='model.position' name='position' value='prefix' /> Prefix</label>
+                <label><input type='radio' label="Suffix" v-model='model.position' name='position' value='suffix' class='ml-3' /> Suffix</label>
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@ export default {
       } else if (this.model.currency === "GBP"){ 
         this.model.currencySymbol = "£" 
       } else if (this.model.currency === "BRL"){ 
-        this.model.currencySymbol = "₿" 
+        this.model.currencySymbol = "R$" 
       } else if (this.model.currency === "INR"){ 
         this.model.currencySymbol = "₹" 
       } else if (this.model.currency === "CNY"){ 
@@ -238,7 +238,6 @@ export default {
         if(company){
           this.model = JSON.parse(company)
         }
-        console.log(this.model)
         setTimeout(() => { this.loadingPage = false }, 500)
       })
     }

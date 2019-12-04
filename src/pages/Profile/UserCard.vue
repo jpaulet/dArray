@@ -34,7 +34,7 @@
       <div style="white-space: pre-line;" class='ml-2'>{{company.payment}}</div>
     </div>
 
-    <div class='col-12 text-left mt-5 mb-5' style='position: absolute;bottom: 70px;'>
+    <div class='col-12 text-left mt-5 mb-5'>
       <h6>Currency:</h6>
       <CurrencyInput v-model="value" :currency="currency" :locale="company.locale" class="demo__currency-input" style='border:0px;padding-left:10px;background:none;' disabled='disabled' />
     </div>

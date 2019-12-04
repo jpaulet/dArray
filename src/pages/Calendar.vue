@@ -1,8 +1,8 @@
 <template>
   <div class="content content-main-card">
-    <div class="card p-5">
+    <div class="card p-3 p-sm-5">
       <div class='row mb-5'>
-        <div class='col-6 text-left'>
+        <div class='col-5 text-left'>
           <h6 style='line-height: 32px;'><i class="tim-icons icon-calendar-60 mr-3"></i>Scheduler</h6>
         </div>
         <div class='col-6 text-right'>
@@ -162,9 +162,10 @@ export default {
 </script>
 
 <style scoped>
-  .fc-toolbar h2{
-    font-size: 1.2em !important;
+  /deep/ .fc-toolbar h2{
+    font-size: 1.25em !important;
   }
+  
   .fc-event{
     background-color: #263148 !important;
     color:#fff;

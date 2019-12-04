@@ -1,7 +1,7 @@
 <template>
   <footer class="footer pt-0 pb-1">
     <div class="container-fluid px-2 row">
-      <ul class="col-4 nav my-0 text-left pl-5">
+      <ul class="col-8 nav my-0 text-left pl-5">
         <li class="nav-item" v-if='false'>
           <a href="javascript:void(0)" class="nav-link">
             About Us
@@ -28,7 +28,7 @@
           </a>
         </li>
       </ul>
-      <div class="col-8 copyright my-0 text-right" style='margin-right:0px;'>
+      <div class="col-4 copyright my-0 text-right" style='margin-right:0px;'>
         &copy;
         {{ new Date().getFullYear() }} made with <i class="tim-icons icon-heart-2"></i> by
         <a href="http://www.jpaulet.com" alt='J.P. Aulet' target="_blank" style='color:#344675;'>J.P. Aulet</a>.
@@ -45,7 +45,7 @@
             <tr><th>Twitter</th></tr>
             <tr style='width:100%;'>
               <td class='' style='width:100%;'>
-                <a href='https://twitter.com/dArray_dapp/status/1199727746114605057' target='_blank'><img src='@/assets/img/twitter_img.png' alt='Twitter img' style='border:1px solid #eee;boder-radius:8px;padding:6px;' /></a>
+                <a href='https://twitter.com/dArray_dapp/status/1199727746114605057' target='_blank'><img src='@/assets/img/twitter_img.png' alt='Twitter img' style='border:1px solid #eee;boder-radius:8px;padding:6px;width:320px;' /></a>
               </td>
             </tr>
           </table>

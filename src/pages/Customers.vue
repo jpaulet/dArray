@@ -4,7 +4,7 @@
       <template slot="header">
             <div class='row mb-4'>
                 <div class="col-sm-6 text-left">
-                  <button type="button" class="btn btn-light btn-sm px-5 text-white" fill="" @click="openNewCustomer">+ New Customer</button>
+                  <button type="button" class="btn btn-light btn-sm px-4 px-md-5 text-white" fill="" @click="openNewCustomer">+ New Customer</button>
                 </div>
             </div>
         </template>
@@ -31,7 +31,20 @@
             </drop-down>
 
             <div class="table-responsive text-left mb-3" style='overflow-x:inherit;'>
-                <base-table :data="table1.data" :columns="table1.columns" thead-classes="text-primary">
+                <table style='width:100%;'>
+                  <thead class="text-primary">
+                    <tr>
+                      <th>Legal</th>
+                      <th class='d-none d-sm-table-cell'>Address</th>
+                      <th class='d-none d-sm-table-cell'>City / Country</th>
+                      <th>Contact</th>
+                      <th style='text-align: center;'>Type</th>
+                      <th style='width:50px;font-size:12px;text-align:center;'>Edit</th>
+                      <th style='width:50px;font-size:12px;text-align:center;'>Delete</th>
+                    </tr>
+                  </thead>
+                </table>
+                <base-table :data="table1.data" thead-classes="text-primary">
                     <template slot-scope="{row}" style='font-size:12px;'>
                         <td style='display:none;'>
                             <base-checkbox v-model="row.done"></base-checkbox>
@@ -39,24 +52,27 @@
                         <td class="text-left">
                             <p class="title" style='font-size:12px;'>{{row.legal}}</p>
                         </td>
-                        <td class="text-left">
+                        <td class="text-left d-none d-sm-table-cell">
                             <p class="text-muted" style='font-size:12px;'>{{row.address}}</p>
                         </td>
-                        <td class="text-left">
+                        <td class="text-left d-none d-sm-table-cell">
                             <p class="text-muted" style='font-size:12px;'>{{row.city}} <span style='font-size:11px;'>({{row.country}})</span></p>
                         </td>
                         <td class="text-left">
-                            <p class="text-muted" style='font-size:12px;'>{{row.name}}: <a style='font-size:11px;text-decoration:underline;'>{{row.email}}</a></p>
+                            <p class="text-muted" style='font-size:12px;'>
+                              <span v-if='row.name'>{{row.name}}:</span>
+                              <a style='font-size:11px;text-decoration:underline;'>{{row.email}}</a>
+                            </p>
                         </td>
                         <td class="text-left">
                             <p class="text-muted"><span class='badge badge-light' style='font-size:11px;'>{{row.type}}</span></p>
                         </td>
-                        <td class="td-actions text-center" style='width:50px;'>
+                        <td class="td-actions text-center px-0" style='width:50px;'>
                             <base-button type="link" artia-label="edit button" @click='editCustomer(row.id)'>
                               <i class="tim-icons icon-pencil"></i>
                             </base-button>
                         </td>
-                        <td class="td-actions text-center" style='width:50px;'>
+                        <td class="td-actions text-center px-0" style='width:50px;'>
                             <base-button type="link" artia-label="delete button" @click='deleteCustomer(row.id)'>
                               <i class="tim-icons icon-simple-remove"></i>
                             </base-button>

@@ -3,23 +3,23 @@
     <card v-if='!newInvoice && !showPreview'>
         <template slot="header">
             <div class='row mb-4'>
-                <div class="col-sm-6 text-left">
-                  <button type="button" class="btn btn-light btn-sm px-5 text-white" fill="" @click="openNewInvoice">+ New Invoice</button>
+                <div class="col-6 text-left">
+                  <button type="button" class="btn btn-light btn-sm px-4 px-md-5 text-white" fill="" @click="openNewInvoice">+ New Invoice</button>
                 </div>
-                <div class="col-sm-6 text-right">
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
-                       <label v-for="(option, index) in invoiceOptions"
-                              :key="option"
-                              class="btn btn-light btn-sm btn-simple"
-                              :class="{active:activeIndex === index}"
-                              :id="index">
-                          <input type="radio"
-                                @click="changeViewType(index,option)"
-                                name="options" autocomplete="off"
-                                :checked="activeIndex === index">
-                          {{ option }}
-                       </label>
-                    </div>
+                <div class="col-6 text-right" style='margin-top:2px;'>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
+                     <label v-for="(option, index) in invoiceOptions"
+                            :key="option"
+                            class="btn btn-light btn-sm btn-simple"
+                            :class="{active:activeIndex === index}"
+                            :id="index">
+                        <input type="radio"
+                              @click="changeViewType(index,option)"
+                              name="options" autocomplete="off"
+                              :checked="activeIndex === index">
+                        {{ option }}
+                     </label>
+                  </div>
                 </div>
             </div>
         </template>
@@ -47,7 +47,21 @@
             </drop-down>
 
             <div v-if='table1.data.length' class="table-responsive text-left mb-3" style='overflow-x:inherit;'>
-                <base-table :data="table1.data" :columns="table1.columns" thead-classes="text-primary">
+                <table style='width:100%;'>
+                  <thead class="text-primary">
+                    <tr>
+                      <th style='width:50px;'> </th>
+                      <th>CLIENT</th>
+                      <th style='text-align:center;'>DATE</th>
+                      <th style='text-align:center;'>AMOUNT</th>
+                      <th class='d-none d-sm-table-cell'>STATUS</th>
+                      <th class='d-none d-sm-table-cell' style='width:50px;font-size:12px;'>VIEW</th>
+                      <th class='d-none d-sm-table-cell' style='text-align:center;width:50px;font-size:12px;animation-duration: '>EDIT</th>
+                      <th class='d-sm-none d-md-none d-lg-none' style='text-align:center;width:50px;'></th>
+                    </tr>
+                  </thead>
+                </table>
+                <base-table :data="table1.data" thead-classes="text-primary">
                     <template slot-scope="{row}">
                         <td>
                             <base-checkbox v-model="row.done" class='rowDone'></base-checkbox>
@@ -58,7 +72,7 @@
                         </td>
                         <td class="text-left" style="cursor:pointer;">
                           <p class="text-muted">{{row.date | moment("D MMM YY")}}</p>
-                          <p class="text-muted" style='color:#ddd;font-size:11px;'>Due: {{row.due_date | moment("from")}}</p>
+                          <p class="text-muted d-none d-sm-block" style='color:#ddd;font-size:11px;'>Due: {{row.due_date | moment("from")}}</p>
                         </td>
                         <td class="text-left" style="cursor:pointer;">
                           <p class="text-muted">
@@ -67,7 +81,7 @@
                             <span v-if='company.position === "suffix"'>{{row.currency ? row.currency : company.currency}}</span>
                           </p> 
                         </td>
-                        <td class="text-left">
+                        <td class="text-left d-none d-sm-table-cell">
                             <p class="text-muted">
                               <drop-down tag="div">
                                 <span aria-label="Invoice Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge" :class="{ 'badge-success' : (row.status === 'Paid'), 'badge-warning' : (row.status === 'Pending'), 'badge-danger' : (row.status === 'Not paid'), 'badge-light' : (row.status === 'Overdue'), 'badge-info' : (row.status === 'Void'), 'badge-secondary' : (row.status === 'Draft') }" style='font-size:12px;margin-bottom:3px;width:100px;'>
@@ -98,12 +112,20 @@
                               </drop-down>
                             </p>
                         </td>
-                        <td class="td-actions text-center" style='width:50px;'>
+                        <td class="d-none d-sm-table-cell td-actions text-center" style='width:50px;'>
                             <base-button type="link" artia-label="view button" @click='showInvoice(row.id)'>
                               <i class="tim-icons icon-zoom-split"></i>
                             </base-button>
                         </td>
-                        <td class="td-actions text-center" style='width:50px;'>
+                        <td class="d-none d-sm-table-cell td-actions text-center" style='width:50px;'>
+                            <base-button type="link" artia-label="edit button" @click='editInvoice(row.id)'>
+                              <i class="tim-icons icon-pencil"></i>
+                            </base-button>
+                        </td>
+                        <td class="d-sm-none d-md-none d-lg-none td-actions text-center" style='width:50px;'>
+                            <base-button type="link" artia-label="view button" @click='showInvoice(row.id)'>
+                              <i class="tim-icons icon-zoom-split"></i>
+                            </base-button>
                             <base-button type="link" artia-label="edit button" @click='editInvoice(row.id)'>
                               <i class="tim-icons icon-pencil"></i>
                             </base-button>

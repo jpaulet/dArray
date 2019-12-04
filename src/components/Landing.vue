@@ -6,7 +6,7 @@
       <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top effect-main">
         <div class="container container">
           <a class="navbar-brand" href="#">
-            <img src='@/assets/img/darray.png' style="width:30px;margin-right:10px;" alt='dArray Logo' />dArray.
+            <img src='@/assets/img/darray.jpg' style="width:30px;margin-right:10px;" alt='dArray Logo' />dArray.
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -40,13 +40,13 @@
               </div>
             </div>
             <div class="hero-img wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <img class="img-fluid" src="@/assets/img/landing/features/dashboard.png" alt="Darray dashboard">
+              <img class="img-fluid" src="@/assets/img/landing/features/dashboard.jpg" alt="Darray dashboard">
             </div>
           </div>
         </div><!-- Hero End -->
 
         <div id="products" class="features wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-          <div class="container">
+          <div class="container px-0">
             <div class="row text-center">
               <div class="col-md-12">
                 <div class="features-intro">
@@ -152,7 +152,7 @@
                     <input type="radio" name="radio-btn" id="img-1" checked />
                     <li class="slide-container">
                     <div class="slide">
-                      <img src="@/assets/img/landing/features/invoice1.png" alt='Invoice screenshot 1' />
+                      <img src="@/assets/img/landing/features/invoice1.jpg" alt='Invoice screenshot 1' />
                         </div>
                     <div class="nav">
                       <label for="img-3" class="prev">&#x2039;</label>
@@ -163,7 +163,7 @@
                     <input type="radio" name="radio-btn" id="img-2" />
                     <li class="slide-container">
                         <div class="slide">
-                          <img src="@/assets/img/landing/features/invoice2.png" alt='Invoice screenshot 2' />
+                          <img src="@/assets/img/landing/features/invoice2.jpg" alt='Invoice screenshot 2' />
                         </div>
                     <div class="nav">
                       <label for="img-1" class="prev">&#x2039;</label>
@@ -174,7 +174,7 @@
                     <input type="radio" name="radio-btn" id="img-3" />
                     <li class="slide-container">
                         <div class="slide">
-                          <img src="@/assets/img/landing/features/invoice3.png" alt='Invoice screenshot 3' />
+                          <img src="@/assets/img/landing/features/invoice3.jpg" alt='Invoice screenshot 3' />
                         </div>
                     <div class="nav">
                       <label for="img-2" class="prev">&#x2039;</label>
@@ -200,12 +200,12 @@
 
              <div class="flex-inner flex-inverted align-center py-1 py-md-4 py-lg-5">
                <div class="f-image f-image-inverted">
-                 <!-- <img class="img-fluid" src="@/assets/img/landing/features/expense1.png" alt="Expenses screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'> -->
+                 <!-- <img class="img-fluid" src="@/assets/img/landing/features/expense1.jpg" alt="Expenses screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'> -->
                  <ul class="slides">
                     <input type="radio" name="radio-btn2" id="img-4" checked />
                     <li class="slide-container">
                     <div class="slide2">
-                      <img src="@/assets/img/landing/features/expense1.png" alt='Expense screenshot 2' />
+                      <img src="@/assets/img/landing/features/expense1.jpg" alt='Expense screenshot 2' />
                         </div>
                     <div class="nav">
                       <label for="img-5" class="prev">&#x2039;</label>
@@ -216,7 +216,7 @@
                     <input type="radio" name="radio-btn2" id="img-5" />
                     <li class="slide-container">
                         <div class="slide2">
-                          <img src="@/assets/img/landing/features/expense2.png" alt='Expense screenshot 2' />
+                          <img src="@/assets/img/landing/features/expense2.jpg" alt='Expense screenshot 2' />
                         </div>
                     <div class="nav">
                       <label for="img-4" class="prev">&#x2039;</label>
@@ -240,7 +240,7 @@
              </div>
              <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
                  <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/features/customer1.png" alt="Customers List screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                   <img class="img-fluid" src="@/assets/img/landing/features/customer1.jpg" alt="Customers List screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                  </div>
                  <div class="f-text">
                    <div class="left-content">
@@ -253,7 +253,7 @@
 
              <div class="flex-inner flex-inverted align-center py-5">
                <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/features/filesystem.png" alt="Documents & Files screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 <img class="img-fluid" src="@/assets/img/landing/features/filesystem.jpg" alt="Documents & Files screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                </div>
                <div class="f-text">
                  <div class="left-content">
@@ -266,7 +266,7 @@
 
              <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
                  <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/features/tasks.png" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                   <img class="img-fluid" src="@/assets/img/landing/features/tasks.jpg" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                  </div>
                  <div class="f-text">
                    <div class="left-content">
@@ -279,7 +279,7 @@
 
              <div class="flex-inner flex-inverted align-center py-1 py-md-4 py-lg-5">
                <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/features/calendar.png" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+                 <img class="img-fluid" src="@/assets/img/landing/features/calendar.jpg" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
                </div>
                <div class="f-text">
                  <div class="left-content">
@@ -296,7 +296,7 @@
                     <input type="radio" name="radio-btn3" id="img-6" checked />
                     <li class="slide-container">
                     <div class="slide3">
-                      <img src="@/assets/img/landing/features/dashboard.png" alt='Dashboard screenshot 1' />
+                      <img src="@/assets/img/landing/features/dashboard.jpg" alt='Dashboard screenshot 1' />
                         </div>
                     <div class="nav">
                       <label for="img-7" class="prev">&#x2039;</label>
@@ -307,7 +307,7 @@
                     <input type="radio" name="radio-btn3" id="img-7" />
                     <li class="slide-container">
                         <div class="slide3">
-                          <img src="@/assets/img/landing/features/settings.png" alt='Settings screenshot 1' />
+                          <img src="@/assets/img/landing/features/settings.jpg" alt='Settings screenshot 1' />
                         </div>
                     <div class="nav">
                       <label for="img-6" class="prev">&#x2039;</label>
@@ -360,7 +360,7 @@
                 </ul>
               </div>
               <div class="ar-image">
-                <video controls poster="@/assets/img/landing/video_preview.png" width='90%' height='100%' style='border-radius:42px;padding:20px;'>
+                <video controls poster="@/assets/img/landing/video_preview.jpg" width='90%' height='100%' style='border-radius:42px;padding:20px;'>
                   <source src="@/assets/img/landing/darray.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -385,7 +385,7 @@
                    <div class="table-left wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
                      <div class="pricing-details">
                        <h2>Free!</h2>
-                       <img src="@/assets/img/landing/free.png" alt="Free dArray Icon" width="60">
+                       <img src="@/assets/img/landing/free.jpg" alt="Free dArray Icon" width="60">
 
                        <span>$0.00</span>
                           <ul>
@@ -404,7 +404,7 @@
                         <tr><th>Twitter</th></tr>
                         <tr>
                           <td class=''>
-                            <a href='https://twitter.com/dArray_dapp/status/1199727746114605057' target='_blank'><img src='@/assets/img/twitter_img.png' alt='Twitter img' style='border:1px solid #eee;boder-radius:8px;padding:6px;' /></a>
+                            <a href='https://twitter.com/dArray_dapp/status/1199727746114605057' rel="noopener" target='_blank'><img src='@/assets/img/twitter_img.jpg' alt='Twitter img' style='border:1px solid #eee;boder-radius:8px;padding:6px;' /></a>
                           </td>
                         </tr>
                       </table>
@@ -414,7 +414,7 @@
                         <tr><th>Buy Me a Coffee</th></tr>
                         <tr>
                           <td class='text-center pt-2'>
-                            <a href='https://www.buymeacoffee.com/mpSEk0R' target='_blank'><img src='@/assets/img/landing/Button_orange.png' alt='Buy me a coffee' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
+                            <a href='https://www.buymeacoffee.com/mpSEk0R' rel="noopener" target='_blank'><img src='@/assets/img/landing/Button_orange.jpg' alt='Buy me a coffee' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
                           </td>
                         </tr>
                       </table>
@@ -424,7 +424,7 @@
                         <tr><th>ProductHunt</th></tr>
                         <tr>
                           <td class='text-center pt-2'>
-                            <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=176110&theme=dark" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" />
+                            <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" rel="noopener" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=176110&theme=dark" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" />
                             </a>
                           </td>
                         </tr>
@@ -435,8 +435,8 @@
                         <tr><th>Patreon</th></tr>
                         <tr>
                           <td class='text-center pt-2'>
-                            <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank'>
-                              <img src='@/assets/img/Patreon+Button.png' style='width:210px;margin:0px auto;opacity:0.8;' />
+                            <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank' rel="noopener">
+                              <img src='@/assets/img/Patreon+Button.jpg' style='width:210px;margin:0px auto;opacity:0.8;' />
                             </a>
                           </td>
                         </tr>
@@ -470,7 +470,7 @@
             <div class="row">
               <div class="col-md-3">
                 <a class="footer-logo" href="#">
-                  <img src='@/assets/img/darray.png' style="width:20px;margin-right:10px;" alt='dArray logo' />dArray.
+                  <img src='@/assets/img/darray.jpg' style="width:20px;margin-right:10px;" alt='dArray logo' />dArray.
                 </a>
               </div>
               <div class="col-md-6 text-center">
@@ -507,11 +507,6 @@ export default {
   methods: {
     signIn () {
       userSession.redirectToSignIn()
-    },
-    loadRemoteScripts () {
-      let popper = document.createElement('script')
-      popper.setAttribute('src', this.publicPath + '/popper.min.js')
-      document.head.appendChild(popper)
     }
   },
   data () {
@@ -532,11 +527,6 @@ export default {
       },10000,this.i)
       return this.rotatingText[this.i]
     }
-  },
-  created () {
-    (async () => {
-      await this.loadRemoteScripts()
-    })()
   },
   mounted () {
     let plugins = document.createElement('script')

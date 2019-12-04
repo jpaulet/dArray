@@ -1,97 +1,98 @@
 <template>
   <div class="content content-main-card">
-    <card style='background: linear-gradient(90deg, rgba(231,236,250,1) 0%, rgba(231,236,250,1) 33.5%, rgba(202,215,251,1) 33.6%, rgba(255,255,255,1) 33.5%, rgba(255,255,255,1) 100%);'>
-        <div class="row">
-          <div class="col-4">
-            <div id="editor">
-              <div class="pr-3">
-                <div class="text-left" style='line-height:30px;'>
-                  <i class="tim-icons icon-pin text-light mr-3"></i>Details
+    <card class='p-0 m-0' style='display:flex;'>
+      <div class="row">
+        <div class="col-12 col-md-4 px-4 py-3" style='background-color:#e7ecfa;'>
+          <div id="editor">
+            <div class="pr-3">
+              <div class="text-left mb-3" style='line-height:30px;'>
+                <i class="tim-icons icon-pin text-light mr-3"></i>Details
+              </div>
+
+              <form class="form px-3 row" @submit.prevent="(action == 'create') ? createTask($event) : updateTask($event, task.id)" >
+                <input type="hidden" name="id" v-model="task.id"/>
+
+                <div class='col-6 col-md-12 text-left mt-2 pr-0'>
+                  <label for="">Name</label>
+                  <input class='form-control' type="text" name="name" placeholder="Name" required="true" v-model="task.name" style='background: #fff;' />
                 </div>
 
-                <form class="form px-3" @submit.prevent="(action == 'create') ? createTask($event) : updateTask($event, task.id)" >
-                  <input type="hidden" name="id" v-model="task.id"/>
+                <div class='col-6 col-md-12 text-left mt-2 pr-0'>
+                  <label for="">Description</label>
+                  <input class='form-control' type="text" name="description" placeholder="Description" required="true" v-model="task.description" style='background: #fff;' />
+                </div>
 
-                 <div class='row text-left mt-4'>
-                    <label for="">Name</label>
-                    <input class='form-control' type="text" name="name" placeholder="Name" required="true" v-model="task.name" style='background: #fff;' />
-                  </div>
-
-                  <div class='row text-left'>
-                    <label for="">Description</label>
-                    <input class='form-control' type="text" name="description" placeholder="Description" required="true" v-model="task.description" style='background: #fff;' />
-                  </div>
-
-                  <div class="row text-left">
-                    <label for="">Completed</label>
-                    <input class='ml-3' type="checkbox" ref="checkbox" name="completed" v-model="task.completed"/>
-                  </div>
-
-                  <button type="button" class="btn btn-danger btn-sm px-3 mt-3 mr-3" @click='clear' style='opacity:0.8;color:#333;'>Clear</button>
-                  <button type="submit" class="btn btn-light btn-sm px-5 text-white mt-3">Submit</button>
-                </form>
-              </div>
+                <div class="col-12 text-left pl-4">
+                  <label for="">Completed</label>
+                  <input class='ml-3' type="checkbox" ref="checkbox" name="completed" v-model="task.completed"/>
+                </div>
+                
+                <div class='col-12 text-center px-0'>
+                  <button type="button" class="btn btn-danger btn-sm px-3 mt-3 float-left mx-0" @click='clear' style='opacity:0.8;color:#333;'>Clear</button>
+                  <button type="submit" class="btn btn-light btn-sm px-4 text-white float-right mt-3">Submit</button>
+                </div>
+              </form>
             </div>
-            <div class="item mt-5" v-if="message">
-              <div class="ui message blue">
-                <i class="icon info" ></i> {{message}}
-              </div>
+          </div>
+          <div class="item mt-5" v-if="message">
+            <div class="ui message blue" style='font-size:12px;'>
+              <i class="icon info" ></i> {{message}}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-8 text-left px-4 pt-3">
+          <div class='row mb-3'>
+            <div class="text-left col-5" style='line-height:30px;'>
+              <i class="tim-icons icon-notes text-light mr-3"></i>Your Tasks
+            </div>
+
+            <div class='col-7 text-right'>
+              <button type="button" class="btn btn-light btn-sm px-5 text-white" @click='saveTasks'>Save</button>
             </div>
           </div>
 
-          <div class="col-8 text-left px-3">
-            <div class='row mb-3'>
-              <div class="text-left col-4" style='line-height:30px;'>
-                <i class="tim-icons icon-notes text-light mr-3"></i>Your Tasks
-              </div>
-
-              <div class='col-8 text-right'>
-                <button type="button" class="btn btn-light btn-sm px-5 text-white" @click='saveTasks'>Save</button>
-              </div>
-            </div>
-
-            <div class='text-center pt-5 mt-5' v-if='loadingPage'>
-              <breeding-rhombus-spinner
-                :animation-duration="2000"
-                :size="65"
-                color="#344675"
-                style='margin:0px auto;'
-              />
-            </div>
-
-            <template v-if='!loadingPage'>
-              <div v-if='!tasks.length' class='text-center mt-5'>
-                <p>No tasks yet. </p>
-                <img src='@/assets/img/tasks.jpg' class='mt-3 mb-5' height='200' />
-              </div>
-
-              <div v-if='tasks.length' id="todo" class="tasklist pt-2">
-                <div class="ui">
-                  <h6><i class="tim-icons icon-triangle-right-17 text-light mr-3"></i>In Progress Tasks ({{todoTasks.length}})</h6>
-                </div>
-
-                <task v-bind:task="task" v-for="task in todoTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
-                <p v-if='!todoTasks.length' class='text-center my-1' style='font-size:12px;'>No pending tasks</p>
-              </div>
-
-              <div v-if='tasks.length' id="completed" class="tasklist pt-3">
-                <div class="ui">
-                    <h6><i class="tim-icons icon-check-2 text-light mr-3"></i>Completed Tasks ({{completedTasks.length}})</h6>
-                </div>
-
-                <task v-bind:task="task" v-for="task in completedTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
-                <p v-if='!completedTasks.length' class='text-center my-1' style='font-size:12px;'>No completed tasks yet</p>
-              </div>
-            </template>
+          <div class='text-center pt-5 mt-5' v-if='loadingPage'>
+            <breeding-rhombus-spinner
+              :animation-duration="2000"
+              :size="65"
+              color="#344675"
+              style='margin:0px auto;'
+            />
           </div>
+
+          <template v-if='!loadingPage'>
+            <div v-if='!tasks.length' class='text-center mt-5'>
+              <p>No tasks yet. </p>
+              <img src='@/assets/img/tasks.jpg' class='mt-3 mb-5' height='200' />
+            </div>
+
+            <div v-if='tasks.length' id="todo" class="tasklist pt-2">
+              <div class="ui">
+                <h6><i class="tim-icons icon-triangle-right-17 text-light mr-3"></i>In Progress Tasks ({{todoTasks.length}})</h6>
+              </div>
+
+              <task v-bind:task="task" v-for="task in todoTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
+              <p v-if='!todoTasks.length' class='text-center my-5' style='font-size:12px;'>No pending tasks</p>
+            </div>
+
+            <div v-if='tasks.length' id="completed" class="tasklist pt-3">
+              <div class="ui">
+                <h6><i class="tim-icons icon-check-2 text-light mr-3"></i>Completed Tasks ({{completedTasks.length}})</h6>
+              </div>
+
+              <task v-bind:task="task" v-for="task in completedTasks" @editTaskParent='editTask' @deleteTaskParent='deleteTask' @toogleTaskParent='toggleDone' v-bind:key='task.id'></task>
+              <p v-if='!completedTasks.length' class='text-center my-5' style='font-size:12px;'>No completed tasks yet</p>
+            </div>
+          </template>
+        </div>
       </div>
-
     </card>
   </div>
 </template>
+
 <script>
 import Vue from 'vue'
-// localStorage persistence
 import { BreedingRhombusSpinner } from 'epic-spinners'
 import { userSession } from '@/userSession'
 import {
@@ -114,8 +115,8 @@ export default {
               </div>
             </div>                    
             <div class="col-3 text-right">              
-              <i class="tim-icons icon-pencil text-light mr-2 text-white" alt="Edit" @click="editTask(task.id)" style='cursor:pointer'></i>
-              <i class="tim-icons icon-trash-simple text-light mr-1 text-white" alt="Delete" @click="deleteTask(task.id)" style='cursor:pointer'></i>
+              <i class="tim-icons icon-pencil text-light mr-2 text-white" :class="task.completed ? 'text-done' : 'text-todo'" alt="Edit" @click="editTask(task.id)" style='cursor:pointer'></i>
+              <i class="tim-icons icon-trash-simple text-light mr-1 text-white" :class="task.completed ? 'text-done' : 'text-todo'" alt="Delete" @click="deleteTask(task.id)" style='cursor:pointer'></i>
             </div>                    
           </div>
       </div> 
@@ -245,9 +246,24 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .content-main-card .card{
     height: 100;
+  }
+
+  .card .card-body{
+    padding:0px 15px !important;
+    display:flex !important;
+  }
+
+  .card-body{
+    padding:0px 15px !important;
+    display:flex !important;
+  }
+
+  /deep/ .card-body{
+    padding:0px 15px !important;
+    display:flex !important;
   }
   
   .task.done label {
@@ -260,6 +276,14 @@ export default {
 
   .task.todo {
     background-color: #f6cd90a1 !important;
+  }
+
+  .text-done{
+    color: #aaa !important;
+  }
+
+  .text-todo{
+    color:#ff0000 !important;
   }
 
   .description {

@@ -1,7 +1,7 @@
 <template>
   <div class="content content-main-card">
     <card>
-      <div id="container">
+      <div id="container px-0 px-md-3">
         <div>
           <div @click="openFilePicker" id="uploader" class='mb-4'>
             <p><span style='color:rgb(52, 70, 117);'>Click</span> to choose a file to upload</p>
@@ -17,7 +17,7 @@
 
             <h4 class='text-left'> Folders </h4>
             <div class='text-left row' style='clear:both;'>
-              <div v-for='(folder,index) in folders' :key='index' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:90px;margin-right:30px;float:left;' @click='changeFolder(folder,currentDepth+1)'>
+              <div v-for='(folder,index) in folders' :key='index' class='text-center folder' style='cursor:pointer;padding:8px 15px;width:90px;margin-right:20px;float:left;' @click='changeFolder(folder,currentDepth+1)'>
                 <img src='@/assets/img/folder.png' height='42' />
                 <p style='font-size:11px;margin-top:5px;'>{{folder}}</p>
               </div>
@@ -30,7 +30,7 @@
             </div>
 
             <h4 class='mt-4 text-left' style='width:100%;clear:both;'> Your Files </h4>
-            <div class='row'>
+            <div class='row px-2'>
               <div class="upload col-6" v-for="(upload, index) in uploads" :key="index" style='cursor:pointer;min-width:280px;' @click='downloadFile(upload.id,upload.name,upload.extension,upload.type)'>
                 <div class="ext" :style="{'background-color': upload.color}">
                   <p>{{upload.ext.toUpperCase()}}</p>

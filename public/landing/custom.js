@@ -35,7 +35,7 @@ jQuery(function($) {
 
   // scroll body to 0px on click
   $('#back-top').on('click', function () {
-    $('#back-top').tooltip('hide');
+    //$('#back-top').tooltip('hide');
     $('body,html').animate({
         scrollTop: 0
     }, 1500);
@@ -70,26 +70,13 @@ jQuery(function($) {
     });
 
     // Closes responsive menu when a scroll trigger link is clicked
+    /*
     $('.js-scroll-trigger').on('click', function() {
       $('.navbar-collapse').collapse('hide');
     });
-
-    // Activate scrollspy to add active class to navbar items on scroll
-    /*
-    $('body').scrollspy({
-      target: '#mainNav',
-      offset: 54
-    });
     */
-  })(jQuery); // End of use strict
 
-  new WOW().init();
-  /*
-  $('.counter').counterUp({
-		delay: 10,
-		time: 1000
-  });
-  */
+  })(jQuery); // End of use strict
 
   $(window).on('load', function() {
 		setTimeout(function() {

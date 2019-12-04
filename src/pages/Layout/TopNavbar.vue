@@ -12,12 +12,7 @@
         <a class="navbar-brand" href=""> <img src='@/assets/img/darray.png' style='width:32px;margin-right:5px;margin-left:-10px;' /> <strong>DARRAY</strong> / {{ $route.name }}</a>
       </div>
 
-      <button class="navbar-toggler" type="button"
-              @click="toggleMenu"
-              data-toggle="collapse"
-              data-target="#navigation"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" @click="toggleMenu" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-bar navbar-kebab"></span>
         <span class="navbar-toggler-bar navbar-kebab"></span>
         <span class="navbar-toggler-bar navbar-kebab"></span>
