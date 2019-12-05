@@ -63,7 +63,15 @@
       <content-footer></content-footer>
     </div>
 
-    <landing v-if="!userSession.isUserSignedIn()"></landing>
+    <landing v-if="!userSession.isUserSignedIn() && !isLoadingPage"></landing>
+    <div class='text-center pt-5 mt-5' v-if='isLoadingPage'>
+      <breeding-rhombus-spinner
+        :animation-duration="2000"
+        :size="65"
+        color="#344675"
+        style='margin:0px auto;'
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -75,6 +83,7 @@ import SidebarLink from '@/components/SidebarPlugin/SidebarLink.vue'
 import Landing from '@/components/Landing.vue'
 import { Person } from 'blockstack'
 import { userSession } from '@/userSession'
+import { BreedingRhombusSpinner } from 'epic-spinners'
 
 export default {
   components: {
@@ -83,13 +92,15 @@ export default {
     ContentFooter,
     SideBar,
     SidebarLink,
-    Landing
+    Landing,
+    BreedingRhombusSpinner
   },
   data () {
     return {
       backgroundColor: 'green',
       userSession: null,
-      user: null
+      user: null,
+      isLoadingPage: false
     }
   },
   methods: {
@@ -109,8 +120,10 @@ export default {
       this.user.username = this.userData.username
       this.user.name = this.userData.name ? this.userData.name : this.userData.username.substr(0,this.userData.username.indexOf("."))      
     } else if (userSession.isSignInPending()) {
+      this.isLoadingPage = true
       userSession.handlePendingSignIn()
         .then((userData) => {
+          this.isLoadingPage = false
           window.location = window.location.origin
         })
     }

@@ -1,7 +1,7 @@
 {
   "name": "dArray",
-  "start_url": "./index.html",
-  "description": "The Decentralized Accounting Software for your Business",
+  "start_url": "https://darray.org",
+  "description": "The Private Accounting Software for your Business",
   "icons": [{
     "src": "favicon.png",
     "sizes": "200x200",
