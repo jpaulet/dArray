@@ -47,91 +47,91 @@
             </drop-down>
 
             <div v-if='table1.data.length' class="table-responsive text-left mb-3" style='overflow-x:inherit;'>
-                <table style='width:100%;'>
+                <table class='table tablesorter'>
                   <thead class="text-primary">
                     <tr>
                       <th style='width:50px;'> </th>
-                      <th>CLIENT</th>
-                      <th style='text-align:center;'>DATE</th>
-                      <th style='text-align:center;'>AMOUNT</th>
-                      <th class='d-none d-sm-table-cell'>STATUS</th>
-                      <th class='d-none d-sm-table-cell' style='width:50px;font-size:12px;'>VIEW</th>
-                      <th class='d-none d-sm-table-cell' style='text-align:center;width:50px;font-size:12px;animation-duration: '>EDIT</th>
+                      <th class='text-left'>CLIENT</th>
+                      <th class='text-left'>DATE</th>
+                      <th class='text-right'>AMOUNT</th>
+                      <th class='d-none d-sm-table-cell text-center' style='text-align:center;'>STATUS</th>
+                      <th class='d-none d-sm-table-cell text-center' style='width:50px;font-size:10px;'>VIEW</th>
+                      <th class='d-none d-sm-table-cell text-center' style='text-align:center;width:50px;font-size:10px; '>EDIT</th>
                       <th class='d-sm-none d-md-none d-lg-none' style='text-align:center;width:50px;'></th>
                     </tr>
                   </thead>
+                  <tbody>
+                    <tr v-for="(row,index) in table1.data" :key='index'>
+                      <td style='width:50px;'>
+                          <base-checkbox v-model="row.done" class='rowDone'></base-checkbox>
+                      </td>
+                      <td class="text-left" style="cursor:pointer;">
+                        <p class="title">{{row.client.legal}}</p>
+                        <p class="text-muted" style='font-size:13px'>{{row.name}}</p>
+                      </td>
+                      <td class="text-left" style="cursor:pointer;text-align:left;">
+                        <p class="text-muted">{{row.date | moment("D MMM YY")}}</p>
+                        <p class="text-muted d-none d-sm-block" style='color:#ddd;font-size:11px;'>Due: {{row.due_date | moment("from")}}</p>
+                      </td>
+                      <td class="text-right" style="cursor:pointer;">
+                        <p class="text-muted text-right">
+                          <span v-if='company.position === "prefix"'>{{row.currency ? row.currency : company.currency}}</span> 
+                          {{row.total | currency}} 
+                          <span v-if='company.position !== "prefix"'>{{row.currency ? row.currency : company.currency}}</span>
+                        </p> 
+                      </td>
+                      <td class="text-center d-none d-sm-table-cell">
+                          <p class="text-muted text-center">
+                            <drop-down tag="div">
+                              <span aria-label="Invoice Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge" :class="{ 'badge-success' : (row.status === 'Paid'), 'badge-warning' : (row.status === 'Pending'), 'badge-danger' : (row.status === 'Not paid'), 'badge-light' : (row.status === 'Overdue'), 'badge-info' : (row.status === 'Void'), 'badge-secondary' : (row.status === 'Draft') }" style='font-size:12px;margin-bottom:3px;width:100px;'>
+                                {{row.status}}
+                                <!-- Do not remove, the icon has a ::after property with a dropdown arrow -->
+                                <i class="tim-icons icon-settings-gear-63" style='display:none;'></i>
+                              </span>
+                              <ul class="dropdown-menu dropdown-menu-left">
+                                <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Paid",row.id)'>
+                                  <span class='badge badge-success' style='font-size:13px;width:100%;'>Paid</span>
+                                </a>
+                                <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Pending",row.id)'>
+                                  <span class='badge badge-warning' style='font-size:13px;width:100%;'>Pending</span>
+                                </a>
+                                <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Not paid",row.id)'>
+                                  <span class='badge badge-danger' style='font-size:13px;width:100%;'>Not paid</span>
+                                </a>
+                                <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Overdue",row.id)'>
+                                  <span class='badge badge-light' style='font-size:13px;width:100%;'>Overdue</span>
+                                </a>
+                                <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Void",row.id)'>
+                                  <span class='badge badge-info' style='font-size:13px;width:100%;'>Void</span>
+                                </a>
+                                <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Draft",row.id)'>
+                                  <span class='badge badge-secondary' style='font-size:13px;width:100%;'>Draft</span>
+                                </a>
+                              </ul>
+                            </drop-down>
+                          </p>
+                      </td>
+                      <td class="d-none d-sm-table-cell td-actions text-center" style='width:50px;'>
+                          <base-button type="link" artia-label="view button" @click='showInvoice(row.id)'>
+                            <i class="tim-icons icon-zoom-split"></i>
+                          </base-button>
+                      </td>
+                      <td class="d-none d-sm-table-cell td-actions text-center" style='width:50px;'>
+                          <base-button type="link" artia-label="edit button" @click='editInvoice(row.id)'>
+                            <i class="tim-icons icon-pencil"></i>
+                          </base-button>
+                      </td>
+                      <td class="d-sm-none d-md-none d-lg-none td-actions text-center" style='width:50px;'>
+                          <base-button type="link" artia-label="view button" @click='showInvoice(row.id)'>
+                            <i class="tim-icons icon-zoom-split"></i>
+                          </base-button>
+                          <base-button type="link" artia-label="edit button" @click='editInvoice(row.id)'>
+                            <i class="tim-icons icon-pencil"></i>
+                          </base-button>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
-                <base-table :data="table1.data" thead-classes="text-primary">
-                    <template slot-scope="{row}">
-                        <td>
-                            <base-checkbox v-model="row.done" class='rowDone'></base-checkbox>
-                        </td>
-                        <td class="text-left" style="cursor:pointer;">
-                          <p class="title">{{row.client.legal}}</p>
-                          <p class="text-muted" style='font-size:13px'>{{row.name}}</p>
-                        </td>
-                        <td class="text-left" style="cursor:pointer;">
-                          <p class="text-muted">{{row.date | moment("D MMM YY")}}</p>
-                          <p class="text-muted d-none d-sm-block" style='color:#ddd;font-size:11px;'>Due: {{row.due_date | moment("from")}}</p>
-                        </td>
-                        <td class="text-left" style="cursor:pointer;">
-                          <p class="text-muted">
-                            <span v-if='company.position === "prefix"'>{{row.currency ? row.currency : company.currency}}</span> 
-                            {{row.total | currency}} 
-                            <span v-if='company.position === "suffix"'>{{row.currency ? row.currency : company.currency}}</span>
-                          </p> 
-                        </td>
-                        <td class="text-left d-none d-sm-table-cell">
-                            <p class="text-muted">
-                              <drop-down tag="div">
-                                <span aria-label="Invoice Status" data-toggle="dropdown" class="dropdown-toggle-permanent badge" :class="{ 'badge-success' : (row.status === 'Paid'), 'badge-warning' : (row.status === 'Pending'), 'badge-danger' : (row.status === 'Not paid'), 'badge-light' : (row.status === 'Overdue'), 'badge-info' : (row.status === 'Void'), 'badge-secondary' : (row.status === 'Draft') }" style='font-size:12px;margin-bottom:3px;width:100px;'>
-                                  {{row.status}}
-                                  <!-- Do not remove, the icon has a ::after property with a dropdown arrow -->
-                                  <i class="tim-icons icon-settings-gear-63" style='display:none;'></i>
-                                </span>
-                                <ul class="dropdown-menu dropdown-menu-left">
-                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Paid",row.id)'>
-                                    <span class='badge badge-success' style='font-size:13px;width:100%;'>Paid</span>
-                                  </a>
-                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Pending",row.id)'>
-                                    <span class='badge badge-warning' style='font-size:13px;width:100%;'>Pending</span>
-                                  </a>
-                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Not paid",row.id)'>
-                                    <span class='badge badge-danger' style='font-size:13px;width:100%;'>Not paid</span>
-                                  </a>
-                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Overdue",row.id)'>
-                                    <span class='badge badge-light' style='font-size:13px;width:100%;'>Overdue</span>
-                                  </a>
-                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Void",row.id)'>
-                                    <span class='badge badge-info' style='font-size:13px;width:100%;'>Void</span>
-                                  </a>
-                                  <a href="#" class="dropdown-item mt-0" @click.prevent='changeStatus("Draft",row.id)'>
-                                    <span class='badge badge-secondary' style='font-size:13px;width:100%;'>Draft</span>
-                                  </a>
-                                </ul>
-                              </drop-down>
-                            </p>
-                        </td>
-                        <td class="d-none d-sm-table-cell td-actions text-center" style='width:50px;'>
-                            <base-button type="link" artia-label="view button" @click='showInvoice(row.id)'>
-                              <i class="tim-icons icon-zoom-split"></i>
-                            </base-button>
-                        </td>
-                        <td class="d-none d-sm-table-cell td-actions text-center" style='width:50px;'>
-                            <base-button type="link" artia-label="edit button" @click='editInvoice(row.id)'>
-                              <i class="tim-icons icon-pencil"></i>
-                            </base-button>
-                        </td>
-                        <td class="d-sm-none d-md-none d-lg-none td-actions text-center" style='width:50px;'>
-                            <base-button type="link" artia-label="view button" @click='showInvoice(row.id)'>
-                              <i class="tim-icons icon-zoom-split"></i>
-                            </base-button>
-                            <base-button type="link" artia-label="edit button" @click='editInvoice(row.id)'>
-                              <i class="tim-icons icon-pencil"></i>
-                            </base-button>
-                        </td>
-                    </template>
-                </base-table>
             </div>
         </div>
 
@@ -1194,7 +1194,7 @@ export default {
     height: 100%;
   }
   .table > thead > tr > th{
-      text-align: center !important;
+    padding:10px 7px !important;
   }
 
   tbody tr:hover td{
