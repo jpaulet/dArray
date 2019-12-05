@@ -80,9 +80,6 @@ export default {
         document.getElementById('imageLogo').src = content
         userSession.putFile(file.name, content)
       }
-      reader.onerror = (e) => {
-        console.error(e)
-      }
       reader.readAsDataURL(file)
 
       this.$emit('newLogo', file.name)
