@@ -1,37 +1,30 @@
 <template>
   <div class="content content-main-card">
     <card v-if='!newExpense && !showPreview'>
-        <template slot="header">
-            <div class='row mb-4'>
-                <div class="col-6 text-left">
-                  <button type="button" class="btn btn-light btn-sm px-4 px-md-5 text-white" fill="" @click="openNewExpense">+ New Expense</button>
-                </div>
-                <div class="col-6 text-right" style='margin-top:2px;'>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
-                       <label v-for="(option, index) in expenseOptions"
-                              :key="option"
-                              class="btn btn-light btn-sm btn-simple"
-                              :class="{active:activeIndex === index}"
-                              :id="index">
-                          <input type="radio"
-                                @click="changeViewType(index,option)"
-                                name="options" autocomplete="off"
-                                :checked="activeIndex === index">
-                          {{ option }}
-                       </label>
-                    </div>
-                </div>
+      <template slot="header">
+        <div class='row mb-4'>
+          <div class="col-6 text-left">
+            <button type="button" class="btn btn-light btn-sm px-4 px-md-5 text-white" fill="" @click="openNewExpense">+ New Expense</button>
+          </div>
+          <div class="col-6 text-right" style='margin-top:2px;'>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
+             <label v-for="(option, index) in expenseOptions" key="option" class="btn btn-light btn-sm btn-simple" :class="{active:activeIndex === index}" :id="index">
+                <input type="radio" @click="changeViewType(index,option)" name="options" autocomplete="off" :checked="activeIndex === index">
+                {{ option }}
+             </label>
             </div>
-        </template>
-
-        <div class='text-center pt-5 mt-5' v-if='loadingPage'>
-          <breeding-rhombus-spinner
-            :animation-duration="2000"
-            :size="65"
-            color="#344675"
-            style='margin:0px auto;'
-          />
+          </div>
         </div>
+      </template>
+
+      <div class='text-center pt-5 mt-5' v-if='loadingPage'>
+        <breeding-rhombus-spinner
+          :animation-duration="2000"
+          :size="65"
+          color="#344675"
+          style='margin:0px auto;'
+        />
+      </div>
 
         <div v-if='table1.data.length && !loadingPage'>
             <h6 class="title d-inline text-left float-left">Expenses ({{table1.data.length}})</h6>

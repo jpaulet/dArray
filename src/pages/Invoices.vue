@@ -1198,7 +1198,7 @@ export default {
   }
 
   tbody tr:hover td{
-      background-color: #f8f8f8;
+    background-color: #f8f8f8;
   }
 
   .invoice-box {

@@ -34,7 +34,7 @@
                       Avg Invoice: <strong>{{averageInvoice.perInvoice}}</strong><span style='font-size:0.5rem;'>{{company.currencySymbol}}</span>
                     </div>
                     <div class='col-4 text-center'>
-                      Last Month: <strong>+{{averageInvoice.lastMonthTendency}}%</strong> <span class='ml-1 tim-icons icon-minimal-up'></span>
+                      Last Month: <strong>{{averageInvoice.lastMonthTendency}}</strong> <span class='ml-1 tim-icons icon-minimal-up'></span>
                     </div>
                   </div>
                 </div>
@@ -94,7 +94,7 @@
             <div class='row px-1' style='font-size:13px;font-weight: 200;'>
               <div class='col-4 text-center'>Avg Month: <strong>{{averageExpense.total}}</strong><span style='font-size:0.5rem;'>{{company.currencySymbol}}</span></div>
               <div class='col-4 text-center'>Avg Expense: <strong>{{averageExpense.perExpense}}</strong><span style='font-size:0.5rem;'>{{company.currencySymbol}}</span></div>
-              <div class='col-4 text-center'>Last Month: <strong>+{{averageExpense.lastMonthTendency}}%</strong> <span class='ml-1 tim-icons icon-minimal-up'></span></div>
+              <div class='col-4 text-center'>Last Month: <strong>{{averageExpense.lastMonthTendency}}</strong> <span class='ml-1 tim-icons icon-minimal-up'></span></div>
             </div>
           </template>
             <line-chart
@@ -461,7 +461,11 @@ export default {
         this.averageInvoice.lastMonthTendency = 0
       }else{
         this.averageInvoice.perInvoice = (total / this.invoices.length).toFixed(2)
-        this.averageInvoice.lastMonthTendency = (100 - ((monthlyInvoices[11] * 100) / (monthlyInvoices[12] === 0 ? 1 : monthlyInvoices[12]))).toFixed(2)
+        if(this.averageInvoice[11] !== 0 && this.averageInvoice[12] !== 0){
+          this.averageInvoice.lastMonthTendency = (100 - ((monthlyInvoices[11] * 100) / (monthlyInvoices[12] === 0 ? 1 : monthlyInvoices[12]))).toFixed(2) + this.company.currencySymbol
+        }else{
+          this.averageInvoice.lastMonthTendency = '?'
+        }
 
       }
       this.averageInvoice.tendency = 0
@@ -504,7 +508,11 @@ export default {
         this.averageExpense.lastMonthTendency = 0
       }else{
         this.averageExpense.perInvoice = (total / this.expenses.length).toFixed(2)
-        this.averageExpense.lastMonthTendency = (100 - ((monthlyExpenses[11] * 100) / (monthlyExpenses[12] === 0 ? 1 : monthlyExpenses[12]))).toFixed(2)
+        if(this.monthlyExpenses[11] !== 0 && this.monthlyExpenses[12] !== 0){
+          this.averageExpense.lastMonthTendency = (100 - ((monthlyExpenses[11] * 100) / (monthlyExpenses[12] === 0 ? 1 : monthlyExpenses[12]))).toFixed(2) + this.company.currencySymbol
+        }else{
+          this.averageExpense.lastMonthTendency = '?'
+        }
       }
       this.averageExpense.tendency = 0
 

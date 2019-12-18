@@ -81,6 +81,7 @@
                 <option value="BRL">BRL</option>
                 <option value="INR">INR</option>
                 <option value="CNY">CNY</option>
+                <option value="CNY">AUD</option>
               </select>
             </div>
             <div class="col-md-4 text-left">
@@ -192,7 +193,9 @@ export default {
         this.model.currencySymbol = "₹" 
       } else if (this.model.currency === "CNY"){ 
         this.model.currencySymbol = "¥" 
-      }      
+      } else if (this.model.currency === "AUD"){ 
+        this.model.currencySymbol = "$" 
+      }       
     },
     saveCompany () {
       userSession.putFile(STORAGE_FILE, JSON.stringify(this.model), this.$ENCRYPT)
