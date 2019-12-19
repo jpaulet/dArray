@@ -16,6 +16,8 @@
                 <li style='line-height:22px;'><span class='badge badge-light'>12/12/19</span> - Improved <i>`Invoices & Expenses`</i> creation.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>10/12/19</span> - Solved <i>`Dashboard`</i> bugs.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>05/12/19</span> - Improved <i>`Files`</i> upload & download.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>04/12/19</span> - Improved all pages with responsive features.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>04/12/19</span> - Added offline/online badge.</li>
               </ul>
             </div> 
 
