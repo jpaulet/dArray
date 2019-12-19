@@ -375,7 +375,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="pricing-intro wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                  <h1>Suport.</h1>
+                  <h1>Support.</h1>
                   <p style='max-width:800px;margin:0px auto;'>
                     <span style='color:#344675;'>dArray</span> is free, but you could support it & myself <span style='color:#aaa;'>a solo-maker</span> in various ways:<br />Thank you in advance <span style='color:#344675;'>❤️</span>.
                   </p>
@@ -400,11 +400,13 @@
                   </div>
                   <div class="col-lg-5 col-md-6">
                     <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
-                      <table class='text-center'>
-                        <tr><th>Twitter</th></tr>
+                      <table class='text-center' style='width:100%;'>
+                        <tr><th>Patreon</th></tr>
                         <tr>
-                          <td class=''>
-                            <a href='https://twitter.com/dArray_dapp/status/1199727746114605057' rel="noopener" target='_blank'><img src='@/assets/img/twitter_img.jpg' alt='Twitter img' style='border:1px solid #eee;boder-radius:8px;padding:6px;' /></a>
+                          <td class='text-center pt-2'>
+                            <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank' rel="noopener">
+                              <img src='@/assets/img/Patreon+Button.jpg' style='width:210px;margin:0px auto;opacity:0.8;' />
+                            </a>
                           </td>
                         </tr>
                       </table>
@@ -419,25 +421,12 @@
                         </tr>
                       </table>
                     </div>
-                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;" v-if='false'>
-                      <table class='text-center' style='width:100%;'>
-                        <tr><th>ProductHunt</th></tr>
-                        <tr>
-                          <td class='text-center pt-2'>
-                            <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" rel="noopener" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=176110&theme=dark" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" />
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
                     <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
                       <table class='text-center' style='width:100%;'>
-                        <tr><th>Patreon</th></tr>
+                        <tr><th>Twitter</th></tr>
                         <tr>
-                          <td class='text-center pt-2'>
-                            <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank' rel="noopener">
-                              <img src='@/assets/img/Patreon+Button.jpg' style='width:210px;margin:0px auto;opacity:0.8;' />
-                            </a>
+                          <td class='pt-3'>
+                            <a href="https://twitter.com/darray_dapp?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#1d253b;'>Follow <strong>@darray_dapp</strong></a> - <a href="https://twitter.com/jp_aulet?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#1d253b;'>Follow <strong>@jp_aulet</strong></a>
                           </td>
                         </tr>
                       </table>

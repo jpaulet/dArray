@@ -12,17 +12,17 @@
             Support Us
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item ml-3">
           <a href="https://jpaulet.typeform.com/to/sVUrrj" class="nav-link" target='_blank'>
             Contact Us & Bugs
           </a>
         </li>
-        <li class="nav-item" v-if='false'>
-          <a href="" class="nav-link" target='_blank'>
+        <li class="nav-item ml-3">
+          <a href="/roadmap" class="nav-link">
             Roadmap
           </a>
         </li>
-        <li class="nav-item" v-if='false'>
+        <li class="nav-item ml-2" v-if='false'>
           <a href="javascript:void(0)" class="nav-link">
             Terms & Privacity
           </a>

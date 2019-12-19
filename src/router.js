@@ -11,6 +11,7 @@ import Calendar from '@/pages/Calendar.vue'
 import TableList from '@/pages/TableList.vue'
 import Settings from '@/pages/Settings.vue'
 import Files from '@/pages/Files.vue'
+import Roadmap from '@/pages/Roadmap.vue'
 
 const routes = [{
   path: '/',
@@ -61,6 +62,11 @@ const routes = [{
       path: 'files',
       name: 'Files',
       component: Files
+    },
+    {
+      path: 'roadmap',
+      name: 'Roadmap',
+      component: Roadmap
     }
   ]
 }]
