@@ -11,6 +11,7 @@ import SideBar from '@/components/SidebarPlugin'
 import VueOffline from 'vue-offline'
 
 import VueCurrencyInput from 'vue-currency-input'
+import VueAnalytics from 'vue-analytics';
 
 const pluginOptions = {
   globalOptions: { currency: 'USD' }
@@ -39,6 +40,12 @@ const router = new VueRouter({
   routes, // short for routes: routes
   linkExactActiveClass: 'active'
 })
+
+// Configuration VueAnalytics
+Vue.use(VueAnalytics, {
+  id: 'UA-154759330-1',
+  router
+});
 
 Vue.use(VueRouter)
 Vue.use(GlobalComponents)

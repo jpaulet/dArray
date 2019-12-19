@@ -35,17 +35,24 @@
       </div>
     </div>
 
-    <modal :show.sync="showContent" body-classes="p-0" modal-classes="modal-dialog-centered modal-lg mt-2" style='transform:translate(0,0) !important;padding-top:50px;'>
-      <template slot="header">
-        <h4 class="modal-title ml-2" id="exampleModalLabel">Support Us</h4>
+    <modal :show.sync="showContent" body-classes="p-0" modal-classes="modal-dialog-centered modal-lg mt-2" style='transform:translate(0,0) !important;padding-top:80px;'>
+      <template slot="header" class='row'>
+        <h4 class="modal-title col-12 mt-3 mb-3" id="exampleModalLabel">Support Me, a solo indie maker</h4>
       </template>
       <div class="col-12 mb-3">
-        <div class="table-right" style="padding:20px 20px 30px 20px;width:100%;">
+        <div class='col-8 text-dark' style='clear:both;margin:0px auto;'> 
+          Hey! I'm J.P 👋, founder and solo developer of <strong>dArray</strong>. If you like my work, you could support me and my software journey!
+          <br /><br />
+          <strong>Thanks in advance 🙂</strong>
+        </div>
+        <div class="table-right" style="padding:20px 20px 30px 20px;">
           <table class='text-center' style='width:100%;'>
-            <tr><th>Twitter</th></tr>
-            <tr style='width:100%;'>
-              <td class='' style='width:100%;'>
-                <a href='https://twitter.com/dArray_dapp/status/1199727746114605057' target='_blank'><img src='@/assets/img/twitter_img.png' alt='Twitter img' style='border:1px solid #eee;boder-radius:8px;padding:6px;width:320px;' /></a>
+            <tr><th>Patreon</th></tr>
+            <tr>
+              <td class='text-center pt-1'>
+                <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank'>
+                  <img src='@/assets/img/Patreon+Button.png' style='width:210px;margin:0px auto;opacity:0.8;' />
+                </a>
               </td>
             </tr>
           </table>
@@ -70,14 +77,12 @@
             </tr>
           </table>
         </div>
-        <div class="table-right pt-0" style="padding:20px 20px 30px 20px;">
+        <div class="table-right pt-o" style="padding:20px 20px 30px 20px;width:100%;">
           <table class='text-center' style='width:100%;'>
-            <tr><th>Patreon</th></tr>
-            <tr>
-              <td class='text-center pt-1'>
-                <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank'>
-                  <img src='@/assets/img/Patreon+Button.png' style='width:210px;margin:0px auto;opacity:0.8;' />
-                </a>
+            <tr><th>Twitter</th></tr>
+            <tr style='width:100%;'>
+              <td class='' style='width:100%;'>
+                <a href="https://twitter.com/darray_dapp?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#1d253b;'>Follow @darray_dapp</a> - <a href="https://twitter.com/jp_aulet?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#1d253b;'>Follow @jp_aulet</a>
               </td>
             </tr>
           </table>
@@ -121,6 +126,10 @@ export default {
           timeout: 2500
         })
     })
+    let randomShow =  Math.floor(Math.random() * 100);
+    if(randomShow === 0){
+      this.showContent = true
+    }
   }
 }
 </script>
