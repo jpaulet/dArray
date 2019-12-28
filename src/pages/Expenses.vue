@@ -1043,9 +1043,6 @@ export default {
 
       this.expense = this.expenses[searchExpense]
 
-      console.log("Changing expense ["+searchExpense+"]: ")
-      console.log(this.expense)
-
       this.$set(this.expense,'status',status)
       let expenseFile = this.expense.id + '.json'
       userSession.putFile(expenseFile, JSON.stringify(this.expense), this.$ENCRYPT)

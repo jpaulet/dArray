@@ -8,7 +8,7 @@
         </div>
       </router-link>
       <div class="column is-7 image-section">
-        <img :src="`/img/${selectedCryptoCurrency.id}_large_logo.png`" class="cryptoCurrency-image" :class="{'cryptoCurrency-image-iframe': isOpenedInIFrame}"/>
+        <img :src="`/img/${selectedCryptoCurrency.id}_logo.png`" class="cryptoCurrency-image" :class="{'cryptoCurrency-image-iframe': isOpenedInIFrame}"/>
         <h1 class="cryptoCurrency-title" :class="{'cryptoCurrency-title-iframe': isOpenedInIFrame}">{{ selectedCryptoCurrency.name }}</h1>
         <span class="tag is-primary" :class="{'tag-iframe': isOpenedInIFrame}">Rank {{ selectedCryptoCurrency.rank}}</span>
         <p class="cryptoCurrency-description" :class="{'cryptoCurrency-description-iframe': isOpenedInIFrame}">{{ selectedCryptoCurrency.description }}</p>
@@ -232,23 +232,6 @@ $large: 1024px;
 
   .image-section {
     position: relative;
-
-    .cryptoCurrency-image {
-      height: 200px;
-
-      -webkit-animation-name: spinner; 
-      -webkit-animation-timing-function: linear; 
-      -webkit-animation-iteration-count: infinite; 
-      -webkit-animation-duration: 60s; 
-      animation-name: spinner; 
-      animation-timing-function: linear; 
-      animation-iteration-count: 1; 
-      animation-duration: 60s; 
-      -webkit-transform-style: preserve-3d; 
-      -moz-transform-style: preserve-3d; 
-      -ms-transform-style: preserve-3d; 
-      transform-style: preserve-3d;
-    }
 
     .cryptoCurrency-image-iframe {
       height: 80px;

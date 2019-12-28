@@ -138,8 +138,14 @@
       "github": "" 
    },
    "tezos": {
-      "description": "Binance Coin (BNB) is an ERC20 token issued on the Ethereum blockchain by the popular cryptocurrency exchange Binance. With this cryptocurrency, you can pay a сommission for transactions on the exchange. And if you decide to do so, you will receive additional discounts. In the first year, you will be able to get a discount – 50%, in the second – 25%, in the third – 12.5%, in the fourth – 6.75%. The token was established with a total supply of 200 million. As per the Whitepaper, Binance plans to use 20% of the profits each Quarter to buyback and burn BNB, until 50% of the total BNB supply (100 million) is burned.",
-      "website": "https://www.binance.com/",
+      "description": "Tezos is a technology for deploying a blockchain capable of modifying its own set of rules with minimal disruption to the network through an on-chain governance model.",
+      "website": "https://tezos.com/",
+      "paper": "",
+      "github": "" 
+   },
+   "tron": {
+      "description": "Tezos is a technology for deploying a blockchain capable of modifying its own set of rules with minimal disruption to the network through an on-chain governance model.",
+      "website": "https://tezos.com/",
       "paper": "",
       "github": "" 
    },

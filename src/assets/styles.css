@@ -50,7 +50,7 @@ html,body{
 }
 
 .router-link-active{
-	background-color: #cccccc21 !important;
+	background-color: #fff !important;
 	border-radius:8px !important;
 }
 
