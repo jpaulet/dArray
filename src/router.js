@@ -1,9 +1,7 @@
-// import Home from './views/Home.vue'
-
 import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
-
 import Dashboard from '@/pages/Dashboard.vue'
 import Invoices from '@/pages/Invoices.vue'
+import Cryptocurrencies from '@/pages/Cryptocurrencies.vue'
 import Expenses from '@/pages/Expenses.vue'
 import Customers from '@/pages/Customers.vue'
 import Tasks from '@/pages/Tasks.vue'
@@ -19,52 +17,57 @@ const routes = [{
   redirect: 'dashboard',
   children: [
     {
-      path: 'dashboard',
+      path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard
     },
     {
-      path: 'invoices',
+      path: '/cryptocurrencies',
+      name: 'Cryptocurrencies',
+      component: cryptocurrencies
+    },
+    {
+      path: '/invoices',
       name: 'Invoices',
       component: Invoices
     },
     {
-      path: 'expenses',
+      path: '/expenses',
       name: 'Expenses',
       component: Expenses
     },
     {
-      path: 'customers',
+      path: '/customers',
       name: 'Customers',
       component: Customers
     },
     {
-      path: 'tasks',
+      path: '/tasks',
       name: 'Tasks',
       component: Tasks
     },
     {
-      path: 'calendar',
+      path: '/calendar',
       name: 'Calendar',
       component: Calendar
     },
     {
-      path: 'table',
+      path: '/table',
       name: 'Table List',
       component: TableList
     },
     {
-      path: 'settings',
+      path: '/settings',
       name: 'Settings',
       component: Settings
     },
     {
-      path: 'files',
+      path: '/files',
       name: 'Files',
       component: Files
     },
     {
-      path: 'roadmap',
+      path: '/roadmap',
       name: 'Roadmap',
       component: Roadmap
     }

@@ -788,7 +788,7 @@ export default {
         return false
       }
 
-      const newInvoicesList = this.invoicesList.filter((el) => {
+      this.invoicesList = this.invoicesList.filter((el) => {
         return !this.selected.some((f) => {
           return f.id === el
         })
@@ -799,25 +799,28 @@ export default {
           userSession.deleteFile(el.id+'.json')
         })
 
-        userSession.putFile(STORAGE_FILE, JSON.stringify(newInvoicesList), this.$ENCRYPT)
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.invoicesList), this.$ENCRYPT)
         this.invoices = this.invoices.filter((el) => {
           return !this.selected.some((f) => {
             return f.id === el.id
           })
         })
+
+        this.$set(this.table1, 'data', this.invoices)
+        this.selected = []
+        this.deselectAll()
       }else{
-        userSession.putFile(ARCHIVED_FILE, JSON.stringify(newInvoicesList), this.$ENCRYPT)
+        userSession.putFile(ARCHIVED_FILE, JSON.stringify(this.invoicesList), this.$ENCRYPT)
         this.invoices = this.invoices.filter((el) => {
           return !this.selected.some((f) => {
             return f.id === el.id
           })
         })
-      }
 
-      this.$set(this.table1, 'data', this.invoices)
-
-      this.selected = []
-      this.deselectAll()
+        this.$set(this.table1, 'data', this.invoices)
+        this.selected = []
+        this.deselectAll()
+      }      
     },
 
     deselectAll(){
@@ -1163,7 +1166,7 @@ export default {
       }
 
       this.invoice = this.invoices[searchInvoice]
-      this.invoice.status = status
+      this.$set(this.invoice, 'status', status)
       let invoiceFile = this.invoice.id + '.json'
       userSession.putFile(invoiceFile, JSON.stringify(this.invoice), this.$ENCRYPT)
     },

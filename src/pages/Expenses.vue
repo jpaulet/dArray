@@ -794,8 +794,8 @@ export default {
       if(!this.checkHasSelected()){
         return false
       }
-
-      const newExpensesList = this.expensesList.filter((el) => {
+      
+      this.expensesList = this.expensesList.filter((el) => {
         return !this.selected.some((f) => {
           return f.id === el
         })
@@ -806,24 +806,28 @@ export default {
           userSession.deleteFile(el.id+'.json')
         })
 
-        userSession.putFile(STORAGE_FILE, JSON.stringify(newExpensesList), this.$ENCRYPT)
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.expensesList), this.$ENCRYPT)
         this.expenses = this.expenses.filter((el) => {
           return !this.selected.some((f) => {
             return f.id === el.id
           })
         })
-      }else{
-        userSession.putFile(ARCHIVED_FILE, JSON.stringify(newExpensesList), this.$ENCRYPT)
-        this.expenses = this.expenses.filter((el) => {
-          return !this.selected.some((f) => {
-            return f.id === el.id
-          })
-        })
-      }
 
-      this.table1.data = this.expenses
-      this.selected = []
-      this.deselectAll()
+        this.$set(this.table1, 'data', this.expenses)
+        this.selected = []
+        this.deselectAll()
+      }else{
+        userSession.putFile(ARCHIVED_FILE, JSON.stringify(this.expensesList), this.$ENCRYPT)
+        this.expenses = this.expenses.filter((el) => {
+          return !this.selected.some((f) => {
+            return f.id === el.id
+          })
+        })
+
+        this.$set(this.table1, 'data', this.expenses)
+        this.selected = []
+        this.deselectAll()
+      }
     },
 
     deselectAll(){
@@ -919,24 +923,35 @@ export default {
         }else{
           this.expensesList = JSON.parse(expenses)
         }
-        var i = 0
-        
-        for (i in this.expensesList) {
-          userSession.getFile(this.expensesList[i] + '.json', this.$DECRYPT).then((expense) => {
-            if (!expense) {
-              this.expensesList.splice(i,1)
-              return false
-            }
+        var notFoundList = []
 
-            expense = JSON.parse(expense)
-            let searchExpense = this.expensesList.indexOf(expense.id)
-            this.$set(this.expenses, searchExpense, expense)
+        for (let i = 0; i < this.expensesList.length; i++){
+          userSession.getFile(this.expensesList[i] + '.json', this.$DECRYPT).then((expense) => {
+            if (expense) {
+              expense = JSON.parse(expense)
+              let searchExpense = this.expensesList.indexOf(expense.id)
+              this.$set(this.expenses, searchExpense, expense)              
+            }else{
+              notFoundList.push(this.expensesList[i])              
+            }
           })
         }
 
         setTimeout(() => { 
           this.table1.data = this.expenses
           this.loadingPage = false
+
+          if(notFoundList.length > 0){
+            for(let j = 0; j < notFoundList.length; j++){
+              var index = this.expensesList.indexOf(notFoundList[j])
+              if (index > -1) {
+                this.expensesList.splice(index, 1)
+                this.expenses.splice(index, 1)
+              }
+            }
+
+            userSession.putFile(STORAGE_FILE, JSON.stringify(this.expensesList), this.$ENCRYPT)
+          }
         }, 700);
       })
     },
@@ -1027,7 +1042,11 @@ export default {
       }
 
       this.expense = this.expenses[searchExpense]
-      this.expense.status = status
+
+      console.log("Changing expense ["+searchExpense+"]: ")
+      console.log(this.expense)
+
+      this.$set(this.expense,'status',status)
       let expenseFile = this.expense.id + '.json'
       userSession.putFile(expenseFile, JSON.stringify(this.expense), this.$ENCRYPT)
     },

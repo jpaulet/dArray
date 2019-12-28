@@ -7,6 +7,12 @@
           <p>Dashboard</p>
         </template>
       </sidebar-link>
+      <sidebar-link to="/cryptocurrencies">
+        <i class="tim-icons icon-coins"></i>
+        <template>
+          <p>Cryptocurrencies</p><span class='badge badge-light' style='font-size:6px;float:right;margin-top:-22px;opacity:0.6;'>new</span>
+        </template>
+      </sidebar-link>
       <sidebar-link to="/invoices">
         <i class="tim-icons icon-paper"></i>
         <template>

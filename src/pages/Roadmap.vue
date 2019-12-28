@@ -11,6 +11,9 @@
             <h6>Done</h6>
             <div class="col-12 pr-md-1 text-left">
               <ul>
+                <li style='line-height:22px;'><span class='badge badge-light'>28/12/19</span> - Added <i>`Cryptocurrencies`</i> page.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>27/12/19</span> - Solved bugs in <i>`Invoice`</i> & <i>`Expenses`</i> page.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>23/12/19</span> - Improved <i>`Settings`</i> page visually. Added required fields.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>19/12/19</span> - Added <i>`Roadmap`</i> page.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>18/12/19</span> - Added <i>`Multiple Currencies`</i> support.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>12/12/19</span> - Improved <i>`Invoices & Expenses`</i> creation.</li>
@@ -18,6 +21,7 @@
                 <li style='line-height:22px;'><span class='badge badge-light'>05/12/19</span> - Improved <i>`Files`</i> upload & download.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>04/12/19</span> - Improved all pages with responsive features.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>04/12/19</span> - Added offline/online badge.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>30/11/19</span> - Launched v1.0</li>
               </ul>
             </div> 
 

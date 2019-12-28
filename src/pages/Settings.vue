@@ -3,26 +3,20 @@
     <div class="row">
       <div class="col-md-8" v-if='!loadingPage'>
         <card>
-          <template slot="header">
-            <h5 class="title">Profile</h5>
-          </template>
-
-          <h6 class='text-left mb-2'>You</h6>
-
+          <h5 class="title mb-3 text-left">PROFILE</h5>
+          
           <div class="row">
             <div class="col-md-6 pr-md-1 text-left">
-              <base-input label="First Name" v-model="model.firstName" placeholder="First Name"></base-input>
+              <base-input label="* First Name" v-model="model.firstName" placeholder="First Name" required></base-input>
             </div>
             <div class="col-md-6 pl-md-1 text-left">
-              <base-input label="Last Name" v-model="model.lastName" placeholder="Last Name"></base-input>
+              <base-input label="* Last Name" v-model="model.lastName" placeholder="Last Name" required></base-input>
             </div>
           </div>
 
-          <h6 class='text-left mb-2 mt-3'>Company</h6>
-
           <div class="row">
             <div class="col-md-6 pr-md-1 text-left">
-              <base-input label="Company"   placeholder="Company" v-model="model.company"></base-input>
+              <base-input label="* Company"   placeholder="Company" v-model="model.company" required></base-input>
             </div>
             <div class="col-md-6 pl-md-1 text-left">
               <base-input label="Email address" v-model="model.email" type="email" placeholder="mike@email.com"></base-input>
@@ -31,23 +25,23 @@
 
           <div class="row">
             <div class="col-md-12 text-left">
-              <base-input label="Address" v-model="model.address" placeholder="Home Address"></base-input>
+              <base-input label="* Address" v-model="model.address" placeholder="Home Address" required></base-input>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-4 pr-md-1 text-left">
-              <base-input label="City" v-model="model.city" placeholder="City"></base-input>
+              <base-input label="* City" v-model="model.city" placeholder="City" required></base-input>
             </div>
             <div class="col-md-4 px-md-1 text-left">
-              <base-input label="Country" v-model="model.country" placeholder="Country"></base-input>
+              <base-input label="* Country" v-model="model.country" placeholder="Country" required></base-input>
             </div>
             <div class="col-md-4 pl-md-1 text-left">
               <base-input label="Postal Code" placeholder="ZIP Code" v-model="model.zip"></base-input>
             </div>
           </div>
 
-          <h6 class='text-left mb-2 mt-3'>Invoice</h6>
+          <h5 class="title my-3 text-left">INVOICES</h5>
 
           <div class="row">
             <div class="col-md-8 text-left">
