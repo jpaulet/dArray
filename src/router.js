@@ -1,7 +1,7 @@
 import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
 import Dashboard from '@/pages/Dashboard.vue'
 import Invoices from '@/pages/Invoices.vue'
-import Cryptocurrencies from '@/pages/Cryptocurrencies.vue'
+//import Cryptocurrencies from '@/pages/Cryptocurrencies.vue'
 import Expenses from '@/pages/Expenses.vue'
 import Customers from '@/pages/Customers.vue'
 import Tasks from '@/pages/Tasks.vue'
@@ -10,6 +10,10 @@ import TableList from '@/pages/TableList.vue'
 import Settings from '@/pages/Settings.vue'
 import Files from '@/pages/Files.vue'
 import Roadmap from '@/pages/Roadmap.vue'
+
+import BodyHero from '@/components/body/BodyHero.vue'
+import SelectedHero from '@/components/body/SelectedHero.vue'
+
 
 const routes = [{
   path: '/',
@@ -23,8 +27,13 @@ const routes = [{
     },
     {
       path: '/cryptocurrencies',
-      name: 'Cryptocurrencies',
-      component: cryptocurrencies
+      name: 'Crypto',
+      component: BodyHero
+    },
+    {
+      path: '/cryptocurrencies/:id',
+      name: 'Crypto',
+      component: SelectedHero
     },
     {
       path: '/invoices',

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import UUID from 'vue-uuid'
 
 import GlobalComponents from './globalComponents'
@@ -11,7 +13,16 @@ import SideBar from '@/components/SidebarPlugin'
 import VueOffline from 'vue-offline'
 
 import VueCurrencyInput from 'vue-currency-input'
-import VueAnalytics from 'vue-analytics';
+import VueAnalytics from 'vue-analytics'
+
+import 'vue-awesome/icons'
+import Icon from 'vue-awesome/components/Icon'
+import DoughnutChart from './components/body/sub/DoughnutChart'
+import {store} from './store.js'
+
+Vue.use(VueAxios, axios)
+Vue.component('icon', Icon)
+Vue.component('doughnut-chart', DoughnutChart)
 
 const pluginOptions = {
   globalOptions: { currency: 'USD' }
@@ -59,5 +70,12 @@ Vue.use(require('vue-moment'))
 new Vue({
   router,
   i18n,
-  render: h => h(App)
+  render: h => h(App),
+  data: {
+    sharedState: store.state
+  },
+  created () {
+    store.getCryptoCurrencies()
+    store.getTotalMarketCapUSD()
+  }
 }).$mount('#app')
