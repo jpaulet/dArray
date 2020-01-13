@@ -81,6 +81,7 @@
   </div>
 </template>
 <script>
+import BootstrapVue from 'bootstrap-vue'  
 import TopNavbar from './TopNavbar.vue'
 import ContentFooter from './ContentFooter.vue'
 import DashboardContent from './DashboardContent.vue'
@@ -124,7 +125,7 @@ export default {
       this.userData = userSession.loadUserData()
       this.user = new Person(this.userData.profile)
       this.user.username = this.userData.username
-      this.user.name = this.userData.name ? this.userData.name : this.userData.username.substr(0,this.userData.username.indexOf("."))      
+      this.user.name = this.userData.name ? this.userData.name : (this.userData.username ? this.userData.username.substr(0,this.userData.username.indexOf(".")) : 'Anonymous')
     } else if (userSession.isSignInPending()) {
       this.isLoadingPage = true
       userSession.handlePendingSignIn()

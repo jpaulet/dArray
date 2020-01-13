@@ -2,7 +2,6 @@
 a,a:focus,a:hover{color:#fff;}
 html,body{
 	height:100%;
-	max-width: 1500px;
 	margin:0px auto;
 }
 .hide{display:none;}
@@ -63,10 +62,7 @@ html,body{
 	color:#000 !important;
 }
 
-
 /* crypto columns */
-
-
 .column {
  display:block;
  -ms-flex-preferred-size:0;

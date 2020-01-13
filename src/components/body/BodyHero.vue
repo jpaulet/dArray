@@ -12,7 +12,7 @@
           <div class='col-12 text-left'>
             <label class='control-label'>Coin</label>
             <select v-model="crypto.coin" class='form-control' style='border:1px solid rgba(34, 42, 66, 0.4);'>
-              <option v-for='(coin,index) in sharedState.cryptoCurrencies' :value='coin.name'>{{coin.name}}</option>
+              <option :key='`optioncoin`+index' v-for='(coin,index) in sharedState.cryptoCurrencies' :value='coin.name'>{{coin.name}}</option>
             </select>
           </div>
           <div class='col-12 text-left mt-3'>
@@ -32,10 +32,10 @@
         <div class='col-6 text-left'>
           <button type="button" class="btn btn-light btn-sm px-4 px-md-5 text-white ml-4" fill="" @click="openNewTracker = true">+ New Tracker</button>
         </div>
-        <div class="col-6 text-right pr-5" style='margin-top:2px;'>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
-           <label v-for="(option, index) in coinOptions" :key="option" class="btn btn-light btn-sm btn-simple" :class="{active:activeIndex === index}" :id="index">
-              <input type="radio" @click="changeViewType(index,option)" name="options" autocomplete="off" :checked="activeIndex === index">
+        <div class="col-6 text-right" style='margin-top:2px;'>
+          <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+           <label v-for="(option, index) in coinOptions" :key="option" class="btn btn-light btn-sm btn-simple" :class="{' active' : (activeIndex === index) }" :id="index" @click.prevent="changeViewType(index,option)" style='margin-left:-2px;'>
+              <input type="radio" name="options" autocomplete="off" :checked="activeIndex === index">
               {{ option }}
            </label>
           </div>
@@ -48,7 +48,7 @@
             <div class="card mb-0" style='background-color: #fff;'>
               <div class="card-image" :class="{'card-image-iframe': isOpenedInIFrame}" style='height:80px;'>
                 <figure class="image is-4by3">
-                  <img :src="`/img/${cryptoCurrency.id}_logo.png`">
+                  <img :src="`/img/${cryptoCurrency.id}_logo.png`" style='max-width:150px;'>
                 </figure>
               </div>
               <div class="card-content" style='height:90px;'>
@@ -71,7 +71,7 @@
             <div class="card mb-0" style='background-color: #fff;'>
               <div class="card-image" :class="{'card-image-iframe': isOpenedInIFrame}" style='height:80px;'>
                 <figure class="image is-4by3">
-                  <img :src="`/img/${cryptoCurrency.id}_logo.png`">
+                  <img :src="`/img/${cryptoCurrency.id}_logo.png`" style='max-width:150px;'>
                 </figure>
               </div>
               <div class="card-content" style='height:90px;'>
@@ -94,7 +94,7 @@
             <div class="card mb-0" style='background-color: #fff;'>
               <div class="card-image" :class="{'card-image-iframe': isOpenedInIFrame}" style='height:80px;'>
                 <figure class="image is-4by3">
-                  <img :src="`/img/${cryptoCurrency.id}_logo.png`">
+                  <img :src="`/img/${cryptoCurrency.id}_logo.png`" style='max-width:150px;'>
                 </figure>
               </div>
               <div class="card-content" style='height:90px;'>
@@ -121,10 +121,10 @@
           </div>
           <div class="col-6 text-right" style='margin-top:2px;'>
             <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
-             <label v-for="(option, index) in coinOptions" :key="option" class="btn btn-light btn-sm btn-simple" :class="{active:activeIndex === index}" :id="index">
-                <input type="radio" @click="changeViewType(index,option)" name="options" autocomplete="off" :checked="activeIndex === index">
-                {{ option }}
-             </label>
+             <label v-for="(option, index) in coinOptions" :key="option" class="btn btn-light btn-sm btn-simple" :class="{' active' : (activeIndex === index) }" :id="index" @click.prevent="changeViewType(index,option)">
+              <input type="radio" name="options" autocomplete="off" :checked="activeIndex === index">
+              {{ option }}
+           </label>
             </div>
           </div>
         </div>

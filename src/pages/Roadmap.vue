@@ -11,6 +11,8 @@
             <h6>Done</h6>
             <div class="col-12 pr-md-1 text-left">
               <ul>
+                <li style='line-height:22px;'><span class='badge badge-light'>31/12/19</span> - Improved mobile responive & solved bugs in mobile view.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>30/12/19</span> - Solved problems with tabs.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>28/12/19</span> - Added <i>`Cryptocurrencies`</i> page.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>27/12/19</span> - Solved bugs in <i>`Invoice`</i> & <i>`Expenses`</i> page.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>23/12/19</span> - Improved <i>`Settings`</i> page visually. Added required fields.</li>

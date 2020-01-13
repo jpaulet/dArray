@@ -14,7 +14,6 @@ import Roadmap from '@/pages/Roadmap.vue'
 import BodyHero from '@/components/body/BodyHero.vue'
 import SelectedHero from '@/components/body/SelectedHero.vue'
 
-
 const routes = [{
   path: '/',
   component: DashboardLayout,

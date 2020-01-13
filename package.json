@@ -23,6 +23,7 @@
     "axios": "^0.18.1",
     "blockstack": "^19.2.5",
     "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.1.0",
     "chart.js": "^2.9.2",
     "core-js": "^2.6.5",
     "epic-spinners": "^1.1.0",
@@ -31,9 +32,10 @@
     "jspdf": "^1.5.3",
     "print-js": "^1.0.61",
     "promise.prototype.finally": "^3.1.1",
-    "bulma": "^0.4.3",
     "vue": "^2.6.10",
     "vue-analytics": "^5.20.1",
+    "vue-awesome": "^2.3.1",
+    "vue-axios": "^2.0.2",
     "vue-chartjs": "^2.8.1",
     "vue-click-outside": "^1.0.7",
     "vue-clickaway": "^2.2.2",
@@ -45,9 +47,7 @@
     "vue-router": "^3.0.3",
     "vue-social-sharing": "^2.4.6",
     "vue-uuid": "^1.1.1",
-    "vue2-transitions": "^0.3.0",
-    "vue-awesome": "^2.3.1",
-    "vue-axios": "^2.0.2"
+    "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.6.0",

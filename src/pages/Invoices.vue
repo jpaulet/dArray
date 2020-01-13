@@ -7,18 +7,11 @@
                   <button type="button" class="btn btn-light btn-sm px-4 px-md-5 text-white" fill="" @click="openNewInvoice">+ New Invoice</button>
                 </div>
                 <div class="col-6 text-right" style='margin-top:2px;'>
-                  <div class="btn-group btn-group-toggle" data-toggle="buttons float-right">
-                     <label v-for="(option, index) in invoiceOptions"
-                            :key="option"
-                            class="btn btn-light btn-sm btn-simple"
-                            :class="{active:activeIndex === index}"
-                            :id="index">
-                        <input type="radio"
-                              @click="changeViewType(index,option)"
-                              name="options" autocomplete="off"
-                              :checked="activeIndex === index">
-                        {{ option }}
-                     </label>
+                  <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
+                     <label v-for="(option, index) in invoiceOptions" :key="option" class="btn btn-light btn-sm btn-simple" :class="{' active' : (activeIndex === index) }" :id="index" @click.prevent="changeViewType(index,option)">
+                      <input type="radio" name="options" autocomplete="off" :checked="activeIndex === index">
+                      {{ option }}
+                   </label>
                   </div>
                 </div>
             </div>

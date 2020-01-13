@@ -1,574 +1,626 @@
 <template>
-  <div class="panel-landing" id="landing">
+	<div class="panel-landing" id="landing" v-if='!showTerms'>
 
-    <div class="wrapper">
-      <!-- Navbar Section -->
-      <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top effect-main">
-        <div class="container container">
-          <a class="navbar-brand" href="#">
-            <img src='@/assets/img/darray.jpg' style="width:30px;margin-right:10px;" alt='dArray Logo' />dArray.
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto navbar-right">
-              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#products">Product</a></li>
-              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#features">Features</a></li>
-              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#video-demo">Demo</a></li>
-              <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#pricing">Support</a></li>
-              <li class="nav-item"><a class="nav-link js-scroll-trigger btn btn-primary" href="#" @click.prevent="signIn" style='color:#fff;'>Sign In</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav><!-- Navbar End -->
+		<div class="wrapper">
+			<!-- Navbar Section -->
+			<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top effect-main" style='display:flex;'>
+				<div class="container container">
+					<a class="navbar-brand" href="#">
+						<img src='@/assets/img/darray.jpg' style="width:30px;margin-right:10px;" alt='dArray Logo' />dArray.
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent" style='background-color: #fff;'>
+						<ul class="navbar-nav ml-auto navbar-right">
+							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#products">Product</a></li>
+							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#features">Features</a></li>
+							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#video-demo">Demo</a></li>
+							<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#pricing">Support</a></li>
+							<li class="nav-item" style='text-align:center;'><a class="nav-link js-scroll-trigger btn btn-primary" href="#" @click.prevent="signIn" style='display:inherit;color:#fff;'>Sign In</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav><!-- Navbar End -->
 
-      <div id="main" class="main">
-        <div class="container text-center">
-          <div class="home hero-2"><!-- Hero Section-->
-            <div class="hero-content wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <h1>The <transition name="slide-fade" mode="out-in"><span class='mr-3'>{{rotateText}}</span></transition> <strong style='font-weight:500;'>Accounting Software</strong><br /> for Makers, Freelancers & SME</h1>
-              <p>Put your business on the <strong style='font-weight:500;'>Blockchain</strong> & keep your data <strong style='font-weight:500;'>secure & private</strong>.<br />Manage Invoices, Expenses, Customers, Files & more from everywhere.</p>
-              <div class="form-alt mt-5">
-                <div class="subscribe-form wow zoomIn animated" style="visibility: visible;">
-                  <a href="#" class="btn btn-primary btn-lg" id="signin-button" @click.prevent="signIn">
-                    Sign In Now
-                  </a><br />
-                  <span style='font-size:11px;'>Sign In with <strong>Blockstack</strong> to get access. It's free!</span>
-                </div>
-                <div id="response"></div>
-              </div>
-            </div>
-            <div class="hero-img wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <img class="img-fluid" src="@/assets/img/landing/features/dashboard.jpg" alt="Darray dashboard">
-            </div>
-          </div>
-        </div><!-- Hero End -->
+			<div id="main" class="main" style='display:grid;'>
+				<div class="container text-center">
+					<div class="home hero-2"><!-- Hero Section-->
+						<div class="hero-content wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+							<h1>The <transition name="slide-fade" mode="out-in"><span class='mr-3'>{{rotateText}}</span></transition> <strong style='font-weight:500;'>Accounting Software</strong><br /> for Makers, Freelancers & SME</h1>
+							<p>Put your business on the <strong style='font-weight:500;'>Blockchain</strong> & keep your data <strong style='font-weight:500;'>secure & private</strong>.<br />Manage Invoices, Expenses, Customers, Files & more from everywhere.</p>
+							<div class="form-alt mt-5">
+								<div class="subscribe-form wow zoomIn animated" style="visibility: visible;">
+									<a href="#" class="btn btn-primary btn-lg" id="signin-button" @click.prevent="signIn">
+										Sign In Now
+									</a><br />
+									<span style='font-size:11px;'>Sign In with <strong>Blockstack</strong> to get access. It's free!</span>
+								</div>
+								<div id="response"></div>
+							</div>
+						</div>
+						<div class="hero-img wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+							<img class="img-fluid" src="@/assets/img/landing/features/dashboard.jpg" alt="Darray dashboard">
+						</div>
+					</div>
+				</div><!-- Hero End -->
 
-        <div id="products" class="features wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-          <div class="container px-0">
-            <div class="row text-center">
-              <div class="col-md-12">
-                <div class="features-intro">
-                  <h2>A privacy-focus accounting platform</h2>
-                  <p>The place to run your business & accounting on the Blockchain. <br /><strong>You own all your data!</strong></p>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4 col-sm-6 feature">
-                <div class="feature-list">
-                  <div class="card-icon">
-                    <div class="card-img">
-                      <img src="@/assets/img/landing/a3.png" alt="Secure" width="35">
-                    </div>
-                  </div>
-                  <div class="card-text">
-                    <h3>Secure</h3>
-                    <p>Encrypt all your data in a secure way. Only you will be able to access it.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4 col-sm-6 feature">
-                <div class="feature-list">
-                  <div class="card-icon">
-                    <div class="card-img">
-                      <img src="@/assets/img/landing/a2.png" alt="Private" width="35">
-                    </div>
-                  </div>
-                  <div class="card-text">
-                    <h3>Private</h3>
-                    <p>Own all your business data: Invoices, Expenses, Tasks, Calendar, Files, etc.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4 col-sm-6 feature">
-                <div class="feature-list">
-                  <div class="card-icon">
-                    <div class="card-img">
-                      <img src="@/assets/img/landing/a1.png" alt="Decentralized" width="35">
-                    </div>
-                  </div>
-                  <div class="card-text">
-                    <h3>Decentralized</h3>
-                    <p>We use Blockchain & Blockstack tech.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4 col-sm-6 feature">
-                <div class="feature-list">
-                  <div class="card-icon">
-                    <div class="card-img">
-                      <img src="@/assets/img/landing/a6.png" alt="Productive" width="35">
-                    </div>
-                  </div>
-                  <div class="card-text">
-                    <h3>Productive</h3>
-                    <p>The all-in-one place for your business</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4 col-sm-6 feature">
-                <div class="feature-list">
-                  <div class="card-icon">
-                    <div class="card-img">
-                      <img src="@/assets/img/landing/a5.png" alt="Easy to use" width="35">
-                    </div>
-                  </div>
-                  <div class="card-text">
-                    <h3>Easy to Use</h3>
-                    <p>Create invoices in 60 sec.</p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4 col-sm-6 feature">
-                <div class="feature-list">
-                  <div class="card-icon">
-                    <div class="card-img">
-                      <img src="@/assets/img/landing/a4.png" alt="Free" width="35">
-                    </div>
-                  </div>
-                  <div class="card-text">
-                    <h3>Free</h3>
-                    <p>It's free! Yes, 0$.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+				<div id="products" class="features wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+					<div class="container px-0">
+						<div class="row text-center">
+							<div class="col-md-12">
+								<div class="features-intro">
+									<h2>A privacy-focus accounting platform</h2>
+									<p>The place to run your business & accounting on the Blockchain. <br /><strong>You own all your data!</strong></p>
+								</div>
+							</div>
+							<div class="col-md-6 col-lg-4 col-sm-6 feature">
+								<div class="feature-list">
+									<div class="card-icon">
+										<div class="card-img">
+											<img src="@/assets/img/landing/a3.png" alt="Secure" width="35">
+										</div>
+									</div>
+									<div class="card-text">
+										<h3>Secure</h3>
+										<p>Encrypt all your data in a secure way. Only you will be able to access it.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-lg-4 col-sm-6 feature">
+								<div class="feature-list">
+									<div class="card-icon">
+										<div class="card-img">
+											<img src="@/assets/img/landing/a2.png" alt="Private" width="35">
+										</div>
+									</div>
+									<div class="card-text">
+										<h3>Private</h3>
+										<p>Own all your business data: Invoices, Expenses, Tasks, Calendar, Files, etc.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-lg-4 col-sm-6 feature">
+								<div class="feature-list">
+									<div class="card-icon">
+										<div class="card-img">
+											<img src="@/assets/img/landing/a1.png" alt="Decentralized" width="35">
+										</div>
+									</div>
+									<div class="card-text">
+										<h3>Decentralized</h3>
+										<p>We use Blockchain & Blockstack tech.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-lg-4 col-sm-6 feature">
+								<div class="feature-list">
+									<div class="card-icon">
+										<div class="card-img">
+											<img src="@/assets/img/landing/a6.png" alt="Productive" width="35">
+										</div>
+									</div>
+									<div class="card-text">
+										<h3>Productive</h3>
+										<p>The all-in-one place for your business</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-lg-4 col-sm-6 feature">
+								<div class="feature-list">
+									<div class="card-icon">
+										<div class="card-img">
+											<img src="@/assets/img/landing/a5.png" alt="Easy to use" width="35">
+										</div>
+									</div>
+									<div class="card-text">
+										<h3>Easy to Use</h3>
+										<p>Create invoices in 60 sec.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6 col-lg-4 col-sm-6 feature">
+								<div class="feature-list">
+									<div class="card-icon">
+										<div class="card-img">
+											<img src="@/assets/img/landing/a4.png" alt="Free" width="35">
+										</div>
+									</div>
+									<div class="card-text">
+										<h3>Free</h3>
+										<p>It's free! Yes, 0$.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        <!-- Features Section -->
-        <div id="features" class="flex-split wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-           <div class="container">
-             <div class="flex-intro align-center">
-               <h2>Manage your accounting in an easy & private way</h2>
-               <p>
-                Take control of your professional activity with dArray, a blockchain-based invoice software & accounting for Makers, Freelancers & SME.
-               </p>
-             </div>
+				<!-- Features Section -->
+				<div id="features" class="flex-split wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+					 <div class="container">
+						 <div class="flex-intro align-center">
+							 <h2>Manage your accounting in an easy & private way</h2>
+							 <p>
+								Take control of your professional activity with dArray, a blockchain-based invoice software & accounting for Makers, Freelancers & SME.
+							 </p>
+						 </div>
 
-             <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
-                 <div class="f-image">
-                   <ul class="slides">
-                    <input type="radio" name="radio-btn" id="img-1" checked />
-                    <li class="slide-container">
-                    <div class="slide">
-                      <img src="@/assets/img/landing/features/invoice1.jpg" alt='Invoice screenshot 1' />
-                        </div>
-                    <div class="nav">
-                      <label for="img-3" class="prev">&#x2039;</label>
-                      <label for="img-2" class="next">&#x203a;</label>
-                    </div>
-                    </li>
+						 <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
+								 <div class="f-image">
+									 <img class="img-fluid" src="@/assets/img/landing/features/dashboard.jpg" alt="Customers List screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+								 </div>
+								 <div class="f-text">
+									 <div class="left-content">
+										 <h2 class="mt-0">Dashboard.</h2>
+										 <p> Have control of your finances at a glance.</p>
+										 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
+									 </div>
+								 </div>
+						 </div>
 
-                    <input type="radio" name="radio-btn" id="img-2" />
-                    <li class="slide-container">
-                        <div class="slide">
-                          <img src="@/assets/img/landing/features/invoice2.jpg" alt='Invoice screenshot 2' />
-                        </div>
-                    <div class="nav">
-                      <label for="img-1" class="prev">&#x2039;</label>
-                      <label for="img-3" class="next">&#x203a;</label>
-                    </div>
-                    </li>
+						 <div class="flex-inner flex-inverted align-center py-5">
+							 <div class="f-image f-image-inverted">
+								 <img class="img-fluid" src="@/assets/img/landing/features/crypto.png" alt="Documents & Files screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+							 </div>
+							 <div class="f-text">
+								 <div class="left-content">
+									 <h2 class="mt-0">Cryptocurrencies</h2>
+									 <p> All your crypto it in real time with this dashboard. Create trackers to control all your assets.</p>
+									 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
+								 </div>
+							 </div>
+						 </div>
 
-                    <input type="radio" name="radio-btn" id="img-3" />
-                    <li class="slide-container">
-                        <div class="slide">
-                          <img src="@/assets/img/landing/features/invoice3.jpg" alt='Invoice screenshot 3' />
-                        </div>
-                    <div class="nav">
-                      <label for="img-2" class="prev">&#x2039;</label>
-                      <label for="img-1" class="next">&#x203a;</label>
-                    </div>
-                    </li>
+						 <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
+								 <div class="f-image">
+									 <ul class="slides">
+										<input type="radio" name="radio-btn" id="img-1" checked />
+										<li class="slide-container">
+										<div class="slide">
+											<img src="@/assets/img/landing/features/invoice1.jpg" alt='Invoice screenshot 1' />
+												</div>
+										<div class="nav">
+											<label for="img-3" class="prev">&#x2039;</label>
+											<label for="img-2" class="next">&#x203a;</label>
+										</div>
+										</li>
 
-                    <li class="nav-dots">
-                      <label for="img-1" class="nav-dot" id="img-dot-1"></label>
-                      <label for="img-2" class="nav-dot" id="img-dot-2"></label>
-                      <label for="img-3" class="nav-dot" id="img-dot-3"></label>
-                    </li>
-                  </ul>
-                 </div>
-                 <div class="f-text">
-                   <div class="left-content">
-                     <h2 class="mt-0">Invoices.</h2>
-                     <p> Forget the paperwork that involves saving tickets and invoices! Create & manage your invoices in an easy & private way.</p>
-                     <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
-                   </div>
-                 </div>
-             </div>
+										<input type="radio" name="radio-btn" id="img-2" />
+										<li class="slide-container">
+												<div class="slide">
+													<img src="@/assets/img/landing/features/invoice2.jpg" alt='Invoice screenshot 2' />
+												</div>
+										<div class="nav">
+											<label for="img-1" class="prev">&#x2039;</label>
+											<label for="img-3" class="next">&#x203a;</label>
+										</div>
+										</li>
 
-             <div class="flex-inner flex-inverted align-center py-1 py-md-4 py-lg-5">
-               <div class="f-image f-image-inverted">
-                 <!-- <img class="img-fluid" src="@/assets/img/landing/features/expense1.jpg" alt="Expenses screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'> -->
-                 <ul class="slides">
-                    <input type="radio" name="radio-btn2" id="img-4" checked />
-                    <li class="slide-container">
-                    <div class="slide2">
-                      <img src="@/assets/img/landing/features/expense1.jpg" alt='Expense screenshot 2' />
-                        </div>
-                    <div class="nav">
-                      <label for="img-5" class="prev">&#x2039;</label>
-                      <label for="img-5" class="next">&#x203a;</label>
-                    </div>
-                    </li>
+										<input type="radio" name="radio-btn" id="img-3" />
+										<li class="slide-container">
+												<div class="slide">
+													<img src="@/assets/img/landing/features/invoice3.jpg" alt='Invoice screenshot 3' />
+												</div>
+										<div class="nav">
+											<label for="img-2" class="prev">&#x2039;</label>
+											<label for="img-1" class="next">&#x203a;</label>
+										</div>
+										</li>
 
-                    <input type="radio" name="radio-btn2" id="img-5" />
-                    <li class="slide-container">
-                        <div class="slide2">
-                          <img src="@/assets/img/landing/features/expense2.jpg" alt='Expense screenshot 2' />
-                        </div>
-                    <div class="nav">
-                      <label for="img-4" class="prev">&#x2039;</label>
-                      <label for="img-4" class="next">&#x203a;</label>
-                    </div>
-                    </li>
+										<li class="nav-dots">
+											<label for="img-1" class="nav-dot" id="img-dot-1"></label>
+											<label for="img-2" class="nav-dot" id="img-dot-2"></label>
+											<label for="img-3" class="nav-dot" id="img-dot-3"></label>
+										</li>
+									</ul>
+								 </div>
+								 <div class="f-text">
+									 <div class="left-content">
+										 <h2 class="mt-0">Invoices.</h2>
+										 <p> Forget the paperwork that involves saving tickets and invoices! Create & manage your invoices in an easy & private way.</p>
+										 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
+									 </div>
+								 </div>
+						 </div>
 
-                    <li class="nav-dots">
-                      <label for="img-4" class="nav-dot" id="img-dot-4"></label>
-                      <label for="img-5" class="nav-dot" id="img-dot-5"></label>
-                    </li>
-                  </ul>
-               </div>
-               <div class="f-text">
-                 <div class="left-content">
-                   <h2 class="mt-0">Expenses.</h2>
-                   <p> Track all your expenses by client, type, status & more. Attach the real receipt to keep things organized.</p>
-                   <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
-                 </div>
-               </div>
-             </div>
-             <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
-                 <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/features/customer1.jpg" alt="Customers List screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
-                 </div>
-                 <div class="f-text">
-                   <div class="left-content">
-                     <h2 class="mt-0">Customers.</h2>
-                     <p> All your customers, partners, offerings in one place.</p>
-                     <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
-                   </div>
-                 </div>
-             </div>
+						 <div class="flex-inner flex-inverted align-center py-1 py-md-4 py-lg-5">
+							 <div class="f-image f-image-inverted">
+								 <!-- <img class="img-fluid" src="@/assets/img/landing/features/expense1.jpg" alt="Expenses screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'> -->
+								 <ul class="slides">
+										<input type="radio" name="radio-btn2" id="img-4" checked />
+										<li class="slide-container">
+										<div class="slide2">
+											<img src="@/assets/img/landing/features/expense1.jpg" alt='Expense screenshot 2' />
+												</div>
+										<div class="nav">
+											<label for="img-5" class="prev">&#x2039;</label>
+											<label for="img-5" class="next">&#x203a;</label>
+										</div>
+										</li>
 
-             <div class="flex-inner flex-inverted align-center py-5">
-               <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/features/filesystem.jpg" alt="Documents & Files screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
-               </div>
-               <div class="f-text">
-                 <div class="left-content">
-                   <h2 class="mt-0">Docs & File</h2>
-                   <p> Store all your data in private & secure storage. Invoices, Expenses & any other important docs.</p>
-                   <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
-                 </div>
-               </div>
-             </div>
+										<input type="radio" name="radio-btn2" id="img-5" />
+										<li class="slide-container">
+												<div class="slide2">
+													<img src="@/assets/img/landing/features/expense2.jpg" alt='Expense screenshot 2' />
+												</div>
+										<div class="nav">
+											<label for="img-4" class="prev">&#x2039;</label>
+											<label for="img-4" class="next">&#x203a;</label>
+										</div>
+										</li>
 
-             <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
-                 <div class="f-image">
-                   <img class="img-fluid" src="@/assets/img/landing/features/tasks.jpg" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
-                 </div>
-                 <div class="f-text">
-                   <div class="left-content">
-                     <h2 class="mt-0">Tasks.</h2>
-                     <p> Easy to use everyday tasks & events.</p>
-                     <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
-                   </div>
-                 </div>
-             </div>
+										<li class="nav-dots">
+											<label for="img-4" class="nav-dot" id="img-dot-4"></label>
+											<label for="img-5" class="nav-dot" id="img-dot-5"></label>
+										</li>
+									</ul>
+							 </div>
+							 <div class="f-text">
+								 <div class="left-content">
+									 <h2 class="mt-0">Expenses.</h2>
+									 <p> Track all your expenses by client, type, status & more. Attach the real receipt to keep things organized.</p>
+									 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
+								 </div>
+							 </div>
+						 </div>
 
-             <div class="flex-inner flex-inverted align-center py-1 py-md-4 py-lg-5">
-               <div class="f-image f-image-inverted">
-                 <img class="img-fluid" src="@/assets/img/landing/features/calendar.jpg" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
-               </div>
-               <div class="f-text">
-                 <div class="left-content">
-                   <h2 class="mt-0">Calendar.</h2>
-                   <p> Create events in your private calendar for meetings, tasks, remember things, etc.</p>
-                   <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
-                 </div>
-               </div>
-             </div>
+						 <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
+								 <div class="f-image">
+									 <img class="img-fluid" src="@/assets/img/landing/features/customer1.jpg" alt="Customers List screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+								 </div>
+								 <div class="f-text">
+									 <div class="left-content">
+										 <h2 class="mt-0">Customers.</h2>
+										 <p> All your customers, partners, offerings in one place.</p>
+										 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
+									 </div>
+								 </div>
+						 </div>
 
-             <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
-                 <div class="f-image">
-                  <ul class="slides">
-                    <input type="radio" name="radio-btn3" id="img-6" checked />
-                    <li class="slide-container">
-                    <div class="slide3">
-                      <img src="@/assets/img/landing/features/dashboard.jpg" alt='Dashboard screenshot 1' />
-                        </div>
-                    <div class="nav">
-                      <label for="img-7" class="prev">&#x2039;</label>
-                      <label for="img-7" class="next">&#x203a;</label>
-                    </div>
-                    </li>
+						 <div class="flex-inner flex-inverted align-center py-5">
+							 <div class="f-image f-image-inverted">
+								 <img class="img-fluid" src="@/assets/img/landing/features/filesystem.jpg" alt="Documents & Files screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+							 </div>
+							 <div class="f-text">
+								 <div class="left-content">
+									 <h2 class="mt-0">Docs & File</h2>
+									 <p> Store all your data in private & secure storage. Invoices, Expenses & any other important docs.</p>
+									 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
+								 </div>
+							 </div>
+						 </div>
 
-                    <input type="radio" name="radio-btn3" id="img-7" />
-                    <li class="slide-container">
-                        <div class="slide3">
-                          <img src="@/assets/img/landing/features/settings.jpg" alt='Settings screenshot 1' />
-                        </div>
-                    <div class="nav">
-                      <label for="img-6" class="prev">&#x2039;</label>
-                      <label for="img-6" class="next">&#x203a;</label>
-                    </div>
-                    </li>
+						 <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
+								 <div class="f-image">
+									 <img class="img-fluid" src="@/assets/img/landing/features/tasks.jpg" alt="Tasks screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+								 </div>
+								 <div class="f-text">
+									 <div class="left-content">
+										 <h2 class="mt-0">Tasks.</h2>
+										 <p> Easy to use everyday tasks & events.</p>
+										 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
+									 </div>
+								 </div>
+						 </div>
 
-                    <li class="nav-dots">
-                      <label for="img-6" class="nav-dot" id="img-dot-6"></label>
-                      <label for="img-7" class="nav-dot" id="img-dot-7"></label>
-                    </li>
-                  </ul>
-                 </div>
-                 <div class="f-text">
-                   <div class="left-content">
-                     <h2 class="mt-0">Your Business Swiss Knife.</h2>
-                     <p> All the features for your productivity: Dashboard, Calendar, Tasks, Pomodoro (WIP), ToDO lists, Organize Files & much more to come!</p>
-                     <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
-                   </div>
-                 </div>
-             </div>
-           </div>
-         </div>
+						 <div class="flex-inner flex-inverted align-center py-1 py-md-4 py-lg-5">
+							 <div class="f-image f-image-inverted">
+								 <img class="img-fluid" src="@/assets/img/landing/features/calendar.jpg" alt="Dashboard screenshot" style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);'>
+							 </div>
+							 <div class="f-text">
+								 <div class="left-content">
+									 <h2 class="mt-0">Calendar.</h2>
+									 <p> Create events in your private calendar for meetings, tasks, remember things, etc.</p>
+									 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
+								 </div>
+							 </div>
+						 </div>
 
-         <div class="yd-ft wow fadeIn py-5" style="visibility: visible; animation-name: fadeIn;">
-           <div class="yd-ft-inner py-5">
-             <div class="yd-ft-left" style='margin-top:-20px;'>
-               <h2>Welcome to dArray, where privacy matters.</h2>
-               <p>A free & private alternative to Zoho, QuickBooks and Freshbooks.</p>
-               <a href="#landing" class="btn-action btn-edge">Get Started</a>
-             </div>
-             <div class="yd-ft-right">
-               <img src="@/assets/img/landing/test.png" alt="Get started">
-             </div>
-           </div>
-         </div>
+						 <div class="flex-inner align-center py-1 py-md-4 py-lg-5">
+								 <div class="f-image">
+									<ul class="slides">
+										<input type="radio" name="radio-btn3" id="img-6" checked />
+										<li class="slide-container">
+										<div class="slide3">
+											<img src="@/assets/img/landing/features/dashboard.jpg" alt='Dashboard screenshot 1' />
+												</div>
+										<div class="nav">
+											<label for="img-7" class="prev">&#x2039;</label>
+											<label for="img-7" class="next">&#x203a;</label>
+										</div>
+										</li>
 
-        <!-- VIDEO DEMO -->
-        <div class="ar-ft-single" id='video-demo'>
-          <div class="container">
-            <div class="ar-feature mt-5 mb-1">
-              <div class="ar-list">
-                <ul>
-                  <li>
-                    <div class="ar-text">
-                      <h3 class='text-left pb-3'>Demo</h3>
-                      <p>Check the video to see a live demo of <span style='color:#344675;'>dArray</span>.</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="ar-image">
-                <video controls poster="@/assets/img/landing/video_preview.jpg" width='90%' height='100%' style='border-radius:42px;padding:20px;'>
-                  <source src="@/assets/img/landing/darray.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
-          </div>
-        </div>
+										<input type="radio" name="radio-btn3" id="img-7" />
+										<li class="slide-container">
+												<div class="slide3">
+													<img src="@/assets/img/landing/features/settings.jpg" alt='Settings screenshot 1' />
+												</div>
+										<div class="nav">
+											<label for="img-6" class="prev">&#x2039;</label>
+											<label for="img-6" class="next">&#x203a;</label>
+										</div>
+										</li>
 
-        <!-- dArray Pricing Section -->
-        <div id="pricing" class="pricing-section text-center">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="pricing-intro wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                  <h1>Support.</h1>
-                  <p style='max-width:800px;margin:0px auto;'>
-                    <span style='color:#344675;'>dArray</span> is free, but you could support it & myself <span style='color:#aaa;'>a solo-maker</span> in various ways:<br />Thank you in advance <span style='color:#344675;'>❤️</span>.
-                  </p>
-                </div>
-                <div class="row">
-                  <div class="col-lg-5 offset-lg-1 col-md-6">
-                   <div class="table-left wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                     <div class="pricing-details">
-                       <h2>Free!</h2>
-                       <img src="@/assets/img/landing/free.jpg" alt="Free dArray Icon" width="60">
+										<li class="nav-dots">
+											<label for="img-6" class="nav-dot" id="img-dot-6"></label>
+											<label for="img-7" class="nav-dot" id="img-dot-7"></label>
+										</li>
+									</ul>
+								 </div>
+								 <div class="f-text">
+									 <div class="left-content">
+										 <h2 class="mt-0">Your Business Swiss Knife.</h2>
+										 <p> All the features for your productivity: Dashboard, Calendar, Tasks, Pomodoro (WIP), ToDO lists, Organize Files & much more to come!</p>
+										 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
+									 </div>
+								 </div>
+						 </div>
+					 </div>
+				 </div>
 
-                       <span>$0.00</span>
-                          <ul>
-                            <li>All the features*</li>
-                            <li>Create & store invoices</li>
-                            <li>Save documents</li>
-                          </ul>
-                          <p style='font-size:10px;color:#555;width:72%margin:0px auto;'>*: In the future we could develop<br />new premium features.</p>
-                         <button class="btn-action" @click='signIn'>Sign In</button>
-                      </div>
-                    </div>                    
-                  </div>
-                  <div class="col-lg-5 col-md-6">
-                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
-                      <table class='text-center' style='width:100%;'>
-                        <tr><th>Patreon</th></tr>
-                        <tr>
-                          <td class='text-center pt-2'>
-                            <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank' rel="noopener">
-                              <img src='@/assets/img/Patreon+Button.jpg' style='width:210px;margin:0px auto;opacity:0.8;' />
-                            </a>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
-                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
-                      <table class='text-center' style='width:100%;'>
-                        <tr><th>Buy Me a Coffee</th></tr>
-                        <tr>
-                          <td class='text-center pt-2'>
-                            <a href='https://www.buymeacoffee.com/mpSEk0R' rel="noopener" target='_blank'><img src='@/assets/img/landing/Button_orange.jpg' alt='Buy me a coffee' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
-                    <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
-                      <table class='text-center' style='width:100%;'>
-                        <tr><th>Twitter</th></tr>
-                        <tr>
-                          <td class='pt-3'>
-                            <a href="https://twitter.com/darray_dapp?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#1d253b;'>Follow <strong>@darray_dapp</strong></a> - <a href="https://twitter.com/jp_aulet?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#1d253b;'>Follow <strong>@jp_aulet</strong></a>
-                          </td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- dArray Pricing Ends -->
+				 <div class="yd-ft wow fadeIn py-5" style="visibility: visible; animation-name: fadeIn;">
+					 <div class="yd-ft-inner py-5">
+						 <div class="yd-ft-left" style='margin-top:-20px;'>
+							 <h2>Welcome to dArray, where privacy matters.</h2>
+							 <p>A free & private alternative to Zoho, QuickBooks and Freshbooks.</p>
+							 <a href="#landing" class="btn-action btn-edge">Get Started</a>
+						 </div>
+						 <div class="yd-ft-right">
+							 <img src="@/assets/img/landing/test.png" alt="Get started">
+						 </div>
+					 </div>
+				 </div>
 
-        <!-- CTA Signup Section -->
-        <div id="signup" class="cta-sm wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-          <div class="container text-center">
-            <div class="cta-content">
-               <h4>DARRAY IS A FULL-FEATURED PRIVATE ONLINE ACCOUNTING SOFTWARE</h4>
-               <h1 class='mb-2'>Start now and put your business<br /> on the Blockchain for free.</h1>
-               <a class="btn-action js-scroll-trigger btn btn-primary btn-lg" href="#" @click.prevent='signIn'>Sign In now</a>
-              <div class="form-note">
-                <p>It's Free. Sign in now with Blockstack to get access to your decentralized CRM.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+				<!-- VIDEO DEMO -->
+				<div class="ar-ft-single" id='video-demo'>
+					<div class="container">
+						<div class="ar-feature mt-5 mb-1">
+							<div class="ar-list">
+								<ul>
+									<li>
+										<div class="ar-text">
+											<h3 class='text-left pb-3'>Demo</h3>
+											<p>Check the video to see a live demo of <span style='color:#344675;'>dArray</span>.</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="ar-image">
+								<video controls poster="@/assets/img/landing/video_preview.jpg" width='90%' height='100%' style='border-radius:42px;padding:20px;'>
+									<source src="@/assets/img/landing/darray.mp4" type="video/mp4">
+									Your browser does not support the video tag.
+								</video>
+							</div>
+						</div>
+					</div>
+				</div>
 
-        <!-- dArray Footer Section -->
-        <div class="footer-sm">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3">
-                <a class="footer-logo" href="#">
-                  <img src='@/assets/img/darray.jpg' style="width:20px;margin-right:10px;" alt='dArray logo' />dArray.
-                </a>
-              </div>
-              <div class="col-md-6 text-center">
-                <h6>© J.P.Aulet 2019 Rights Reserved</h6>
-              </div>
-              <div class="col-md-3">
-                <ul>
-                  <li><a href="https://twitter.com/jpaulet">@jpaulet</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+				<!-- dArray Pricing Section -->
+				<div id="pricing" class="pricing-section text-center">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="pricing-intro wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+									<h1>Support.</h1>
+									<p style='max-width:800px;margin:0px auto;'>
+										<span style='color:#344675;'>dArray</span> is free, but you could support it & myself <span style='color:#aaa;'>a solo-maker</span> in various ways:<br />Thank you in advance <span style='color:#344675;'>❤️</span>.
+									</p>
+								</div>
+								<div class="row">
+									<div class="col-lg-5 offset-lg-1 col-md-6">
+									 <div class="table-left wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+										 <div class="pricing-details">
+											 <h2>Free!</h2>
+											 <img src="@/assets/img/landing/free.jpg" alt="Free dArray Icon" width="60">
 
-       <!-- Scroll To Top -->
-        <div id="back-top" class="bk-top" style="display: none;">
-          <div class="bk-top-txt">
-             <a class="back-to-top js-scroll-trigger" href="#main">top</a>
-          </div>
-        </div>
-       <!-- Scroll To Top Ends-->
+											 <span>$0.00</span>
+													<ul>
+														<li>All the features*</li>
+														<li>Create & store invoices</li>
+														<li>Save documents</li>
+													</ul>
+													<p style='font-size:10px;color:#555;width:72%margin:0px auto;'>*: In the future we could develop<br />new premium features.</p>
+												 <button class="btn-action" @click='signIn'>Sign In</button>
+											</div>
+										</div>                    
+									</div>
+									<div class="col-lg-5 col-md-6">
+										<div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
+											<table class='text-center' style='width:100%;'>
+												<tr><th>Patreon</th></tr>
+												<tr>
+													<td class='text-center pt-2'>
+														<a href="https://www.patreon.com/bePatron?u=11297370" target='_blank' rel="noopener">
+															<img src='@/assets/img/Patreon+Button.jpg' style='width:210px;margin:0px auto;opacity:0.8;' />
+														</a>
+													</td>
+												</tr>
+											</table>
+										</div>
+										<div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
+											<table class='text-center' style='width:100%;'>
+												<tr><th>Buy Me a Coffee</th></tr>
+												<tr>
+													<td class='text-center pt-2'>
+														<a href='https://www.buymeacoffee.com/mpSEk0R' rel="noopener" target='_blank'><img src='@/assets/img/landing/Button_orange.jpg' alt='Buy me a coffee' style='width:210px;margin:0px auto;opacity:0.8;border-radius:25px;'/></a>
+													</td>
+												</tr>
+											</table>
+										</div>
+										<div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
+											<table class='text-center' style='width:100%;'>
+												<tr><th>Twitter</th></tr>
+												<tr>
+													<td class='pt-3'>
+														<a href="https://twitter.com/darray_dapp?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#fff;background-color:rgb(29, 161, 242);border-radius:25px;padding:10px 20px;font-weight:600;'>Follow <strong>@darray_dapp</strong></a> 
+														<br /> <br /> <br />
+														<a href="https://twitter.com/jp_aulet?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#fff;background-color:rgb(29, 161, 242);border-radius:25px;padding:10px 20px;font-weight:600;'>Follow <strong>@jp_aulet</strong></a>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- dArray Pricing Ends -->
 
-       <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=176110&theme=dark" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 250px; height: 54px; bottom: 5px; left: -10px; position: fixed;transform:scale(0.75);opacity:0.9;" width="250px" height="54px" /></a>
+				<!-- CTA Signup Section -->
+				<div id="signup" class="cta-sm wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+					<div class="container text-center">
+						<div class="cta-content">
+							 <h4>DARRAY IS A FULL-FEATURED PRIVATE ONLINE ACCOUNTING SOFTWARE</h4>
+							 <h1 class='mb-2'>Start now and put your business<br /> on the Blockchain for free.</h1>
+							 <a class="btn-action js-scroll-trigger btn btn-primary btn-lg" href="#" @click.prevent='signIn'>Sign In now</a>
+							<div class="form-note">
+								<p>It's Free. Sign in now with Blockstack to get access to your decentralized CRM.</p>
+							</div>
+						</div>
+					</div>
+				</div>
 
-      </div> <!-- Main -->
-    </div><!-- Wrapper -->
-  </div>
+				<!-- dArray Footer Section -->
+				<div class="footer-sm">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-2">
+								<a class="footer-logo" href="#">
+									<img src='@/assets/img/darray.jpg' style="width:20px;margin-right:10px;" alt='dArray logo' />dArray.
+								</a>
+							</div>
+							<div class="col-md-6 text-center">
+								<h6>© J.P.Aulet 2020 Rights Reserved</h6>
+							</div>
+							<div class="col-md-4">
+								<ul>
+									<li><a @click.prevent='showTerms = true'>Terms & Conditions</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			 <!-- Scroll To Top -->
+				<div id="back-top" class="bk-top" style="display: none;">
+					<div class="bk-top-txt">
+						 <a class="back-to-top js-scroll-trigger" href="#main">top</a>
+					</div>
+				</div>
+			 <!-- Scroll To Top Ends-->
+
+			 <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=176110&theme=dark" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 250px; height: 54px; bottom: 5px; left: -10px; position: fixed;transform:scale(0.85);opacity:0.9;" width="250px" height="54px" /></a>
+
+			</div> <!-- Main -->
+		</div><!-- Wrapper -->
+	</div>
+
+	<div v-else-if='showTerms'>
+		<div @click='showTerms = false' style='cursor:pointer;font-size:35px !important;position:fixed;right:10px;top:10px;color:#888;'>x</div>
+		<Terms />
+	</div>
+
 </template>
 
 <script>
+import Terms from '@/components/Terms'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap'
 import { userSession } from '../userSession'
 export default {
-  name: 'signin',
-  methods: {
-    signIn () {
-      userSession.redirectToSignIn()
-    }
+	name: 'signin',
+	components: {
+    Terms
   },
-  data () {
-    return {
-      rotatingText: ['Decentralized','Private','Secure','Blockchain','Free'],
-      i: 0,
-      //publicPath: 'http://localhost:8080' || process.env.BASE_URL
-      publicPath: ''
-    }
-  },
-  computed: {
-    rotateText: function(){
-      setTimeout(() => {
-        this.i++
-        if(this.i>=this.rotatingText.length){
-          this.i = 0
-        }
-      },10000,this.i)
-      return this.rotatingText[this.i]
-    }
-  },
-  mounted () {
-    let plugins = document.createElement('script')
-    plugins.setAttribute('src', this.publicPath + '/landing/plugins.js')
-    document.head.appendChild(plugins)
+	methods: {
+		signIn () {
+			userSession.redirectToSignIn()
+		}
+	},
+	data () {
+		return {
+			rotatingText: ['Decentralized','Private','Secure','Blockchain','Free'],
+			i: 0,
+			publicPath: '',
+			showTerms: false
+		}
+	},
+	computed: {
+		rotateText: function(){
+			setTimeout(() => {
+				this.i++
+				if(this.i>=this.rotatingText.length){
+					this.i = 0
+				}
+			},10000,this.i)
+			return this.rotatingText[this.i]
+		}
+	},
+	mounted () {
+		let plugins = document.createElement('script')
+		plugins.setAttribute('src', this.publicPath + '/landing/plugins.js')
+		document.head.appendChild(plugins)
 
-    let custom = document.createElement('script')
-    custom.setAttribute('src', this.publicPath + '/landing/custom.js')
-    document.head.appendChild(custom)
-  }
+		let custom = document.createElement('script')
+		custom.setAttribute('src', this.publicPath + '/landing/custom.js')
+		document.head.appendChild(custom)
+	}
 }
 </script>
 
 <style scoped>
-  /* cyrillic-ext */
+
+html{
+	position: inherit;
+}
+
+@media only screen and (max-device-width: 480px) {
+	html {
+		position: absolute !important;
+	}
+}
+
+	/* cyrillic-ext */
 @font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gTD_u50.woff2) format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gTD_u50.woff2) format('woff2');
+	unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 /* cyrillic */
 @font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3g3D_u50.woff2) format('woff2');
-  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3g3D_u50.woff2) format('woff2');
+	unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 /* vietnamese */
 @font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gbD_u50.woff2) format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gbD_u50.woff2) format('woff2');
+	unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
 }
 /* latin-ext */
 @font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gfD_u50.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gfD_u50.woff2) format('woff2');
+	unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 /* latin */
 @font-face {
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gnD_g.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Montserrat Light'), local('Montserrat-Light'), url(https://fonts.gstatic.com/s/montserrat/v14/JTURjIg1_i6t8kCHKm45_cJD3gnD_g.woff2) format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 .owl-carousel,.owl-carousel .owl-item{-webkit-tap-highlight-color:transparent;position:relative}.owl-carousel{display:none;width:100%;z-index:1}.owl-carousel .owl-stage{position:relative;-ms-touch-action:pan-Y;touch-action:manipulation;-moz-backface-visibility:hidden}.owl-carousel .owl-stage:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0}.owl-carousel .owl-stage-outer{position:relative;overflow:hidden;-webkit-transform:translate3d(0,0,0)}.owl-carousel .owl-item,.owl-carousel .owl-wrapper{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0)}.owl-carousel .owl-item{min-height:1px;float:left;-webkit-backface-visibility:hidden;-webkit-touch-callout:none}.owl-carousel .owl-item img{display:block;width:100%}.owl-carousel .owl-dots.disabled,.owl-carousel .owl-nav.disabled{display:none}.no-js .owl-carousel,.owl-carousel.owl-loaded{display:block}.owl-carousel .owl-dot,.owl-carousel .owl-nav .owl-next,.owl-carousel .owl-nav .owl-prev{cursor:pointer;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.owl-carousel .owl-nav button.owl-next,.owl-carousel .owl-nav button.owl-prev,.owl-carousel button.owl-dot{background:0 0;color:inherit;border:none;padding:0!important;font:inherit}.owl-carousel.owl-loading{opacity:0;display:block}.owl-carousel.owl-hidden{opacity:0}.owl-carousel.owl-refresh .owl-item{visibility:hidden}.owl-carousel.owl-drag .owl-item{-ms-touch-action:none;touch-action:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.owl-carousel.owl-grab{cursor:move;cursor:grab}.owl-carousel.owl-rtl{direction:rtl}.owl-carousel.owl-rtl .owl-item{float:right}.owl-carousel .animated{animation-duration:1s;animation-fill-mode:both}.owl-carousel .owl-animated-in{z-index:0}.owl-carousel .owl-animated-out{z-index:1}.owl-carousel .fadeOut{animation-name:fadeOut}@keyframes fadeOut{0%{opacity:1}100%{opacity:0}}.owl-height{transition:height .5s ease-in-out}.owl-carousel .owl-item .owl-lazy{opacity:0;transition:opacity .4s ease}.owl-carousel .owl-item img.owl-lazy{transform-style:preserve-3d}.owl-carousel .owl-video-wrapper{position:relative;height:100%;background:#000}.owl-carousel .owl-video-play-icon{position:absolute;height:80px;width:80px;left:50%;top:50%;margin-left:-40px;margin-top:-40px;cursor:pointer;z-index:1;-webkit-backface-visibility:hidden;transition:transform .1s ease}.owl-carousel .owl-video-play-icon:hover{-ms-transform:scale(1.3,1.3);transform:scale(1.3,1.3)}.owl-carousel .owl-video-playing .owl-video-play-icon,.owl-carousel .owl-video-playing .owl-video-tn{display:none}.owl-carousel .owl-video-tn{opacity:0;height:100%;background-position:center center;background-repeat:no-repeat;background-size:contain;transition:opacity .4s ease}.owl-carousel .owl-video-frame{position:relative;z-index:1;height:100%;width:100%}
@@ -578,722 +630,722 @@ export default {
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-  display: block;
+	display: block;
 }
 body {
-  background-color: #fff !important;
-  background: #fff !important;
-  line-height: 1;
+	background-color: #fff !important;
+	background: #fff !important;
+	line-height: 1;
 }
 ol, ul {
-  list-style: none;
+	list-style: none;
 }
 blockquote, q {
-  quotes: none;
+	quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-  content: '';
-  content: none;
+	content: '';
+	content: none;
 }
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 /* --- Common Styles ---*/
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat';
-  font-size: 16px;
+	font-family: 'Montserrat';
+	font-size: 16px;
 }
 
 p {
-  font-family: 'Montserrat';
-  font-size: 14px;
+	font-family: 'Montserrat';
+	font-size: 14px;
 }
 
 /*----- Helper Classes -----*/
 html * {
-  text-rendering: optimizeLegibility !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 *, *:after, *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 #loading {
-   width: 100%;
-   height: 100%;
-   top: 0px;
-   left: 0px;
-   position: fixed;
-   opacity: 1;
-   background-color: #F2F2F2;
-   z-index: 9999;
-   text-align: center;
+	 width: 100%;
+	 height: 100%;
+	 top: 0px;
+	 left: 0px;
+	 position: fixed;
+	 opacity: 1;
+	 background-color: #F2F2F2;
+	 z-index: 9999;
+	 text-align: center;
 }
 
 #loading-image {
-  display: inline;
-  top: 40%;
-  position: relative;
-  z-index: 9999;
+	display: inline;
+	top: 40%;
+	position: relative;
+	z-index: 9999;
 }
 
 .container-m {
-  max-width: 1024px;
-  margin: 0 auto !important;
-  padding-left: 20px;
-  padding-right: 20px;
-  position: relative;
+	max-width: 1024px;
+	margin: 0 auto !important;
+	padding-left: 20px;
+	padding-right: 20px;
+	position: relative;
 }
 
 .container-s {
-  max-width: 920px;
-  margin: 0 auto !important;
-  padding-left: 20px;
-  padding-right: 20px;
-  position: relative;
+	max-width: 920px;
+	margin: 0 auto !important;
+	padding-left: 20px;
+	padding-right: 20px;
+	position: relative;
 }
 
 /*------ Navbar Styling ------*/
 .navbar {
-  font-family: "Montserrat";
-  padding-top: 25px;
-  padding-bottom: 25px;
-  background-color: transparent !important;
-  -webkit-transition: 0.5s all ease;
-  transition: 0.5s all ease;
+	font-family: "Montserrat";
+	padding-top: 25px;
+	padding-bottom: 25px;
+	background-color: transparent !important;
+	-webkit-transition: 0.5s all ease;
+	transition: 0.5s all ease;
 }
 
 .navbar .navbar-brand {
-  font-family: 'Montserrat';
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0;
-  color: #344675 !important;
-  vertical-align: middle;
+	font-family: 'Montserrat';
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing: 0;
+	color: #344675 !important;
+	vertical-align: middle;
 }
 
 .navbar .navbar-brand img {
-  vertical-align: middle;
-  margin-right: 0.3em;
+	vertical-align: middle;
+	margin-right: 0.3em;
 }
 
 .navbar .navbar-toggler {
-  border: none;
+	border: none;
 }
 
 .navbar span.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
 
 .navbar span.navbar-toggler-icon::before {
-  outline: none;
+	outline: none;
 }
 
 .navbar .navbar-toggler:focus {
-  outline: none;
+	outline: none;
 }
 
 .navbar-nav {
-  text-align: center;
-  margin-top: 15px;
-  background: #FFF;
-  -webkit-transition: 0.5s all ease; /* For Safari 3.1 to 6.0 */
-  transition: 0.5s all ease;
+	text-align: center;
+	margin-top: 15px;
+	background: #FFF;
+	-webkit-transition: 0.5s all ease; /* For Safari 3.1 to 6.0 */
+	transition: 0.5s all ease;
 }
 
 .navbar-nav .nav-item {
-  margin-right: 0;
-  margin-top: 1.5rem;
-  font-size: 0.85rem;
-  font-weight: 400;
-  text-transform: capitalize;
-  color: #563D7C;
+	margin-right: 0;
+	margin-top: 1.5rem;
+	font-size: 0.85rem;
+	font-weight: 400;
+	text-transform: capitalize;
+	color: #563D7C;
 }
 
 .navbar-nav .nav-item .nav-link {
-  color: #364655;
-  font-weight: 500;
+	color: #364655;
+	font-weight: 500;
 }
 
 .nav-white .nav-item .nav-link {
-  font-size: 0.92rem;
-  text-transform: capitalize;
-  color: #FFFFFF;
+	font-size: 0.92rem;
+	text-transform: capitalize;
+	color: #FFFFFF;
 }
 
 .nav-white .nav-item .nav-link:hover {
-  color: #00eaff;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+	color: #00eaff;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
 }
 
 .nav-white .navbar-brand {
-  color: #FFFFFF;
+	color: #FFFFFF;
 }
 
 @media only screen and (max-width: 768px) {
-  .navbar {
-    /*background: rgba(255, 255, 255, 0.99) !important;*/
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
+	.navbar {
+		/*background: rgba(255, 255, 255, 0.99) !important;*/
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
 
-  .navbar .navbar-nav {
-    padding-bottom: 25px;
-  }
+	.navbar .navbar-nav {
+		padding-bottom: 25px;
+	}
 
-  .nav-white .nav-item .nav-link {
-    color: #4957B8;
-  }
+	.nav-white .nav-item .nav-link {
+		color: #4957B8;
+	}
 
-  .navbar .btn-cta {
-    padding: 0 30px;
-  }
+	.navbar .btn-cta {
+		padding: 0 30px;
+	}
 }
 
 @media only screen and (min-width: 240px) {
-  .navbar.past-main {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    background-color: rgba(255, 255, 255, 0.99) !important;
-    -webkit-box-shadow: 0 2px 3px 0 rgba(96, 96, 96, 0.1);
-    -moz-box-shadow: 0 2px 3px 0 rgba(96, 96, 96, 0.1);
-    box-shadow: 0 2px 3px 0 rgba(96, 96, 96, 0.1);
-  }
+	.navbar.past-main {
+		padding-top: 15px;
+		padding-bottom: 15px;
+		background-color: rgba(255, 255, 255, 0.99) !important;
+		-webkit-box-shadow: 0 2px 3px 0 rgba(96, 96, 96, 0.1);
+		-moz-box-shadow: 0 2px 3px 0 rgba(96, 96, 96, 0.1);
+		box-shadow: 0 2px 3px 0 rgba(96, 96, 96, 0.1);
+	}
 
-  .navbar.effect-main {
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-  }
+	.navbar.effect-main {
+		-webkit-transition: all 0.3s;
+		transition: all 0.3s;
+	}
 
-  .navbar.past-main .navbar-brand {
-    color: #344675 !important;
-  }
+	.navbar.past-main .navbar-brand {
+		color: #344675 !important;
+	}
 
-  .nav-white.past-main .nav-item .nav-link {
-    color: #364655;
-    font-weight:500;
-  }
+	.nav-white.past-main .nav-item .nav-link {
+		color: #364655;
+		font-weight:500;
+	}
 
-  .navbar.past-main .nav-item .nav-link {
-    font-weight: 500;
-  }
+	.navbar.past-main .nav-item .nav-link {
+		font-weight: 500;
+	}
 
-  .nav-white.past-main .navbar-brand {
-    color: #364655;
-  }
+	.nav-white.past-main .navbar-brand {
+		color: #364655;
+	}
 
-  .navbar.past-main span.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
-  }
+	.navbar.past-main span.navbar-toggler-icon {
+		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+	}
 
-  .nav-white.effect-main {
-    -webkit-transition: all 0.3s;
-    transition: all 0.3s;
-  }
+	.nav-white.effect-main {
+		-webkit-transition: all 0.3s;
+		transition: all 0.3s;
+	}
 }
 
 /*------------- Hero Home Styling Starts ----------------*/
 .home {
-  padding: 100px 0 50px 0;
+	padding: 100px 0 50px 0;
 }
 
 .home .intro-block {
-  padding: 50px 0 50px 0;
-  max-width: 800px;
-  margin: 0 auto;
+	padding: 50px 0 50px 0;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 .centered {
-  float: none !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+	float: none !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
 }
 
 .home .hero-img img {
-  max-width: 720px !important;
-  width: 100%;
-  margin: 20px 0;
+	max-width: 720px !important;
+	width: 100%;
+	margin: 20px 0;
 }
 
 .home h1 {
-  font-size: 3rem;
-  font-weight: 300;
-  color: #364655;
-  line-height: 1.2;
-  letter-spacing: 0;
+	font-size: 3rem;
+	font-weight: 300;
+	color: #364655;
+	line-height: 1.2;
+	letter-spacing: 0;
 }
 
 .home p {
-  font-size: 1.3rem;
-  font-weight: 300;
-  color: rgb(129, 129, 152);
-  max-width: 830px;
-  margin: 0 auto;
-  letter-spacing: 0;
-  line-height: 1.6;
-  margin-top: 15px;
-  margin-bottom: 15px;
+	font-size: 1.3rem;
+	font-weight: 300;
+	color: rgb(129, 129, 152);
+	max-width: 830px;
+	margin: 0 auto;
+	letter-spacing: 0;
+	line-height: 1.6;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  .home h1 {
-    font-size: 1.5rem;
-  }
+	.home h1 {
+		font-size: 1.5rem;
+	}
 
-  .home p {
-    font-size: 0.8rem;
-  }
+	.home p {
+		font-size: 0.8rem;
+	}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  .home h1 {
-    font-size: 2rem;
-  }
+	.home h1 {
+		font-size: 2rem;
+	}
 
-  .home p {
-    font-size: 1rem;
-  }
+	.home p {
+		font-size: 1rem;
+	}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .home h1 {
-    font-size: 2rem;
-  }
+	.home h1 {
+		font-size: 2rem;
+	}
 
-  .home p {
-    font-size: 1rem;
-  }
+	.home p {
+		font-size: 1rem;
+	}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .home h1 {
-    font-size: 2.5rem;
-  }
+	.home h1 {
+		font-size: 2.5rem;
+	}
 
-  .home p {
-    font-size: 1.3rem;
-  }
+	.home p {
+		font-size: 1.3rem;
+	}
 }
 
 .btn-action {
-  font-family: 'Montserrat';
-  display: inline-block;
-  height: 38px;
-  padding: 0 30px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 36px;
-  letter-spacing: 2px;
-  margin: 25px 0;
-  text-transform: uppercase;
-  text-decoration: none !important;
-  white-space: nowrap;
-  cursor: pointer;
-  background-color: #387ed1;
-  background: #344675;
-  color: #FFFFFF;
-  border: 1px solid transparent !important;
-  border-radius: 4px;
-  box-sizing: border-box;
-  -webkit-transition: 0.2s;
-  -moz-transition: 0.2s;
-  transition: 0.2s;
+	font-family: 'Montserrat';
+	display: inline-block;
+	height: 38px;
+	padding: 0 30px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 36px;
+	letter-spacing: 2px;
+	margin: 25px 0;
+	text-transform: uppercase;
+	text-decoration: none !important;
+	white-space: nowrap;
+	cursor: pointer;
+	background-color: #387ed1;
+	background: #344675;
+	color: #FFFFFF;
+	border: 1px solid transparent !important;
+	border-radius: 4px;
+	box-sizing: border-box;
+	-webkit-transition: 0.2s;
+	-moz-transition: 0.2s;
+	transition: 0.2s;
 }
 
 .btn-action:hover {
-  color: #FFFFFF;
-  box-shadow: 0 5px 25px 0 rgba(0, 0, 100,.2);
-  border: 1px solid transparent !important;
-  outline: none !important;
-  text-decoration: none;
+	color: #FFFFFF;
+	box-shadow: 0 5px 25px 0 rgba(0, 0, 100,.2);
+	border: 1px solid transparent !important;
+	outline: none !important;
+	text-decoration: none;
 }
 
 .btn-action:focus, .btn-action:active {
-  background: #344675;
-  color: #FFFFFF;
-  border: 1px solid transparent !important;
-  outline: none !important;
+	background: #344675;
+	color: #FFFFFF;
+	border: 1px solid transparent !important;
+	outline: none !important;
 }
 
 .home .client-list {
-  margin-top: 25px;
+	margin-top: 25px;
 }
 
 .home .client-list ul {
-  list-style-type: none;
+	list-style-type: none;
 }
 
 .home .client-list ul li {
-  display: inline;
-  margin: 0 20px;
+	display: inline;
+	margin: 0 20px;
 }
 
 .home .client-list ul li img {
-  width: 100px;
-  opacity: 0.6;
-  cursor: pointer;
+	width: 100px;
+	opacity: 0.6;
+	cursor: pointer;
 }
 
 .home .client-list ul li img:hover {
-  opacity: 0.9;
+	opacity: 0.9;
 }
 
 .btn-cta {
-  font-family: 'Montserrat';
-  display: inline-block;
-  height: 30px;
-  padding: 0 30px;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 28px;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  text-decoration: none !important;
-  white-space: nowrap;
-  cursor: pointer;
-  background-color: #387ed1;
-  background: #344675;
-  color: #FFFFFF !important;
-  border: 1px solid transparent !important;
-  border-radius: 4px;
-  box-sizing: border-box;
-  -webkit-transition: 0.2s;
-  -moz-transition: 0.2s;
-  transition: 0.2s;
+	font-family: 'Montserrat';
+	display: inline-block;
+	height: 30px;
+	padding: 0 30px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 28px;
+	letter-spacing: 1px;
+	text-transform: capitalize;
+	text-decoration: none !important;
+	white-space: nowrap;
+	cursor: pointer;
+	background-color: #387ed1;
+	background: #344675;
+	color: #FFFFFF !important;
+	border: 1px solid transparent !important;
+	border-radius: 4px;
+	box-sizing: border-box;
+	-webkit-transition: 0.2s;
+	-moz-transition: 0.2s;
+	transition: 0.2s;
 }
 
 .btn-cta:hover {
-  color: #FFFFFF;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0,.1);
-  border: 1px solid transparent !important;
-  outline: none;
-  text-decoration: none;
+	color: #FFFFFF;
+	box-shadow: 0 5px 20px 0 rgba(0, 0, 0,.1);
+	border: 1px solid transparent !important;
+	outline: none;
+	text-decoration: none;
 }
 
 .btn-cta:focus, .btn-cta:active {
-  background: #344675;
-  color: #FFFFFF;
-  border: 1px solid transparent !important;
-  outline: none !important;
+	background: #344675;
+	color: #FFFFFF;
+	border: 1px solid transparent !important;
+	outline: none !important;
 }
 
 /*----------- Hero Version 2 Styling ------------*/
 .hero-2 {
-  text-align: center;
+	text-align: center;
 }
 
 .hero-2 .hero-content {
-    padding: 50px 0;
+		padding: 50px 0;
 }
 
 .hero-2 .hero-img {
-  border-radius: 24px;
+	border-radius: 24px;
 }
 
 .hero-2 .hero-img img {
-  border-radius: 10px;
-  box-shadow: 0px 0px 60px 0px rgba(0,0,0,.1);
+	border-radius: 10px;
+	box-shadow: 0px 0px 60px 0px rgba(0,0,0,.1);
 }
 
 .hero-2 .form-alt {
-  position: relative;
-  margin-top: 25px;
+	position: relative;
+	margin-top: 25px;
 }
 
 .hero-2 .chimp-form .mail {
-  position: relative;
-  background-color: #F9F9F9;
-  box-shadow: none;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  transition: all .3s;
+	position: relative;
+	background-color: #F9F9F9;
+	box-shadow: none;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	transition: all .3s;
 }
 
 .hero-2 .form-alt input {
-  color: #222222;
-  font-family: 'Montserrat';
-  padding: 0;
-  font-size: 13px;
-  font-weight: 500;
-  height: 45px;
-  border: 0;
-  border-radius: 4px;
-  background-color: #F3F3F3;
-  outline: none;
-  padding: 0 100px 0 20px;
-  box-shadow: 0 5px 30px rgba(255, 255, 255, 0.1);
+	color: #222222;
+	font-family: 'Montserrat';
+	padding: 0;
+	font-size: 13px;
+	font-weight: 500;
+	height: 45px;
+	border: 0;
+	border-radius: 4px;
+	background-color: #F3F3F3;
+	outline: none;
+	padding: 0 100px 0 20px;
+	box-shadow: 0 5px 30px rgba(255, 255, 255, 0.1);
 }
 
 .hero-2 .form-alt input:focus {
-  outline: none !important;
-  border-color: transparent;
+	outline: none !important;
+	border-color: transparent;
 }
 
 .hero-2 .form-alt .submit-button {
-  height: 45px;
-  border: 0;
-  border-radius: 0 4px 4px 0;
-  margin-left: -25px;
-  padding: 0 25px 0 25px;
-  background: #344675;
-  font-family: 'Montserrat';
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: capitalize;
-  letter-spacing: 0;
-  color: #FFFFFF;
-  cursor: pointer;
-  outline: none;
-  box-shadow: 0 5px 30px rgba(255, 255, 255, 0.05);
-  -webkit-transition: 500ms;
-  -moz-transition: 500ms;
-  transition: 500ms;
+	height: 45px;
+	border: 0;
+	border-radius: 0 4px 4px 0;
+	margin-left: -25px;
+	padding: 0 25px 0 25px;
+	background: #344675;
+	font-family: 'Montserrat';
+	font-size: 14px;
+	font-weight: 500;
+	text-transform: capitalize;
+	letter-spacing: 0;
+	color: #FFFFFF;
+	cursor: pointer;
+	outline: none;
+	box-shadow: 0 5px 30px rgba(255, 255, 255, 0.05);
+	-webkit-transition: 500ms;
+	-moz-transition: 500ms;
+	transition: 500ms;
 }
 
 .hero-2 #email-error {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -50%;
-  font-family: 'Montserrat';
-  font-size: 13px;
-  font-weight: 500;
-  color: #FF3333;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -50%;
+	font-family: 'Montserrat';
+	font-size: 13px;
+	font-weight: 500;
+	color: #FF3333;
 }
 
 .hero-2 #response {
-  position: absolute;
-  left: 0;
-  bottom: -45%;
-  vertical-align: middle;
-  font-family: 'Montserrat';
-  font-size: 13px !important;
-  font-weight: 500;
-  color: #15ccbe;
+	position: absolute;
+	left: 0;
+	bottom: -45%;
+	vertical-align: middle;
+	font-family: 'Montserrat';
+	font-size: 13px !important;
+	font-weight: 500;
+	color: #15ccbe;
 }
 
 .hero-2 #chimp-email-error {
-  position: absolute;
-  left: 0;
-  bottom: -45%;
-  vertical-align: middle;
-  font-family: 'Montserrat';
-  font-size: 13px;
-  font-weight: 500;
-  color: red;
+	position: absolute;
+	left: 0;
+	bottom: -45%;
+	vertical-align: middle;
+	font-family: 'Montserrat';
+	font-size: 13px;
+	font-weight: 500;
+	color: red;
 }
 
 .hero-2 .success-message {
-  color:#33cc33;
-  margin-top: 5px;
+	color:#33cc33;
+	margin-top: 5px;
 }
 
 .hero-2 .form-note p {
-  font-size: 12px;
+	font-size: 12px;
 }
 
 /*----------- Flex Features ------------*/
 .flex-split {
-  padding: 100px 0;
+	padding: 100px 0;
 }
 
 .flex-intro {
-  margin-bottom: 50px;
-  text-align: center;
+	margin-bottom: 50px;
+	text-align: center;
 }
 
 .flex-intro h2 {
-  font-size: 28px;
-  font-weight: 600;
-  color: #3a3a47;
-  line-height: 1.3;
-  margin-bottom: 10px;
+	font-size: 28px;
+	font-weight: 600;
+	color: #3a3a47;
+	line-height: 1.3;
+	margin-bottom: 10px;
 }
 
 .flex-intro p {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: 0.01em;
-  color: #818198;
-  max-width: 630px;
-  margin: 0 auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.6;
+	letter-spacing: 0.01em;
+	color: #818198;
+	max-width: 630px;
+	margin: 0 auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .flex-inner {
-  margin: 50px 0;
+	margin: 50px 0;
 }
 
 .flex-inner .f-image {
-  padding: 0 0px 40px 0px;
+	padding: 0 0px 40px 0px;
 }
 
 .flex-inner .f-text {
-  padding: 0 35px;
-  min-height:250px;
+	padding: 0 35px;
+	min-height:250px;
 }
 
  .flex-inner .f-text {
-  -webkit-box-flex:1;
-  -ms-flex:1;
-  flex:1;
-  text-align: center;
+	-webkit-box-flex:1;
+	-ms-flex:1;
+	flex:1;
+	text-align: center;
 }
 
 .flex-inner .f-text h2 {
-  font-size: 24px;
-  font-weight: 600;
-  color: #3a3a47;
-  line-height: 1.3;
-  margin-top: 20px;
+	font-size: 24px;
+	font-weight: 600;
+	color: #3a3a47;
+	line-height: 1.3;
+	margin-top: 20px;
 }
 
 .flex-inner .f-text  p {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: 0.01em;
-  color: #818198;
-  margin-top: 15px;
-  margin-bottom: 15px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.6;
+	letter-spacing: 0.01em;
+	color: #818198;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .flex-inner .f-text .left-content a {
-  font-family: "Montserrat";
-  font-size: 14px;
-  font-weight: bold;
-  color: #8798ab;
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
+	font-family: "Montserrat";
+	font-size: 14px;
+	font-weight: bold;
+	color: #8798ab;
+	position: relative;
+	display: inline-block;
+	text-decoration: none;
 }
 
 .flex-inner .f-text .left-content a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -20%;
-  height: 1px;
-  width: 50px;
-  background: #8798ab;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -20%;
+	height: 1px;
+	width: 50px;
+	background: #8798ab;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
 }
 
 .flex-inner .f-text .left-content a:hover::after {
-  width: 75px;
+	width: 75px;
 }
 
 .flex-inner .f-text .left-content a:hover {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .flex-inner.flex-inverted .f-image {
-  -webkit-box-ordinal-group:2;
-  -ms-flex-order:1;
-  order:1
+	-webkit-box-ordinal-group:2;
+	-ms-flex-order:1;
+	order:1
 }
 
 /*--------- Features Section Styles ----------*/
 .features {
-  background: #f6f6fd;
+	background: #f6f6fd;
 }
 
 .features-intro {
-  margin-bottom: 50px;
+	margin-bottom: 50px;
 }
 
 .features-intro h2 {
-  font-size: 28px;
-  font-weight: 600;
-  color: #3a3a47;
-  line-height: 1.3;
-  margin-bottom: 10px;
+	font-size: 28px;
+	font-weight: 600;
+	color: #3a3a47;
+	line-height: 1.3;
+	margin-bottom: 10px;
 }
 
 .features-intro p {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: 0.01em;
-  color: #818198;
-  max-width: 630px;
-  margin: 0 auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.6;
+	letter-spacing: 0.01em;
+	color: #818198;
+	max-width: 630px;
+	margin: 0 auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .feature-list {
-  margin: 30px 10px;
+	margin: 30px 10px;
 }
 
 .card-icon {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  margin: 0 auto;
-  background: rgba(30, 166, 154, 0.08);
-  background: #ece7fe;
-  display: table;
-  text-align: center;
+	width: 65px;
+	height: 65px;
+	border-radius: 50%;
+	margin: 0 auto;
+	background: rgba(30, 166, 154, 0.08);
+	background: #ece7fe;
+	display: table;
+	text-align: center;
 }
 
 .card-img {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
 }
 
 .card-img img {
-  vertical-align: middle;
+	vertical-align: middle;
 }
 
 .card-text {
-  margin-top: 25px;
+	margin-top: 25px;
 }
 
 .card-text h3 {
-  font-size: 21px;
-  font-weight: 500;
-  color: #364655;
-  margin-bottom: 15px;
+	font-size: 21px;
+	font-weight: 500;
+	color: #364655;
+	margin-bottom: 15px;
 }
 
 .card-text p {
-  font-size: 15px;
-  font-weight: 500;
-  color: rgb(129, 129, 152);
-  line-height: 1.6;
-  max-width: 320px;
-  margin: 0 auto;
+	font-size: 15px;
+	font-weight: 500;
+	color: rgb(129, 129, 152);
+	line-height: 1.6;
+	max-width: 320px;
+	margin: 0 auto;
 }
 
 /*------- Stat Section Styling -------*/
 .yd-stats {
-  padding: 100px 0;
-  background: #344675;
+	padding: 100px 0;
+	background: #344675;
 }
 
 .yd-stats .intro {
@@ -1301,1010 +1353,1002 @@ body {
 }
 
 .yd-stats .intro h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #3a3a47;
-  color: #FFFFFF;
-  line-height: 1.3;
-  margin-bottom: 10px;
+	font-size: 28px;
+	font-weight: 700;
+	color: #3a3a47;
+	color: #FFFFFF;
+	line-height: 1.3;
+	margin-bottom: 10px;
 }
 
 .yd-stats .intro p {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: 0.01em;
-  color: #818198;
-  color: #FFFFFF;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.6;
+	letter-spacing: 0.01em;
+	color: #818198;
+	color: #FFFFFF;
 
-  max-width: 630px;
-  margin: 0 auto;
-  margin-top: 15px;
-  margin-bottom: 15px;
+	max-width: 630px;
+	margin: 0 auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .yd-stats .counter-up {
-  margin-top: 50px;
+	margin-top: 50px;
 }
 
 .counter-icon {
-  padding: 15px;
+	padding: 15px;
 }
 
 .counter-icon img {
-  width: 60px;
-  height: 60px;
+	width: 60px;
+	height: 60px;
 }
 
 .counter-text {
-  margin: 10px 0;
+	margin: 10px 0;
 }
 
 .counter-up h3 {
-  font-size: 42px;
-  font-weight: 700;
-  color: #344675;
-  color: #FFFFFF;
+	font-size: 42px;
+	font-weight: 700;
+	color: #344675;
+	color: #FFFFFF;
 }
 
 .counter-text h2 {
-  font-size: 14px;
-  font-weight: 500;
-  padding: 0.5em;
-  color: #364655;
-  color: #FFFFFF;
+	font-size: 14px;
+	font-weight: 500;
+	padding: 0.5em;
+	color: #364655;
+	color: #FFFFFF;
 
 }
 
 .yd-link {
-  text-align: center;
-  margin: 25px 0;
+	text-align: center;
+	margin: 25px 0;
 }
 
 .yd-link a {
-  font-family: 'Montserrat';
-  font-size: 15px;
-  font-weight: 500;
-  color: #344675;
-  color: #FFFFFF;
-  text-decoration: none;
-  border-bottom: 1px solid #fff;
+	font-family: 'Montserrat';
+	font-size: 15px;
+	font-weight: 500;
+	color: #344675;
+	color: #FFFFFF;
+	text-decoration: none;
+	border-bottom: 1px solid #fff;
 }
 
 .yd-ft {
-  padding: 75px 0;
-  background: #E8F3EC;
-  background: #344675;
+	padding: 75px 0;
+	background: #E8F3EC;
+	background: #344675;
 }
 
 .yd-ft .yd-ft-inner {
-  display: block;
-  background: #E8F3EC;
-  background: #344675;
-  max-width: 1024px;
-  margin: 0 auto;
+	display: block;
+	background: #E8F3EC;
+	background: #344675;
+	max-width: 1024px;
+	margin: 0 auto;
 }
 
 .yd-ft .yd-ft-inner .yd-ft-left {
-  padding: 40px;
+	padding: 40px;
 }
 
 .yd-ft .yd-ft-inner .yd-ft-left h2 {
-  font-size: 32px;
-  font-weight: 400;
-  color: #FFFFFF;
-  /*color: #364655;*/
-  line-height: 1.2;
-  letter-spacing: 0;
-  margin-bottom: 10px;
+	font-size: 32px;
+	font-weight: 400;
+	color: #FFFFFF;
+	/*color: #364655;*/
+	line-height: 1.2;
+	letter-spacing: 0;
+	margin-bottom: 10px;
 }
 
 .yd-ft .yd-ft-inner .yd-ft-left p {
-  font-size: 16px;
-  font-weight: 500;
-  color: #818198;
-  color: #FFF;
-  line-height: 1.6;
-  margin-bottom: 0;
+	font-size: 16px;
+	font-weight: 500;
+	color: #818198;
+	color: #FFF;
+	line-height: 1.6;
+	margin-bottom: 0;
 }
 
 .yd-ft .yd-ft-inner .yd-ft-left .btn-action {
-  background: #FFF;
-  color: #344675;
-  letter-spacing: 1px;
-  text-transform: capitalize;
+	background: #FFF;
+	color: #344675;
+	letter-spacing: 1px;
+	text-transform: capitalize;
 }
 
 .yd-ft .yd-ft-inner .yd-ft-right {
-  text-align: center;
+	text-align: center;
 }
 
 .yd-ft .yd-ft-inner .yd-ft-right img {
-  max-width: 90%;
-  margin: 0 auto;
+	max-width: 90%;
+	margin: 0 auto;
 }
 
 /*------------ Ar Feature Item Styling -----------*/
 .ar-ft-single .container-m {
-  margin: 100px 0;
+	margin: 100px 0;
 }
 
 .ar-feature {
-  text-align: center;
-  display: block;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  overflow: hidden;
+	text-align: center;
+	display: block;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	overflow: hidden;
 }
 
 .ar-feature .ar-list {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 0 20%;
-  flex: 1 0 20%;
-  text-align: left;
+	-webkit-box-flex: 1;
+	-ms-flex: 1 0 20%;
+	flex: 1 0 20%;
+	text-align: left;
 }
 
 .ar-feature .ar-image {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 0 80%;
-  flex: 1 0 80%;
-  margin-left: 0;
+	-webkit-box-flex: 1;
+	-ms-flex: 1 0 80%;
+	flex: 1 0 80%;
+	margin-left: 0;
 }
 
 .ar-list ul {
-  list-style-type: none;
-  overflow: hidden;
-  margin-top: 0;
+	list-style-type: none;
+	overflow: hidden;
+	margin-top: 0;
 }
 
 .ar-list ul li {
-  margin-bottom: 30px;
-  overflow: hidden;
+	margin-bottom: 30px;
+	overflow: hidden;
 }
 
 .ar-feature .ar-icon {
-  float: left;
-  width: 15%;
+	float: left;
+	width: 15%;
 }
 
 .ar-feature .ar-icon img {
-  margin-top: 0;
-  vertical-align: middle;
+	margin-top: 0;
+	vertical-align: middle;
 }
 
 .ar-feature .ar-text {
-  float: right;
-  width: 85%;
+	float: right;
+	width: 85%;
 }
 
 .ar-feature .ar-text h3 {
-  font-size: 18px;
-  color: #364655;
-  font-weight: 500;
-  line-height: 1.2;
-  margin-bottom: 10px;
+	font-size: 18px;
+	color: #364655;
+	font-weight: 500;
+	line-height: 1.2;
+	margin-bottom: 10px;
 }
 
 .ar-feature .ar-text p {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.6;
-  color: #97a6b5;
+	font-size: 15px;
+	font-weight: 500;
+	line-height: 1.6;
+	color: #97a6b5;
 }
 
 /* ----- Pricing Tables Styling Starts ----- */
 .pricing-section {
-  width: 100%;
-  height: 100%;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  background: #FFFFFF;
+	width: 100%;
+	height: 100%;
+	padding-top: 100px;
+	padding-bottom: 100px;
+	background: #FFFFFF;
 }
 
 .pricing-intro {
-  padding-bottom: 30px;
+	padding-bottom: 30px;
 }
 
 .pricing-intro h1 {
-  font-size: 32px;
-  color: #364655;
-  font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: 20px;
+	font-size: 32px;
+	color: #364655;
+	font-weight: 600;
+	line-height: 1.4;
+	margin-bottom: 20px;
 }
 
 .pricing-intro p {
-  font-size: 16px;
-  color: #97a6b5;
-  font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: 0;
-  margin-top: 10px;
-  margin-bottom: 50px;
+	font-size: 16px;
+	color: #97a6b5;
+	font-weight: 500;
+	line-height: 1.6;
+	letter-spacing: 0;
+	margin-top: 10px;
+	margin-bottom: 50px;
 }
 
 .pricing-details {
-  padding: 50px 0 0 0;
+	padding: 50px 0 0 0;
 }
 
 .pricing-section .table-left, .pricing-section .table-right {
-  padding: 20px 20px 50px 20px;
-  margin: 0 auto;
-  margin-bottom: 30px;
-  background-color: #FFFFFF;
-  box-shadow: 0px 0px 60px 0px rgba(0,0,0,.1);
-  border: transparent;
-  border-radius: 10px;
-  max-width: 400px;
+	padding: 20px 20px 50px 20px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+	background-color: #FFFFFF;
+	box-shadow: 0px 0px 60px 0px rgba(0,0,0,.1);
+	border: transparent;
+	border-radius: 10px;
+	max-width: 400px;
 }
 
 .table-left .icon, .table-right .icon {
-  padding: 50px 50px 40px 50px;
+	padding: 50px 50px 40px 50px;
 }
 
 .table-left .icon img, .table-right .icon img {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto;
+	width: 60px;
+	height: 60px;
+	margin: 0 auto;
 }
 
 .table-left .pricing-details span, .table-right .pricing-details span {
-  display: block;
-  font-family: 'Montserrat';
-  font-size: 32px;
-  font-weight: 600;
-  color: #364655;
-  opacity: 0.7;
-  margin: 20px 0;
+	display: block;
+	font-family: 'Montserrat';
+	font-size: 32px;
+	font-weight: 600;
+	color: #364655;
+	opacity: 0.7;
+	margin: 20px 0;
 }
 
 .table-left .pricing-details h2, .table-right .pricing-details h2 {
-  font-size: 21px;
-  font-weight: 600;
-  color: #344675;
-  margin-bottom: 30px;
+	font-size: 21px;
+	font-weight: 600;
+	color: #344675;
+	margin-bottom: 30px;
 }
 
 .table-left .pricing-details p, .table-right .pricing-details p {
-  font-size: 16px;
-  font-weight: 500;
-  color: #364655;
-  line-height: 1.4;
+	font-size: 16px;
+	font-weight: 500;
+	color: #364655;
+	line-height: 1.4;
 }
 
 .table-left .pricing-details ul, .table-right .pricing-details ul {
-  margin-top: 30px;
-  margin-bottom: 50px;
-  padding: 0;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	padding: 0;
 }
 
 .table-left .pricing-details li, .table-right .pricing-details li {
-  font-family: 'Montserrat';
-  font-size: 16px;
-  font-weight: 500;
-  color: #97a6b5;
-  line-height: 1.4;
-  letter-spacing: 0;
-  margin-bottom: 10px;
+	font-family: 'Montserrat';
+	font-size: 16px;
+	font-weight: 500;
+	color: #97a6b5;
+	line-height: 1.4;
+	letter-spacing: 0;
+	margin-bottom: 10px;
 }
 
 .pricing-section .table-left:hover, .pricing-section .table-right:hover {
-  box-shadow: 0 0 80px 0 rgba(0, 0, 0, 0.1);
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
+	box-shadow: 0 0 80px 0 rgba(0, 0, 0, 0.1);
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-o-transition: 0.3s;
+	transition: 0.3s;
 }
 
 .pricing-section .table-left, .pricing-section .table-right {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 .pricing-section .table-center {
-  margin-top: 0;
+	margin-top: 0;
 }
 
 /*------------------------------------------------
 ---------- Ar Review Section Styling -------------
 ------------------------------------------------*/
-  .ar-reviews {
-    padding: 5%;
-    /* background: url(../images/bg.jpg) no-repeat center center;*/
-    background: #f6f6fd;
-  }
+	.ar-reviews {
+		padding: 5%;
+		/* background: url(../images/bg.jpg) no-repeat center center;*/
+		background: #f6f6fd;
+	}
 
-  .ar-reviews .ar-box {
-    background: #344675;
-    display: block;
-    padding: 50px;
-  }
+	.ar-reviews .ar-box {
+		background: #344675;
+		display: block;
+		padding: 50px;
+	}
 
-  .ar-box .ar-right {
-    margin-top: 50px;
-  }
+	.ar-box .ar-right {
+		margin-top: 50px;
+	}
 
-  .ar-box .ar-left h2 {
-    font-size: 24px;
-    font-weight: 600;
-    color: #FFF;
-    line-height: 1.6;
-  }
+	.ar-box .ar-left h2 {
+		font-size: 24px;
+		font-weight: 600;
+		color: #FFF;
+		line-height: 1.6;
+	}
 
-  .ar-box .ar-right p {
-    font-size: 14px;
-    font-weight: 400;
-    color: #FFF;
-    line-height: 1.7rem;
-    text-align: left;
-    margin-bottom: 1.5rem;
-  }
+	.ar-box .ar-right p {
+		font-size: 14px;
+		font-weight: 400;
+		color: #FFF;
+		line-height: 1.7rem;
+		text-align: left;
+		margin-bottom: 1.5rem;
+	}
 
-  .ar-box .ar-left .btn-action {
-    background: #FFF;
-    color: #344675;
-    letter-spacing: 1px;
-    text-transform: capitalize;
-  }
+	.ar-box .ar-left .btn-action {
+		background: #FFF;
+		color: #344675;
+		letter-spacing: 1px;
+		text-transform: capitalize;
+	}
 
 /*----------------------------------------------
 ------------ Review Section Styling ------------
 ----------------------------------------------*/
 .yd-reviews {
-  padding: 100px 0 100px 0;
-  background: #FFFFFF;
-  background: rgba(30, 166, 154, 0.08);
-  background: #f6f6fd;
-  background-size: cover;
+	padding: 100px 0 100px 0;
+	background: #FFFFFF;
+	background: rgba(30, 166, 154, 0.08);
+	background: #f6f6fd;
+	background-size: cover;
 }
 
 .yd-reviews .intro {
-  padding: 0;
-  max-width: 600px;
-  margin: 0 auto;
-  margin-bottom: 75px;
+	padding: 0;
+	max-width: 600px;
+	margin: 0 auto;
+	margin-bottom: 75px;
 }
 
 .yd-reviews .intro h1 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #364655;
-  line-height: 1.2;
-  margin-bottom: 20px;
+	font-size: 28px;
+	font-weight: 700;
+	color: #364655;
+	line-height: 1.2;
+	margin-bottom: 20px;
 }
 
 .yd-reviews .intro p {
-  font-size: 16px;
-  font-weight: 500;
-  color: rgb(129, 129, 152);
-  line-height: 1.6;
-  margin: 0px auto;
+	font-size: 16px;
+	font-weight: 500;
+	color: rgb(129, 129, 152);
+	line-height: 1.6;
+	margin: 0px auto;
 }
 
 .yd-reviews .intro p:nth-child(4) {
-  font-size: 13px;
+	font-size: 13px;
 }
 
 .yd-reviews .intro a {
-  color: #0000FF;
-  text-decoration: none;
+	color: #0000FF;
+	text-decoration: none;
 }
 
 .yd-reviews .card-single {
-    display: block;
+		display: block;
 }
 
 .yd-reviews .card-single .review-text {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 0 50%;
-  flex: 1 0 50%;
-  background: #344675;
-  padding: 60px;
-  text-align: left;
+	-webkit-box-flex: 1;
+	-ms-flex: 1 0 50%;
+	flex: 1 0 50%;
+	background: #344675;
+	padding: 60px;
+	text-align: left;
 }
 
 .yd-reviews .card-single .review-attribution {
-  -webkit-box-flex: 1;
-  -ms-flex: 1 0 50%;
-  flex: 1 0 50%;
-  padding: 60px;
-  background: #FFFFFF;
+	-webkit-box-flex: 1;
+	-ms-flex: 1 0 50%;
+	flex: 1 0 50%;
+	padding: 60px;
+	background: #FFFFFF;
 }
 
 .yd-reviews .card-single h1 {
-  font-size: 18px;
-  font-weight: 500;
-  color: #FFF;
-  line-height: 1.5;
-  letter-spacing: 0;
-  margin-bottom: 0;
+	font-size: 18px;
+	font-weight: 500;
+	color: #FFF;
+	line-height: 1.5;
+	letter-spacing: 0;
+	margin-bottom: 0;
 }
 
 .yd-reviews .card-single .review-attribution i {
-  font-size: 13px;
-  color: #ffd700;
+	font-size: 13px;
+	color: #ffd700;
 }
 
 .yd-reviews .card-single .review-attribution h2 {
-  font-size: 15px;
-  font-weight: 600;
-  color: #556577;
-  line-height: 1.4;
-  margin-top: 5px;
+	font-size: 15px;
+	font-weight: 600;
+	color: #556577;
+	line-height: 1.4;
+	margin-top: 5px;
 }
 
 .yd-reviews .card-single .review-attribution h6 {
-  font-size: 12px;
-  font-weight: 500;
-  color: #97a6b5;
-  line-height: 1.4;
+	font-size: 12px;
+	font-weight: 500;
+	color: #97a6b5;
+	line-height: 1.4;
 }
 
 .yd-reviews .card-single .review-attribution a {
-  font-family: 'Montserrat';
-  font-size: 12px;
-  font-weight: 500;
-  color: #344675;
-  position: relative;
-  display: inline-block;
-  text-decoration: none;
+	font-family: 'Montserrat';
+	font-size: 12px;
+	font-weight: 500;
+	color: #344675;
+	position: relative;
+	display: inline-block;
+	text-decoration: none;
 }
 
 .yd-reviews .card-single .review-attribution a:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: -3px;
-  left: 0;
-  background-color: #344675;
-  visibility: hidden;
-  -webkit-transform: scaleX(0);
-  transform: scaleX(0);
-  -webkit-transition: all 0.2s ease-in-out 0s;
-  transition: all 0.2s ease-in-out 0s;
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	bottom: -3px;
+	left: 0;
+	background-color: #344675;
+	visibility: hidden;
+	-webkit-transform: scaleX(0);
+	transform: scaleX(0);
+	-webkit-transition: all 0.2s ease-in-out 0s;
+	transition: all 0.2s ease-in-out 0s;
 }
 
 .yd-reviews .card-single .review-attribution a:hover:before {
-  visibility: visible;
-  -webkit-transform: scaleX(1);
-  transform: scaleX(1);
+	visibility: visible;
+	-webkit-transform: scaleX(1);
+	transform: scaleX(1);
 }
 
 .yd-reviews .card-single .review-attribution .review-img {
-  text-align: center;
-  margin-bottom: 20px;
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 .yd-reviews .card-single .review-attribution img {
-  height: 80px;
-  width: 80px;
-  margin: 0 auto;
+	height: 80px;
+	width: 80px;
+	margin: 0 auto;
 }
 
 /*-------------------------------------------------------
 -------------- Subscription Form Styling ----------------
 -------------------------------------------------------*/
 .cta-sm {
-  background: rgba(30, 166, 154, 0.1);
-  background: #f8faff;
-  background: #f6f6fd;
+	background: rgba(30, 166, 154, 0.1);
+	background: #f8faff;
+	background: #f6f6fd;
 }
 
 .cta-sm .container-m{
-  margin-top:100px;
-  margin-bottom:100px;
+	margin-top:100px;
+	margin-bottom:100px;
 }
 
 .cta-sm .cta-content {
-  max-width: 768px;
-  margin: 0 auto;
+	max-width: 768px;
+	margin: 0 auto;
 }
 
 .cta-sm h1 {
-  font-size: 28px;
-  font-weight: 600;
-  color: #364655;
-  line-height: 1.6;
+	font-size: 28px;
+	font-weight: 600;
+	color: #364655;
+	line-height: 1.6;
 }
 
 .cta-sm h4 {
-  font-size: 13px;
-  font-weight: 400;
-  color: #aeaeae;
-  letter-spacing: 1px;
-  margin-bottom: 0;
+	font-size: 13px;
+	font-weight: 400;
+	color: #aeaeae;
+	letter-spacing: 1px;
+	margin-bottom: 0;
 }
 
 .form {
-  position: relative;
-  max-width: 420px;
-  margin: 0 auto;
-  margin-top: 30px;
+	position: relative;
+	max-width: 420px;
+	margin: 0 auto;
+	margin-top: 30px;
 }
 
 .chimp-form .mail {
-  position: relative;
-  background-color: #FFFFFF;
-  box-shadow: none;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  transition: all .3s;
+	position: relative;
+	background-color: #FFFFFF;
+	box-shadow: none;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	transition: all .3s;
 }
 
 .form input {
-  display: block;
-  width: 100%;
-  margin: 0 auto;
-  color: #344675;
-  font-family: 'Montserrat';
-  padding: 0;
-  font-size: 13px;
-  font-weight: 500;
-  height: 50px;
-  border: 1px solid #344675;
-  border-radius: 4px;
-  background-color: #FFFFFF;
-  outline: none;
-  padding: 0 100px 0 20px;
-  box-shadow: 0 5px 30px rgba(255, 255, 255, 0.1);
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	color: #344675;
+	font-family: 'Montserrat';
+	padding: 0;
+	font-size: 13px;
+	font-weight: 500;
+	height: 50px;
+	border: 1px solid #344675;
+	border-radius: 4px;
+	background-color: #FFFFFF;
+	outline: none;
+	padding: 0 100px 0 20px;
+	box-shadow: 0 5px 30px rgba(255, 255, 255, 0.1);
 }
 
 .form input:focus {
-  outline: none !important;
-  background: #FFFFFF;
-  border: 1px solid #344675;
+	outline: none !important;
+	background: #FFFFFF;
+	border: 1px solid #344675;
 }
 
 .form .submit-button {
-  height: 50px;
-  width: 100%;
-  border: 0;
-  border-radius: 4px;
-  margin: 0 auto;
-  margin: 15px 0;
-  padding: 0 25px 0 25px;
-  background: #344675;
-  font-family: 'Montserrat';
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: capitalize;
-  letter-spacing: 0;
-  color: #FFFFFF;
-  cursor: pointer;
-  outline: none;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 100,.2);
-  -webkit-transition: 300ms;
-  -moz-transition: 300ms;
-  transition: 300ms;
+	height: 50px;
+	width: 100%;
+	border: 0;
+	border-radius: 4px;
+	margin: 0 auto;
+	margin: 15px 0;
+	padding: 0 25px 0 25px;
+	background: #344675;
+	font-family: 'Montserrat';
+	font-size: 14px;
+	font-weight: 500;
+	text-transform: capitalize;
+	letter-spacing: 0;
+	color: #FFFFFF;
+	cursor: pointer;
+	outline: none;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 100,.2);
+	-webkit-transition: 300ms;
+	-moz-transition: 300ms;
+	transition: 300ms;
 }
 
 .form .submit-button:hover {
-  box-shadow: 0 5px 25px 0 rgba(0, 0, 100,.2);
+	box-shadow: 0 5px 25px 0 rgba(0, 0, 100,.2);
 }
 
 .form .submit-button:focus, .form .submit-button:active {
-  background: #344675;
+	background: #344675;
 }
 
 #email-error {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -50%;
-  font-family: 'Montserrat';
-  font-size: 13px;
-  font-weight: 500;
-  color: #FF3333;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -50%;
+	font-family: 'Montserrat';
+	font-size: 13px;
+	font-weight: 500;
+	color: #FF3333;
 }
 
 #response {
-  position: absolute;
-  left: 0;
-  bottom: -45%;
-  vertical-align: middle;
-  font-family: 'Montserrat';
-  font-size: 13px !important;
-  font-weight: 500;
-  color: #15ccbe;
+	position: absolute;
+	left: 0;
+	bottom: -45%;
+	vertical-align: middle;
+	font-family: 'Montserrat';
+	font-size: 13px !important;
+	font-weight: 500;
+	color: #15ccbe;
 }
 
 #chimp-email-error {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -45%;
-  vertical-align: middle;
-  font-family: 'Montserrat';
-  font-size: 13px;
-  font-weight: 500;
-  color: red;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -45%;
+	vertical-align: middle;
+	font-family: 'Montserrat';
+	font-size: 13px;
+	font-weight: 500;
+	color: red;
 }
 
 .success-message {
-  color:#33cc33;
-  margin-top: 5px;
+	color:#33cc33;
+	margin-top: 5px;
 }
 
 .form-note p {
-  font-size: 12px;
-  font-weight: 500;
-  color: #97a6b5
+	font-size: 12px;
+	font-weight: 500;
+	color: #97a6b5
 }
 
 /*------------------ Footer Small Styling Starts -------------*/
 .footer-sm {
-  padding: 30px 0;
-  background: rgba(30, 166, 154, 0.1);
-  background: #f6f6fd;
-  text-align: center;
+	padding: 30px 0;
+	background: rgba(30, 166, 154, 0.1);
+	background: #f6f6fd;
+	text-align: center;
 }
 
 .footer-sm .col-md-4:nth-child(even) {
-  text-align: center;
+	text-align: center;
 }
 
 .footer-sm .footer-logo {
-  font-family: 'Montserrat';
-  font-size: 18px;
-  font-weight: 600;
-  color: #344675;
-  letter-spacing: 0;
-  display: block;
-  margin-bottom: 15px;
-  text-decoration: none;
+	font-family: 'Montserrat';
+	font-size: 18px;
+	font-weight: 600;
+	color: #344675;
+	letter-spacing: 0;
+	display: block;
+	margin-bottom: 15px;
+	text-decoration: none;
 }
 
 .footer-sm h6 {
-  font-size: 13px;
-  font-weight: 500;
-  color: #97a6b5;
-  letter-spacing: 0;
-  display: inline-block;
+	font-size: 13px;
+	font-weight: 500;
+	color: #97a6b5;
+	letter-spacing: 0;
+	display: inline-block;
 }
 
 .footer-sm ul {
-  list-style-type: none;
-  text-align: center;
-  margin-top: 10px;
+	list-style-type: none;
+	text-align: center;
+	margin-top: 10px;
 }
 
 .footer-sm ul li {
-  font-family: "Montserrat";
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0;
-  display: inline-block;
-  margin-left: 6px;
-  margin-right: 6px;
+	font-family: "Montserrat";
+	font-size: 13px;
+	font-weight: 400;
+	letter-spacing: 0;
+	display: inline-block;
+	margin-left: 6px;
+	margin-right: 6px;
 }
 
 .footer-sm ul li a {
-  font-size: 13px;
-  font-weight: 500;
-  position: relative;
-  display: inline-block;
-  color: #97a6b5;
-  text-decoration: none;
+	font-size: 13px;
+	font-weight: 500;
+	position: relative;
+	display: inline-block;
+	color: #97a6b5;
+	text-decoration: none;
 }
 
 .footer-sm ul li a:before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: -3px;
-  left: 0;
-  background-color: #344675;
-  visibility: hidden;
-  -webkit-transform: scaleX(0);
-  transform: scaleX(0);
-  -webkit-transition: all 0.2s ease-in-out 0s;
-  transition: all 0.2s ease-in-out 0s;
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	bottom: -3px;
+	left: 0;
+	background-color: #344675;
+	visibility: hidden;
+	-webkit-transform: scaleX(0);
+	transform: scaleX(0);
+	-webkit-transition: all 0.2s ease-in-out 0s;
+	transition: all 0.2s ease-in-out 0s;
 }
 
 .footer-sm ul li a:hover:before {
-  visibility: visible;
-  -webkit-transform: scaleX(1);
-  transform: scaleX(1);
+	visibility: visible;
+	-webkit-transform: scaleX(1);
+	transform: scaleX(1);
 }
 
 .no-touch .footer-sm ul li a:hover {
-  text-decoration: none;
-  color: #000;
+	text-decoration: none;
+	color: #000;
 }
 
 /* -------- Bact-to-Top Styling Starts Here -------------*/
 .bk-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  border-radius: 3px;
-  z-index: 90;
-  display: none;
-  width: 45px;
-  height: 45px;
-  background: #344675;
-  color: #f2f2f0;
-  border-radius: 50%;
-  display: table;
-  box-shadow:0 5px 15px rgba(0, 0, 0, .1);
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	border-radius: 3px;
+	z-index: 90;
+	display: none;
+	width: 45px;
+	height: 45px;
+	background: #344675;
+	color: #f2f2f0;
+	border-radius: 50%;
+	display: table;
+	box-shadow:0 5px 15px rgba(0, 0, 0, .1);
 }
 
 .bk-top-txt {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
 }
 
 .back-to-top {
-  font-family: 'Montserrat';
-  font-size: 12px;
-  font-weight: 700;
-  color: #FFFFFF;
-  text-decoration: none;
-  -webkit-transition: 200ms;
-  -moz-transition: 200ms;
-  -o-transition: 200ms;
-  transition: 200ms;
+	font-family: 'Montserrat';
+	font-size: 12px;
+	font-weight: 700;
+	color: #FFFFFF;
+	text-decoration: none;
+	-webkit-transition: 200ms;
+	-moz-transition: 200ms;
+	-o-transition: 200ms;
+	transition: 200ms;
 }
 
 .back-to-top:hover {
-  color: #FFFFFF;
-  text-decoration: none;
-  font-size: 13px;
+	color: #FFFFFF;
+	text-decoration: none;
+	font-size: 13px;
 }
 
 .back-to-top:focus {
-  color: #FFFFFF;
+	color: #FFFFFF;
 }
 
 /*------------ Media Queries -------------*/
 @media only screen and (min-width: 767px) {
-  .navbar-nav {
-      margin-top: 0;
-    }
+	.navbar-nav {
+			margin-top: 0;
+		}
 
-  .navbar-nav .nav-item {
-    margin-top: 0;
-    margin-right: 15px;
-    font-size: 0.85rem;
-    font-weight: 400;
-  }
+	.navbar-nav .nav-item {
+		margin-top: 0;
+		margin-right: 15px;
+		font-size: 0.85rem;
+		font-weight: 400;
+	}
 
-  .container-s {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+	.container-s {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 
-  .flex-intro h2 {
-    font-size: 32px;
-  }
+	.flex-intro h2 {
+		font-size: 32px;
+	}
 
-  .flex-inner {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    margin: 75px 0;
-  }
+	.flex-inner {
+		position: relative;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+		margin: 75px 0;
+	}
 
-  .flex-inner .f-image {
-      -webkit-box-flex: 0;
-      -ms-flex: 0 0 650px;
-      flex: 0 0 650px;
-  }
+	.flex-inner .f-image {
+			-webkit-box-flex: 0;
+			-ms-flex: 0 0 650px;
+			flex: 0 0 650px;
+	}
 
-  .flex-inner .f-text h2 {
-    font-size: 24px;
-  }
+	.flex-inner .f-text h2 {
+		font-size: 24px;
+	}
 
-  .flex-inner .f-text  p {
-    font-size: 16px;
-    font-weight: 500;
-  }
+	.flex-inner .f-text  p {
+		font-size: 16px;
+		font-weight: 500;
+	}
 
-  .counter-up h3 {
-    font-size: 72px;
-  }
+	.counter-up h3 {
+		font-size: 72px;
+	}
 
-  .ar-feature {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
+	.ar-feature {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+	}
 
-  .ar-feature .ar-image {
-    margin-left: 25px;
-  }
+	.ar-feature .ar-image {
+		margin-left: 25px;
+	}
 
-  .ar-reviews .ar-box {
-    padding: 100px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
+	.ar-reviews .ar-box {
+		padding: 100px;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+	}
 
-  .ar-reviews .ar-box .ar-left {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 0 50%;
-    flex: 1 0 50%;
-  }
+	.ar-reviews .ar-box .ar-left {
+		-webkit-box-flex: 1;
+		-ms-flex: 1 0 50%;
+		flex: 1 0 50%;
+	}
 
-  .ar-reviews .ar-box .ar-right {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 0 50%;
-    flex: 1 0 50%;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    text-align: center;
-    margin-top: 0;
-  }
+	.ar-reviews .ar-box .ar-right {
+		-webkit-box-flex: 1;
+		-ms-flex: 1 0 50%;
+		flex: 1 0 50%;
+		-webkit-box-pack: end;
+		-ms-flex-pack: end;
+		justify-content: flex-end;
+		text-align: center;
+		margin-top: 0;
+	}
 
-  .ar-box .ar-left h2 {
-    font-size: 28px;
-  }
+	.ar-box .ar-left h2 {
+		font-size: 28px;
+	}
 
-  .ar-box .ar-right p {
-    font-size: 15px;
-  }
+	.ar-box .ar-right p {
+		font-size: 15px;
+	}
 
-  .yd-reviews .review-cards {
-    margin-bottom: 0;
-  }
+	.yd-reviews .review-cards {
+		margin-bottom: 0;
+	}
 
-  .yd-ft .yd-ft-inner {
-    padding: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
+	.yd-ft .yd-ft-inner {
+		padding: 0;
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		align-items: center;
+	}
 
-  .yd-ft .yd-ft-inner .yd-ft-left {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 0 50%;
-    flex: 1 0 50%;
-  }
+	.yd-ft .yd-ft-inner .yd-ft-left {
+		-webkit-box-flex: 1;
+		-ms-flex: 1 0 50%;
+		flex: 1 0 50%;
+	}
 
-  .yd-ft .yd-ft-inner .yd-ft-right {
-    -webkit-box-flex: 1;
-    -ms-flex: 1 0 50%;
-    flex: 1 0 50%;
-    -webkit-box-pack: end;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
-    text-align: center;
-  }
+	.yd-ft .yd-ft-inner .yd-ft-right {
+		-webkit-box-flex: 1;
+		-ms-flex: 1 0 50%;
+		flex: 1 0 50%;
+		-webkit-box-pack: end;
+		-ms-flex-pack: end;
+		justify-content: flex-end;
+		text-align: center;
+	}
 
-  .yd-reviews .card-single {
-   display: -webkit-box;
-   display: -ms-flexbox;
-   display: flex;
-   -webkit-box-align: center;
-   -ms-flex-align: center;
-   align-items: center;
-   background: #FFF;
-  }
+	.yd-reviews .card-single {
+	 display: -webkit-box;
+	 display: -ms-flexbox;
+	 display: flex;
+	 -webkit-box-align: center;
+	 -ms-flex-align: center;
+	 align-items: center;
+	 background: #FFF;
+	}
 
-  .form input {
-    padding: 0 50px 0 50px;
-  }
+	.form input {
+		padding: 0 50px 0 50px;
+	}
 
-  .footer-sm {
-    text-align: left;
-  }
+	.footer-sm {
+		text-align: left;
+	}
 
-  .footer-sm .footer-logo {
-   margin-bottom: 0;
-   font-size: 16px;
-   display: block;
-  }
+	.footer-sm .footer-logo {
+	 margin-bottom: 0;
+	 font-size: 16px;
+	 display: block;
+	}
 
-  .footer-sm ul {
-   list-style-type: none;
-   text-align: right;
-   margin-top: 0;
-  }
+	.footer-sm ul {
+	 list-style-type: none;
+	 text-align: right;
+	 margin-top: 0;
+	}
 }
 
 @media only screen and (min-width: 480px) {
-  .container-s {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
+	.container-s {
+		padding-left: 40px;
+		padding-right: 40px;
+	}
 
-  .flex-inner .f-text {
-    -webkit-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    text-align: left;
+	.flex-inner .f-text {
+		-webkit-box-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+		text-align: left;
  }
 }
 
 @media only screen and (min-width: 1024px) {
-  .hero-2 .form-alt input {
-    padding: 0 100px 0 50px;
-  }
+	.hero-2 .form-alt input {
+		padding: 0 100px 0 50px;
+	}
 }
 
 @media screen and (max-width: 420px) {
-  .hero-2 .form-alt input {
-      text-align: center;
-      padding: 20px 20px;
-  }
+	.hero-2 .form-alt input {
+			text-align: center;
+			padding: 20px 20px;
+	}
 
-  .hero-2 .form-alt .submit-button {
-    margin-left: 0;
-  }
+	.hero-2 .form-alt .submit-button {
+		margin-left: 0;
+	}
 }
 
 .navbar-nav{
-  background: transparent !important;
+	background: transparent !important;
 }
 
 #signup,#products,.ar-ft-single{
-  padding: 100px 0px !important;
+	padding: 100px 0px !important;
 }
 
 #reviews .container, #pricing .container {
-    width: 100% !important;
-    padding-right: 15px !important;
-    padding-left: 15px !important;
-    margin-right: auto !important;
-    margin-left: auto !important;
-}
-
-body{
-  background-color: #fff !important;
-}
-
-html,body{
-  max-width:100% !important;
+		width: 100% !important;
+		padding-right: 15px !important;
+		padding-left: 15px !important;
+		margin-right: auto !important;
+		margin-left: auto !important;
 }
 
 .btn-primary {
-  background-image: linear-gradient(to bottom left, #344675, #344675, #344675) !important;
+	background-image: linear-gradient(to bottom left, #344675, #344675, #344675) !important;
 }
 
 .Tweet-card{
-  display:none !important;
+	display:none !important;
 }
 
 .flex-inner{
-  min-height: 330px;
+	min-height: 330px;
 }
 
 /* SLIDES */
 .slides {
-  padding: 0;
-  width: 609px;
-  height: 420px;
-  display: block;
-  margin: 0 auto;
-  position: relative;
+	padding: 0;
+	width: 609px;
+	height: 420px;
+	display: block;
+	margin: 0 auto;
+	position: relative;
 }
 
 .slides * {
-  user-select: none;
-  -ms-user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
+	user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 }
 
 .slides input { display: none; }
@@ -2312,72 +2356,72 @@ html,body{
 .slide-container { display: block; }
 
 .slide {
-  top: 0;
-  opacity: 0;
-  width: 609px;
-  height: 420px;
-  display: block;
-  position: absolute;
-  /*transform: scale(0);*/
-  transition: all .7s ease-in-out;
+	top: 0;
+	opacity: 0;
+	width: 609px;
+	height: 420px;
+	display: block;
+	position: absolute;
+	/*transform: scale(0);*/
+	transition: all .7s ease-in-out;
 }
 
 .slide img {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .slide2 {
-  top: 0;
-  opacity: 0;
-  width: 609px;
-  height: 420px;
-  display: block;
-  position: absolute;
-  /*transform: scale(0);*/
-  transition: all .7s ease-in-out;
+	top: 0;
+	opacity: 0;
+	width: 609px;
+	height: 420px;
+	display: block;
+	position: absolute;
+	/*transform: scale(0);*/
+	transition: all .7s ease-in-out;
 }
 
 .slide2 img {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 
 .slide3 {
-  top: 0;
-  opacity: 0;
-  width: 609px;
-  height: 420px;
-  display: block;
-  position: absolute;
-  /*transform: scale(0);*/
-  transition: all .7s ease-in-out;
+	top: 0;
+	opacity: 0;
+	width: 609px;
+	height: 420px;
+	display: block;
+	position: absolute;
+	/*transform: scale(0);*/
+	transition: all .7s ease-in-out;
 }
 
 .slide3 img {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 .nav label {
-  width: 100px;
-  height: 100%;
-  display: none;
-  position: absolute;
+	width: 100px;
+	height: 100%;
+	display: none;
+	position: absolute;
 
-  opacity: 0;
-  z-index: 9;
-  cursor: pointer;
-  transition: opacity .2s;
+	opacity: 0;
+	z-index: 9;
+	cursor: pointer;
+	transition: opacity .2s;
 
-  color: #FFF;
-  font-size: 96pt;
-  text-align: center;
-  line-height: 380px;
-  font-family: "Varela Round", sans-serif;
-  background-color: rgba(255, 255, 255, .3);
-  text-shadow: 0px 0px 15px rgb(119, 119, 119);
+	color: #FFF;
+	font-size: 96pt;
+	text-align: center;
+	line-height: 380px;
+	font-family: "Varela Round", sans-serif;
+	background-color: rgba(255, 255, 255, .3);
+	text-shadow: 0px 0px 15px rgb(119, 119, 119);
 }
 
 .slide:hover + .nav label { opacity: 0.5; }
@@ -2387,48 +2431,48 @@ html,body{
 .nav .next { right: 0; }
 
 input:checked + .slide-container  .slide {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 1s ease-in-out;
+	opacity: 1;
+	transform: scale(1);
+	transition: opacity 1s ease-in-out;
 }
 
 input:checked + .slide-container  .slide2 {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 1s ease-in-out;
+	opacity: 1;
+	transform: scale(1);
+	transition: opacity 1s ease-in-out;
 }
 
 input:checked + .slide-container  .slide3 {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 1s ease-in-out;
+	opacity: 1;
+	transform: scale(1);
+	transition: opacity 1s ease-in-out;
 }
 
 input:checked + .slide-container .nav label { display: block; }
 
 .nav-dots {
-  width: 100%;
-  bottom: -25px;
-  height: 11px;
-  display: block;
-  position: absolute;
-  text-align: center;
+	width: 100%;
+	bottom: -25px;
+	height: 11px;
+	display: block;
+	position: absolute;
+	text-align: center;
 }
 
 .nav-dots .nav-dot {
-  top: -5px;
-  width: 8px;
-  height: 8px;
-  margin: 0 4px;
-  position: relative;
-  border-radius: 100%;
-  display: inline-block;
-  background-color: rgba(0, 0, 0, 0.6);
+	top: -5px;
+	width: 8px;
+	height: 8px;
+	margin: 0 4px;
+	position: relative;
+	border-radius: 100%;
+	display: inline-block;
+	background-color: rgba(0, 0, 0, 0.6);
 }
 
 .nav-dots .nav-dot:hover {
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.8);
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.8);
 }
 
 input#img-1:checked ~ .nav-dots label#img-dot-1,
@@ -2438,7 +2482,7 @@ input#img-4:checked ~ .nav-dots label#img-dot-4,
 input#img-5:checked ~ .nav-dots label#img-dot-5,
 input#img-6:checked ~ .nav-dots label#img-dot-6,
 input#img-7:checked ~ .nav-dots label#img-dot-7 {
-  background: rgba(0, 0, 0, 0.8);
+	background: rgba(0, 0, 0, 0.8);
 }
 
 .feature:hover{
