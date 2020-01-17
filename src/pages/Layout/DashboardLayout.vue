@@ -31,6 +31,12 @@
           <p>Customers</p>
         </template>
       </sidebar-link>
+      <sidebar-link to="/pomodoro">
+        <i class="tim-icons icon-time-alarm"></i>
+        <template>
+          <p>Pomodoro</p><span class='badge badge-light' style='font-size:6px;float:right;margin-top:-22px;opacity:0.6;'>new</span>
+        </template>
+      </sidebar-link>
       <sidebar-link to="/tasks">
         <i class="tim-icons icon-pin"></i>
         <template>

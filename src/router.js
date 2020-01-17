@@ -10,6 +10,7 @@ import TableList from '@/pages/TableList.vue'
 import Settings from '@/pages/Settings.vue'
 import Files from '@/pages/Files.vue'
 import Roadmap from '@/pages/Roadmap.vue'
+import Pomodoro from '@/pages/Pomodoro.vue'
 
 import BodyHero from '@/components/body/BodyHero.vue'
 import SelectedHero from '@/components/body/SelectedHero.vue'
@@ -78,6 +79,11 @@ const routes = [{
       path: '/roadmap',
       name: 'Roadmap',
       component: Roadmap
+    },
+    {
+      path: '/pomodoro',
+      name: 'Pomodoro',
+      component: Pomodoro
     }
   ]
 }]

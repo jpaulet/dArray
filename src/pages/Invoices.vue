@@ -150,7 +150,7 @@
 
                 <div class='row text-left mt-0'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:50px;'> Title </label>
-                    <input class='form-control ml-0' type='text' v-model='invoice.name' name='invoice' style='min-width: 90px;max-width:60%;' placeholder="Invoice #" />
+                    <input class='form-control ml-0' type='text' v-model='invoice.name' name='invoice' style='min-width: 90px;max-width:60%;' placeholder="*Invoice # (required)" required />
                 </div>
                 <div class='text-left mt-4'>
                     <h6 class='float-left' style='line-height:22px;vertical-align:middle;height:22px;'>
@@ -165,7 +165,7 @@
                         <a v-for='customer in customers' v-bind:key='customer.id' href="" class="dropdown-item" @click.prevent='selectCustomer(customer.id)'>{{customer.legal}}</a>
                       </ul>
                     </drop-down>
-                    <input type='text' class='form-control col-10 ml-1' v-model='invoice.client.legal' placeholder="Title" />
+                    <input type='text' class='form-control col-10 ml-1' v-model='invoice.client.legal' placeholder="*Title (required)" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.address' placeholder="Address" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.city' placeholder="City" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.country' placeholder="Country" />
@@ -1046,12 +1046,12 @@ export default {
     isFilled () {
       if (!this.invoice.name || !this.invoice.client.legal || this.total === 0) {
         this.$notify({
-          message: 'You should fill the invoice first',
+          message: 'You should fill the invoice first: Invoice Title, Customer Name & the total couldn\'t be 0',
           icon: 'tim-icons icon-bell-55',
           horizontalAlign: 'center',
           verticalAlign: 'bottom',
           type: 'danger',
-          timeout: 1500
+          timeout: 3000
         })
         return false
       }

@@ -140,7 +140,7 @@
 
                 <div class='row text-left'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'> Title </label>
-                    <input class='form-control ml-1 col-7' type='text' v-model='expense.title' name='expense' placeholder="Expense name" />
+                    <input class='form-control ml-1 col-7' type='text' v-model='expense.title' name='expense' placeholder="*Expense name (required)" required />
                 </div>
                 <div class='row text-left mt-2'>
                     <label class='ml-3' style='vertical-align:middle;line-height:40px;width:70px;'> Category </label>
@@ -956,7 +956,26 @@ export default {
       })
     },
 
+    isFilled () {
+      if (!this.expense.title || this.total === 0) {
+        this.$notify({
+          message: 'You should fill the expense first: Title & the total couldn\'t be 0',
+          icon: 'tim-icons icon-bell-55',
+          horizontalAlign: 'center',
+          verticalAlign: 'bottom',
+          type: 'danger',
+          timeout: 3000
+        })
+        return false
+      }
+      return true
+    },
+
     saveExpense () {
+      let canSave = this.isFilled()
+      if (!canSave) {
+        return false
+      }
       let isNew = false
       if (this.expense.id === null) {
         this.expense.id = uuid.v4()

@@ -322,29 +322,41 @@
 									<ul class="slides">
 										<input type="radio" name="radio-btn3" id="img-6" checked />
 										<li class="slide-container">
-										<div class="slide3">
-											<img src="@/assets/img/landing/features/dashboard.jpg" alt='Dashboard screenshot 1' />
-												</div>
-										<div class="nav">
-											<label for="img-7" class="prev">&#x2039;</label>
-											<label for="img-7" class="next">&#x203a;</label>
-										</div>
+											<div class="slide3">
+												<img src="@/assets/img/landing/features/dashboard.jpg" alt='Dashboard screenshot 1' />
+											</div>
+											<div class="nav">
+												<label for="img-8" class="prev">&#x2039;</label>
+												<label for="img-7" class="next">&#x203a;</label>
+											</div>
 										</li>
 
 										<input type="radio" name="radio-btn3" id="img-7" />
 										<li class="slide-container">
-												<div class="slide3">
-													<img src="@/assets/img/landing/features/settings.jpg" alt='Settings screenshot 1' />
-												</div>
-										<div class="nav">
-											<label for="img-6" class="prev">&#x2039;</label>
-											<label for="img-6" class="next">&#x203a;</label>
-										</div>
+											<div class="slide3">
+												<img src="@/assets/img/landing/features/settings.jpg" alt='Settings screenshot' />
+											</div>
+											<div class="nav">
+												<label for="img-6" class="prev">&#x2039;</label>
+												<label for="img-8" class="next">&#x203a;</label>
+											</div>
+										</li>
+
+										<input type="radio" name="radio-btn3" id="img-8" />
+										<li class="slide-container">
+											<div class="slide3">
+												<img src="@/assets/img/landing/features/pomodoro.jpg" alt='Pomodoro screenshot' />
+											</div>
+											<div class="nav">
+												<label for="img-7" class="prev">&#x2039;</label>
+												<label for="img-6" class="next">&#x203a;</label>
+											</div>
 										</li>
 
 										<li class="nav-dots">
 											<label for="img-6" class="nav-dot" id="img-dot-6"></label>
 											<label for="img-7" class="nav-dot" id="img-dot-7"></label>
+											<label for="img-8" class="nav-dot" id="img-dot-8"></label>
 										</li>
 									</ul>
 								 </div>

@@ -7,10 +7,15 @@
             <h5 class="title">Roadmap</h5>
           </template>
 
-          <div class="col-12 col-md-8 col-lg-6 mt-3" style='margin:0px auto;'>
+          <div class="col-12 col-md-8 col-lg-8 mt-3" style='margin:0px auto;'>
             <h6>Done</h6>
             <div class="col-12 pr-md-1 text-left">
               <ul>
+                <li style='line-height:22px;'><span class='badge badge-light'>12/01/20</span> - Added required fields for Invoices & Expenses.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>11/01/20</span> - Created <i>GitCoin</i> grant page: <a href='https://gitcoin.co/grants/321/darray' target='_blank'>Support Us!</a></li>
+                <li style='line-height:22px;'><span class='badge badge-light'>11/01/20</span> - 🎉🎉 Moved dArray to Open Source Software! 🎉🎉</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>07/01/20</span> - Pomodoro final touches (WIP).</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>03/01/20</span> - First Work with `Time Tracker`: Pomodoro (WIP).</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>31/12/19</span> - Improved mobile responive & solved bugs in mobile view.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>30/12/19</span> - Solved problems with tabs.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>28/12/19</span> - Added <i>`Cryptocurrencies`</i> page.</li>
@@ -30,12 +35,14 @@
             <h6 class='mt-5'>ToDo</h6>
             <div class="col-12 pr-md-1 text-left">
               <ul style='line-height:22px;'>
+                <li style='line-height:22px;'>Add <i>`Project Managment` page</i>.</li>
+                <li style='line-height:22px;'>Create <i>`Time Tracking: Pomodoro`</i>.</li>
                 <li style='line-height:22px;'>Create <i>`Reports Page`</i>.</li>
               </ul>
             </div>            
           </div>
 
-          <div class="col-12 col-md-8 col-lg-6 mt-5 text-center pt-5" style='margin:0px auto;'>
+          <div class="col-12 col-md-8 col-lg-8 mt-5 text-center pt-5" style='margin:0px auto;'>
             Have any suggestion? Question? Found any bug? <br />Contact me throught <a href='https://jpaulet.typeform.com/to/sVUrrj' style='color:#344675;font-weight:600;'>this form</a>.
           </div>
           <div class="col-12 col-md-8 col-lg-6 mt-3 text-center mb-5" style='margin:0px auto;'>
