@@ -362,7 +362,7 @@
 								 </div>
 								 <div class="f-text">
 									 <div class="left-content">
-										 <h2 class="mt-0">Your Business Swiss Knife.</h2>
+										 <h2 class="mt-0">Your Business Swiss Army Knife.</h2>
 										 <p> All the features for your productivity: Dashboard, Calendar, Tasks, Pomodoro (WIP), ToDO lists, Organize Files & much more to come!</p>
 										 <a v-if='false' href="#landing" style='font-size:10px;'>Know more</a>
 									 </div>
