@@ -13,12 +13,15 @@ import SideBar from '@/components/SidebarPlugin'
 import VueOffline from 'vue-offline'
 
 import VueCurrencyInput from 'vue-currency-input'
-import VueAnalytics from 'vue-analytics'
+// import VueAnalytics from 'vue-analytics'
 
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import DoughnutChart from './components/body/sub/DoughnutChart'
-import {store} from './store.js'
+import { store } from './store.js'
+
+// router setup
+import routes from './router'
 
 Vue.use(VueAxios, axios)
 Vue.component('icon', Icon)
@@ -29,13 +32,11 @@ const pluginOptions = {
 }
 Vue.use(VueCurrencyInput, pluginOptions)
 
-// router setup
-import routes from './router'
-
 window.blockstack = require('blockstack')
 window.axios = require('axios')
 
 Vue.config.productionTip = false
+// Vue.http.headers.common['Animal'] = 'cat';
 
 Vue.prototype.$ENCRYPT = {
   encrypt: true
@@ -53,10 +54,12 @@ const router = new VueRouter({
 })
 
 // Configuration VueAnalytics
+/*
 Vue.use(VueAnalytics, {
   id: 'UA-154759330-1',
   router
 });
+*/
 
 Vue.use(VueRouter)
 Vue.use(GlobalComponents)
@@ -73,9 +76,5 @@ new Vue({
   render: h => h(App),
   data: {
     sharedState: store.state
-  },
-  created () {
-    store.getCryptoCurrencies()
-    store.getTotalMarketCapUSD()
   }
 }).$mount('#app')

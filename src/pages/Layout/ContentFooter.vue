@@ -72,7 +72,7 @@
             <tr><th>ProductHunt</th></tr>
             <tr>
               <td class='text-center pt-1'>
-                <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=176110&theme=dark" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" /></a>
+                <a href="https://www.producthunt.com/posts/darray?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-darray" target="_blank"><img src="@/assets/img/landing/featured.svg" alt="dArray - The Private Accounting Software for your Business | Product Hunt Embed" style="width: 210px; height: 44px;" width="250px" height="54px" /></a>
               </td>
             </tr>
           </table>

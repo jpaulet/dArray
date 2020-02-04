@@ -137,7 +137,7 @@ export default {
       searchQuery: '',
       showMenu: false,
       blockstack: window.blockstack,
-      avatar: 'https://s3.amazonaws.com/onename/avatar-placeholder.png',
+      avatar: 'https://darray.org/public/avatar-placeholder.png',
       givenName: 'Anonymous',
       imageSrc: null,
       messages: []
@@ -176,7 +176,7 @@ export default {
         this.avatar = user.avatarUrl()
         this.imageSrc = user.avatarUrl()
       }else{
-        this.imageSrc = 'https://s3.amazonaws.com/onename/avatar-placeholder.png'
+        this.imageSrc = 'https://darray.org/public/avatar-placeholder.png'
       }
       this.checkInicialization()
     } else if (blockstack.isSignInPending()) {
@@ -188,5 +188,3 @@ export default {
   }
 }
 </script>
-<style>
-</style>

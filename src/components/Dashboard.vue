@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       blockstack: window.blockstack,
-      avatar: 'https://s3.amazonaws.com/onename/avatar-placeholder.png',
+      avatar: 'https://darray.org/public/avatar-placeholder.png',
       givenName: 'Anonymous'
     }
   },
@@ -48,5 +48,3 @@ export default {
   }
 }
 </script>
-
-<style scoped></style>

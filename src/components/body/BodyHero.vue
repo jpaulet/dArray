@@ -209,6 +209,9 @@ export default {
     }
   },
   created () {
+    store.getCryptoCurrencies()
+    store.getTotalMarketCapUSD()
+    
     if (window.self !== window.top) {
       this.isOpenedInIFrame = true
     }

@@ -42,7 +42,7 @@
     "vue-currency-input": "^1.14.0",
     "vue-github-buttons": "^3.1.0",
     "vue-i18n": "^8.14.1",
-    "vue-moment": "^4.0.0",
+    "vue-moment": "^4.1.0",
     "vue-offline": "^2.0.8",
     "vue-router": "^3.0.3",
     "vue-social-sharing": "^2.4.6",
@@ -53,7 +53,7 @@
     "@vue/cli-plugin-babel": "^3.6.0",
     "@vue/cli-plugin-eslint": "^3.6.0",
     "@vue/cli-plugin-unit-jest": "^4.0.5",
-    "@vue/cli-service": "^3.6.0",
+    "@vue/cli-service": "^4.1.2",
     "@vue/eslint-config-prettier": "^5.0.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
@@ -63,10 +63,13 @@
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.13.1",
     "prettier": "^1.18.2",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.5.21",
+    "webpack": "^4.41.5",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-dev-server": "^3.10.2"
   },
   "browserslist": {
     "production": [
