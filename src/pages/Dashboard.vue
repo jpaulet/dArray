@@ -12,8 +12,8 @@
     </div>
     <template v-if='!loadingPage'>
       <div class=''>
-        <div v-if='(totalInvoices == 0 && totalExpenses == 0)' class='col-12 alert text-left alert-light' role='alert' style='opacity:0.6;border:0px;'> 
-          Welcome! Create <router-link to="invoices?newInvoice=true" style='color:#222;'>new invoices</router-link> & <router-link to="expenses?newExpense=true" style='color:#222;'>expenses</router-link> to start getting some information in the dashboard! 
+        <div v-if='(totalInvoices == 0 && totalExpenses == 0)' class='col-12 alert text-left alert-light' role='alert' style='opacity:0.6;border:0px;'>
+          Welcome! Create <router-link to="invoices?newInvoice=true" style='color:#222;'>new invoices</router-link> & <router-link to="expenses?newExpense=true" style='color:#222;'>expenses</router-link> to start getting some information in the dashboard!
         </div>
       </div>
       <div class="row">
@@ -81,7 +81,7 @@
               :extra-options="greenLineChart.extraOptions">
             </line-chart>
           </card>
-        </div> 
+        </div>
       </div>
       <div class="row">
         <div class="col-12 col-sm-7">
@@ -107,7 +107,7 @@
             </line-chart>
           </card>
         </div>
-             
+
         <div class="col-12 col-sm-5">
           <card type="chart" cardCol>
             <template slot="header" class='mb-3'>
@@ -208,8 +208,8 @@ export default {
       totalExpensesVAT: 0,
       monthlyExpenses: [],
       monthlyExpensesVAT: [],
-      averageInvoice: { 'total':0, 'perInvoice':0, 'tendency':0, 'lastMonthTendency':0 },
-      averageExpense: { 'total':0, 'perExpense':0, 'tendency':0, 'lastMonthTendency':0 },
+      averageInvoice: { 'total': 0, 'perInvoice': 0, 'tendency': 0, 'lastMonthTendency': 0 },
+      averageExpense: { 'total': 0, 'perExpense': 0, 'tendency': 0, 'lastMonthTendency': 0 },
       bigLineChartCategories: [
         'Accounts',
         'Purchases',
@@ -235,7 +235,7 @@ export default {
   },
   methods: {
     initBigChart (index) {
-      //let chartData = {
+      // let chartData = {
       this.bigLineChart.chartData = {
         datasets: [{
           fill: true,
@@ -258,7 +258,7 @@ export default {
       this.bigLineChart.activeIndex = index
     },
 
-    initChart2 (){
+    initChart2 () {
       this.greenLineChart = {
         extraOptions: chartConfigs.purpleChartOptions,
         chartData: {
@@ -285,7 +285,7 @@ export default {
       }
     },
 
-    initChart3 (){
+    initChart3 () {
       this.purpleLineChart = {
         extraOptions: chartConfigs.purpleChartOptions,
         chartData: {
@@ -312,7 +312,7 @@ export default {
       }
     },
 
-    initChart4 (){
+    initChart4 () {
       this.blueBarChart = {
         extraOptions: chartConfigs.purpleChartOptions,
         chartData: {
@@ -338,24 +338,24 @@ export default {
       }
     },
 
-    fetchData(){
+    fetchData () {
       // Load Invoices data
       userSession.getFile(INVOICES_FILE, this.$DECRYPT).then((invoices) => {
-        if(!invoices){ 
+        if (!invoices) {
           this.invoicesList = []
-        }else{
+        } else {
           this.invoicesList = JSON.parse(invoices)
         }
         var i = 0
         var j = 0
-        if(this.invoicesList.length === 0){
+        if (this.invoicesList.length === 0) {
           this.calcInvoices()
         }
 
         for (i in this.invoicesList) {
           userSession.getFile(this.invoicesList[i] + '.json', this.$DECRYPT).then((invoice) => {
             if (invoice === null) {
-              this.invoicesList.splice(i,1)
+              this.invoicesList.splice(i, 1)
               return
             }
 
@@ -363,31 +363,31 @@ export default {
             let searchInvoice = this.invoicesList.indexOf(invoice.id)
             this.$set(this.invoices, searchInvoice, invoice)
 
-            if(j === (this.invoicesList.length - 1)) {
+            if (j === (this.invoicesList.length - 1)) {
               this.calcInvoices()
             }
             j++
           })
-        }        
+        }
       })
 
       // Load Expenses data
       userSession.getFile(EXPENSES_FILE, this.$DECRYPT).then((expenses) => {
-        if(!expenses){
+        if (!expenses) {
           this.expensesList = []
-        }else{
+        } else {
           this.expensesList = JSON.parse(expenses)
         }
         var i = 0
         var j = 0
-        if(this.expensesList.length === 0){
+        if (this.expensesList.length === 0) {
           this.calcExpenses()
         }
 
         for (i in this.expensesList) {
           userSession.getFile(this.expensesList[i] + '.json', this.$DECRYPT).then((expense) => {
             if (!expense) {
-              //this.expensesList.splice(i,1)
+              // this.expensesList.splice(i,1)
               j++
               return
             }
@@ -396,7 +396,7 @@ export default {
             let searchExpense = this.expensesList.indexOf(expense.id)
             this.$set(this.expenses, searchExpense, expense)
 
-            if(j === (this.expensesList.length - 1)) {
+            if (j === (this.expensesList.length - 1)) {
               this.calcExpenses()
             }
             j++
@@ -406,22 +406,22 @@ export default {
 
       // Load Customers
       userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
-        if(!company){ 
+        if (!company) {
           this.company = {}
           this.company.currency = '$'
-        }else{
+        } else {
           this.company = JSON.parse(company)
         }
       })
     },
 
-    getLastMonths() {
+    getLastMonths () {
       var theMonths = new Array('JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC')
       var today = new Date()
       var aMonth = today.getMonth()
       var i
-      for (i=0; i<=11; i++) {
-        this.listMonths[(11-i)] = theMonths[aMonth]
+      for (i = 0; i <= 11; i++) {
+        this.listMonths[(11 - i)] = theMonths[aMonth]
         aMonth--
         if (aMonth < 0) {
           aMonth = 11
@@ -429,20 +429,20 @@ export default {
       }
     },
 
-    calcInvoices() {
+    calcInvoices () {
       var total = 0
       var totalVAT = 0
       var monthlyInvoices = []
       var monthlyVAT = []
 
-      for(let i=1;i<=12;i++){
+      for (let i = 1; i <= 12; i++) {
         monthlyInvoices[i] = 0
         monthlyVAT[i] = 0
       }
 
       this.invoices.map((invoice) => {
-        monthlyInvoices[parseInt(invoice.date.substr(5,2),10)] += invoice.total
-        monthlyVAT[parseInt(invoice.date.substr(5,2),10)] += invoice.vat
+        monthlyInvoices[parseInt(invoice.date.substr(5, 2), 10)] += invoice.total
+        monthlyVAT[parseInt(invoice.date.substr(5, 2), 10)] += invoice.vat
         total = total + invoice.total
         totalVAT = totalVAT + invoice.vat
       })
@@ -456,40 +456,39 @@ export default {
       this.monthlyVAT = monthlyVAT
 
       this.averageInvoice.total = (total / 12).toFixed(2)
-      if(!this.invoices.length){
+      if (!this.invoices.length) {
         this.averageInvoice.perInvoice = 0
         this.averageInvoice.lastMonthTendency = 0
-      }else{
+      } else {
         this.averageInvoice.perInvoice = (total / this.invoices.length).toFixed(2)
-        if(this.averageInvoice[11] !== 0 && this.averageInvoice[12] !== 0){
+        if (this.averageInvoice[11] !== 0 && this.averageInvoice[12] !== 0) {
           this.averageInvoice.lastMonthTendency = (100 - ((monthlyInvoices[11] * 100) / (monthlyInvoices[12] === 0 ? 1 : monthlyInvoices[12]))).toFixed(2) + this.company.currencySymbol
-        }else{
+        } else {
           this.averageInvoice.lastMonthTendency = '?'
         }
-
       }
       this.averageInvoice.tendency = 0
 
-      this.initBigChart(0)      
+      this.initBigChart(0)
       this.initChart2()
 
       this.loadingPage = false
     },
 
-    calcExpenses() {
+    calcExpenses () {
       var total = 0
       var totalVAT = 0
       var monthlyExpenses = []
       var monthlyVAT = []
-      
-      for(let i=1;i<=12;i++){
+
+      for (let i = 1; i <= 12; i++) {
         monthlyExpenses[i] = 0
         monthlyVAT[i] = 0
       }
 
       this.expenses.map((expense) => {
-        monthlyExpenses[parseInt(expense.date.substr(5,2),10)] += expense.total
-        monthlyVAT[parseInt(expense.date.substr(5,2),10)] += expense.vat
+        monthlyExpenses[parseInt(expense.date.substr(5, 2), 10)] += expense.total
+        monthlyVAT[parseInt(expense.date.substr(5, 2), 10)] += expense.vat
         total = total + expense.total
         totalVAT = totalVAT + expense.vat
       })
@@ -503,14 +502,14 @@ export default {
       this.monthlyExpensesVAT = monthlyVAT
 
       this.averageExpense.total = (total / 12).toFixed(2)
-      if(!this.expenses.length){
+      if (!this.expenses.length) {
         this.averageExpense.perInvoice = 0
         this.averageExpense.lastMonthTendency = 0
-      }else{
+      } else {
         this.averageExpense.perInvoice = (total / this.expenses.length).toFixed(2)
-        if(this.monthlyExpenses[11] !== 0 && this.monthlyExpenses[12] !== 0){
+        if (this.monthlyExpenses[11] !== 0 && this.monthlyExpenses[12] !== 0) {
           this.averageExpense.lastMonthTendency = (100 - ((monthlyExpenses[11] * 100) / (monthlyExpenses[12] === 0 ? 1 : monthlyExpenses[12]))).toFixed(2) + this.company.currencySymbol
-        }else{
+        } else {
           this.averageExpense.lastMonthTendency = '?'
         }
       }
@@ -522,7 +521,7 @@ export default {
       this.loadingPage = false
     }
   },
-  async created (){
+  async created () {
     this.getLastMonths()
     await this.fetchData()
   },

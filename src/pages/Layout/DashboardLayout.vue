@@ -10,7 +10,7 @@
       <sidebar-link to="/cryptocurrencies">
         <i class="tim-icons icon-coins"></i>
         <template>
-          <p>Cryptocurrencies</p><span class='badge badge-light' style='font-size:6px;float:right;margin-top:-22px;opacity:0.6;'>new</span>
+          <p>Cryptocurrencies</p>
         </template>
       </sidebar-link>
       <sidebar-link to="/invoices">
@@ -55,14 +55,6 @@
           <p>Documents</p>
         </template>
       </sidebar-link>
-      <!--
-      <sidebar-link to="/table">
-        <i class="tim-icons icon-puzzle-10"></i>
-        <template>
-          <p>Resources</p>
-        </template>
-      </sidebar-link>
-      -->
       <sidebar-link to="/settings">
         <i class="tim-icons icon-settings"></i>
         <p>Settings</p>
@@ -87,7 +79,6 @@
   </div>
 </template>
 <script>
-import BootstrapVue from 'bootstrap-vue'  
 import TopNavbar from './TopNavbar.vue'
 import ContentFooter from './ContentFooter.vue'
 import DashboardContent from './DashboardContent.vue'
@@ -131,7 +122,7 @@ export default {
       this.userData = userSession.loadUserData()
       this.user = new Person(this.userData.profile)
       this.user.username = this.userData.username
-      this.user.name = this.userData.name ? this.userData.name : (this.userData.username ? this.userData.username.substr(0,this.userData.username.indexOf(".")) : 'Anonymous')
+      this.user.name = this.userData.name ? this.userData.name : (this.userData.username ? this.userData.username.substr(0, this.userData.username.indexOf('.')) : 'Anonymous')
     } else if (userSession.isSignInPending()) {
       this.isLoadingPage = true
       userSession.handlePendingSignIn()

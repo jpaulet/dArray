@@ -98,7 +98,7 @@ export default {
       this.loadingPage = true
       // Load Files
       userSession.getFile(FILESYSTEM, this.$DECRYPT).then((filesystem) => {
-        if(!filesystem){
+        if (!filesystem) {
           return false
         }
         this.uploads = JSON.parse(filesystem || [])
@@ -118,18 +118,18 @@ export default {
             this.folders = JSON.parse(folders || [])
           }
           this.loadingPage = false
-        }).catch(function(e) {
-          console.log("Error: "+e)
+        }).catch(function (e) {
+          console.log('Error: ' + e)
           this.loadingPage = false
         })
-      }).catch(function(e) {
-        console.log("Error: "+e)
+      }).catch(function (e) {
+        console.log('Error: ' + e)
         this.loadingPage = false
       })
 
       setTimeout(() => {
         this.loadingPage = false
-      }, 1500);      
+      }, 1500)
     },
 
     changeFolder (folder, depth) {
@@ -138,13 +138,13 @@ export default {
       if (localPath === '/') {
         localPath = folder + '/'
       } else {
-        if(this.currentDepth > depth){
+        if (this.currentDepth > depth) {
           var the_arr = localPath.replace(/^\/|\/$/g, '').split('/')
-          for(let i=depth;i<this.currentDepth;i++){ 
+          for (let i = depth; i < this.currentDepth; i++) {
             the_arr.pop()
           }
           localPath = the_arr.join('/') + '/'
-        }else{
+        } else {
           localPath = localPath + folder + '/'
         }
       }
@@ -207,7 +207,7 @@ export default {
     },
 
     closeNewFolder () {
-      this.newFolder = false      
+      this.newFolder = false
     },
 
     getRandomColor (type) {
@@ -238,7 +238,7 @@ export default {
       let extension = file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length)
       if (extension === 'jpg' || extension === 'jpeg' || extension === 'gif' || extension === 'png' || extension === 'bmp') {
         var type = 'image'
-      }else{
+      } else {
         var type = 'file'
       }
 
@@ -328,7 +328,7 @@ export default {
           return false
         }
 
-        extension = filename.substr(filename.indexOf('.') + 1,filename.lenght)
+        extension = filename.substr(filename.indexOf('.') + 1, filename.lenght)
         var element = document.createElement('a')
         element.setAttribute('href', theFile)
         element.setAttribute('download', filename)

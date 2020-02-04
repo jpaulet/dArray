@@ -40,7 +40,7 @@
         <h4 class="modal-title col-12 mt-3 mb-3" id="exampleModalLabel">Support Me, a solo indie maker</h4>
       </template>
       <div class="col-12 mb-3">
-        <div class='col-8 text-dark' style='clear:both;margin:0px auto;'> 
+        <div class='col-8 text-dark' style='clear:both;margin:0px auto;'>
           Hey! I'm J.P 👋, founder and solo developer of <strong>dArray</strong>. If you like my work, you could support me and my software journey!
           <br /><br />
           <strong>Thanks in advance 🙂</strong>
@@ -107,27 +107,27 @@ export default {
   },
   mounted () {
     this.$on('offline', () => {
-        this.$notify({
-          message: 'You are offline!',
-          icon: 'tim-icons icon-bell-55',
-          horizontalAlign: 'center',
-          verticalAlign: 'bottom',
-          type: 'danger',
-          timeout: 2500
-        })
+      this.$notify({
+        message: 'You are offline!',
+        icon: 'tim-icons icon-bell-55',
+        horizontalAlign: 'center',
+        verticalAlign: 'bottom',
+        type: 'danger',
+        timeout: 2500
+      })
     })
     this.$on('online', () => {
-        this.$notify({
-          message: 'You are online now!',
-          icon: 'tim-icons icon-bell-55',
-          horizontalAlign: 'center',
-          verticalAlign: 'bottom',
-          type: 'success',
-          timeout: 2500
-        })
+      this.$notify({
+        message: 'You are online now!',
+        icon: 'tim-icons icon-bell-55',
+        horizontalAlign: 'center',
+        verticalAlign: 'bottom',
+        type: 'success',
+        timeout: 2500
+      })
     })
-    let randomShow =  Math.floor(Math.random() * 100);
-    if(randomShow === 0){
+    let randomShow = Math.floor(Math.random() * 100)
+    if (randomShow === 0) {
       this.showContent = true
     }
   }
@@ -137,6 +137,6 @@ export default {
 <style scoped>
   #twitter-widget-0{
     min-width: 100% !important;
-    width: 100% !important; 
+    width: 100% !important;
   }
 </style>

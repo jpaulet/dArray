@@ -51,7 +51,7 @@
               </select>
             </div>
           </div>
-          <p class="price-amount" :class="{'price-amount-iframe': isOpenedInIFrame}">{{ selectedFiatCurrency }} {{ selectedCryptoCurrency.selectedPrice }} 
+          <p class="price-amount" :class="{'price-amount-iframe': isOpenedInIFrame}">{{ selectedFiatCurrency }} {{ selectedCryptoCurrency.selectedPrice }}
             <span :class="{'positive-percent-change': selectedCryptoCurrency.positivePercentChange, 'negative-percent-change': !selectedCryptoCurrency.positivePercentChange}">
               ({{ selectedCryptoCurrency.percentChange24h }}%)
               <sub>
@@ -73,15 +73,15 @@
               <div class="doughnut-chart doughnut-tooltip tooltip" :class="{'hide': isOpenedInIFrame || !sharedState.totalMarketCapUSD}">
                 <doughnut-chart
                   :data="{
-                    labels:['Total Market Cap USD', `Selected Crypto Currency Market Cap`], 
+                    labels:['Total Market Cap USD', `Selected Crypto Currency Market Cap`],
                     datasets:[
                       { data: [globalMarketCapUSD, selectedCryptoCurrencyMarketCap],
                         backgroundColor: [
                           '#370628',
                           '#fd6721'
                         ]
-                      }]}" 
-                  :width="125" 
+                      }]}"
+                  :width="125"
                   :height="50">
                 </doughnut-chart>
                 <span class="tooltiptext">{{ percentageOfMarketCap }}</span>
@@ -197,7 +197,7 @@ $large: 1024px;
 .selected-section {
   position: relative;
   align-items: center;
-  
+
   @media screen and (max-width: $medium) {
     padding-top: 30px;
   }
@@ -479,7 +479,7 @@ $large: 1024px;
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-    
+
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
@@ -516,27 +516,27 @@ $large: 1024px;
 }
 
 @-webkit-keyframes spinner {
-    from 
-    { 
-        -webkit-transform: rotateY(0deg); 
-    } 
-    to { 
-        -webkit-transform: rotateY(-360deg); 
-    } 
+    from
+    {
+        -webkit-transform: rotateY(0deg);
+    }
+    to {
+        -webkit-transform: rotateY(-360deg);
+    }
 }
-@keyframes spinner { 
-    from { 
-        -moz-transform: rotateY(0deg); 
-        -ms-transform: rotateY(0deg); 
-        transform: rotateY(0deg); 
-    } 
-    to 
-    { 
-        -moz-transform: rotateY(-360deg); 
-        -ms-transform: rotateY(-360deg); 
-        transform: rotateY(-360deg); 
-    
-    } 
+@keyframes spinner {
+    from {
+        -moz-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+    }
+    to
+    {
+        -moz-transform: rotateY(-360deg);
+        -ms-transform: rotateY(-360deg);
+        transform: rotateY(-360deg);
+
+    }
 }
 
 ::-webkit-scrollbar {

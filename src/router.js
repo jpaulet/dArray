@@ -1,7 +1,7 @@
 import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
 import Dashboard from '@/pages/Dashboard.vue'
 import Invoices from '@/pages/Invoices.vue'
-//import Cryptocurrencies from '@/pages/Cryptocurrencies.vue'
+// import Cryptocurrencies from '@/pages/Cryptocurrencies.vue'
 import Expenses from '@/pages/Expenses.vue'
 import Customers from '@/pages/Customers.vue'
 import Tasks from '@/pages/Tasks.vue'

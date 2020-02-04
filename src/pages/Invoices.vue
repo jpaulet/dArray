@@ -68,10 +68,10 @@
                       </td>
                       <td class="text-right" style="cursor:pointer;">
                         <p class="text-muted text-right">
-                          <span v-if='company.position === "prefix"'>{{row.currency ? row.currency : company.currency}}</span> 
-                          {{row.total | currency}} 
+                          <span v-if='company.position === "prefix"'>{{row.currency ? row.currency : company.currency}}</span>
+                          {{row.total | currency}}
                           <span v-if='company.position !== "prefix"'>{{row.currency ? row.currency : company.currency}}</span>
-                        </p> 
+                        </p>
                       </td>
                       <td class="text-center d-none d-sm-table-cell">
                           <p class="text-muted text-center">
@@ -813,7 +813,7 @@ export default {
         this.$set(this.table1, 'data', this.invoices)
         this.selected = []
         this.deselectAll()
-      }      
+      }
     },
 
     deselectAll(){
@@ -915,7 +915,7 @@ export default {
 
       // Load Invoices data
       userSession.getFile(ARCHIVED_FILE, this.$DECRYPT).then((invoices) => {
-        if(!invoices){ 
+        if(!invoices){
           this.invoicesList = []
         }else{
           this.invoicesList = JSON.parse(invoices)
@@ -969,7 +969,7 @@ export default {
       // Load Company data
       const loadInvoicesAll = async () => {
         const data = await userSession.getFile(COMPANY_FILE, this.$DECRYPT).then((company) => {
-          if(!company){ 
+          if(!company){
             this.company = {}
             this.company.currency = '$'
           }else{
@@ -987,11 +987,11 @@ export default {
 
           // Load Invoices data
           return userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((invoices) => {
-            if(invoices){ 
+            if(invoices){
               this.invoicesList = JSON.parse(invoices)
             }
             //this.invoicesList = []
-            
+
             return Promise.all(
               this.invoicesList.map((invoiceFile) => {
                 userSession.getFile(invoiceFile + '.json', this.$DECRYPT).then((invoice) => {
@@ -1010,17 +1010,17 @@ export default {
             )
           },(error) => {
             console.log("Error loading the Invoices files: "+error)
-          })       
-        })        
+          })
+        })
       }
 
       loadInvoicesAll().then( () => {
-        setTimeout(() => { 
+        setTimeout(() => {
           this.table1.data = this.invoices
           this.loadingPage = false
         }, 700)
       })
-      
+
       // Load Customers
       userSession.getFile(CUSTOMERS_FILE, this.$DECRYPT).then((customers) => {
         if(!customers){
@@ -1040,7 +1040,7 @@ export default {
             this.$set(this.customers, searchCustomer, customer)
           })
         }
-      })      
+      })
     },
 
     isFilled () {
@@ -1290,7 +1290,7 @@ export default {
           type: 'success',
           timeout: 1500
         })
-      }      
+      }
     },
 
     changeSymbol(){

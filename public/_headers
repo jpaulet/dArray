@@ -2,6 +2,8 @@
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Headers: "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding"
   Access-Control-Allow-Methods: "POST, GET, OPTIONS, DELETE, PUT"
+  can't-be-evil: "true"
+  can\'t-be-evil: "true"
 /manifest.json
   Access-Control-Allow-Origin: *
   Access-Control-Allow-Headers: "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding"

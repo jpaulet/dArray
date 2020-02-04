@@ -26,7 +26,7 @@
                   <label for="">Completed</label>
                   <input class='ml-3' type="checkbox" ref="checkbox" name="completed" v-model="task.completed"/>
                 </div>
-                
+
                 <div class='col-12 text-center px-0'>
                   <button type="button" class="btn btn-danger btn-sm px-3 mt-3 float-left mx-0" @click='clear' style='opacity:0.8;color:#333;'>Clear</button>
                   <button type="submit" class="btn btn-light btn-sm px-4 text-white float-right mt-3">Submit</button>
@@ -265,7 +265,7 @@ export default {
     padding:0px 15px !important;
     display:flex !important;
   }
-  
+
   .task.done label {
     text-decoration: line-through;
   }

@@ -67,8 +67,8 @@
                     </td>
                     <td class="text-right pr-3">
                       <p class="text-muted">
-                        <span v-if='company.position === "prefix"'>{{row.currency ? row.currency : company.currency}}</span> 
-                        {{row.total | currency}} 
+                        <span v-if='company.position === "prefix"'>{{row.currency ? row.currency : company.currency}}</span>
+                        {{row.total | currency}}
                         <span v-if='company.position !== "prefix"'>{{row.currency ? row.currency : company.currency}}</span>
                       </p>
                     </td>
@@ -794,7 +794,7 @@ export default {
       if(!this.checkHasSelected()){
         return false
       }
-      
+
       this.expensesList = this.expensesList.filter((el) => {
         return !this.selected.some((f) => {
           return f.id === el
@@ -908,7 +908,7 @@ export default {
           this.company.currency = '$'
         }else{
           this.company = JSON.parse(company)
-        }        
+        }
         this.expense.tax = this.company.vat
 
         if(this.invoice && this.invoice.currency !== undefined){
@@ -930,14 +930,14 @@ export default {
             if (expense) {
               expense = JSON.parse(expense)
               let searchExpense = this.expensesList.indexOf(expense.id)
-              this.$set(this.expenses, searchExpense, expense)              
+              this.$set(this.expenses, searchExpense, expense)
             }else{
-              notFoundList.push(this.expensesList[i])              
+              notFoundList.push(this.expensesList[i])
             }
           })
         }
 
-        setTimeout(() => { 
+        setTimeout(() => {
           this.table1.data = this.expenses
           this.loadingPage = false
 
@@ -1069,7 +1069,7 @@ export default {
 
     changeViewType (index,option) {
       this.activeIndex = index
-      
+
       if(option === 'Archived'){
         this.loadArchived()
       }else{
@@ -1078,14 +1078,14 @@ export default {
         this.fetchData()
       }
     },
-    
+
     loadArchived(){
       this.loadingPage = true
       this.expenses = []
 
       // Load Expenses data
       userSession.getFile(ARCHIVED_FILE, this.$DECRYPT).then((expenses) => {
-        if(!expenses){ 
+        if(!expenses){
           this.expensesList = []
         }else{
           this.expensesList = JSON.parse(expenses)
@@ -1327,7 +1327,7 @@ export default {
       background-color: #fff;
       border-color: rgba(29, 37, 59, 0.25);
   }
-  
+
   .badge-success {
     background-color: #c2e8cea3 !important;
     color:#8ebb9c;

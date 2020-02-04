@@ -53,8 +53,8 @@
               </div>
               <div class="card-content" style='height:90px;'>
                 <p class="title is-5 mb-3 mt-3" style='position:relative;' :class="{'title-iframe': isOpenedInIFrame}">{{ cryptoCurrency.name }} <span class='badge badge-light' style='font-size:8px;border-radius:8px;'>{{cryptoCurrency.rank}}</span></p>
-                <p class="title price-title is-5" style='position:relative;' :class="{'price-title-iframe': isOpenedInIFrame}">${{ getPriceUSD(cryptoCurrency) }} 
-                  <span :class="{'positive-percent-change': cryptoCurrency.positivePercentChange, 'negative-percent-change': !cryptoCurrency.positivePercentChange}"> {{ getPercentChange(cryptoCurrency) }}% 
+                <p class="title price-title is-5" style='position:relative;' :class="{'price-title-iframe': isOpenedInIFrame}">${{ getPriceUSD(cryptoCurrency) }}
+                  <span :class="{'positive-percent-change': cryptoCurrency.positivePercentChange, 'negative-percent-change': !cryptoCurrency.positivePercentChange}"> {{ getPercentChange(cryptoCurrency) }}%
                     <icon class="arrow-up" name="arrow-up" height="9" width="9"></icon>
                     <icon class="arrow-down" name="arrow-down" height="9" width="9"></icon>
                   </span>
@@ -76,8 +76,8 @@
               </div>
               <div class="card-content" style='height:90px;'>
                 <p class="title is-5 mb-3 mt-3" style='position:relative;' :class="{'title-iframe': isOpenedInIFrame}">{{ cryptoCurrency.name }} <span class='badge badge-light' style='font-size:8px;border-radius:8px;'>{{cryptoCurrency.rank}}</span></p>
-                <p class="title price-title is-5" style='position:relative;' :class="{'price-title-iframe': isOpenedInIFrame}">${{ getPriceUSD(cryptoCurrency) }}  
-                  <span :class="{'positive-percent-change': cryptoCurrency.positivePercentChange, 'negative-percent-change': !cryptoCurrency.positivePercentChange}"> {{ getPercentChange(cryptoCurrency) }}% 
+                <p class="title price-title is-5" style='position:relative;' :class="{'price-title-iframe': isOpenedInIFrame}">${{ getPriceUSD(cryptoCurrency) }}
+                  <span :class="{'positive-percent-change': cryptoCurrency.positivePercentChange, 'negative-percent-change': !cryptoCurrency.positivePercentChange}"> {{ getPercentChange(cryptoCurrency) }}%
                     <icon class="arrow-up" name="arrow-up" height="9" width="9"></icon>
                     <icon class="arrow-down" name="arrow-down" height="9" width="9"></icon>
                   </span>
@@ -99,8 +99,8 @@
               </div>
               <div class="card-content" style='height:90px;'>
                 <p class="title is-5 mb-3 mt-3" style='position:relative;' :class="{'title-iframe': isOpenedInIFrame}">{{ cryptoCurrency.name }} <span class='badge badge-light' style='font-size:8px;border-radius:8px;'>{{cryptoCurrency.rank}}</span></p>
-                <p class="title price-title is-5" style='position:relative;' :class="{'price-title-iframe': isOpenedInIFrame}">${{ getPriceUSD(cryptoCurrency) }}  
-                  <span :class="{'positive-percent-change': cryptoCurrency.positivePercentChange, 'negative-percent-change': !cryptoCurrency.positivePercentChange}"> {{ getPercentChange(cryptoCurrency) }}% 
+                <p class="title price-title is-5" style='position:relative;' :class="{'price-title-iframe': isOpenedInIFrame}">${{ getPriceUSD(cryptoCurrency) }}
+                  <span :class="{'positive-percent-change': cryptoCurrency.positivePercentChange, 'negative-percent-change': !cryptoCurrency.positivePercentChange}"> {{ getPercentChange(cryptoCurrency) }}%
                     <icon class="arrow-up" name="arrow-up" height="9" width="9"></icon>
                     <icon class="arrow-down" name="arrow-down" height="9" width="9"></icon>
                   </span>
@@ -205,13 +205,13 @@ export default {
       coinOptions: [
         'Dashboard',
         'Portfolio'
-      ],
+      ]
     }
   },
   created () {
     store.getCryptoCurrencies()
     store.getTotalMarketCapUSD()
-    
+
     if (window.self !== window.top) {
       this.isOpenedInIFrame = true
     }
@@ -225,115 +225,115 @@ export default {
       return this.sharedState.cryptoCurrencies.slice(5, 10)
     },
     thirdFiveCryptoCurrencies () {
-      return this.sharedState.cryptoCurrencies.slice(10,15)
+      return this.sharedState.cryptoCurrencies.slice(10, 15)
     }
   },
   methods: {
-    getTrackerPrice(coin){
-      if(!coin){ return }
-      let indexCoin = this.cryptos.findIndex((item) => { 
+    getTrackerPrice (coin) {
+      if (!coin) { return }
+      let indexCoin = this.cryptos.findIndex((item) => {
         return item.coin.toLowerCase() === coin.toLowerCase()
       })
-      
-      if(indexCoin > -1){
+
+      if (indexCoin > -1) {
         var tracked = this.cryptos[indexCoin]
-        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => { 
+        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => {
           return item.id.toLowerCase() === coin.toLowerCase()
         })
         var cryptoCoin = this.sharedState.cryptoCurrencies[indexCoins]
 
         return `<div class="tracker" style="font-size:12px;">
-                  <strong style="font-size:16px;">`+Number(parseFloat(tracked.amount) * parseFloat(cryptoCoin.price_usd)).toFixed(2)+ `</strong> $
+                  <strong style="font-size:16px;">` + Number(parseFloat(tracked.amount) * parseFloat(cryptoCoin.price_usd)).toFixed(2) + `</strong> $
                 </div>`
-      }else{
+      } else {
         return `<div><br /></div>`
       }
     },
-    getStatusPrice(coin){
-      if(!coin){ return }
-      let indexCoin = this.cryptos.findIndex((item) => { 
+    getStatusPrice (coin) {
+      if (!coin) { return }
+      let indexCoin = this.cryptos.findIndex((item) => {
         return item.coin.toLowerCase() === coin.toLowerCase()
       })
-      
-      if(indexCoin > -1){
+
+      if (indexCoin > -1) {
         var tracked = this.cryptos[indexCoin]
-        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => { 
+        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => {
           return item.id.toLowerCase() === coin.toLowerCase()
         })
         var cryptoCoin = this.sharedState.cryptoCurrencies[indexCoins]
 
-        if(!(cryptoCoin.percent_change_24h.indexOf('-') > -1)){
+        if (!(cryptoCoin.percent_change_24h.indexOf('-') > -1)) {
           return `<span class='text-success'>⬆️</span>`
-        }else{
+        } else {
           return `<span class='text-danger'>⬇️</span>`
         }
-      }else{
+      } else {
         return `<div><br /></div>`
       }
     },
-    get1DayPrice(coin){
-      if(!coin){ return }
-      let indexCoin = this.cryptos.findIndex((item) => { 
+    get1DayPrice (coin) {
+      if (!coin) { return }
+      let indexCoin = this.cryptos.findIndex((item) => {
         return item.coin.toLowerCase() === coin.toLowerCase()
       })
-      
-      if(indexCoin > -1){
+
+      if (indexCoin > -1) {
         var tracked = this.cryptos[indexCoin]
-        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => { 
+        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => {
           return item.id.toLowerCase() === coin.toLowerCase()
         })
         var cryptoCoin = this.sharedState.cryptoCurrencies[indexCoins]
 
-        if(cryptoCoin.percent_change_24h > 0){
-          return `<span class='text-success'>+`+cryptoCoin.percent_change_24h+`%</span>`
-        }else{
-          return `<span class='text-danger'>`+cryptoCoin.percent_change_24h+`%</span>`
+        if (cryptoCoin.percent_change_24h > 0) {
+          return `<span class='text-success'>+` + cryptoCoin.percent_change_24h + `%</span>`
+        } else {
+          return `<span class='text-danger'>` + cryptoCoin.percent_change_24h + `%</span>`
         }
-      }else{
+      } else {
         return `?`
       }
     },
-    get1WeekPrice(coin){
-      if(!coin){ return }
-      let indexCoin = this.cryptos.findIndex((item) => { 
+    get1WeekPrice (coin) {
+      if (!coin) { return }
+      let indexCoin = this.cryptos.findIndex((item) => {
         return item.coin.toLowerCase() === coin.toLowerCase()
       })
-      
-      if(indexCoin > -1){
+
+      if (indexCoin > -1) {
         var tracked = this.cryptos[indexCoin]
-        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => { 
+        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => {
           return item.id.toLowerCase() === coin.toLowerCase()
         })
         var cryptoCoin = this.sharedState.cryptoCurrencies[indexCoins]
 
-        if(cryptoCoin.percent_change_7d > 0){
-          return `<span class='text-success'>+`+cryptoCoin.percent_change_7d+`%</span>`
-        }else{
-          return `<span class='text-danger'>`+cryptoCoin.percent_change_7d+`%</span>`
+        if (cryptoCoin.percent_change_7d > 0) {
+          return `<span class='text-success'>+` + cryptoCoin.percent_change_7d + `%</span>`
+        } else {
+          return `<span class='text-danger'>` + cryptoCoin.percent_change_7d + `%</span>`
         }
-      }else{
+      } else {
         return `?`
       }
     },
-    get1HourPrice(coin){
-      if(!coin){ return }
-      let indexCoin = this.cryptos.findIndex((item) => { 
+    get1HourPrice (coin) {
+      if (!coin) { return }
+      let indexCoin = this.cryptos.findIndex((item) => {
         return item.coin.toLowerCase() === coin.toLowerCase()
       })
-      
-      if(indexCoin > -1){
+
+      if (indexCoin > -1) {
         var tracked = this.cryptos[indexCoin]
-        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => { 
+        let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => {
           return item.id.toLowerCase() === coin.toLowerCase()
         })
         var cryptoCoin = this.sharedState.cryptoCurrencies[indexCoins]
 
-        if(cryptoCoin.percent_change_1h > 0){
-          return `<span class='text-success'>+`+cryptoCoin.percent_change_1h+`%</span>`
-        }else{
-          return `<span class='text-danger'>`+cryptoCoin.percent_change_1h+`%</span>`
+        if (cryptoCoin.percent_change_1h > 0) {
+          return `<span class='text-success'>+` + cryptoCoin.percent_change_1h + `%</span>`
+        } else {
+          return `<span class='text-danger'>` + cryptoCoin.percent_change_1h + `%</span>`
         }
-      }else{
+      } else {
         return `?`
       }
     },
@@ -348,37 +348,37 @@ export default {
     getPercentChange (cryptoCurrency) {
       return cryptoCurrency.percentChange24h
     },
-    saveCrypto(){
-      let indexCoin = this.cryptos.findIndex((item) => { 
-        return item.coin === this.crypto.coin 
+    saveCrypto () {
+      let indexCoin = this.cryptos.findIndex((item) => {
+        return item.coin === this.crypto.coin
       })
-      if(indexCoin > -1){
-        this.cryptos.splice(indexCoin,1)
+      if (indexCoin > -1) {
+        this.cryptos.splice(indexCoin, 1)
       }
 
       this.cryptos.push(this.crypto)
       userSession.putFile(CRYPTO_FILE, JSON.stringify(this.cryptos), this.$ENCRYPT)
       this.crypto = {
         coin: null,
-        amount: 0        
+        amount: 0
       }
       this.openNewTracker = false
     },
     fetchData () {
       userSession.getFile(CRYPTO_FILE, this.$DECRYPT).then((crypto) => {
-        if(crypto){
+        if (crypto) {
           this.cryptos = JSON.parse(crypto)
         }
         this.cryptos = []
         setTimeout(() => { this.loadingPage = false }, 500)
       })
-    },    
-    changeViewType (index,option) {
+    },
+    changeViewType (index, option) {
       this.activeIndex = index
 
-      if(option === 'Dashboard'){
+      if (option === 'Dashboard') {
         this.showDashboard = true
-      }else{
+      } else {
         this.showDashboard = false
       }
     }
@@ -433,10 +433,10 @@ export default {
    padding: 0;
 }
  .card .card-content .title {
-   
+
 }
  .card .card-content .title-iframe {
-   font-size: 0.9rem;   
+   font-size: 0.9rem;
 }
  .card .card-content .price-title {
    font-size: 1rem;
@@ -478,5 +478,5 @@ export default {
      -ms-transform: rotateY(-360deg);
      transform: rotateY(-360deg);
   }
-} 
+}
 </style>

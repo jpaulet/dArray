@@ -47,7 +47,7 @@
           <div> <span>{{event.start}}</span> <span v-if='event.end && (event.start !== event.end)'>/ {{event.end}}</span> <span v-if='event.hour'>at {{event.hour}}</span></div>
         </div>
         <template slot="footer" class="text-center">
-          <base-button type="danger" @click="viewEvent = false" style='opacity:0.5;'>Close</base-button>          
+          <base-button type="danger" @click="viewEvent = false" style='opacity:0.5;'>Close</base-button>
         </template>
       </modal>
 
@@ -84,13 +84,13 @@ export default {
         time: '',
         color: '#263148'
       },
-      //colors: ['#263148', '#1abc9c', '#2980b9', '#7f8c8d', '#f1c40f', '#d35400', '#27ae60'],
+      // colors: ['#263148', '#1abc9c', '#2980b9', '#7f8c8d', '#f1c40f', '#d35400', '#27ae60'],
       colors: ['#263148', '#1abc9ca3', '#263148a3', '#7f8c8d', '#f1c40f', '#d354009e', '#2980b991'],
       event: {}
     }
   },
   methods: {
-    selectColor (color){
+    selectColor (color) {
       this.newEvent.color = color
     },
     handleDateClick (info) {
@@ -102,10 +102,10 @@ export default {
       this.event = {
         title: info.event.title,
         description: info.event.extendedProps.description,
-        start: info.event.start.getMonth()+'-'+info.event.start.getDate()+'-'+info.event.start.getFullYear(),
-        end: info.event.end ? info.event.end.getMonth()+'-'+info.event.end.getDate()+'-'+info.event.end.getFullYear() : null,
+        start: info.event.start.getMonth() + '-' + info.event.start.getDate() + '-' + info.event.start.getFullYear(),
+        end: info.event.end ? info.event.end.getMonth() + '-' + info.event.end.getDate() + '-' + info.event.end.getFullYear() : null,
         hour: info.event.extendedProps.time,
-        color: info.event.color,
+        color: info.event.color
       }
       this.viewEvent = true
     },
@@ -154,7 +154,7 @@ export default {
   mounted () {
     this.fetchData()
 
-    if(this.$route.query.newEvent){
+    if (this.$route.query.newEvent) {
       this.createEvent = true
     }
   }
@@ -165,7 +165,7 @@ export default {
   /deep/ .fc-toolbar h2{
     font-size: 1.25em !important;
   }
-  
+
   .fc-event{
     background-color: #263148 !important;
     color:#fff;

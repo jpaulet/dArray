@@ -1,182 +1,137 @@
 <template>
- 	<div class="content content-main-card" :class="{'is-play': isPlay}">
-		<card class='p-2 p-md-3 p-lg-5'>
-		  <div class="modal-box">
-	        <div class="modal-content-area">
-	          <div class="tab-container">
-	            <div id="tab1" class="tab-content todo-list-content">
-	              <div class="add-list" style='border:1px solid #999;border-radius:22px;padding:2px;margin-bottom:20px;'>
-	                <input
-	                  type="text"
-	                  class="form-control input-text"
-	                  placeholder="Add a New Mission..."
-	                  v-model="newTodo"
-	                  @keyup.enter="addTodo"
-	                />
-	                <a href="javascript:;" class="add-btn" @click.prevent="addTodo">
-	                  <i class="tim-icons icon-simple-add"></i>
-	                </a>
-	              </div>
-	              <div class="todo-list-collapse">
-	              	<a class="btn btn-light col-12" data-toggle="collapse" href="#collapseTodo" role="button" aria-expanded="false" aria-controls="collapseTodo">TO-DO</a>
-	              	<div class="collapse show" id="collapseTodo">
-	              		<ul class="todo-list-group px-3">
-	              			<li class="list-group-item" v-for="(item, key) in filterTodoList">
-		                      <div class="i-content item-custom todo-content mt-2 mb-2" style='line-height:14px;'>
-		                        <input type="checkbox" :id="item.id" class="todo-list-chk mr-3" v-model="item.completed" />
-		                        <label :for="item.id" :class="{'completed' : item.completed}">
-		                          {{ item.title }}
-		                        </label>
-		                        <div class="i-play">
-		                          <i class="tim-icons icon-triangle-right-17"></i>
-		                        </div>
-		                      </div>
-		                      <a href="javascript:;" class="del-btn" @click.prevent="removeTodo(item)">
-		                        <i class="tim-icons icon-simple-remove"></i>
-		                      </a>
-		                    </li>
-	              		</ul>
-	              	</div>
-	              	<a class="btn btn-light col-12" data-toggle="collapse" href="#collapseDone" role="button" aria-expanded="false" aria-controls="collapseDone">DONE</a>
-	              	<div class="collapse show" id="collapseDone">
-	                  <ul class="done-list-group px-3">
-	                    <li v-if="item.completed" class="list-group-item item-done" v-for="(item, key) in todoList">
-	                      <div class="i-content item-custom mt-2 mb-2" style='line-height:14px;'>
-	                        <input type="checkbox" :id="item.id" class="todo-list-chk mr-3" v-model="item.completed" />
-	                        <label :for="item.id" :class="{'completed' : item.completed}"> {{ item.title }} </label>
-	                      </div>
-	                      <div class="i-record">
-	                        <i class="count"></i>
-	                        <i class="count"></i>
-	                        <i class="count"></i>
-	                        <i class="count"></i>
-	                      </div>
-	                    </li>
-	                  </ul>
-	                </div>
-	              </div>
-	            </div>
-	            <!--
-	            <div id="tab3" class="tab-content ringtones-content">
-	              <div class="type">
-	                <div class="t-name">Work</div>
-	                <div class="t-checkbox-list">	                  
-	                    <label><input type='radio' label="none" v-model='radio1' name='radio1' value='none' /> none</label>
-	                    <label><input type='radio' label="alarm" v-model='radio1' name='radio1' value='none' /> alarm</label>
-	                    <label><input type='radio' label="beep" v-model='radio1' name='radio1' value='beep' /> beep</label>
-	                    <label><input type='radio' label="bell" v-model='radio1' name='radio1' value='bell' /> bell</label>
-	                    <label><input type='radio' label="bird" v-model='radio1' name='radio1' value='bird' /> bird</label>
-	                    <label><input type='radio' label="bugle" v-model='radio1' name='radio1' value='bugle' /> bugle</label>
-	                    <label><input type='radio' label="digital" v-model='radio1' name='radio1' value='digital' /> digital</label>
-	                    <label><input type='radio' label="drop" v-model='radio1' name='radio1' value='drop' /> drop</label>
-	                    <label><input type='radio' label="horn" v-model='radio1' name='radio1' value='horn' /> horn</label>
-	                    <label><input type='radio' label="music" v-model='radio1' name='radio1' value='music' /> music</label>
-	                    <label><input type='radio' label="ring" v-model='radio1' name='radio1' value='ring' /> ring</label>
-	                    <label><input type='radio' label="warning" v-model='radio1' name='radio1' value='warning' /> warning</label>
-	                    <label><input type='radio' label="whistle" v-model='radio1' name='radio1' value='whistle' /> whistle</label>	                  
-	                </div>
-	              </div>
-	              <div class="type">
-	                <div class="t-name">Break</div>
-	                <div class="t-checkbox-list">
-	                  	<label><input type='radio' label="none" v-model='radio2' name='radio2' value='none' /> none</label>
-	                    <label><input type='radio' label="alarm" v-model='radio2' name='radio2' value='none' /> alarm</label>
-	                    <label><input type='radio' label="beep" v-model='radio2' name='radio2' value='beep' /> beep</label>
-	                    <label><input type='radio' label="bell" v-model='radio2' name='radio2' value='bell' /> bell</label>
-	                    <label><input type='radio' label="bird" v-model='radio2' name='radio2' value='bird' /> bird</label>
-	                    <label><input type='radio' label="bugle" v-model='radio2' name='radio2' value='bugle' /> bugle</label>
-	                    <label><input type='radio' label="digital" v-model='radio2' name='radio2' value='digital' /> digital</label>
-	                    <label><input type='radio' label="drop" v-model='radio2' name='radio2' value='drop' /> drop</label>
-	                    <label><input type='radio' label="horn" v-model='radio2' name='radio2' value='horn' /> horn</label>
-	                    <label><input type='radio' label="music" v-model='radio2' name='radio2' value='music' /> music</label>
-	                    <label><input type='radio' label="ring" v-model='radio2' name='radio2' value='ring' /> ring</label>
-	                    <label><input type='radio' label="warning" v-model='radio2' name='radio2' value='warning' /> warning</label>
-	                    <label><input type='radio' label="whistle" v-model='radio2' name='radio2' value='whistle' /> whistle</label>
-	                </div>
-	              </div>
-	            </div>
-	        	-->
-	          </div>
-	        </div>
-	        <div class="modal-close-info">
-	          <a href="javascript:;" class="close-btn" @click.prevent="closeModal">
-	            <i class="tim-icons icon-simple-remove"></i>
-	          </a>
-	        </div>
-	      </div>
+  <div class="content content-main-card" :class="{'is-play': isPlay}">
+    <card class='p-2 p-md-3 p-lg-5'>
+      <div class="modal-box">
+          <div class="modal-content-area">
+            <div class="tab-container">
+              <div id="tab1" class="tab-content todo-list-content">
+                <div class="add-list" style='border:1px solid #999;border-radius:22px;padding:2px;margin-bottom:20px;'>
+                  <input
+                    type="text"
+                    class="form-control input-text"
+                    placeholder="Add a New Mission..."
+                    v-model="newTodo"
+                    @keyup.enter="addTodo"
+                  />
+                  <a href="javascript:;" class="add-btn" @click.prevent="addTodo">
+                    <i class="tim-icons icon-simple-add"></i>
+                  </a>
+                </div>
+                <div class="todo-list-collapse">
+                  <a class="btn btn-light col-12" data-toggle="collapse" href="#collapseTodo" role="button" aria-expanded="false" aria-controls="collapseTodo">TO-DO</a>
+                  <div class="collapse show" id="collapseTodo">
+                    <ul class="todo-list-group px-3">
+                      <li class="list-group-item" v-for="(item, key) in filterTodoList">
+                          <div class="i-content item-custom todo-content mt-2 mb-2" style='line-height:14px;'>
+                            <input type="checkbox" :id="item.id" class="todo-list-chk mr-3" v-model="item.completed" />
+                            <label :for="item.id" :class="{'completed' : item.completed}">
+                              {{ item.title }}
+                            </label>
+                            <div class="i-play">
+                              <i class="tim-icons icon-triangle-right-17"></i>
+                            </div>
+                          </div>
+                          <a href="javascript:;" class="del-btn" @click.prevent="removeTodo(item)">
+                            <i class="tim-icons icon-simple-remove"></i>
+                          </a>
+                        </li>
+                    </ul>
+                  </div>
+                  <a class="btn btn-light col-12" data-toggle="collapse" href="#collapseDone" role="button" aria-expanded="false" aria-controls="collapseDone">DONE</a>
+                  <div class="collapse show" id="collapseDone">
+                    <ul class="done-list-group px-3">
+                      <li v-if="item.completed" class="list-group-item item-done" v-for="(item, key) in todoList">
+                        <div class="i-content item-custom mt-2 mb-2" style='line-height:14px;'>
+                          <input type="checkbox" :id="item.id" class="todo-list-chk mr-3" v-model="item.completed" />
+                          <label :for="item.id" :class="{'completed' : item.completed}"> {{ item.title }} </label>
+                        </div>
+                        <div class="i-record">
+                          <i class="count"></i>
+                          <i class="count"></i>
+                          <i class="count"></i>
+                          <i class="count"></i>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-close-info">
+            <a href="javascript:;" class="close-btn" @click.prevent="closeModal">
+              <i class="tim-icons icon-simple-remove"></i>
+            </a>
+          </div>
+        </div>
 
-	      <div class="main row">
-	        <div class="panel-list-area main-area col-12 col-md-6">
-	          <div class="add-list" style='border:1px solid #999;border-radius:22px;padding:2px;margin-bottom:20px;'>
-	            <input
-	              type="text"
-	              class="form-control input-text"
-	              placeholder="Add a New Mission..."
-	              v-model="newTodo"
-	              @keyup.enter="addTodo"
-	            />
-	            <a href="javascript:;" class="add-btn" @click.prevent="addTodo">
-	              <i class="tim-icons icon-simple-add"></i>
-	            </a>
-	          </div>
-	          <div class="current-list">
-	            <div class="c-chk-item item-custom">
-	              <input type="checkbox" id="check-1" class="todo-list-chk" />
-	              <label for="check-1">the First thing to do today</label>
-	              <div class="count">
-	                <span></span>
-	                <span></span>
-	                <span></span>
-	                <span></span>
-	              </div>
-	            </div>
-	            <div class="timer">{{ time }}</div>
-	          </div>
-	          <ul class="todo-list-group">
-	            <li class="list-group-item" v-for="(item, key) in filterTodoList">
-	              <div class="i-content item-custom">
-	                <input type="checkbox" :id="item.id" class="todo-list-chk" v-model="item.completed" />
-	                <label :for="item.id" :class="{'completed' : item.completed}"> {{ item.title }} </label>
-	                <div class="i-play">
-	                  <i class="tim-icons icon-triangle-right-17"></i>
-	                </div>
-	              </div>
-	              <a href="javascript:;" class="del-btn" @click.prevent="removeTodo(item)">
-	                <i class="tim-icons icon-simple-remove"></i>
-	              </a>
-	            </li>
-	            <li class="list-group-item last-group-item" v-if="filterTodoList.length">
-	              <a href="javascript:;" class="btn-more" @click.prevent="showModalList">More</a>
-	            </li>
-	          </ul>
-	        </div>
-	        <div class="panel-menu-area main-area">
-	          <div class="menu-all">
-	            <a href="javascript:;" id="btn-todo-list" class="menu-btn" data-num="1" @click.pret="showModal">
-	              <i class="tim-icons icon-bullet-list-67"></i>
-	            </a>
-	        	<!-- 
-	            <a href="javascript:;" id="btn-ringtones" class="menu-btn" data-num="2" @click.prevent="showModal">
-	              <i class="tim-icons icon-volume-98"></i>
-	            </a>
-	    		-->
-	          </div>
-	        </div>
-	        <div class="clock-enable main-area col-12 col-md-6">
-	          <div class="clock">
-	            <a href="javascript:;" class="btn-play" v-if="!isPlay" @click="timerRun">
-	              <i class="tim-icons icon-triangle-right-17"></i>
-	            </a>
-	            <a href="javascript:;" class="btn-reset" v-if="!isPlay" @click="timerReset">
-	              <div class="dot"></div>
-	            </a>
-	            <a href="javascript:;" class="btn-pause" v-else @click="timerPause">
-	              <i class="tim-icons icon-button-pause"></i>
-	            </a>
-	          </div>
-	        </div>
-	      </div>
-	    </card>
+        <div class="main row">
+          <div class="panel-list-area main-area col-12 col-md-6">
+            <div class="add-list" style='border:1px solid #999;border-radius:22px;padding:2px;margin-bottom:20px;'>
+              <input
+                type="text"
+                class="form-control input-text"
+                placeholder="Add a New Mission..."
+                v-model="newTodo"
+                @keyup.enter="addTodo"
+              />
+              <a href="javascript:;" class="add-btn" @click.prevent="addTodo">
+                <i class="tim-icons icon-simple-add"></i>
+              </a>
+            </div>
+            <div class="current-list">
+              <div class="c-chk-item item-custom">
+                <input type="checkbox" id="check-1" class="todo-list-chk" />
+                <label for="check-1">the First thing to do today</label>
+                <div class="count">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+              <div class="timer">{{ time }}</div>
+            </div>
+            <ul class="todo-list-group">
+              <li class="list-group-item" v-for="(item, key) in filterTodoList">
+                <div class="i-content item-custom">
+                  <input type="checkbox" :id="item.id" class="todo-list-chk" v-model="item.completed" />
+                  <label :for="item.id" :class="{'completed' : item.completed}"> {{ item.title }} </label>
+                  <div class="i-play">
+                    <i class="tim-icons icon-triangle-right-17"></i>
+                  </div>
+                </div>
+                <a href="javascript:;" class="del-btn" @click.prevent="removeTodo(item)">
+                  <i class="tim-icons icon-simple-remove"></i>
+                </a>
+              </li>
+              <li class="list-group-item last-group-item" v-if="filterTodoList.length">
+                <a href="javascript:;" class="btn-more" @click.prevent="showModalList">More</a>
+              </li>
+            </ul>
+          </div>
+          <div class="panel-menu-area main-area">
+            <div class="menu-all">
+              <a href="javascript:;" id="btn-todo-list" class="menu-btn" data-num="1" @click.pret="showModal">
+                <i class="tim-icons icon-bullet-list-67"></i>
+              </a>
+            </div>
+          </div>
+          <div class="clock-enable main-area col-12 col-md-6">
+            <div class="clock">
+              <a href="javascript:;" class="btn-play" v-if="!isPlay" @click="timerRun">
+                <i class="tim-icons icon-triangle-right-17"></i>
+              </a>
+              <a href="javascript:;" class="btn-reset" v-if="!isPlay" @click="timerReset">
+                <div class="dot"></div>
+              </a>
+              <a href="javascript:;" class="btn-pause" v-else @click="timerPause">
+                <i class="tim-icons icon-button-pause"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </card>
     </div>
 </template>
 
@@ -188,197 +143,195 @@ import {
 
 var STORAGE_FILE = 'pomodoro.json'
 
-export default {  
-	components: {
-		Card
-	},
-    data() {
-      return {
-        newTodo: '',
-        todoList: [],
-        isPlay: false,
-        activeName: ['1', '2'],
-        radio: 2,
-        radio2: 4,
-        chart: null,
-        chartConfig: {},
-        totalTime: 25 * 60,
-        timerPaused: false,
-        interval: null
-      };
-    },
-    mounted() {
-      this.$nextTick(() => {
-        let _showTab = 0;
-        let $defaultLi = $('.menu-tabs a')
-          .eq(_showTab)
-          .addClass('current');
-        $($defaultLi.find('a').attr('href'))
-          .siblings()
-          .hide();
-        $('.menu-tabs a').click(function() {
-          let $this = $(this);
-          $this
-            .addClass('current')
-            .siblings('.current')
-            .removeClass('current');
-          let N = $(this)
-            .attr('href')
-            .substr(4);
-          $('.tab-content').hide();
-          $('.tab-content').removeClass('active');
-          $('#tab' + N)
-            .fadeIn()
-            .addClass('active');
-          return false;
-        });
-      });
-    },
-    methods: {
-      addTodo() {
-        let value = this.newTodo.trim();
-        let timestamp = Math.floor(Date.now());
-        if (!value) return;
-        this.todoList.push({
-          id: timestamp,
-          title: value,
-          completed: false
-        });
-        this.newTodo = '';
-        this.saveToFile()
-      },
-      removeTodo(todo) {
-        let newIndex = '';
-        this.todoList.forEach((item, key) => {
-          if (todo.id === item.id) {
-            newIndex = key;
-          }
-        });
-        this.todoList.splice(newIndex, 1);
-        this.saveToFile()
-      },
-      saveToFile(){
-      	userSession.putFile(STORAGE_FILE, JSON.stringify(this.todoList), this.$ENCRYPT)
-      },
-      showModal(e) {
-        let btnId = e.target.parentNode.id;
-        let dataNum = Number(e.target.parentNode.dataset.num);
-        $('.main-area').css({
-          opacity: 0,
-          display: 'none'
-        });
-        $('.modal-box').css({
-          opacity: 1,
-          display: 'flex'
-        });
-        $('.menu-tabs .menu-btn').removeClass('current');
-        $('.' + btnId).addClass('current');
-        $('.tab-content').css('display', 'none');
-        $('#tab' + dataNum)
-          .css('display', 'block')
-          .addClass('active');
-        if ($('.btn-analytics').hasClass('current')) {
-          console.log('Y');
-          this.createChart();
-        }
-      },
-      closeModal() {
-        $('.main-area').css({
-          opacity: 1,
-          display: 'flex'
-        });
-        $('.modal-box').css({
-          opacity: 0,
-          display: 'none'
-        });
-        $('.menu-tabs .menu-btn').removeClass('current');
-        $('.tab-content')
-          .css('display', 'none')
-          .removeClass('active');
-      },
-      showModalList() {
-        $('.main-area').css({
-          opacity: 0,
-          display: 'none'
-        });
-        $('.modal-box').css({
-          opacity: 1,
-          display: 'flex'
-        });
-        $('.menu-tabs .menu-btn').removeClass('current');
-        $('.btn-todo-list').addClass('current');
-        $('.tab-content').css('display', 'none');
-        $('#tab1').css('display', 'block');
-      },
-      timerRun() {
-        this.isPlay = true;
-        this.interval = setInterval(this.countdownTimer, 1000);
-      },
-      timerPause() {
-        this.isPlay = false;
-        clearInterval(this.interval);
-      },
-      timerReset() {
-        this.isPlay = false;
-        clearInterval(() => {
-          this.interval;
-        });
-        this.totalTime = 25 * 60;
-      },
-      timerCountdown() {
-        this.interval = setInterval(this.updateCurrentTime, 1000);
-        setInterval(() => {
-          this.timerMinutes--;
-        }, 60 * 1000);
-
-        if (this.timerSeconds === '00') {
-          this.timerSeconds = 59;
-          setInterval(() => {
-            this.timerSeconds--;
-          }, 1000);
-        } else {
-          setInterval(() => {
-            this.timerSeconds--;
-          }, 1000);
-        }
-      },
-      countdownTimer() {
-        this.totalTime--;
-      },
-      fetchData(){
-      	userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((pomodoro) => {
-	        if(pomodoro){
-	        	this.todoList = JSON.parse(pomodoro)
-	        }
-	    })
-      }
-    },
-    computed: {
-      time() {
-        return this.minutes + ':' + this.seconds;
-      },
-      minutes() {
-        let min = Math.floor(this.totalTime / 60);
-        return min >= 10 ? min : '0' + min;
-      },
-      seconds() {
-        let sec = this.totalTime - this.minutes * 60;
-        return sec >= 10 ? sec : '0' + sec;
-      },
-
-      filterTodoList() {
-        let newTodoList = [];
-        this.todoList.forEach(function(item) {
-          if (!item.completed) {
-            newTodoList.push(item);
-          }
-        });
-        return newTodoList;
-      }
-    },
-    mounted() {
-    	this.fetchData()
+export default {
+  components: {
+    Card
+  },
+  data () {
+    return {
+      newTodo: '',
+      todoList: [],
+      isPlay: false,
+      activeName: ['1', '2'],
+      radio: 2,
+      radio2: 4,
+      chart: null,
+      chartConfig: {},
+      totalTime: 25 * 60,
+      timerPaused: false,
+      interval: null
     }
+  },
+  mounted () {
+    this.fetchData()
+    this.$nextTick(() => {
+      let _showTab = 0
+      let $defaultLi = $('.menu-tabs a')
+        .eq(_showTab)
+        .addClass('current')
+      $($defaultLi.find('a').attr('href'))
+        .siblings()
+        .hide()
+      $('.menu-tabs a').click(function () {
+        let $this = $(this)
+        $this
+          .addClass('current')
+          .siblings('.current')
+          .removeClass('current')
+        let N = $(this)
+          .attr('href')
+          .substr(4)
+        $('.tab-content').hide()
+        $('.tab-content').removeClass('active')
+        $('#tab' + N)
+          .fadeIn()
+          .addClass('active')
+        return false
+      })
+    })
+  },
+  methods: {
+    addTodo () {
+      let value = this.newTodo.trim()
+      let timestamp = Math.floor(Date.now())
+      if (!value) return
+      this.todoList.push({
+        id: timestamp,
+        title: value,
+        completed: false
+      })
+      this.newTodo = ''
+      this.saveToFile()
+    },
+    removeTodo (todo) {
+      let newIndex = ''
+      this.todoList.forEach((item, key) => {
+        if (todo.id === item.id) {
+          newIndex = key
+        }
+      })
+      this.todoList.splice(newIndex, 1)
+      this.saveToFile()
+    },
+    saveToFile () {
+        userSession.putFile(STORAGE_FILE, JSON.stringify(this.todoList), this.$ENCRYPT)
+    },
+    showModal (e) {
+      let btnId = e.target.parentNode.id
+      let dataNum = Number(e.target.parentNode.dataset.num)
+      $('.main-area').css({
+        opacity: 0,
+        display: 'none'
+      })
+      $('.modal-box').css({
+        opacity: 1,
+        display: 'flex'
+      })
+      $('.menu-tabs .menu-btn').removeClass('current')
+      $('.' + btnId).addClass('current')
+      $('.tab-content').css('display', 'none')
+      $('#tab' + dataNum)
+        .css('display', 'block')
+        .addClass('active')
+      if ($('.btn-analytics').hasClass('current')) {
+        console.log('Y')
+        this.createChart()
+      }
+    },
+    closeModal () {
+      $('.main-area').css({
+        opacity: 1,
+        display: 'flex'
+      })
+      $('.modal-box').css({
+        opacity: 0,
+        display: 'none'
+      })
+      $('.menu-tabs .menu-btn').removeClass('current')
+      $('.tab-content')
+        .css('display', 'none')
+        .removeClass('active')
+    },
+    showModalList () {
+      $('.main-area').css({
+        opacity: 0,
+        display: 'none'
+      })
+      $('.modal-box').css({
+        opacity: 1,
+        display: 'flex'
+      })
+      $('.menu-tabs .menu-btn').removeClass('current')
+      $('.btn-todo-list').addClass('current')
+      $('.tab-content').css('display', 'none')
+      $('#tab1').css('display', 'block')
+    },
+    timerRun () {
+      this.isPlay = true
+      this.interval = setInterval(this.countdownTimer, 1000)
+    },
+    timerPause () {
+      this.isPlay = false
+      clearInterval(this.interval)
+    },
+    timerReset () {
+      this.isPlay = false
+      clearInterval(() => {
+        this.interval
+      })
+      this.totalTime = 25 * 60
+    },
+    timerCountdown () {
+      this.interval = setInterval(this.updateCurrentTime, 1000)
+      setInterval(() => {
+        this.timerMinutes--
+      }, 60 * 1000)
+
+      if (this.timerSeconds === '00') {
+        this.timerSeconds = 59
+        setInterval(() => {
+          this.timerSeconds--
+        }, 1000)
+      } else {
+        setInterval(() => {
+          this.timerSeconds--
+        }, 1000)
+      }
+    },
+    countdownTimer () {
+      this.totalTime--
+    },
+    fetchData () {
+        userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((pomodoro) => {
+          if (pomodoro) {
+            this.todoList = JSON.parse(pomodoro)
+          }
+      })
+    }
+  },
+  computed: {
+    time () {
+      return this.minutes + ':' + this.seconds
+    },
+    minutes () {
+      let min = Math.floor(this.totalTime / 60)
+      return min >= 10 ? min : '0' + min
+    },
+    seconds () {
+      let sec = this.totalTime - this.minutes * 60
+      return sec >= 10 ? sec : '0' + sec
+    },
+
+    filterTodoList () {
+      let newTodoList = []
+      this.todoList.forEach(function (item) {
+        if (!item.completed) {
+          newTodoList.push(item)
+        }
+      })
+      return newTodoList
+    }
+  }  
 }
 </script>
 <style scoped>
@@ -464,7 +417,7 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   width: calc(100% - 450px);
-  float: left;  
+  float: left;
 }
 .panel-list-area .item-custom input {
   position: absolute;
@@ -767,7 +720,7 @@ export default {
   display: none;
   justify-content: space-between;
   width: 100%;
-  color: #fff;  
+  color: #fff;
 }
 
 .modal-panel-area {

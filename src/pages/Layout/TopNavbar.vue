@@ -107,7 +107,7 @@
             </a>
             <ul class="dropdown-menu dropdown-navbar">
               <!-- <li class="nav-link"><router-link to="" class="nav-item dropdown-item">Profile</a></router-link> -->
-              <li class="nav-link"><router-link to="settings" class="nav-item dropdown-item">Settings</a></router-link>
+              <li class="nav-link"><router-link to="settings" class="nav-item dropdown-item">Settings</router-link>
               <li class="dropdown-divider"></li>
               <li class="nav-link">
                  <a href="#" id="signout-button" @click.prevent="signOut" class="nav-item dropdown-item">Log out</a>
@@ -137,7 +137,7 @@ export default {
       searchQuery: '',
       showMenu: false,
       blockstack: window.blockstack,
-      avatar: 'https://darray.org/public/avatar-placeholder.png',
+      avatar: 'https://darray.org/img/avatar-placeholder.png',
       givenName: 'Anonymous',
       imageSrc: null,
       messages: []
@@ -155,7 +155,8 @@ export default {
       location.reload()
     },
     checkInicialization () {
-      blockstack.getFile('company.json').then((fileContents) => {
+      const blockstack = this.blockstack
+      blockstack.getFile(STORAGE_FILE).then((fileContents) => {
         if (!fileContents) {
           let message = {}
           message.title = 'Add Company Info'
@@ -172,11 +173,11 @@ export default {
       const profile = blockstack.loadUserData().profile
       const user = new blockstack.Person(profile)
       this.givenName = user.name() ? user.name() : 'Nameless Person'
-      if (user.avatarUrl()){
+      if (user.avatarUrl()) {
         this.avatar = user.avatarUrl()
         this.imageSrc = user.avatarUrl()
-      }else{
-        this.imageSrc = 'https://darray.org/public/avatar-placeholder.png'
+      } else {
+        this.imageSrc = 'https://darray.org/img/avatar-placeholder.png'
       }
       this.checkInicialization()
     } else if (blockstack.isSignInPending()) {

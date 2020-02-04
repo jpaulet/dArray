@@ -7,7 +7,7 @@
         <img v-if='!imageLogo' style='height:124px;width:124px;border-radius:0px;' class="avatar" src="@/assets/img/company.png" alt="Logo Default" id='imageLogo' v-on:load='fetchFile'>
         <img v-if='imageLogo' style='height:124px;width:124px;border-radius:0px;' class="avatar" :src="imageSrc" alt="Logo" id='imageLogo'>
         <div class='col-12 text-center'><button class='btn btn-light btn-sm' style='font-size:11px;clear:both;background:#eee;color:#344675;background-color:#eee;'> Upload your logo </button></div>
-      </a>            
+      </a>
     </div>
     <div class="col-12 text-left mb-2 mt-4 pl-3">
       <h5 class="title mb-1">{{ company.company }}</h5>

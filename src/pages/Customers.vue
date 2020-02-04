@@ -275,8 +275,8 @@ export default {
       // Load Customers
       userSession.getFile(CUSTOMERS_FILE, this.$DECRYPT).then((customers) => {
         this.customersList = JSON.parse(customers || '[]')
-        //this.customersList = ["a7ef2d0f-530c-4886-b188-2af2647826bf"]
-        //userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList))
+        // this.customersList = ["a7ef2d0f-530c-4886-b188-2af2647826bf"]
+        // userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList))
         let i = 0
 
         for (i in this.customersList) {
@@ -284,16 +284,16 @@ export default {
             if (customer === null) {
               return false
             }
-            
+
             customer = JSON.parse(customer)
             let searchCustomer = this.customersList.indexOf(customer.id)
             this.$set(this.customers, searchCustomer, customer)
           })
         }
 
-        setTimeout(() => { 
+        setTimeout(() => {
           this.table1.data = this.customers
-          this.loadingPage = false 
+          this.loadingPage = false
         }, 700)
       })
     },
@@ -347,7 +347,7 @@ export default {
       this.model = this.customer
       this.newCustomer = true
     },
-    deleteCustomer (id){
+    deleteCustomer (id) {
       let searchCustomer = this.customersList.indexOf(id)
       if (searchCustomer === -1) {
         this.$notify({
@@ -360,12 +360,12 @@ export default {
         })
         return false
       }
-      
+
       this.customersList.splice(searchCustomer, 1)
       this.customers.splice(searchCustomer, 1)
 
       userSession.deleteFile(id + '.json')
-      userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList), this.$ENCRYPT)      
+      userSession.putFile(CUSTOMERS_FILE, JSON.stringify(this.customersList), this.$ENCRYPT)
     },
     clearCustomer () {
       this.model = {
@@ -393,7 +393,7 @@ export default {
     this.i18n = this.$i18n
     this.fetchData()
 
-    if(this.$route.query.newCustomer){
+    if (this.$route.query.newCustomer) {
       this.openNewCustomer()
     }
   }

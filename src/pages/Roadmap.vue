@@ -11,6 +11,10 @@
             <h6>Done</h6>
             <div class="col-12 pr-md-1 text-left">
               <ul>
+                <li style='line-height:22px;'><span class='badge badge-light'>31/01/20</span> - Wallet & crypto payments work started.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>30/01/20</span> - Adding Headers `can't be evil`.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>28/01/20</span> - Deleted 3rd Party assets. Deleted Cookies.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>22/01/20</span> - Deployed new <strong>Pomodoro</strong> Page.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>12/01/20</span> - Added required fields for Invoices & Expenses.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>11/01/20</span> - Created <i>GitCoin</i> grant page: <a href='https://gitcoin.co/grants/321/darray' target='_blank'>Support Us!</a></li>
                 <li style='line-height:22px;'><span class='badge badge-light'>11/01/20</span> - 🎉🎉 Moved dArray to Open Source Software! 🎉🎉</li>
@@ -30,16 +34,15 @@
                 <li style='line-height:22px;'><span class='badge badge-light'>04/12/19</span> - Added offline/online badge.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>30/11/19</span> - Launched v1.0</li>
               </ul>
-            </div> 
+            </div>
 
             <h6 class='mt-5'>ToDo</h6>
             <div class="col-12 pr-md-1 text-left">
               <ul style='line-height:22px;'>
                 <li style='line-height:22px;'>Add <i>`Project Managment` page</i>.</li>
-                <li style='line-height:22px;'>Create <i>`Time Tracking: Pomodoro`</i>.</li>
                 <li style='line-height:22px;'>Create <i>`Reports Page`</i>.</li>
               </ul>
-            </div>            
+            </div>
           </div>
 
           <div class="col-12 col-md-8 col-lg-8 mt-5 text-center pt-5" style='margin:0px auto;'>
@@ -92,7 +95,6 @@
 </template>
 <script>
 import { BreedingRhombusSpinner } from 'epic-spinners'
-import { userSession } from '@/userSession'
 import {
   Card
 } from '@/components/index'
@@ -104,13 +106,13 @@ export default {
   },
   data () {
     return {
-      loadingPage: true      
+      loadingPage: true
     }
   },
   methods: {
-    showModal(){
-      var x = document.getElementByClassName("modal");
-      x.style.display = "block";
+    showModal () {
+      var x = document.getElementByClassName('modal')
+      x.style.display = 'block'
     }
   },
   mounted () {

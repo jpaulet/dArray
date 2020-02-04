@@ -435,7 +435,7 @@
 													<p style='font-size:10px;color:#555;width:72%margin:0px auto;'>*: In the future we could develop<br />new premium features.</p>
 												 <button class="btn-action" @click='signIn'>Sign In</button>
 											</div>
-										</div>                    
+										</div>
 									</div>
 									<div class="col-lg-5 col-md-6">
 										<div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
@@ -465,7 +465,7 @@
 												<tr><th>Twitter</th></tr>
 												<tr>
 													<td class='pt-3'>
-														<a href="https://twitter.com/darray_dapp?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#fff;background-color:rgb(29, 161, 242);border-radius:25px;padding:10px 20px;font-weight:600;'>Follow <strong>@darray_dapp</strong></a> 
+														<a href="https://twitter.com/darray_dapp?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#fff;background-color:rgb(29, 161, 242);border-radius:25px;padding:10px 20px;font-weight:600;'>Follow <strong>@darray_dapp</strong></a>
 														<br /> <br /> <br />
 														<a href="https://twitter.com/jp_aulet?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false" style='color:#fff;background-color:rgb(29, 161, 242);border-radius:25px;padding:10px 20px;font-weight:600;'>Follow <strong>@jp_aulet</strong></a>
 													</td>
@@ -542,43 +542,43 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap'
 import { userSession } from '../userSession'
 export default {
-	name: 'signin',
-	components: {
+  name: 'signin',
+  components: {
     Terms
   },
-	methods: {
-		signIn () {
-			userSession.redirectToSignIn()
-		}
-	},
-	data () {
-		return {
-			rotatingText: ['Decentralized','Private','Secure','Blockchain','Free'],
-			i: 0,
-			publicPath: '',
-			showTerms: false
-		}
-	},
-	computed: {
-		rotateText: function(){
-			setTimeout(() => {
-				this.i++
-				if(this.i>=this.rotatingText.length){
-					this.i = 0
-				}
-			},10000,this.i)
-			return this.rotatingText[this.i]
-		}
-	},
-	mounted () {
-		let plugins = document.createElement('script')
-		plugins.setAttribute('src', this.publicPath + '/landing/plugins.js')
-		document.head.appendChild(plugins)
+  methods: {
+    signIn () {
+      userSession.redirectToSignIn()
+    }
+  },
+  data () {
+    return {
+      rotatingText: ['Decentralized', 'Private', 'Secure', 'Blockchain', 'Free'],
+      i: 0,
+      publicPath: '',
+      showTerms: false
+    }
+  },
+  computed: {
+    rotateText: function () {
+      setTimeout(() => {
+        this.i++
+        if (this.i >= this.rotatingText.length) {
+          this.i = 0
+        }
+      }, 10000, this.i)
+      return this.rotatingText[this.i]
+    }
+  },
+  mounted () {
+    let plugins = document.createElement('script')
+    plugins.setAttribute('src', this.publicPath + '/landing/plugins.js')
+    document.head.appendChild(plugins)
 
-		let custom = document.createElement('script')
-		custom.setAttribute('src', this.publicPath + '/landing/custom.js')
-		document.head.appendChild(custom)
-	}
+    let custom = document.createElement('script')
+    custom.setAttribute('src', this.publicPath + '/landing/custom.js')
+    document.head.appendChild(custom)
+  }
 }
 </script>
 
@@ -2398,7 +2398,6 @@ body {
 	width: 100%;
 	height: 100%;
 }
-
 
 .slide3 {
 	top: 0;
