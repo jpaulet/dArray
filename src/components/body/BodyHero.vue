@@ -368,8 +368,9 @@ export default {
       userSession.getFile(CRYPTO_FILE, this.$DECRYPT).then((crypto) => {
         if (crypto) {
           this.cryptos = JSON.parse(crypto)
+        }else{
+          this.cryptos = []
         }
-        this.cryptos = []
         setTimeout(() => { this.loadingPage = false }, 500)
       })
     },
