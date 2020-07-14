@@ -24,7 +24,7 @@
           </div>
 
           <div class="row">
-            <div class="col-md-12 text-left">
+            <div class="col-md-6 text-left">
               <base-input label="* Address" v-model="model.address" placeholder="Home Address" required></base-input>
             </div>
           </div>

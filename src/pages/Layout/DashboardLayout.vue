@@ -7,12 +7,14 @@
           <p>Dashboard</p>
         </template>
       </sidebar-link>
+      <!--
       <sidebar-link to="/cryptocurrencies">
         <i class="tim-icons icon-coins"></i>
         <template>
           <p>Cryptocurrencies</p>
         </template>
       </sidebar-link>
+      -->
       <sidebar-link to="/invoices">
         <i class="tim-icons icon-paper"></i>
         <template>
@@ -62,12 +64,13 @@
     </side-bar>
 
     <div class="main-panel" :data="backgroundColor" v-if="user" :user="user">
-      <top-navbar></top-navbar>
+      <top-navbar :isSubscribed='isSubscribed' :timeLeft='timeLeft'></top-navbar>
       <dashboard-content @click.native="toggleSidebar"></dashboard-content>
       <content-footer></content-footer>
     </div>
 
     <landing v-if="!userSession.isUserSignedIn() && !isLoadingPage"></landing>
+
     <div class='text-center pt-5 mt-5' v-if='isLoadingPage'>
       <breeding-rhombus-spinner
         :animation-duration="2000"
@@ -104,7 +107,9 @@ export default {
       backgroundColor: 'green',
       userSession: null,
       user: null,
-      isLoadingPage: false
+      isLoadingPage: false,
+      isSubscribed: false,
+      timeLeft: null
     }
   },
   methods: {
@@ -112,6 +117,32 @@ export default {
       if (this.$sidebar.showSidebar) {
         this.$sidebar.displaySidebar(false)
       }
+    },
+    checkSubscription (user) {
+      // api call
+      console.log(user)
+      /*
+      if (this.isSubscribed) {
+        var url = 'https://darray.org/api/checkSSID'
+        axios.post(url, {username: user.username }, {'headers': {'Accepts': 'application/json'}}.then((response)) => {
+          if(response.data === true){
+            this.isSubscribed = true
+          }else{
+            this.isSubscribed = false
+            this.timeLeft = response.data
+          }
+        })
+      } else {
+        var url = 'https://darray.org/api/checkSubscription'
+        axios.post(url,  {username: user.username }, {'headers': {'Accepts': 'application/json'}}.then((response)) => {
+          this.isSubscribed = response.data.subscribed
+          this.timeLeft = response.data.timeLeft
+          this.ssid = response.ssid
+        })
+      }
+      */
+      this.isSubscribed = false
+      this.timeLeft = '2'
     }
   },
   created () {
@@ -123,6 +154,7 @@ export default {
       this.user = new Person(this.userData.profile)
       this.user.username = this.userData.username
       this.user.name = this.userData.name ? this.userData.name : (this.userData.username ? this.userData.username.substr(0, this.userData.username.indexOf('.')) : 'Anonymous')
+      this.isSubscribed = this.checkSubscription(this.userData)
     } else if (userSession.isSignInPending()) {
       this.isLoadingPage = true
       userSession.handlePendingSignIn()

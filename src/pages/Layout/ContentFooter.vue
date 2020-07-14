@@ -35,6 +35,15 @@
       </div>
     </div>
 
+    <modal :show.sync="showPayment" body-classes="p-0" modal-classes="modal-dialog-centered modal-lg mt-2" style='transform:translate(0,0) !important;padding-top:80px;'>
+      <template slot="header" class='row'>
+        <h4 class="modal-title col-12 mt-3 mb-3" id="exampleModalLabel">Important Announcement</h4>
+      </template>
+      <div class="col-12 mb-3 text-dark">
+        
+      </div>
+    </modal>
+
     <modal :show.sync="showContent" body-classes="p-0" modal-classes="modal-dialog-centered modal-lg mt-2" style='transform:translate(0,0) !important;padding-top:80px;'>
       <template slot="header" class='row'>
         <h4 class="modal-title col-12 mt-3 mb-3" id="exampleModalLabel">Support Me, a solo indie maker</h4>
@@ -102,7 +111,8 @@ export default {
   },
   data () {
     return {
-      showContent: false
+      showContent: false,
+      showPayment: false
     }
   },
   mounted () {

@@ -1,19 +1,17 @@
-import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
-import Dashboard from '@/pages/Dashboard.vue'
-import Invoices from '@/pages/Invoices.vue'
-// import Cryptocurrencies from '@/pages/Cryptocurrencies.vue'
-import Expenses from '@/pages/Expenses.vue'
-import Customers from '@/pages/Customers.vue'
-import Tasks from '@/pages/Tasks.vue'
-import Calendar from '@/pages/Calendar.vue'
-import TableList from '@/pages/TableList.vue'
-import Settings from '@/pages/Settings.vue'
-import Files from '@/pages/Files.vue'
-import Roadmap from '@/pages/Roadmap.vue'
-import Pomodoro from '@/pages/Pomodoro.vue'
-
-import BodyHero from '@/components/body/BodyHero.vue'
-import SelectedHero from '@/components/body/SelectedHero.vue'
+const DashboardLayout = () => import('@/pages/Layout/DashboardLayout.vue')
+const Dashboard = () => import('@/pages/Dashboard.vue')
+const Invoices = () => import('@/pages/Invoices.vue')
+const Expenses = () => import('@/pages/Expenses.vue')
+const Customers = () => import('@/pages/Customers.vue')
+const Tasks = () => import('@/pages/Tasks.vue')
+const Calendar = () => import('@/pages/Calendar.vue')
+const TableList = () => import('@/pages/TableList.vue')
+const Settings = () => import('@/pages/Settings.vue')
+const Files = () => import('@/pages/Files.vue')
+const Roadmap = () => import('@/pages/Roadmap.vue')
+const Pomodoro = () => import('@/pages/Pomodoro.vue')
+const BodyHero = () => import('@/components/body/BodyHero.vue')
+const SelectedHero = () => import('@/components/body/SelectedHero.vue')
 
 const routes = [{
   path: '/',
@@ -25,6 +23,7 @@ const routes = [{
       name: 'Dashboard',
       component: Dashboard
     },
+    /*
     {
       path: '/cryptocurrencies',
       name: 'Crypto',
@@ -35,6 +34,7 @@ const routes = [{
       name: 'Crypto',
       component: SelectedHero
     },
+    */
     {
       path: '/invoices',
       name: 'Invoices',

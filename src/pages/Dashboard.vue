@@ -165,15 +165,12 @@
   </div>
 </template>
 <script>
-
 import {
   Card
 } from '@/components/index'
 
-import Vue from 'vue'
 import { BreedingRhombusSpinner } from 'epic-spinners'
 import LineChart from '@/components/Charts/LineChart'
-import BarChart from '@/components/Charts/BarChart'
 import * as chartConfigs from '@/components/Charts/config'
 import TaskList from './Dashboard/TaskList'
 import UserTable from './Dashboard/UserTable'
@@ -187,7 +184,6 @@ export default {
   components: {
     Card,
     LineChart,
-    BarChart,
     TaskList,
     UserTable,
     BreedingRhombusSpinner
@@ -262,7 +258,7 @@ export default {
       this.greenLineChart = {
         extraOptions: chartConfigs.purpleChartOptions,
         chartData: {
-          labels: this.listMonths.slice(-6),
+          labels: this.listMonths.slice(-12),
           datasets: [{
             label: '',
             fill: true,
@@ -277,7 +273,7 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.monthlyVAT.slice(-6)
+            data: this.monthlyVAT.slice(-12)
           }]
         },
         gradientColors: config.colors.primaryGradient,
@@ -289,7 +285,7 @@ export default {
       this.purpleLineChart = {
         extraOptions: chartConfigs.purpleChartOptions,
         chartData: {
-          labels: this.listMonths.slice(-6),
+          labels: this.listMonths.slice(-12),
           datasets: [{
             label: '',
             fill: true,
@@ -304,7 +300,7 @@ export default {
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
             pointRadius: 4,
-            data: this.monthlyExpenses.slice(-6)
+            data: this.monthlyExpenses.slice(-12)
           }]
         },
         gradientColors: config.colors.primaryGradient,
@@ -416,7 +412,7 @@ export default {
     },
 
     getLastMonths () {
-      var theMonths = new Array('JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC')
+      var theMonths = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
       var today = new Date()
       var aMonth = today.getMonth()
       var i
@@ -434,6 +430,8 @@ export default {
       var totalVAT = 0
       var monthlyInvoices = []
       var monthlyVAT = []
+      var today = new Date()
+      var aMonth = today.getMonth()
 
       for (let i = 1; i <= 12; i++) {
         monthlyInvoices[i] = 0
@@ -441,8 +439,13 @@ export default {
       }
 
       this.invoices.map((invoice) => {
-        monthlyInvoices[parseInt(invoice.date.substr(5, 2), 10)] += invoice.total
-        monthlyVAT[parseInt(invoice.date.substr(5, 2), 10)] += invoice.vat
+        var invoiceMonth = parseInt(invoice.date.substr(5, 2), 10)
+        var resultingMonth = invoiceMonth - aMonth - 1
+        if (resultingMonth < 1) {
+          resultingMonth = 12 - resultingMonth - 1
+        }
+        monthlyInvoices[resultingMonth] += invoice.total
+        monthlyVAT[resultingMonth] += invoice.vat
         total = total + invoice.total
         totalVAT = totalVAT + invoice.vat
       })
@@ -480,6 +483,8 @@ export default {
       var totalVAT = 0
       var monthlyExpenses = []
       var monthlyVAT = []
+      var today = new Date()
+      var aMonth = today.getMonth()
 
       for (let i = 1; i <= 12; i++) {
         monthlyExpenses[i] = 0
@@ -487,8 +492,13 @@ export default {
       }
 
       this.expenses.map((expense) => {
-        monthlyExpenses[parseInt(expense.date.substr(5, 2), 10)] += expense.total
-        monthlyVAT[parseInt(expense.date.substr(5, 2), 10)] += expense.vat
+        var expenseMonth = parseInt(expense.date.substr(5, 2), 10)
+        var resultingMonth = expenseMonth - aMonth - 1
+        if (resultingMonth < 1) {
+          resultingMonth = 12 - resultingMonth - 1
+        }
+        monthlyExpenses[resultingMonth] += expense.total
+        monthlyVAT[resultingMonth] += expense.vat
         total = total + expense.total
         totalVAT = totalVAT + expense.vat
       })

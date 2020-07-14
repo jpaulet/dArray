@@ -41,5 +41,4 @@ export default {
   }
 }
 </style>
-
 <style src="./assets/styles.css" lang="css"></style>

@@ -43,7 +43,7 @@
       </div>
 
       <div class="columns" style="margin: 0px 10px">
-        <div v-for="cryptoCurrency in firstFiveCryptoCurrencies" class="column">
+        <div v-for="(cryptoCurrency,index) in firstFiveCryptoCurrencies" class="column" :key='`crypto`+index'>
           <router-link :to="`cryptocurrencies/${cryptoCurrency.id}`">
             <div class="card mb-0" style='background-color: #fff;'>
               <div class="card-image" :class="{'card-image-iframe': isOpenedInIFrame}" style='height:80px;'>
@@ -66,7 +66,7 @@
         </div>
       </div>
       <div class="columns" style="margin: 0px 10px">
-        <div v-for="cryptoCurrency in secondFiveCryptoCurrencies" class="column">
+        <div v-for="(cryptoCurrency,index) in secondFiveCryptoCurrencies" class="column" :key='`cryptocurrency`+index'>
           <router-link :to="`cryptocurrencies/${cryptoCurrency.id}`">
             <div class="card mb-0" style='background-color: #fff;'>
               <div class="card-image" :class="{'card-image-iframe': isOpenedInIFrame}" style='height:80px;'>
@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="columns" style="margin: 0px 10px">
-        <div v-for="cryptoCurrency in thirdFiveCryptoCurrencies" class="column">
+        <div v-for="(cryptoCurrency,index) in thirdFiveCryptoCurrencies" class="column" :key='`crypto3`+index'>
           <router-link :to="`cryptocurrencies/${cryptoCurrency.id}`">
             <div class="card mb-0" style='background-color: #fff;'>
               <div class="card-image" :class="{'card-image-iframe': isOpenedInIFrame}" style='height:80px;'>
@@ -171,9 +171,9 @@
 
 <script>
 import { store } from '../../store.js'
-import { BreedingRhombusSpinner } from 'epic-spinners'
+import { userSession } from '@/userSession'
 import {
-  Card, BaseButton, BaseCheckbox, BaseInput, Modal
+  Card, BaseButton, BaseInput
 } from '@/components/index'
 
 var CRYPTO_FILE = 'cryptos.json'
@@ -184,10 +184,7 @@ export default {
   components: {
     Card,
     BaseButton,
-    BaseInput,
-    BaseCheckbox,
-    Modal,
-    BreedingRhombusSpinner
+    BaseInput
   },
   data () {
     return {
@@ -256,7 +253,6 @@ export default {
       })
 
       if (indexCoin > -1) {
-        var tracked = this.cryptos[indexCoin]
         let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => {
           return item.id.toLowerCase() === coin.toLowerCase()
         })
@@ -278,7 +274,6 @@ export default {
       })
 
       if (indexCoin > -1) {
-        var tracked = this.cryptos[indexCoin]
         let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => {
           return item.id.toLowerCase() === coin.toLowerCase()
         })
@@ -300,7 +295,6 @@ export default {
       })
 
       if (indexCoin > -1) {
-        var tracked = this.cryptos[indexCoin]
         let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => {
           return item.id.toLowerCase() === coin.toLowerCase()
         })
@@ -322,7 +316,6 @@ export default {
       })
 
       if (indexCoin > -1) {
-        var tracked = this.cryptos[indexCoin]
         let indexCoins = this.sharedState.cryptoCurrencies.findIndex((item) => {
           return item.id.toLowerCase() === coin.toLowerCase()
         })
@@ -368,7 +361,7 @@ export default {
       userSession.getFile(CRYPTO_FILE, this.$DECRYPT).then((crypto) => {
         if (crypto) {
           this.cryptos = JSON.parse(crypto)
-        }else{
+        } else {
           this.cryptos = []
         }
         setTimeout(() => { this.loadingPage = false }, 500)

@@ -168,6 +168,7 @@
                     <input type='text' class='form-control col-10 ml-1' v-model='invoice.client.legal' placeholder="*Title (required)" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.address' placeholder="Address" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.city' placeholder="City" />
+                    <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.cp' placeholder="Postal code" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.country' placeholder="Country" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.nif' placeholder="Tax Nº" />
                     <input type='text' class='form-control col-10 ml-1 mt-1' v-model='invoice.client.email' placeholder="E-mail" />
@@ -231,7 +232,7 @@
                         <td style='padding-bottom:10px;'>
                             <h6>Customer Details:</h6>
                             <span class='ml-2'>{{invoice.client.legal}}</span><br>
-                            <span class='ml-2'>{{invoice.client.address}}</span><br>
+                            <span class='ml-2'>{{invoice.client.address}}</span> /  <span class='ml-2'>{{invoice.client.cp}}</span><br>
                             <span class='ml-2'>{{invoice.client.city}}</span> / <span class='ml-2'>{{invoice.client.country}}</span><br>
                             <span v-if='invoice.client.nif' class='ml-2'>{{invoice.client.nif}}<br> </span>
                             <span v-if='invoice.client.email' class='ml-2'>{{invoice.client.email}}<br></span>
@@ -241,7 +242,7 @@
                         <td style='padding-bottom:10px;'>
                             <h6>Company Details:</h6>
                             <span class='mr-2'>{{company.company}}<br> </span>
-                            <span class='mr-2'>{{company.address}}<br> </span>
+                            <span class='mr-2'>{{company.address}}</span> -  <span class='ml-2'>{{company.zip}}</span><br>
                             <span class='mr-2'>{{company.city}} - {{company.country}}<br> </span>
                             <span class='mr-2'>{{company.email}}</span>
                         </td>
@@ -283,7 +284,7 @@
                   <td>{{invoice.currency}}{{ subtotal | currency }}</td>
                 </tr>
 
-                <tr class="vat">
+                <tr class="vat" v-if='invoice.vat !== 0 && invoice.vat !== "0"'>
                   <td colspan="3" class='text-right pr-3'>VAT <span style='font-size:12px;'>({{invoice.tax}} %)</span>:</td>
                   <td>{{invoice.currency}}{{ vat | currency }}</td>
                 </tr>
@@ -379,7 +380,7 @@
                     <td style='padding-bottom:10px;'>
                         <h6>Customer Details:</h6>
                         <span class='ml-2'>{{invoice.client.legal}}</span><br>
-                        <span class='ml-2'>{{invoice.client.address}}</span><br>
+                        <span class='ml-2'>{{invoice.client.address}}</span> - <span class='mr-2'>{{invoice.client.cp}}</span><br>
                         <span class='ml-2'>{{invoice.client.country}}</span><br>
                         <span v-if='invoice.client.tax_number' class='ml-2'>{{invoice.client.tax_number}}<br> </span>
                         <span v-if='invoice.client.email' class='ml-2'>{{invoice.client.email}}<br></span>
@@ -389,7 +390,7 @@
                     <td style='padding-bottom:10px;'>
                         <h6>Company Details:</h6>
                         <span class='mr-2'>{{company.company}}<br> </span>
-                        <span class='mr-2'>{{company.address}}<br> </span>
+                        <span class='mr-2'>{{company.address}}</span> - <span class='mr-2'>{{company.zip}}<br> </span>
                         <span class='mr-2'>{{company.city}} - {{company.country}}<br> </span>
                         <span class='mr-2'>{{company.email}}</span>
                     </td>
@@ -425,7 +426,7 @@
               <td>{{invoice.currency}}{{ subtotal | currency }}</td>
             </tr>
 
-            <tr class="vat">
+            <tr class="vat" v-if='invoice.vat !== 0 && invoice.vat !== "0"'>
               <td colspan="3" class='text-right pr-3'>VAT <span style='font-size:12px;'>({{invoice.tax}} %)</span>:</td>
               <td>{{invoice.currency}}{{ vat | currency }}</td>
             </tr>
@@ -546,6 +547,7 @@ export default {
         comments: '',
         status: 'Pending',
         tax: 0,
+        cp: 0,
         currency: null,
         discount: 0,
         items: [
@@ -886,6 +888,7 @@ export default {
         comments: '',
         status: 'Pending',
         tax: 0,
+        cp: 0,
         currency: '$',
         discount: 0,
         items: [

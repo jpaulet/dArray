@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   configureWebpack: {
@@ -9,13 +9,22 @@ module.exports = {
         jquery: 'jquery',
         'window.jQuery': 'jquery',
         jQuery: 'jquery'
-      }),
-      new BundleAnalyzerPlugin()
+      })
+      //new BundleAnalyzerPlugin()
     ],
     resolve: {
       alias: {
         'vue$': 'vue/dist/vue.esm.js'
       }
+    },
+    optimization: {
+      splitChunks: {
+        minSize: 10000,
+        maxSize: 250000,
+      }
+    },
+    performance: {
+      hints: false
     },
     mode: 'production'
   },
@@ -25,6 +34,10 @@ module.exports = {
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
       'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding',
       'can\'t-be-evil': 'true'
+    },
+    overlay: {
+      warnings: false,
+      errors: false
     }
   }
 }
