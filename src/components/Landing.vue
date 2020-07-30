@@ -34,7 +34,7 @@
                   <a href="#" class="btn btn-primary btn-lg" id="signin-button" @click.prevent="signIn">
                     Sign In Now
                   </a><br />
-                  <span style='font-size:11px;'>Sign In with <strong>Blockstack</strong> to get access. It's free!</span>
+                  <span style='font-size:11px;'>Sign In with <strong>Blockstack</strong> to get access.</span>
                 </div>
                 <div id="response"></div>
               </div>
@@ -128,7 +128,7 @@
                   </div>
                   <div class="card-text">
                     <h3>Free</h3>
-                    <p>It's free! Yes, 0$.</p>
+                    <p>You could test it for 1 month for free.</p>
                   </div>
                 </div>
               </div>
@@ -178,7 +178,7 @@
                     <input type="radio" name="radio-btn" id="img-1" checked />
                     <li class="slide-container">
                     <div class="slide">
-                      <img src="@/assets/img/landing/features/invoice1.jpg" alt='Invoice screenshot 1' />
+                      <img class='img-fluid' src="@/assets/img/landing/features/invoice1.jpg" alt='Invoice screenshot 1' />
                         </div>
                     <div class="nav">
                       <label for="img-3" class="prev">&#x2039;</label>
@@ -189,7 +189,7 @@
                     <input type="radio" name="radio-btn" id="img-2" />
                     <li class="slide-container">
                         <div class="slide">
-                          <img src="@/assets/img/landing/features/invoice2.jpg" alt='Invoice screenshot 2' />
+                          <img class='img-fluid' src="@/assets/img/landing/features/invoice2.jpg" alt='Invoice screenshot 2' />
                         </div>
                     <div class="nav">
                       <label for="img-1" class="prev">&#x2039;</label>
@@ -200,7 +200,7 @@
                     <input type="radio" name="radio-btn" id="img-3" />
                     <li class="slide-container">
                         <div class="slide">
-                          <img src="@/assets/img/landing/features/invoice3.jpg" alt='Invoice screenshot 3' />
+                          <img class='img-fluid' src="@/assets/img/landing/features/invoice3.jpg" alt='Invoice screenshot 3' />
                         </div>
                     <div class="nav">
                       <label for="img-2" class="prev">&#x2039;</label>
@@ -231,7 +231,7 @@
                     <input type="radio" name="radio-btn2" id="img-4" checked />
                     <li class="slide-container">
                     <div class="slide2">
-                      <img src="@/assets/img/landing/features/expense1.jpg" alt='Expense screenshot 2' />
+                      <img class='img-fluid' src="@/assets/img/landing/features/expense1.jpg" alt='Expense screenshot 2' />
                         </div>
                     <div class="nav">
                       <label for="img-5" class="prev">&#x2039;</label>
@@ -242,7 +242,7 @@
                     <input type="radio" name="radio-btn2" id="img-5" />
                     <li class="slide-container">
                         <div class="slide2">
-                          <img src="@/assets/img/landing/features/expense2.jpg" alt='Expense screenshot 2' />
+                          <img class='img-fluid' src="@/assets/img/landing/features/expense2.jpg" alt='Expense screenshot 2' />
                         </div>
                     <div class="nav">
                       <label for="img-4" class="prev">&#x2039;</label>
@@ -323,7 +323,7 @@
                     <input type="radio" name="radio-btn3" id="img-6" checked />
                     <li class="slide-container">
                       <div class="slide3">
-                        <img src="@/assets/img/landing/features/dashboard.jpg" alt='Dashboard screenshot 1' />
+                        <img class='img-fluid' src="@/assets/img/landing/features/dashboard.jpg" alt='Dashboard screenshot 1' style='box-shadow:0px 0px 30px 0px rgba(0,0,0,.1);' />
                       </div>
                       <div class="nav">
                         <label for="img-8" class="prev">&#x2039;</label>
@@ -375,7 +375,7 @@
            <div class="yd-ft-inner py-5">
              <div class="yd-ft-left" style='margin-top:-20px;'>
                <h2>Welcome to dArray, where privacy matters.</h2>
-               <p>A free & private alternative to Zoho, QuickBooks and Freshbooks.</p>
+               <p>A secure & private alternative to Zoho, QuickBooks and Freshbooks.</p>
                <a href="#landing" class="btn-action btn-edge">Get Started</a>
              </div>
              <div class="yd-ft-right">
@@ -416,28 +416,11 @@
                 <div class="pricing-intro wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
                   <h1>Support.</h1>
                   <p style='max-width:800px;margin:0px auto;'>
-                    <span style='color:#344675;'>dArray</span> is free, but you could support it & myself <span style='color:#aaa;'>a solo-maker</span> in various ways:<br />Thank you in advance <span style='color:#344675;'>❤️</span>.
+                    I developed <span style='color:#344675;'>dArray</span> as a solo-maker, you could support my job in various ways:<br />Thank you in advance <span style='color:#344675;'>❤️</span>.
                   </p>
                 </div>
                 <div class="row">
-                  <div class="col-lg-5 offset-lg-1 col-md-6">
-                   <div class="table-left wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                     <div class="pricing-details">
-                       <h2>Free!</h2>
-                       <img src="@/assets/img/landing/free.jpg" alt="Free dArray Icon" width="60">
-
-                       <span>$0.00</span>
-                          <ul>
-                            <li>All the features*</li>
-                            <li>Create & store invoices</li>
-                            <li>Save documents</li>
-                          </ul>
-                          <p style='font-size:10px;color:#555;width:72%margin:0px auto;'>*: In the future we could develop<br />new premium features.</p>
-                         <button class="btn-action" @click='signIn'>Sign In</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-5 col-md-6">
+                  <div class="col-8 offset-2">
                     <div class="table-right wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;padding:16px 20px 24px 20px;">
                       <table class='text-center' style='width:100%;'>
                         <tr><th>Patreon</th></tr>
@@ -485,10 +468,10 @@
           <div class="container text-center">
             <div class="cta-content">
                <h4>DARRAY IS A FULL-FEATURED PRIVATE ONLINE ACCOUNTING SOFTWARE</h4>
-               <h1 class='mb-2'>Start now and put your business<br /> on the Blockchain for free.</h1>
+               <h1 class='mb-2 mt-2'>Start now and put your business on the<br /> Blockchain in a secure & private way.</h1>
                <a class="btn-action js-scroll-trigger btn btn-primary btn-lg" href="#" @click.prevent='signIn'>Sign In now</a>
               <div class="form-note">
-                <p>It's Free. Sign in now with Blockstack to get access to your decentralized CRM.</p>
+                <p>The first month it's free. Sign in now with Blockstack to get access to your decentralized CRM.</p>
               </div>
             </div>
           </div>
