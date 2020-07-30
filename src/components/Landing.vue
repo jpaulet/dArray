@@ -521,7 +521,6 @@
 
 <script>
 import Terms from '@/components/Terms'
-// import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap'
 import { userSession } from '../userSession'
 export default {

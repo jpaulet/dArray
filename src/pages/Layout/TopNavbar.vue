@@ -132,8 +132,8 @@
       <div class="col-12 mb-3">
         <div class='col-12 text-dark' style='clear:both;margin:0px auto;text-align:justify;'>
           Hey! I'm J.P 👋, founder and solo developer of <strong>dArray</strong>. <br /><br />
-          As you may know, <u>Blockstack ended their dApps "Reward Program"</u> and as a solo-developer this prorgram was the only way to monetize dArray.<br /><br />
-          For this reason, in order to be able to pay the server, keep working on this app, make updates, solve bugs and provide new requested features I'm in the obligation to change the conditions and request a <strong>small yearly payment</strong>. This payment will be used to pay for the server and development costs. <br /><br />But don't worry, dArray is a open-source software, you will always be able to download the source code and run your own private server with your data! If you prefer to keep using dArray.org, with all your information and ready-to-use dApp, updates and new features, you will have 30 days to pay the subcription to keep accessing to your data. <br /><br />
+          As you may know, <u>Blockstack ended their dApps "Reward Program"</u> several months ago and as a solo-developer this prorgram was the only way to monetize dArray.<br /><br />
+          For this reason, in order to be able to pay the server, <strong>keep working on this dApp</strong>, make updates, solve bugs and provide new <strong>requested features</strong> I'm in the obligation to change the conditions and request a <strong>small yearly payment</strong>. <span style='text-decoration:underline;'>This payment will be used to pay for the server and development costs</span>. <br /><br />But don't worry, dArray is a open-source software, you will always be able to download the source code and run your own private server with your data! If you prefer to keep using dArray.org, with all your information and ready-to-use dApp, updates and new features, you will have 30 days to pay the subcription to keep accessing to your data. <br /><br />
           I hope you all understand this situation and comprenhend that as a Freelancer & Developer <u>I need some help from users</u> to keep this amazing journey!<br /><br />
           <strong>Thanks in advance 🙂</strong><br />
           J.P. Aulet!<br />
@@ -151,14 +151,19 @@
         <h3 class="modal-title col-12 mt-3 mb-3" id="exampleModalLabel" style='text-decoration: underline;'>Subscribe</h3>
       </template>
       <div class="col-12 mb-3">
-        <div class='col-12 text-dark' style='clear:both;margin:0px auto;text-align:justify;'>
+        <div class='col-12 text-dark' style='clear:both;margin:0px auto;text-align:center;'>
           Get fully access to <strong>dArray</strong> for only 29.99€/year!<br /><br />
 
           <!-- <div ref="card" style='width:60%;margin:0px auto;'></div> <br /> -->
           <div style='width:60%;margin:0px auto 30px;text-align:center;border:1px solid #ccc;border-radius:8px;padding:30px;'>
             <div style='text-align:center;'>
               <img src='darray_sm.png' style='margin:20px auto;' />
-              <br />1 year subscription - 29.99€
+              <br />1 year subscription - 49.99€
+              <br />Unlimited Invoices & Expenses
+              <br />Unlimited Customers
+              <br />Pomodoro + Tasks + Documents
+              <br /><span style='font-size:11px;font-weight:200;'>+ Support a solo-maker</span>
+              <br />New Features for free
             </div>
           </div>
           <div style='text-align:center;'>

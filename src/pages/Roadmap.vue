@@ -7,10 +7,49 @@
             <h5 class="title">Roadmap</h5>
           </template>
 
+          <div class="col-12 col-md-8 col-lg-6 mt-3 text-center mb-5" style='margin:0px auto;'>
+            Want to support me & my job?
+            <div class='row mt-3'>
+              <div class="col-6" style="padding:20px 20px 30px 20px;">
+                <table class='text-center' style='width:100%;'>
+                  <tr><th>Patreon</th></tr>
+                  <tr>
+                    <td class='text-center pt-1'>
+                      <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank'>
+                        <img src='@/assets/img/Patreon+Button.png' style='width:210px;margin:0px auto;opacity:0.8;' />
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-6" style="padding:20px 20px 30px 20px;">
+                <table class='text-center' style='width:100%;'>
+                  <tr><th>Buy Me a Coffee</th></tr>
+                  <tr>
+                    <td class='text-center pt-1'>
+                      <a href='https://www.buymeacoffee.com/mpSEk0R' target='_blank'><img src='@/assets/img/landing/Button_orange.png' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
           <div class="col-12 col-md-8 col-lg-8 mt-3" style='margin:0px auto;'>
             <h6>Done</h6>
             <div class="col-12 pr-md-1 text-left">
               <ul>
+                <li style='line-height:22px;'><span class='badge badge-light'>29/07/20</span> - Added "Important Information" popup.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>29/07/20</span> - Started working in new crypto page.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>27/07/20</span> - Removed Crypto page due CoinList API deprecation.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>24/06/20</span> - Blockstack Browser deprecated, start moving to Blockstack Connect (WIP).</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>13/06/20</span> - Updated styles.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>07/05/20</span> - Improved charts.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>19/04/20</span> - Moved dArray to new (faster) server.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>11/04/20</span> - Solved warnings, improved performance.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>24/03/20</span> - Solved bug in Dashboard chart.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>22/03/20</span> - Added requested coins & localizations.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>15/02/20</span> - Improved Expenses & Invoices page.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>31/01/20</span> - Wallet & crypto payments work started.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>30/01/20</span> - Adding Headers `can't be evil`.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>28/01/20</span> - Deleted 3rd Party assets. Deleted Cookies.</li>
@@ -41,39 +80,13 @@
               <ul style='line-height:22px;'>
                 <li style='line-height:22px;'>Add <i>`Project Managment` page</i>.</li>
                 <li style='line-height:22px;'>Create <i>`Reports Page`</i>.</li>
+                <li style='line-height:22px;'>Monetize dApp.</li>
               </ul>
             </div>
           </div>
 
           <div class="col-12 col-md-8 col-lg-8 mt-5 text-center pt-5" style='margin:0px auto;'>
             Have any suggestion? Question? Found any bug? <br />Contact me throught <a href='https://jpaulet.typeform.com/to/sVUrrj' style='color:#344675;font-weight:600;'>this form</a>.
-          </div>
-          <div class="col-12 col-md-8 col-lg-6 mt-3 text-center mb-5" style='margin:0px auto;'>
-            Want to support me & my job?
-            <div class='row mt-3'>
-              <div class="col-6" style="padding:20px 20px 30px 20px;">
-                <table class='text-center' style='width:100%;'>
-                  <tr><th>Patreon</th></tr>
-                  <tr>
-                    <td class='text-center pt-1'>
-                      <a href="https://www.patreon.com/bePatron?u=11297370" target='_blank'>
-                        <img src='@/assets/img/Patreon+Button.png' style='width:210px;margin:0px auto;opacity:0.8;' />
-                      </a>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-              <div class="col-6" style="padding:20px 20px 30px 20px;">
-                <table class='text-center' style='width:100%;'>
-                  <tr><th>Buy Me a Coffee</th></tr>
-                  <tr>
-                    <td class='text-center pt-1'>
-                      <a href='https://www.buymeacoffee.com/mpSEk0R' target='_blank'><img src='@/assets/img/landing/Button_orange.png' style='width:210px;margin:0px auto;opacity:0.8;'/></a>
-                    </td>
-                  </tr>
-                </table>
-              </div>
-            </div>
           </div>
         </card>
       </div>
