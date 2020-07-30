@@ -13,7 +13,7 @@ export const store = {
   },
   getCryptoCurrencies () {
     const getUrl = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=1&limit=15&sort=cmc_rank'
-    axios.get(getUrl, {'headers': { 'X-CMC_PRO_API_KEY': 'f82883c7-aa81-45e5-8460-c72ce13f5cea', 'Accepts': 'application/json'}}).then((response) => {
+    axios.get(getUrl, { 'headers': { 'X-CMC_PRO_API_KEY': 'f82883c7-aa81-45e5-8460-c72ce13f5cea', 'Accepts': 'application/json' } }).then((response) => {
       this.state.cryptoCurrencies = response.data
       this.state.cryptoCurrencies.forEach(cryptoCurrency => this.addImageAndDescription(cryptoCurrency))
     })
@@ -31,7 +31,7 @@ export const store = {
   },
   getTotalMarketCapUSD () {
     const getUrl = 'https://api.coinmarketcap.com/v1/global/'
-    axios.get(getUrl, {'headers': { 'X-CMC_PRO_API_KEY': 'f82883c7-aa81-45e5-8460-c72ce13f5cea', 'Accepts': 'application/json'}}).then((response) => {
+    axios.get(getUrl, { 'headers': { 'X-CMC_PRO_API_KEY': 'f82883c7-aa81-45e5-8460-c72ce13f5cea', 'Accepts': 'application/json' } }).then((response) => {
       const globalData = response.data
       this.state.totalMarketCapUSD = globalData.total_market_cap_usd
     })

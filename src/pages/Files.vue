@@ -12,7 +12,9 @@
             <h4 class='text-left'> Path </h4>
             <div class='text-left mb-3'>
               <a href='#' @click.prevent='changeFolder("/",0)' class='text-left text-muted badge badge-light' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /Home </a>
-              <a v-if='path !== "/" && folder !== "/" && folder !== ""' v-for='(folder,index) in path.split("/")' :key='index' @click.prevent='changeFolder(folder,index+1)' href='#' class='text-left text-muted badge badge-light ml-2' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /{{folder}} </a>
+              <template v-if='path !== "/" && folder !== "/" && folder !== ""'>
+                <a v-for='(folder,index) in path.split("/")' :key='index' @click.prevent='changeFolder(folder,index+1)' href='#' class='text-left text-muted badge badge-light ml-2' style='font-size:11px;line-height:14px;color:#fff !important;background-color:#344675;'> /{{folder}} </a>
+              </template>
             </div>
 
             <h4 class='text-left'> Folders </h4>
@@ -139,11 +141,11 @@ export default {
         localPath = folder + '/'
       } else {
         if (this.currentDepth > depth) {
-          var the_arr = localPath.replace(/^\/|\/$/g, '').split('/')
+          var theArr = localPath.replace(/^\/|\/$/g, '').split('/')
           for (let i = depth; i < this.currentDepth; i++) {
-            the_arr.pop()
+            theArr.pop()
           }
-          localPath = the_arr.join('/') + '/'
+          localPath = theArr.join('/') + '/'
         } else {
           localPath = localPath + folder + '/'
         }
@@ -236,10 +238,11 @@ export default {
       const file = input.files[0]
       var dataURL = null
       let extension = file.name.substring(file.name.lastIndexOf('.') + 1, file.name.length)
+      var type = ''
       if (extension === 'jpg' || extension === 'jpeg' || extension === 'gif' || extension === 'png' || extension === 'bmp') {
-        var type = 'image'
+        type = 'image'
       } else {
-        var type = 'file'
+        type = 'file'
       }
 
       const upload = {

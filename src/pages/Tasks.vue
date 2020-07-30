@@ -151,10 +151,6 @@ export default {
     todoTasks: function () {
       this.$nextTick()
       return this.tasks.filter(item => item.completed === false)
-    },
-    nextID: function () {
-      if (this.tasks.length === 0) { return 1 }
-      return (this.tasks.sort(function (a, b) { return a.id - b.id }))[this.tasks.length - 1].id + 1
     }
   },
   methods: {
@@ -214,7 +210,7 @@ export default {
         this.task.completed = true
       }
 
-      let taskID = this.nextID
+      let taskID = this.nextID()
       this.task.id = taskID
       this.tasks.push({ ...this.task })
       this.clear()
@@ -238,6 +234,10 @@ export default {
         type: 'success',
         timeout: 1500
       })
+    },
+    nextID: function () {
+      if (this.tasks.length === 0) { return 1 }
+      return (this.tasks.sort(function (a, b) { return a.id - b.id }))[this.tasks.length - 1].id + 1
     }
   },
   async mounted () {

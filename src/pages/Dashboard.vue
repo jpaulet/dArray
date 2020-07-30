@@ -175,6 +175,7 @@ import * as chartConfigs from '@/components/Charts/config'
 import TaskList from './Dashboard/TaskList'
 import UserTable from './Dashboard/UserTable'
 import config from '@/config'
+const userSession = () => import('../userSession.js')
 
 var INVOICES_FILE = 'invoices.json'
 var EXPENSES_FILE = 'expenses.json'

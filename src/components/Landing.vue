@@ -27,7 +27,7 @@
         <div class="container text-center">
           <div class="home hero-2"><!-- Hero Section-->
             <div class="hero-content wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-              <h1>The <transition name="slide-fade" mode="out-in"><span class='mr-3'>{{rotateText}}</span></transition> <strong style='font-weight:500;'>Accounting Software</strong><br /> for Makers, Freelancers & SME</h1>
+              <h1>The <transition name="slide-fade" mode="out-in"><span class='mr-3'>Private</span></transition> <strong style='font-weight:500;'>Accounting Software</strong><br /> for Makers, Freelancers & SME</h1>
               <p>Put your business on the <strong style='font-weight:500;'>Blockchain</strong> & keep your data <strong style='font-weight:500;'>secure & private</strong>.<br />Manage Invoices, Expenses, Customers, Files & more from everywhere.</p>
               <div class="form-alt mt-5">
                 <div class="subscribe-form wow zoomIn animated" style="visibility: visible;">
@@ -538,46 +538,48 @@
 
 <script>
 import Terms from '@/components/Terms'
-import BootstrapVue from 'bootstrap-vue'
+// import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap'
 import { userSession } from '../userSession'
 export default {
   name: 'signin',
   components: {
-  Terms
+    Terms
   },
   methods: {
-  signIn () {
-    userSession.redirectToSignIn()
-  }
+    signIn () {
+      userSession.redirectToSignIn()
+    }
   },
   data () {
-  return {
-    rotatingText: ['Decentralized', 'Private', 'Secure', 'Blockchain', 'Free'],
-    i: 0,
-    publicPath: '',
-    showTerms: false
-  }
-  },
-  computed: {
-  rotateText: function () {
-    setTimeout(() => {
-    this.i++
-    if (this.i >= this.rotatingText.length) {
-      this.i = 0
+    return {
+      rotatingText: ['Decentralized', 'Private', 'Secure', 'Blockchain', 'Free'],
+      i: 0,
+      publicPath: '',
+      showTerms: false
     }
-    }, 10000, this.i)
-    return this.rotatingText[this.i]
-  }
   },
+  /*
+  computed: {
+    rotateText: function () {
+      setTimeout(() => {
+        this.i++
+        if (this.i >= this.rotatingText.length) {
+          this.i = 0
+        }
+      }, 10000, this.i)
+      return this.rotatingText[this.i]
+    }
+  },
+  */
   mounted () {
-  let plugins = document.createElement('script')
-  plugins.setAttribute('src', this.publicPath + '/landing/plugins.js')
-  document.head.appendChild(plugins)
+    let plugins = document.createElement('script')
+    plugins.setAttribute('src', this.publicPath + '/landing/plugins.js')
+    document.head.appendChild(plugins)
 
-  let custom = document.createElement('script')
-  custom.setAttribute('src', this.publicPath + '/landing/custom.js')
-  document.head.appendChild(custom)
+    let custom = document.createElement('script')
+    custom.setAttribute('src', this.publicPath + '/landing/custom.js')
+    document.head.appendChild(custom)
   }
 }
 </script>

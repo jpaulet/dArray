@@ -175,7 +175,7 @@ import DropDown from '@/components/Dropdown.vue'
 import Modal from '@/components/Modal.vue'
 import { userSession } from '@/userSession'
 
-let stripe = Stripe(`pk_test_pALdYXC6f316H4PUGjaQDstY00JiQ39DRr`)
+// let stripe = Stripe(`pk_test_pALdYXC6f316H4PUGjaQDstY00JiQ39DRr`)
 // let elements = stripe.elements()
 // let card = undefined
 
@@ -225,6 +225,7 @@ export default {
       })
     },
     purchase: function () {
+      /*
       stripe.redirectToCheckout({
         lineItems: [{
           price: '1',
@@ -241,6 +242,7 @@ export default {
         // error, display the localized error message to your customer
         // using `result.error.message`.
       })
+      */
       /*
       stripe.createToken(card).then(function (result) {
         console.log(result.token)

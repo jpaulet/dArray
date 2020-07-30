@@ -18,7 +18,9 @@
 </template>
 
 <script>
-import { userSession } from '../userSession'
+// import { userSession } from '../userSession'
+const userSession = () => import('../userSession.js')
+
 export default {
   methods: {
     signOut () {
