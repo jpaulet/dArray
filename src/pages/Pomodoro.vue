@@ -21,7 +21,7 @@
                   <a class="btn btn-light col-12" data-toggle="collapse" href="#collapseTodo" role="button" aria-expanded="false" aria-controls="collapseTodo">TO-DO</a>
                   <div class="collapse show" id="collapseTodo">
                     <ul class="todo-list-group px-3">
-                      <li class="list-group-item" v-for="(item, key) in filterTodoList">
+                      <li class="list-group-item" v-for="(item, key) in filterTodoList" :key="`filterTodo-${key}`">
                           <div class="i-content item-custom todo-content mt-2 mb-2" style='line-height:14px;'>
                             <input type="checkbox" :id="item.id" class="todo-list-chk mr-3" v-model="item.completed" />
                             <label :for="item.id" :class="{'completed' : item.completed}">
@@ -40,17 +40,19 @@
                   <a class="btn btn-light col-12" data-toggle="collapse" href="#collapseDone" role="button" aria-expanded="false" aria-controls="collapseDone">DONE</a>
                   <div class="collapse show" id="collapseDone">
                     <ul class="done-list-group px-3">
-                      <li v-if="item.completed" class="list-group-item item-done" v-for="(item, key) in todoList">
-                        <div class="i-content item-custom mt-2 mb-2" style='line-height:14px;'>
-                          <input type="checkbox" :id="item.id" class="todo-list-chk mr-3" v-model="item.completed" />
-                          <label :for="item.id" :class="{'completed' : item.completed}"> {{ item.title }} </label>
-                        </div>
-                        <div class="i-record">
-                          <i class="count"></i>
-                          <i class="count"></i>
-                          <i class="count"></i>
-                          <i class="count"></i>
-                        </div>
+                      <li class="list-group-item item-done" v-for="(item, key) in todoList" :key="`todoList-${key}`">
+                        <template  v-if="item.completed">
+                          <div class="i-content item-custom mt-2 mb-2" style='line-height:14px;'>
+                            <input type="checkbox" :id="item.id" class="todo-list-chk mr-3" v-model="item.completed" />
+                            <label :for="item.id" :class="{'completed' : item.completed}"> {{ item.title }} </label>
+                          </div>
+                          <div class="i-record">
+                            <i class="count"></i>
+                            <i class="count"></i>
+                            <i class="count"></i>
+                            <i class="count"></i>
+                          </div>
+                        </template>
                       </li>
                     </ul>
                   </div>
@@ -93,7 +95,7 @@
               <div class="timer">{{ time }}</div>
             </div>
             <ul class="todo-list-group">
-              <li class="list-group-item" v-for="(item, key) in filterTodoList">
+              <li class="list-group-item" v-for="(item, key) in filterTodoList"  :key="`filterTodoList-${key}`">
                 <div class="i-content item-custom">
                   <input type="checkbox" :id="item.id" class="todo-list-chk" v-model="item.completed" />
                   <label :for="item.id" :class="{'completed' : item.completed}"> {{ item.title }} </label>
@@ -112,7 +114,7 @@
           </div>
           <div class="panel-menu-area main-area">
             <div class="menu-all">
-              <a href="javascript:;" id="btn-todo-list" class="menu-btn" data-num="1" @click.pret="showModal">
+              <a href="javascript:;" id="btn-todo-list" class="menu-btn" data-num="1" @click.prevent="showModal">
                 <i class="tim-icons icon-bullet-list-67"></i>
               </a>
             </div>
@@ -214,7 +216,7 @@ export default {
       this.saveToFile()
     },
     saveToFile () {
-        userSession.putFile(STORAGE_FILE, JSON.stringify(this.todoList), this.$ENCRYPT)
+      userSession.putFile(STORAGE_FILE, JSON.stringify(this.todoList), this.$ENCRYPT)
     },
     showModal (e) {
       let btnId = e.target.parentNode.id
@@ -276,9 +278,7 @@ export default {
     },
     timerReset () {
       this.isPlay = false
-      clearInterval(() => {
-        this.interval
-      })
+      clearInterval(this.interval)
       this.totalTime = 25 * 60
     },
     timerCountdown () {
@@ -302,10 +302,10 @@ export default {
       this.totalTime--
     },
     fetchData () {
-        userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((pomodoro) => {
-          if (pomodoro) {
-            this.todoList = JSON.parse(pomodoro)
-          }
+      userSession.getFile(STORAGE_FILE, this.$DECRYPT).then((pomodoro) => {
+        if (pomodoro) {
+          this.todoList = JSON.parse(pomodoro)
+        }
       })
     }
   },
@@ -331,7 +331,7 @@ export default {
       })
       return newTodoList
     }
-  }  
+  }
 }
 </script>
 <style scoped>

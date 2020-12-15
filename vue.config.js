@@ -1,5 +1,5 @@
 const webpack = require('webpack')
-//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   configureWebpack: {
@@ -10,7 +10,7 @@ module.exports = {
         'window.jQuery': 'jquery',
         jQuery: 'jquery'
       })
-      //new BundleAnalyzerPlugin()
+      // new BundleAnalyzerPlugin()
     ],
     resolve: {
       alias: {
@@ -20,7 +20,7 @@ module.exports = {
     optimization: {
       splitChunks: {
         minSize: 10000,
-        maxSize: 250000,
+        maxSize: 250000
       }
     },
     performance: {

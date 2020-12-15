@@ -6,7 +6,7 @@
           <p>{{ link.name }}</p>
         </slot>
       </a>
-    </component :is="tag">
+    </component>
 </template>
 <script>
 export default {

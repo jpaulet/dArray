@@ -40,7 +40,7 @@
         <h4 class="modal-title col-12 mt-3 mb-3" id="exampleModalLabel">Important Announcement</h4>
       </template>
       <div class="col-12 mb-3 text-dark">
-        
+
       </div>
     </modal>
 

@@ -37,7 +37,7 @@
 
             <div class="box dropdown" :class="{'is-open': dropDownOpen, 'transparent': isOpenedInIFrame}">
               <ul>
-                <li v-for="fiatCurrency in fiatCurrencies"><a class="nav-item" :class="{'font-white': isOpenedInIFrame}"@click="selectFiatCurrency(fiatCurrency)">{{ fiatCurrency }}</a></li>
+                <li v-for="(fiatCurrency,index) in fiatCurrencies" :key="`fiat-${index}`"><a class="nav-item" :class="{'font-white': isOpenedInIFrame}" @click="selectFiatCurrency(fiatCurrency)">{{ fiatCurrency }}</a></li>
               </ul>
             </div>
           </div>
@@ -47,7 +47,7 @@
           <div class="control" :class="{'hide': isOpenedInIFrame}">
             <div class="select">
               <select v-model="selectedFiatCurrency" @change="selectFiatCurrency($event)" class='form-control'>
-                <option v-for="fiatCurrency in fiatCurrencies">{{ fiatCurrency }}</option>
+                <option v-for="(fiatCurrency,index) in fiatCurrencies" :key="`fiat2-${index}`">{{ fiatCurrency }}</option>
               </select>
             </div>
           </div>

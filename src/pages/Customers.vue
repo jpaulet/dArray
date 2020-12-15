@@ -212,7 +212,7 @@ import {
   BaseInput
 } from '@/components/index'
 import BaseButton from '@/components/BaseButton'
-import BaseTable from '@/components/BaseTable'
+// import BaseTable from '@/components/BaseTable'
 import { uuid } from 'vue-uuid'
 
 const tableColumns = ['Legal', 'Address', 'City / Country', 'Contact', 'Type', 'Edit', 'Delete']
@@ -225,7 +225,7 @@ export default {
     Card,
     BaseInput,
     BaseButton,
-    BaseTable,
+    // BaseTable,
     BreedingRhombusSpinner
   },
   data () {
