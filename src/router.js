@@ -10,8 +10,6 @@ const Settings = () => import('@/pages/Settings.vue')
 const Files = () => import('@/pages/Files.vue')
 const Roadmap = () => import('@/pages/Roadmap.vue')
 const Pomodoro = () => import('@/pages/Pomodoro.vue')
-const BodyHero = () => import('@/components/body/BodyHero.vue')
-const SelectedHero = () => import('@/components/body/SelectedHero.vue')
 
 const routes = [{
   path: '/',
@@ -22,19 +20,7 @@ const routes = [{
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard
-    },
-    /*
-    {
-      path: '/cryptocurrencies',
-      name: 'Crypto',
-      component: BodyHero
-    },
-    {
-      path: '/cryptocurrencies/:id',
-      name: 'Crypto',
-      component: SelectedHero
-    },
-    */
+    },    
     {
       path: '/invoices',
       name: 'Invoices',
