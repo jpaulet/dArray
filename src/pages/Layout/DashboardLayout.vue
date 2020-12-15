@@ -119,8 +119,9 @@ export default {
       }
     },
     checkSubscription (user) {
-      // api call
+      console.log('Check userdata!')
       console.log(user)
+      // api call
       /*
       if (this.isSubscribed) {
         var url = 'https://darray.org/api/checkSSID'

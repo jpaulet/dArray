@@ -3,17 +3,15 @@
     <thead :class="theadClasses">
       <tr>
         <slot name="columns">
-          <th v-for="column in columns" :key="column"> {{ column }}</th>
+          <th v-for="column in columns" :key="column">{{ column }}</th>
         </slot>
       </tr>
     </thead>
     <tbody :class="tbodyClasses">
       <tr v-for="(item, index) in data" :key="index">
         <slot :row="item">
-          <td v-for="(column, index) in columns"
-              :key="index"
-              v-if="hasValue(item, column)">
-            {{itemValue(item, column)}}
+          <td v-for="(column, index) in columns" :key="index">
+            <span v-if="hasValue(item, column)">{{itemValue(item, column)}}</span>
           </td>
         </slot>
       </tr>
