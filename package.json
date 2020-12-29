@@ -16,6 +16,8 @@
     "@fullcalendar/daygrid": "^4.4.2",
     "@fullcalendar/interaction": "^4.4.2",
     "@fullcalendar/vue": "^4.4.2",
+    "@sentry/tracing": "^5.29.2",
+    "@sentry/vue": "^5.29.2",
     "axios": "^0.18.1",
     "blockstack": "^19.2.5",
     "bootstrap": "^4.5.0",

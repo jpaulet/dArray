@@ -4,20 +4,22 @@ jQuery(function($) {
   $("html").css("max-width","100%");
   $("body").css("max-width","100%");
 
-  // get the value of the bottom of the #main element by adding the offset of that element plus its height, set it as a variable
-  var mainbottom = $('#main').offset().top;
+  if($('#main').length){
+    // get the value of the bottom of the #main element by adding the offset of that element plus its height, set it as a variable
+    var mainbottom = $('#main').offset().top;
 
-  // on scroll,
-  $(window).on('scroll',function(){
-    // we round here to reduce a little workload
-    stop = Math.round($(window).scrollTop());
-    if (stop > mainbottom) {
-        $('.navbar').addClass('past-main');
-        $('.navbar').addClass('effect-main')
-    } else {
-        $('.navbar').removeClass('past-main');
-    }
-  });
+    // on scroll,
+    $(window).on('scroll',function(){
+      // we round here to reduce a little workload
+      stop = Math.round($(window).scrollTop());
+      if (stop > mainbottom) {
+          $('.navbar').addClass('past-main');
+          $('.navbar').addClass('effect-main')
+      } else {
+          $('.navbar').removeClass('past-main');
+      }
+    });
+  }
 
   $(document).on('click.nav','.navbar-collapse.in',function(e) {
     if( $(e.target).is('a') ) {

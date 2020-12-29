@@ -17,15 +17,16 @@ import VueAnalytics from 'vue-analytics'
 
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
-import DoughnutChart from './components/body/sub/DoughnutChart'
-// import { store } from './store.js'
 
 // router setup
 import routes from './router'
 
+// Sentry data
+import * as Sentry from '@sentry/browser'
+import { Integrations } from '@sentry/tracing'
+
 Vue.use(VueAxios, axios)
 Vue.component('icon', Icon)
-Vue.component('doughnut-chart', DoughnutChart)
 
 const pluginOptions = {
   globalOptions: { currency: 'USD' }
@@ -48,7 +49,7 @@ Vue.prototype.$DECRYPT = {
 const router = new VueRouter({
   mode: 'history',
   root: '/',
-  routes, // short for routes: routes
+  routes,
   linkExactActiveClass: 'active'
 })
 
@@ -66,6 +67,19 @@ Vue.use(Notify)
 Vue.use(UUID)
 Vue.use(VueOffline)
 Vue.use(require('vue-moment'))
+
+Sentry.init({
+  Vue,
+  dsn: 'https://12148eedffbe453eb4d9fa832e03a89e@o497233.ingest.sentry.io/5573057',
+  autoSessionTracking: true,
+  integrations: [
+    new Integrations.BrowserTracing()
+  ],
+
+  // We recommend adjusting this value in production, or using tracesSampler
+  // for finer control
+  tracesSampleRate: 1.0
+})
 
 new Vue({
   router,
