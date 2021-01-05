@@ -16,7 +16,7 @@
     "@fullcalendar/daygrid": "^4.4.2",
     "@fullcalendar/interaction": "^4.4.2",
     "@fullcalendar/vue": "^4.4.2",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "blockstack": "^19.2.5",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.16.0",
