@@ -39,6 +39,9 @@
             <h6>Done</h6>
             <div class="col-12 pr-md-1 text-left">
               <ul>
+                <li style='line-height:22px;'><span class='badge badge-light'>09/01/21</span> - Added Crypto page with icons and lists.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>09/01/21</span> - Added Subscription model.</li>
+                <li style='line-height:22px;'><span class='badge badge-light'>29/12/20</span> - Finished Crypto Page with trackers.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>29/07/20</span> - Added "Important Information" popup.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>29/07/20</span> - Started working in new crypto page.</li>
                 <li style='line-height:22px;'><span class='badge badge-light'>27/07/20</span> - Removed Crypto page due CoinList API deprecation.</li>

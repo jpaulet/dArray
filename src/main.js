@@ -20,12 +20,15 @@ import Icon from 'vue-awesome/components/Icon'
 import DoughnutChart from './components/body/sub/DoughnutChart'
 // import { store } from './store.js'
 
+import { StripeCheckout } from 'vue-stripe-checkout'
+
 // router setup
 import routes from './router'
 
 Vue.use(VueAxios, axios)
 Vue.component('icon', Icon)
 Vue.component('doughnut-chart', DoughnutChart)
+Vue.component('StripeCheckout', StripeCheckout)
 
 const pluginOptions = {
   globalOptions: { currency: 'USD' }

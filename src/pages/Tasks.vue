@@ -181,10 +181,12 @@ export default {
       let task = this.tasks.find(item => item.id === id)
 
       if (task) {
-        this.task = { id: task.id,
+        this.task = {
+          id: task.id,
           name: task.name,
           description: task.description,
-          completed: task.completed }
+          completed: task.completed
+        }
       }
       this.message = `Editing Task ${id}`
     },

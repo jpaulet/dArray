@@ -10,8 +10,9 @@ const Settings = () => import('@/pages/Settings.vue')
 const Files = () => import('@/pages/Files.vue')
 const Roadmap = () => import('@/pages/Roadmap.vue')
 const Pomodoro = () => import('@/pages/Pomodoro.vue')
-// const BodyHero = () => import('@/components/body/BodyHero.vue')
-// const SelectedHero = () => import('@/components/body/SelectedHero.vue')
+const Subscribe = () => import('@/pages/Subscription.vue')
+const PaymentSuccess = () => import('@/pages/paymentSuccess.vue')
+const Crypto = () => import('@/pages/Crypto.vue')
 
 const routes = [{
   path: '/',
@@ -84,6 +85,21 @@ const routes = [{
       path: '/pomodoro',
       name: 'Pomodoro',
       component: Pomodoro
+    },
+    {
+      path: '/subscribe',
+      name: 'Subscribe',
+      component: Subscribe
+    },
+    {
+      path: '/paymentSuccess',
+      name: 'PaymentSuccess',
+      component: PaymentSuccess
+    },
+    {
+      path: '/crypto',
+      name: 'Crypto',
+      component: Crypto
     }
   ]
 }]

@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-sm-7">
+        <div class="col-12 col-sm-6">
           <card type="chart">
             <template slot="header">
               <div class="row">
@@ -59,7 +59,7 @@
             </line-chart>
           </card>
         </div>
-        <div class="col-12 col-sm-5">
+        <div class="col-12 col-sm-6">
           <card type="chart" cardCol>
             <template slot="header">
               <div class="row">
@@ -84,7 +84,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-sm-7">
+        <div class="col-12 col-sm-6">
           <card type="chart" cardCol >
           <template slot="header">
             <h5 class="card-category">Lasts 12 Months</h5>
@@ -108,7 +108,7 @@
           </card>
         </div>
 
-        <div class="col-12 col-sm-5">
+        <div class="col-12 col-sm-6">
           <card type="chart" cardCol>
             <template slot="header" class='mb-3'>
               <h5 class="card-category">Lasts 6 Months</h5>

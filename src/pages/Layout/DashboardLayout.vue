@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <side-bar :background-color="backgroundColor" v-if="user" :title="user.name">
+    <side-bar :background-color="backgroundColor" v-if="user && location !== '/subscribe'" :title="user.name">
       <sidebar-link to="/dashboard">
         <i class="tim-icons icon-chart-pie-36"></i>
         <template>
@@ -36,7 +36,13 @@
       <sidebar-link to="/pomodoro">
         <i class="tim-icons icon-time-alarm"></i>
         <template>
-          <p>Pomodoro</p><span class='badge badge-light' style='font-size:6px;float:right;margin-top:-22px;opacity:0.6;'>new</span>
+          <p>Pomodoro</p>
+        </template>
+      </sidebar-link>
+      <sidebar-link to="/crypto">
+        <i class="tim-icons icon-coins"></i>
+        <template>
+          <p>Crypto</p><span class='badge badge-light' style='font-size:6px;float:right;margin-top:-22px;opacity:0.6;'>new</span>
         </template>
       </sidebar-link>
       <sidebar-link to="/tasks">
@@ -108,8 +114,10 @@ export default {
       userSession: null,
       user: null,
       isLoadingPage: false,
-      isSubscribed: false,
-      timeLeft: null
+      isSubscribed: true,
+      timeLeft: 0,
+      location: null,
+      firstDay: null
     }
   },
   methods: {
@@ -119,35 +127,37 @@ export default {
       }
     },
     checkSubscription (user) {
-      console.log('Check userdata!')
-      console.log(user)
-      // api call
-      /*
-      if (this.isSubscribed) {
-        var url = 'https://darray.org/api/checkSSID'
-        axios.post(url, {username: user.username }, {'headers': {'Accepts': 'application/json'}}.then((response)) => {
-          if(response.data === true){
-            this.isSubscribed = true
-          }else{
-            this.isSubscribed = false
-            this.timeLeft = response.data
-          }
-        })
-      } else {
-        var url = 'https://darray.org/api/checkSubscription'
-        axios.post(url,  {username: user.username }, {'headers': {'Accepts': 'application/json'}}.then((response)) => {
-          this.isSubscribed = response.data.subscribed
-          this.timeLeft = response.data.timeLeft
-          this.ssid = response.ssid
-        })
-      }
-      */
-      this.isSubscribed = false
-      this.timeLeft = '2'
+      let today = new Date()
+      var fileName = user.username + '_subscribed.json'
+      var firstDay = 'firstDay.json'
+
+      userSession.getFile(firstDay, this.$DECRYPT).then((date) => {
+        if (date) {
+          this.firstDay = date
+          console.log(this.firstDay)
+        } else {
+          console.log('No firstday')
+          userSession.putFile(firstDay, JSON.stringify(new Date()), this.$ENCRYPT)
+        }
+      })
+
+      userSession.getFile(fileName, this.$DECRYPT).then((subscribed) => {
+        this.isSubscribed = JSON.parse(subscribed || 'false')
+
+        if (this.isSubscribed.subscribed && today.toISOString() < this.isSubscribed.date) {
+          this.isSubscribed = this.isSubscribed.subscribed
+        } else {
+          var newYear = new Date(today.getFullYear(), 1, 10)
+          var oneDay = 1000 * 60 * 60 * 24
+          this.timeLeft = Math.ceil((newYear.getTime() - today.getTime()) / (oneDay))
+          this.isSubscribed = false
+        }
+      })
     }
   },
   created () {
     this.userSession = userSession
+    this.location = window.location.pathname
   },
   mounted () {
     if (userSession.isUserSignedIn()) {
@@ -155,7 +165,7 @@ export default {
       this.user = new Person(this.userData.profile)
       this.user.username = this.userData.username
       this.user.name = this.userData.name ? this.userData.name : (this.userData.username ? this.userData.username.substr(0, this.userData.username.indexOf('.')) : 'Anonymous')
-      this.isSubscribed = this.checkSubscription(this.userData)
+      this.checkSubscription(this.userData)
     } else if (userSession.isSignInPending()) {
       this.isLoadingPage = true
       userSession.handlePendingSignIn()
