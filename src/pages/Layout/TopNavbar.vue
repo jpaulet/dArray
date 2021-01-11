@@ -190,7 +190,7 @@ import DropDown from '@/components/Dropdown.vue'
 import Modal from '@/components/Modal.vue'
 import { userSession } from '@/userSession'
 
-var stripe = Stripe('pk_test_pALdYXC6f316H4PUGjaQDstY00JiQ39DRr')
+var stripe = Stripe('pk_live_PAcBsMNCSaxAJ8AlVrvrJcQc00gUSBpm2f')
 
 var STORAGE_FILE = 'company.json'
 export default {
@@ -244,7 +244,7 @@ export default {
       var host = location.protocol.concat('//').concat(window.location.host)
       stripe.redirectToCheckout({
         lineItems: [{
-          price: 'price_1I84z0CjpkHqiQ9gk0cUUb1Q', // Replace with the ID of your price
+          price: 'price_1I8Tr8CjpkHqiQ9gXtraE1xe', // Replace with the ID of your price
           quantity: 1
         }],
         // mode: 'subscription',

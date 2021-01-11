@@ -33,7 +33,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
 import { userSession } from '@/userSession'
-var stripe = Stripe('pk_test_pALdYXC6f316H4PUGjaQDstY00JiQ39DRr')
+var stripe = Stripe('pk_live_PAcBsMNCSaxAJ8AlVrvrJcQc00gUSBpm2f')
 
 export default {
   methods: {
@@ -43,7 +43,7 @@ export default {
 
       stripe.redirectToCheckout({
         lineItems: [{
-          price: 'price_1I84z0CjpkHqiQ9gk0cUUb1Q', // Replace with the ID of your price
+          price: 'price_1I8Tr8CjpkHqiQ9gXtraE1xe', // Replace with the ID of your price
           quantity: 1
         }],
         mode: 'payment',
