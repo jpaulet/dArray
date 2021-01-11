@@ -29,7 +29,6 @@ import { Integrations } from '@sentry/tracing'
 
 Vue.use(VueAxios, axios)
 Vue.component('icon', Icon)
-Vue.component('doughnut-chart', DoughnutChart)
 Vue.component('StripeCheckout', StripeCheckout)
 
 const pluginOptions = {
