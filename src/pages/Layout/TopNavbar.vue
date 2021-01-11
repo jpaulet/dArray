@@ -241,14 +241,16 @@ export default {
       })
     },
     async purchase () {
+      var host = location.protocol.concat('//').concat(window.location.host)
       stripe.redirectToCheckout({
         lineItems: [{
-          price: 'price_1I710JCjpkHqiQ9g3sEiHntU', // Replace with the ID of your price
+          price: 'price_1I84z0CjpkHqiQ9gk0cUUb1Q', // Replace with the ID of your price
           quantity: 1
         }],
-        mode: 'subscription',
-        successUrl: 'http://localhost:8080/paymentSuccess?session_id={CHECKOUT_SESSION_ID}',
-        cancelUrl: 'http://localhost:8080/paymentCancel'
+        // mode: 'subscription',
+        mode: 'payment',
+        successUrl: host + '/paymentSuccess?session_id={CHECKOUT_SESSION_ID}',
+        cancelUrl: host + '/paymentCancel'
       }).then(function (result) {
         // If `redirectToCheckout` fails due to a browser or network
         // error, display the localized error message to your customer
@@ -261,7 +263,7 @@ export default {
     const blockstack = this.blockstack
     if (blockstack.isUserSignedIn()) {
       var getUrl = window.location
-      if (!this.isSubscribed && this.timeLeft < 0 && window.location.pathname !== '/subscribe' && window.location.pathname !== '/paymentSuccess') {
+      if (!this.isSubscribed && this.timeLeft <= 0 && window.location.pathname !== '/subscribe' && window.location.pathname !== '/paymentSuccess') {
         var baseUrl = getUrl.protocol + "//" + getUrl.host + '/subscribe'
         window.location = baseUrl
       }

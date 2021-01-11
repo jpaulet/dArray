@@ -133,25 +133,28 @@ export default {
 
       userSession.getFile(firstDay, this.$DECRYPT).then((date) => {
         if (date) {
-          this.firstDay = date
-          console.log(this.firstDay)
+          this.firstDay = JSON.parse(date)
         } else {
-          console.log('No firstday')
-          userSession.putFile(firstDay, JSON.stringify(new Date()), this.$ENCRYPT)
+          userSession.putFile(firstDay, JSON.stringify(today), this.$ENCRYPT)
+          this.firstDay = today
         }
-      })
 
-      userSession.getFile(fileName, this.$DECRYPT).then((subscribed) => {
-        this.isSubscribed = JSON.parse(subscribed || 'false')
+        userSession.getFile(fileName, this.$DECRYPT).then((subscribed) => {
+          this.isSubscribed = JSON.parse(subscribed || 'false')
 
-        if (this.isSubscribed.subscribed && today.toISOString() < this.isSubscribed.date) {
-          this.isSubscribed = this.isSubscribed.subscribed
-        } else {
-          var newYear = new Date(today.getFullYear(), 1, 10)
-          var oneDay = 1000 * 60 * 60 * 24
-          this.timeLeft = Math.ceil((newYear.getTime() - today.getTime()) / (oneDay))
-          this.isSubscribed = false
-        }
+          if (this.isSubscribed.subscribed && today.toISOString() < this.isSubscribed.date) {
+            this.isSubscribed = true
+          } else {
+            var subscriptionDate = new Date(this.firstDay)
+            var plusOneMonth = new Date(subscriptionDate.getFullYear(), subscriptionDate.getMonth() + 1, subscriptionDate.getDate())
+            var oneDay = 1000 * 60 * 60 * 24
+            this.timeLeft = Math.ceil((plusOneMonth.getTime() - today.getTime()) / (oneDay))
+            if (this.timeLeft < 0) {
+              this.timeLeft = 0
+            }
+            this.isSubscribed = false
+          }
+        })
       })
     }
   },

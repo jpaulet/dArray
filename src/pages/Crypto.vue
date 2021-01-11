@@ -14,7 +14,7 @@
         </div>
 
         <div class="row">
-            <div class='col-3' style='padding:10px;' v-for="(crypto, index) in cryptoList" :key="index">
+            <div class='col-sm-6 col-md-4 col-lg-3 col-12' style='padding:10px;' v-for="(crypto, index) in cryptoList" :key="index">
                 <card style='margin-bottom:0px;'>
                     <div style='position:absolute;top:5px;right:5px;opacity:0.8;'>
                         <button @click='showCrypto = true' class='btn btn-light text-white' style='border-radius:50px;height:30px;padding:8px 10px;line-height:18px;'>{{myCrypto[index]}}</button>
@@ -44,12 +44,12 @@
             </div>
         </div>
 
-        <modal :show.sync="showCrypto" body-classes="p-0" modal-classes="modal-dialog-centered modal-lg" style='transform:translate(0,0);'>
+        <modal :show.sync="showCrypto" body-classes="p-0" modal-classes="modal-dialog-centered modal-lg" id='theModal' style='transform:translate(0,0) !important;'>
             <template slot="header">
               <h3 class="modal-title ml-2" id="exampleModalLabel">Set Your Cryptos</h3>
             </template>
             <div class='row' style='padding:0px 30px;'>
-                <div v-for="(crypto, index) in myCrypto" :key="index" class='col-3' style='padding:10px 20px;text-align:left;'>
+                <div v-for="(crypto, index) in myCrypto" :key="index" class='col-6 col-sm-4 col-md-3' style='padding:10px 20px;text-align:left;'>
                     <template  v-if='index !== "index"'>
                         {{index | capitalize}}: <br />
                         <input type='number' v-model='myCrypto[index]' />
@@ -188,5 +188,12 @@ export default {
 }
 .green{
     color:#03800b;
+}
+#theModal.show .modal-dialog{
+  max-width:90% !important;
+  transform: translate(0,0) !important;
+}
+#theModal{
+  overflow: scroll !important;
 }
 </style>
