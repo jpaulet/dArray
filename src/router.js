@@ -23,19 +23,7 @@ const routes = [{
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard
-    },
-    /*
-    {
-      path: '/cryptocurrencies',
-      name: 'Crypto',
-      component: BodyHero
-    },
-    {
-      path: '/cryptocurrencies/:id',
-      name: 'Crypto',
-      component: SelectedHero
-    },
-    */
+    },    
     {
       path: '/invoices',
       name: 'Invoices',
