@@ -11,7 +11,7 @@
 2. Clone the repository and `cd` into it:
 
     ```bash
-    git clone https://github.com/jpaulet/dcrm.git darray
+    git clone https://github.com/jpaulet/darray.git darray
     cd darray
     ```
     
