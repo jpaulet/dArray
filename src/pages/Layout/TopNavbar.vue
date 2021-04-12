@@ -72,6 +72,7 @@
               <span class="d-md-block">Subscribe</span>
             </button>
           </li>
+          <!-- End Subscription -->
 
           <!-- SEARCH -->
           <li class="search-bar input-group"  @click="searchModalVisible = true" style='display:none;'>
@@ -263,10 +264,12 @@ export default {
     const blockstack = this.blockstack
     if (blockstack.isUserSignedIn()) {
       var getUrl = window.location
+
       if (!this.isSubscribed && this.timeLeft <= 0 && window.location.pathname !== '/subscribe' && window.location.pathname !== '/paymentSuccess') {
-        var baseUrl = getUrl.protocol + "//" + getUrl.host + '/subscribe'
+        var baseUrl = getUrl.protocol + '//' + getUrl.host + '/subscribe'
         window.location = baseUrl
       }
+
       if (!localStorage.getItem('showSubscription')) {
         localStorage.setItem('showSubscription', true)
         this.loading = false

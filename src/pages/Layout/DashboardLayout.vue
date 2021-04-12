@@ -147,12 +147,18 @@ export default {
           } else {
             var subscriptionDate = new Date(this.firstDay)
             var plusOneMonth = new Date(subscriptionDate.getFullYear(), subscriptionDate.getMonth() + 1, subscriptionDate.getDate())
-            var oneDay = 1000 * 60 * 60 * 24
+            let oneDay = 1000 * 60 * 60 * 24
             this.timeLeft = Math.ceil((plusOneMonth.getTime() - today.getTime()) / (oneDay))
             if (this.timeLeft < 0) {
               this.timeLeft = 0
             }
             this.isSubscribed = false
+          }
+
+          var getUrl = window.location
+          if (!this.isSubscribed && this.timeLeft <= 0 && window.location.pathname !== '/subscribe' && window.location.pathname !== '/paymentSuccess') {
+            var baseUrl = getUrl.protocol + '//' + getUrl.host + '/subscribe'
+            window.location = baseUrl
           }
         })
       })
