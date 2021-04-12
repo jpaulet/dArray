@@ -28,7 +28,7 @@
     "epic-spinners": "^1.1.0",
     "html2canvas": "^1.0.0-rc.5",
     "jquery": "^3.5.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "print-js": "^1.0.63",
     "promise.prototype.finally": "^3.1.2",
     "stripe": "^8.129.0",
